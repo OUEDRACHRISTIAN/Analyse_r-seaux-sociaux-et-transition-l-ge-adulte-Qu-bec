@@ -1,0 +1,2106 @@
+---
+title: "Portrait description de l'échantillon"
+output: html_document
+date: "2024-03-13"
+auteur: "Louis De Coster"
+---
+
+## Introduction
+
+En considérant ces nouveaux déterminants, la question principale qui se pose est donc de comprendre les dynamiques à l’œuvre dans la socialisation secondaire (construction de son identité sociale, avec exemple) de l’individu qui passe de l’adolescence à l’âge adulte dans cette ère numérique. Nous déclinons cette question en plusieurs sous-questions :9
+1.	Quels sont les (nouveaux) marqueurs du passage à l’âge adulte au Québec et de quels types sont-ils au niveau de leur séquence chronologique ? (Séquentialité différée ou non)
+2.	Quelle est la place des réseaux sociaux numériques avec rapport aux réseaux sociaux physiques dans la socialisation secondaire d’une personne qui passe de l’adolescence à l’âge adulte au Québec, et plus spécifiquement, dans leur quête d’information nécessaire à la prise de décisions face des importants choix de vie ?
+a.	De quelle manière les jeunes font recours aux médias sociaux numériques dans leur prise de décision importante en ce qui a trait au passage à l’âge adulte (quitter la maison familiale, mariage, métier, achat de propriété…)
+b.	Quelles sont les approches utilisées pour valider les informations des réseaux sociaux numériques ?
+3.	Quelle est la place des réseaux sociaux numériques dans l’intériorisation des valeurs et normes sociales contribuant :
+a.	À une société plus juste telle que l’empathie et l’altruisme, avec exemple ? 
+b.	À un meilleur fonctionnement de notre société comme le respect ?
+4.	Et, quelles sont les probabilités qu’un individu atteigne un certain niveau de bien-être social dans sa vie d’adulte proprement dite si celui-ci a fait une utilisation réfléchie des réseaux sociaux numériques dans la prise de décisions importantes ou non banales durant sa période du passage à l’âge adulte au Québec, soit entre 18 et 24 ans ?
+De plus, l’ensemble de ces quatre sous-questions seront analysées en fonction du sexe, du lieu de naissance (nés au Québec vs nés hors Québec) et de la situation géographique du répondant (Montréal vs le reste de la province)
+
+
+-----------------
+
+# 1.	Quels sont les (nouveaux) marqueurs du passage à l’âge adulte au Québec et de quels types sont-ils au niveau de leur séquence chronologique 
+
+```{r}
+library(tidyverse)
+library(summarytools)
+library(gtsummary)
+library(survey)
+library(readxl)
+
+data_P2 = read_csv("data_P2.csv")
+
+```
+
+```{r}
+freq(data_P2$BC1Q1SQ1)
+```
+
+```{r}
+freq(data_P2$age)
+```
+
+
+# Création de nouvelles variables
+
+```{r}
+
+# creons une variable gp_age 
+
+data_P2 <- 
+
+  data_P2 %>%
+
+  mutate(gpe_age = factor(if_else(age <= 24,  "18-24 ans", "25-34 ans")))
+
+freq(data_P2$gpe_age)
+
+```
+  
+  - Fréquences effets négatifs
+
+```{r}
+
+#freq(data_P2$En_ligne_plus_longtemps_que_prévu)
+
+freq(data_P2$Perdu_du_sommeil)
+
+freq(data_P2$Moins_d_activite_physique)
+
+freq(data_P2$Difficile_concentration_taches)
+
+freq(data_P2$Problemes_avec_relations_amis_famille)
+
+freq(data_P2$Sentiment_d_anxiete)
+
+freq(data_P2$Sentiment_de_deprime)
+
+freq(data_P2$Sentiment_anxieux_des_autres)
+
+freq(data_P2$Sentiment_intimide_ou_harcele)
+
+freq(data_P2$Sentiment_frustre_ou_colere)
+
+freq(data_P2$Pas_de_probleme_resenti)
+
+```
+  
+```{r}
+freq(data_P2$BC1Q1SQ4)
+data_P2w=data_P2 %>% mutate(laugue_parlee=BC1Q1SQ4)
+
+
+data_P2=data_P2 %>% 
+  mutate(laugue_parlee=case_when(BC1Q1SQ4=="A1"~1,
+                         BC1Q1SQ4=="A2"~2,
+                         BC1Q1SQ4=="A3"~3,
+                         BC1Q1SQ4=="A5"~NA_real_),
+         laugue_parlee=factor(laugue_parlee,levels=c(1,2,3),labels=c("Français","Anglais", "Autre")))
+
+freq(data_P2$laugue_parlee,weights = data_P2$PON)
+```
+  
+  
+# Description de l'échantillon (avec les pondérations)
+
+```{r}
+
+library(survey)
+
+data_design <- svydesign(id = ~ id, weights = ~ PON, data = data_P2)
+
+
+table_des <- 
+  data_P2 %>%
+  select(lieu_de_naissance, genre, sexe, gpe_age)  %>%
+  tbl_summary()
+table_des
+
+
+data_P2 <- 
+  data_P2  %>%
+  mutate(sexe = factor(sexe))
+
+table_des_sexe <- 
+  data_P2 %>%
+  select(lieu_de_naissance, genre, sexe, gpe_age)  %>%
+  tbl_summary(by = gpe_age)  %>%
+  add_p() %>%
+  add_overall()
+
+table_des_sexe
+
+```
+
+
+Ce qui est en haut ne tient pas compte de la pondération. voici comment il faut le faire mieux
+
+
+```{r}
+
+table_des_pon <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(lieu_de_naissance, genre, sexe, gpe_age, age)
+  )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_pon
+
+```
+
+Maintenant faisons a description de notre variabe dépendante
+
+```{r}
+freq(data_P2$Importance_quiter_nid)
+```
+
+
+- Marqueurs objectifs selon le sexe
+
+
+1: Pas important du tout
+2: Pas important
+3: plus ou moins important
+4: important
+5: Très important
+
+```{r}
+
+freq(data_P2$Importance_quiter_nid)
+
+#Importance_emploi_TPL Importance_vivre_en_couple Importance_marie_1er_fois Importance_avecent_1er_fois
+
+
+class(data_P2$Importance_quiter_nid)
+
+
+table_des_pon_mo <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Importance_quiter_nid, Importance_emploi_TPL, Importance_vivre_en_couple, Importance_marie_1er_fois, Importance_parent_1er_fois, sexe)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_pon_mo
+```
+
+
+
+- Marqueurs objectifs selon l'age 
+
+```{r}
+
+freq(data_P2$gpe_age)
+
+#Importance_emploi_TPL Importance_vivre_en_couple Importance_marie_1er_fois Importance_avecent_1er_fois
+
+table_des_age_mo <-
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Importance_quiter_nid, Importance_emploi_TPL, Importance_vivre_en_couple, Importance_marie_1er_fois, Importance_parent_1er_fois, gpe_age)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_age_mo
+```
+
+
+## Faire le graphique
+
+```{r}
+class(data_P2$Importance_quiter_nid)
+
+ggplot(data_P2) +
+  geom_bar(aes(x = gpe_age, fill = as.factor(Importance_quiter_nid)), position = "fill") 
+  
+
+
+```
+
+
+
+- Marqueurs objectifs selon lieu de residence
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Importance_quiter_nid, Importance_emploi_TPL, Importance_vivre_en_couple, Importance_marie_1er_fois, Importance_parent_1er_fois, BC1QC)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs objectifs accomplis selon le sexe
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+   by = sexe,
+    include = c(N_a_pas_quiter_le_nid_1er_fois, Vivre_conjoint_1er_fois, Marie_1er_fois, Etre_parent_1er_fois, Commencer_travail_plus_de_28_hrs, sexe)
+    ) %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs objectifs accomplis selon le l'âge
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(N_a_pas_quiter_le_nid_1er_fois, Vivre_conjoint_1er_fois, Marie_1er_fois, Etre_parent_1er_fois, Commencer_travail_plus_de_28_hrs,gpe_age)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs objectifs accomplis selon lieu de residence
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(N_a_pas_quiter_le_nid_1er_fois, Vivre_conjoint_1er_fois, Marie_1er_fois, Etre_parent_1er_fois, Commencer_travail_plus_de_28_hrs, BC1QC)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Nombre d'années depuis:
+
+- Nombre d'annees depuis le depart du nid familial
+
+```{r}
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q2B_new = if_else(BC2Q2B < 2000 | BC2Q2B > 2030, NA_real_, BC2Q2B))
+
+freq(data_P2$BC2Q2B_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Depart_nid =  2023 - BC2Q2B_new)
+freq(data_P2$Depart_nid)
+```
+
+- Nombre d'annees depuis le depart pour aller vivre avec conjoint
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q2D_new = if_else(BC2Q2D < 2000 | BC2Q2D > 2030, NA_real_, BC2Q2D))
+
+freq(data_P2$BC2Q2D_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Vivre_avec_conjoint =  2023 - BC2Q2D_new)
+freq(data_P2$Vivre_avec_conjoint)
+```
+
+- Nombre d'annees depuis le mariage
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q2F_new = if_else(BC2Q2F < 2000 | BC2Q2F > 2030, NA_real_, BC2Q2F))
+
+freq(data_P2$BC2Q2F_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Etre_marie =  2023 - BC2Q2F_new)
+freq(data_P2$Etre_marie)
+```
+
+- Nombre de mois depuis le retour au nid familial
+
+```{r}
+freq(data_P2$`BC2Q2H[SQ001]`)
+
+# faire la moyenne et te T Test
+
+```
+
+- Nombre d'annees depuis la naissance de votre 1er enfant<
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q2J_new = if_else(`BC2Q2J[SQ001]` < 2000 | `BC2Q2J[SQ001]` > 2030, NA_real_, `BC2Q2J[SQ001]`))
+
+freq(data_P2$BC2Q2J_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Premier_enfant =  2023 - BC2Q2J_new)
+freq(data_P2w$Premier_enfant)
+```
+
+- Nombre d'annees depuis le début d'un travail rémunéré de 28h/semaine
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q2L_new = if_else(`BC2Q2L[SQ001]` < 2000 | `BC2Q2L[SQ001]` > 2030, NA_real_, `BC2Q2L[SQ001]`))
+
+freq(data_P2$BC2Q2L_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Premier_travail =  2023 - BC2Q2L_new)
+freq(data_P2$Premier_travail)
+```
+
+- Marqueurs subjectifs et individualistes selon le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Importance_propres_responsabilites, Importance_propres_decisions, Importance_independant_finance,sexe)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs subjectifs et individualistes selon l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Importance_propres_responsabilites, Importance_propres_decisions, Importance_independant_finance,gpe_age)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs subjectifs et individualistes selon le lieu de residence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Importance_propres_responsabilites, Importance_propres_decisions, Importance_independant_finance,BC1QC)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs subjectifs et individualistes accomplis selon le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Prendre_propres_resposabilités, Prendre_propres_décisions, Prendre_propres_resposabilités, Independant_finance,sexe)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs subjectifs et individualistes accomplis selon l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Prendre_propres_resposabilités, Prendre_propres_décisions, Independant_finance,gpe_age)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Marqueurs subjectifs et individualistes accomplis selon le lieu de residence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Prendre_propres_resposabilités, Prendre_propres_décisions, Independant_finance,BC1QC)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Nombre d'années depuis:
+
+- Nombre d'annees depuis que vous prenez vos propres responsabilités
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q4B_new = if_else(`BC2Q4B[SQ001]` < 2000 | `BC2Q4B[SQ001]` > 2030, NA_real_, `BC2Q4B[SQ001]`))
+
+freq(data_P2$BC2Q4B_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Prendre_propres_resposabilités =  2023 - BC2Q4B_new)
+freq(data_P2$Prendre_propres_resposabilités)
+```
+
+-Nombre d'annees depuis que vous prenez vos propres décisions
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q4D_new = if_else(`BC2Q4D[SQ001]` < 2000 | `BC2Q4D[SQ001]` > 2030, NA_real_, `BC2Q4D[SQ001]`))
+
+freq(data_P2$BC2Q4D_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Prendre_propres_décisions =  2023 - BC2Q4D_new)
+freq(data_P2$Prendre_propres_décisions)
+```
+
+- Nombre d'annees depuis que vous êtes devenu indépendant financièrement
+
+```{r}
+data_P2 <- 
+  data_P2 %>%
+  mutate(BC2Q4F_new = if_else(`BC2Q4F[SQ001]` < 2000 | `BC2Q4F[SQ001]` > 2030, NA_real_, `BC2Q4F[SQ001]`))
+
+freq(data_P2$BC2Q4F_new)
+
+data_P2 <- 
+  data_P2 %>%
+  mutate(Independant_finance =  2023 - BC2Q4F_new)
+freq(data_P2$Independant_finance)
+```
+
+Bloc 3 : Les valeurs et les attitudes des jeunes et leurs relations interpersonnelles
+
+- Section 1: Les valeurs de ces jeunes
+
+L'environnement vs. l'économie avec les sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(BC3Q1SQ1, BC3Q1SQ1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L'environnement vs. l'économie avec lâge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(BC3Q1SQ1, BC3Q1SQ1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+-L'environnement vs. l'économie avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(BC3Q1SQ1, BC3Q1SQ1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance des prinicipes qui guident les jeunes dans leur vie avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Justice_sociale, Influencer_sur_autrui, Monde_en_paix, Securite_pour_famille, Respect_et_armonie_avec_terre, Honorer_parents_aines, Autorite_commander_autrui, Proteger_environnement, Richesse_materiel_argent, Auto_discipline, Union_avec_la_nature, Equite_egalite_des_chances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance des prinicipes qui guident les jeunes dans leur vie avec lâge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Justice_sociale, Influencer_sur_autrui, Monde_en_paix, Securite_pour_famille, Respect_et_armonie_avec_terre, Honorer_parents_aines, Autorite_commander_autrui, Proteger_environnement, Richesse_materiel_argent, Auto_discipline, Union_avec_la_nature, Equite_egalite_des_chances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance des prinicipes qui guident les jeunes dans leur vie avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Justice_sociale, Influencer_sur_autrui, Monde_en_paix, Securite_pour_famille, Respect_et_armonie_avec_terre, Honorer_parents_aines, Autorite_commander_autrui, Proteger_environnement, Richesse_materiel_argent, Auto_discipline, Union_avec_la_nature, Equite_egalite_des_chances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 2: Attitudes envers la politique avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Democratie_au_Quebec)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes envers la politique avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Democratie_au_Quebec)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes envers la politique avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Democratie_au_Quebec)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L'orrientation politique avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Orientation_politique)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L'orrientation politique avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Orientation_politique)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L'orrientation politique avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Orientation_politique)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 3: Confiance envers les institutions avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Service_de_police, Systeme_de_justice, Systeme_de_sante, Système_scolaire, Systeme_aide_sociale, Parlement_du_Quebec, Parlement_du_Canada, Aux_banques, Aux_grandes_corporations, Aux_marchands_locaux, Aux_gens_d_affaires, Medias_sociaux_numeriques, Information_vehiculee_par_numerique, Medias_conventionnels, Internet_en_general, Aux_influenceurs, Aux_vedettes_du_show_bis)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Confiance envers les institutions avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Service_de_police, Systeme_de_justice, Systeme_de_sante, Système_scolaire, Systeme_aide_sociale, Parlement_du_Quebec, Parlement_du_Canada, Aux_banques, Aux_grandes_corporations, Aux_marchands_locaux, Aux_gens_d_affaires, Medias_sociaux_numeriques, Information_vehiculee_par_numerique, Medias_conventionnels, Internet_en_general, Aux_influenceurs, Aux_vedettes_du_show_bis)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Confiance envers les institutions avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Service_de_police, Systeme_de_justice, Systeme_de_sante, Système_scolaire, Systeme_aide_sociale, Parlement_du_Quebec, Parlement_du_Canada, Aux_banques, Aux_grandes_corporations, Aux_marchands_locaux, Aux_gens_d_affaires, Medias_sociaux_numeriques, Information_vehiculee_par_numerique, Medias_conventionnels, Internet_en_general, Aux_influenceurs, Aux_vedettes_du_show_bis)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 4: Attitudes envers les autres avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Aider_les_autres_pour_bien_parraitre, Aider_les_autres_en_crise, Aider_les_autres_lorsque_demander, Aider_les_autres_aide_en_retour, Aider_les_autres_qui_ne_réussissent_pas)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes envers les autres avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Aider_les_autres_pour_bien_parraitre, Aider_les_autres_en_crise, Aider_les_autres_lorsque_demander, Aider_les_autres_aide_en_retour, Aider_les_autres_qui_ne_réussissent_pas)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes envers les autres avec le lieux de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Aider_les_autres_pour_bien_parraitre, Aider_les_autres_en_crise, Aider_les_autres_lorsque_demander, Aider_les_autres_aide_en_retour, Aider_les_autres_qui_ne_réussissent_pas)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 5: Relations interpersonnelles pâr le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Personnes_sur_qui_compter, Personnes_même_activités_sociales, Mes_proches_et_securite_affective, Personnes_avec_qui_discuter, Ma_competence_reconnue, Jai_des_personnes_fiables_pour_aide, Personnes_qui_partagent_attitudes_et_croyances, Ressent_lien_affectif_avec_autre, Gens_qui_admirent_mes_talents, Gens_sur_qui_compter_urgence, )
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Relations interpersonnelles pâr l'âge
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Personnes_sur_qui_compter, Personnes_même_activités_sociales, Mes_proches_et_securite_affective, Personnes_avec_qui_discuter, Ma_competence_reconnue, Jai_des_personnes_fiables_pour_aide, Personnes_qui_partagent_attitudes_et_croyances, Ressent_lien_affectif_avec_autre, Gens_qui_admirent_mes_talents, Gens_sur_qui_compter_urgence, )
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Relations interpersonnelles pâr le lieu de résidence
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Personnes_sur_qui_compter, Personnes_même_activités_sociales, Mes_proches_et_securite_affective, Personnes_avec_qui_discuter, Ma_competence_reconnue, Jai_des_personnes_fiables_pour_aide, Personnes_qui_partagent_attitudes_et_croyances, Ressent_lien_affectif_avec_autre, Gens_qui_admirent_mes_talents, Gens_sur_qui_compter_urgence, )
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face au genre avec le sexe (Avoir un transgenre dans l'entourage)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Personnes_transgenres_mon_entourage)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+
+```
+
+- Attitudes face au genre avec l'âge (Avoir un transgenre dans l'entourage)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Personnes_transgenres_mon_entourage)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face au genre avec le lieu de résidence (Avoir un transgenre dans l'entourage)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Personnes_transgenres_mon_entourage)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face au genre avec le sexe (Pouvoir exprimer son genre librement)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Pouvoir_exprime_son_genre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+
+```
+
+- Attitudes face au genre avec l'âge (Pouvoir exprimer son genre librement)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Pouvoir_exprime_son_genre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face au genre avec le lieu de résidence (Pouvoir exprimer son genre librement)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Pouvoir_exprime_son_genre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Ne serait pas capable de le ou la supporter avec le sexe (Ne serait pas capable de le ou la supporter)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Capable_d_appuer_transgenre_proches)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+
+```
+
+- Attitudes face au genre avec l'âge (Ne serait pas capable de le ou la supporter)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Capable_d_appuer_transgenre_proches)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face au genre avec le lieu de résidence (Ne serait pas capable de le ou la supporter)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Capable_d_appuer_transgenre_proches)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 6: Engagement social et communautaire  avec le sexeg
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Membre_parti_politique, Benevolat_volontaire, Signer_pétition, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Participer_a_une_manifestation,  Membre_association, Membre_association, Amasser_fonds_pour_une_cause, Ne_pas_acheter_produit_en_désacord, Faire_don_bienfaisance, Offrir_aide_entourage, Autre_avtivite)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Engagement social et communautaire avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Membre_parti_politique, Benevolat_volontaire, Signer_pétition, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Participer_a_une_manifestation, Membre_association, Membre_association, Amasser_fonds_pour_une_cause, Ne_pas_acheter_produit_en_désacord, Faire_don_bienfaisance, Offrir_aide_entourage, Autre_avtivite)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Engagement social et communautaire avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Membre_parti_politique, Benevolat_volontaire, Signer_pétition, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Faire_part_opninions_sur_web, Participer_a_une_manifestation, Membre_association, Membre_association, Amasser_fonds_pour_une_cause, Ne_pas_acheter_produit_en_désacord, Faire_don_bienfaisance, Offrir_aide_entourage, Autre_avtivite)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Section 7: Attitudes face à l'innovation avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Enonce_me_représente_le_mieux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face à l'innovation avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Enonce_me_représente_le_mieux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Attitudes face à l'innovation avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Enonce_me_représente_le_mieux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+Bloc 5 : Utilisation des médias sociaux numériques avec les jeunes de 18-34 ans
+
+- Avoir un compte de médias sociaux numériques avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Comptes_medias_sociaux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Avoir un compte de médias sociaux numériques avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Comptes_medias_sociaux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+- Combiem de comptes de médias sociaux numériques avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Combien_de_comptes_medias_sociaux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Combiem de comptes de médias sociaux numériques avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Combien_de_comptes_medias_sociaux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Combiem de comptes de médias sociaux numériques avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Combien_de_comptes_medias_sociaux)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Combiem de comptes de médias sociaux numériques sont utilisés avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Combien_d_usage_regulie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Combiem de comptes de médias sociaux numériques sont utilisés avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Combien_d_usage_regulie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Combiem de comptes de médias sociaux numériques sont utilisés avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Combien_d_usage_regulie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Activités faites sur les médias sociaux numériques  avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_peoches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Activités faites sur les médias sociaux numériques  avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_peoches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Activités faites sur les médias sociaux numériques avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_peoches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Heures passées sur RSM avec jour avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nombre_d_heures_sur_RSM_Jour)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Heures passées sur RSM avec jour avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nombre_d_heures_sur_RSM_Jour)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Heures passées sur RSM avec jour avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Nombre_d_heures_sur_RSM_Jour)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Types d'utilisation du cellulaire et des RSM face aux autres avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Utilise_telephone_lors_interactions_reelles, Altere_emonidentite_inoffensive, Altere_mon_identite_pour_manipuler, Suit_la_vie_des_autres_sans_etre_connu)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Types d'utilisation du cellulaire et des RSM face aux autres avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Utilise_telephone_lors_interactions_reelles, Altere_emonidentite_inoffensive, Altere_mon_identite_pour_manipuler, Suit_la_vie_des_autres_sans_etre_connu)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Types d'utilisation du cellulaire et des RSM face aux autres avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Utilise_telephone_lors_interactions_reelles, Altere_emonidentite_inoffensive, Altere_mon_identite_pour_manipuler, Suit_la_vie_des_autres_sans_etre_connu)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur le travail avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Travail)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur le travail avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Travail)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur le travail avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Travail)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur les études avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Etudes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur les études avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Etudes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Utilisation des RSM et les effets négatifs sur les études avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Etudes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(En_ligne_plus_longtemps_que_prévu, Perdu_du_sommeil, Moins_d_activite_physique, Difficile_concentration_taches, Problemes_avec_relations_amis_famille, Sentiment_d_anxiete, Sentiment_de_deprime, Sentiment_anxieux_des_autres, Sentiment_intimide_ou_harcele, Sentiment_frustre_ou_colere, Pas_de_probleme_resenti, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Effets négatifs sur la vie dues à l’usage des RSM avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(En_ligne_plus_longtemps_que_prévu, Perdu_du_sommeil, Moins_d_activite_physique, Difficile_concentration_taches, Problemes_avec_relations_amis_famille, Sentiment_d_anxiete, Sentiment_de_deprime, Sentiment_anxieux_des_autres, Sentiment_intimide_ou_harcele, Sentiment_frustre_ou_colere, Pas_de_probleme_resenti, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+```{r}
+
+
+
+```
+
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(En_ligne_plus_longtemps_que_prévu, Perdu_du_sommeil, Moins_d_activite_physique, Difficile_concentration_taches, Problemes_avec_relations_amis_famille, Sentiment_d_anxiete, Sentiment_de_deprime, Sentiment_anxieux_des_autres, Sentiment_intimide_ou_harcele, Sentiment_frustre_ou_colere, Pas_de_probleme_resenti, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Effets négatifs sur la vie dues à l’usage des RSM avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(En_ligne_plus_longtemps_que_prévu, Perdu_du_sommeil, Moins_d_activite_physique, Difficile_concentration_taches, Problemes_avec_relations_amis_famille, Sentiment_d_anxiete, Sentiment_de_deprime, Sentiment_anxieux_des_autres, Sentiment_intimide_ou_harcele, Sentiment_frustre_ou_colere, Pas_de_probleme_resenti, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Raisons pour ne pas utiliser les RSM avec le sexe
+
+```{r}
+
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Aucun_besoin_interet_temps, Inquietude_securite_vie_orivee, Manque_de_confiance_connaissances, Acces_restraint_a_internet, Subi_intimidation_ou_farcelement, A_eu_une_experience_negative, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Raisons pour ne pas utiliser les RSM avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Aucun_besoin_interet_temps, Inquietude_securite_vie_orivee, Manque_de_confiance_connaissances, Acces_restraint_a_internet, Subi_intimidation_ou_farcelement, A_eu_une_experience_negative, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Effets négatifs sur la vie dues à l’usage des RSM avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Aucun_besoin_interet_temps, Inquietude_securite_vie_orivee, Manque_de_confiance_connaissances, Acces_restraint_a_internet, Subi_intimidation_ou_farcelement, A_eu_une_experience_negative, Autre)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Bloc 6 : La quête d'information avec les jeunes de 18-34 ans
+
+- Importance des différentes sources d'information avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance des différentes sources d'information avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance des différentes sources d'information avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Regarder, lire ou regarder les nouvelles sur l'activité avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Se_renseigner_aux_nuvelles)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Regarder, lire ou regarder les nouvelles sur l'activité avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Se_renseigner_aux_nuvelles)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Regarder, lire ou regarder les nouvelles sur l'activité avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Se_renseigner_aux_nuvelles)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Fréquences de l'utilisation de différents médias avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(La_television,  La_radio, La_presse_ecrite, Les_medias_numeriques_actualité,  L_internet_en_general)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Fréquences de l'utilisation de différents médias avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(La_television, La_radio, La_presse_ecrite, Les_medias_numeriques_actualité,  L_internet_en_general)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Fréquences de l'utilisation de différents médias avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(La_television,  La_radio, La_presse_ecrite, Les_medias_numeriques_actualité,  L_internet_en_general)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec le sexe (heures)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nombre_d_heures)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec l'âge (heures)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nombre_d_heures)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec le lieu de résidence (heures)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Nombre_d_heures)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec le sexe (Minutes)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nombre_de_minutes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec l'âge (Minutes)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nombre_de_minutes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le temps passer à se renseigner avec jour avec le lieu de résidence (Minutes)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Nombre_de_minutes)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- la qualité des plateformes RSM pour se renseigner sur l'actualité avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Facebook, Twitter, YouTube, Tic_toc, Instagram)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- la qualité des plateformes RSM pour se renseigner sur l'actualité avec l'âge (Minutes)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Facebook, Twitter, YouTube, Tic_toc, Instagram)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- la qualité des plateformes RSM pour se renseigner sur l'actualité avec le lieu de résidence (Minutes)
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Facebook, Twitter, YouTube, Tic_toc, Instagram)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance et mode de communication avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Importance_suivre_actualité, Informe_ou_non, Type_d_information, Niveau_d_interet_face_aux_details, Attitude_face_a_une_nouvelle, Processus_de_validation, Pourquoi_ne_pas_valider, Consulter_meme_medias, Journalistes_partagent_pas_mes_idees, Cnager_d_avis_apres_une_nouvelle, Valider_une_nouvelle_nouvelle, Valider_la_nouvedlle_nouvelle)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance et mode de communication avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Importance_suivre_actualité, Informe_ou_non, Type_d_information, Niveau_d_interet_face_aux_details, Attitude_face_a_une_nouvelle, Processus_de_validation, Pourquoi_ne_pas_valider, Consulter_meme_medias, Journalistes_partagent_pas_mes_idees, Cnager_d_avis_apres_une_nouvelle, Valider_une_nouvelle_nouvelle, Valider_la_nouvedlle_nouvelle)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Importance et mode de communication avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Importance_suivre_actualité, Informe_ou_non, Type_d_information, Niveau_d_interet_face_aux_details, Attitude_face_a_une_nouvelle, Processus_de_validation, Pourquoi_ne_pas_valider, Consulter_meme_medias, Journalistes_partagent_pas_mes_idees, Cnager_d_avis_apres_une_nouvelle, Valider_une_nouvelle_nouvelle, Valider_la_nouvedlle_nouvelle)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Confiance envers les médias avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nouvelles_et_information_en_general, Information_consulter_personnellement, Nouvelles_preparees_par_journalistes, Commentaires_animateurs_radio, Nouvelles_source_amis_et_proches, Nouvelles_sur_medias_sociaux_en_general, Nouvelles_sur_medias_sociaux_par_journalistes, Nouvelles_sur_medias_sociaux_par_connaissances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Confiance envers les médias avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nouvelles_et_information_en_general, Information_consulter_personnellement, Nouvelles_preparees_par_journalistes, Commentaires_animateurs_radio, Nouvelles_source_amis_et_proches, Nouvelles_sur_medias_sociaux_en_general, Nouvelles_sur_medias_sociaux_par_journalistes, Nouvelles_sur_medias_sociaux_par_connaissances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Confiance envers les médias avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Nouvelles_et_information_en_general, Information_consulter_personnellement, Nouvelles_preparees_par_journalistes, Commentaires_animateurs_radio, Nouvelles_source_amis_et_proches, Nouvelles_sur_medias_sociaux_en_general, Nouvelles_sur_medias_sociaux_par_journalistes, Nouvelles_sur_medias_sociaux_par_connaissances)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Opinions envers les médias avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Proprietaire_influence_contenu, Medias_essentiel_pour_democratie, Poloticiens_manipulent_les_journalistes, Difficultes_source_fiable_ou_non)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Opinions envers les médias avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Proprietaire_influence_contenu, Medias_essentiel_pour_democratie, Poloticiens_manipulent_les_journalistes, Difficultes_source_fiable_ou_non)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Opinions envers les médias avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Proprietaire_influence_contenu, Medias_essentiel_pour_democratie, Poloticiens_manipulent_les_journalistes, Difficultes_source_fiable_ou_non)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Bloc 7 : L’attitude envers les avecamètres de confidentialité
+
+- L’attitude envers les avecamètres de confidentialité avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Securite_economique, Preoccupe_par_Securite_economique, Preoccupe_par_Securite_face_a_ma_reputation, Proccupe_par_Securite_physique, Mes_par9ametres_refletent_mes_attitudes, Pourquoi)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L’attitude envers les avecamètres de confidentialité avec l'âge
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Securite_economique, Preoccupe_par_Securite_economique, Preoccupe_par_Securite_face_a_ma_reputation, Proccupe_par_Securite_physique, Mes_parametres_refletent_mes_attitudes, Pourquoi)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- L’attitude envers les avecamètres de confidentialité avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Securite_economique, Preoccupe_par_Securite_economique, Preoccupe_par_Securite_face_a_ma_reputation, Proccupe_par_Securite_physique, Mes_parametres_refletent_mes_attitudes, Pourquoi)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Bloc 8 : La satisfaction à l’égard de la vie après le passage à l’âge adulte chez les 25-34 ans
+
+- La satisfaction à l’égard de la vie après le passage à l’âge adulte chez les 25-34 ans avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Satisfation_face_a_la_vie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- La satisfaction à l’égard de la vie après le passage à l’âge adulte chez les 25-34 ans avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Satisfation_face_a_la_vie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le bonheur dans la vie après le passage à l’âge adulte chez les 25-34 ans avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Niveau_de_bonheur)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- Le bonheur dans la vie après le passage à l’âge adulte chez les 25-34 ans avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Niveau_de_bonheur)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- État de la situation sociale après le passage à l’âge adulte chez les 25-34 ans avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Situation_sociale_souhaitee)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- État de la situation sociale après le passage à l’âge adulte chez les 25-34 ans avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Situation_sociale_souhaitee)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- La satisfaction à l’égard de certains éléments dans la vie après le passage à l’âge adulte chez les 25-34 ans avec le sexe
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Avec_la_mere, Avec_le_pere, Avec_leurs_freres_et_soeurs, Avec_blonde_ou_chum, Avec_leurs_amis, Avec_leurs_collegues_de_travail, Avec_leurs_colleges_etudiants, Avec_les_autres_en_general, Avec_leur_choix_de_carriere, Avec_leur_situation_financiere, Avec_leur_sante_mentale, Avec_leurs_habitudes_de_vie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+- La satisfaction à l’égard de certains éléments dans la vie après le passage à l’âge adulte chez les 25-34 ans avec le lieu de résidence
+
+```{r}
+table_des_mo_lr <- 
+  data_design %>%
+  tbl_svysummary(
+    by = BC1QC,
+    include = c(Avec_la_mere, Avec_le_pere, Avec_leurs_freres_et_soeurs, Avec_blonde_ou_chum, Avec_leurs_amis, Avec_leurs_collegues_de_travail, Avec_leurs_colleges_etudiants, Avec_les_autres_en_general, Avec_leur_choix_de_carriere, Avec_leur_situation_financiere, Avec_leur_sante_mentale, Avec_leurs_habitudes_de_vie)
+    )  %>%
+  add_p()  %>%
+  add_overall()
+
+table_des_mo_lr
+```
+
+
+
+
+
+
+

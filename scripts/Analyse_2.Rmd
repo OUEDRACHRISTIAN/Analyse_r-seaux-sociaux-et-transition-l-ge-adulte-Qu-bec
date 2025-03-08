@@ -1,0 +1,2129 @@
+---
+title: "Analyse_2"
+output:
+  html_document: default
+  pdf_document: 
+    latex_engine: xelatex
+  word_document: default
+date: "2025-02-08"
+author: "Christian Cyriaque"
+---
+
+
+
+
+```{r message=FALSE, warning=FALSE}
+
+library(officer)
+library(flextable)
+library(tidyverse)
+library(summarytools)
+library(gtsummary)
+library(survey)
+library(readxl)
+library(dplyr)
+library(survey)
+
+data_P2 = read_csv("data_P2.csv")
+```
+
+# Creons une variable gp_age
+```{r}
+
+data_P2 <- 
+
+  data_P2 %>%
+
+  mutate(gpe_age = factor(if_else(age <= 24,  "18-24 ans", "25-34 ans")))
+
+freq(data_P2$gpe_age)
+
+```
+
+
+#Supprimer des données manques de la variable sexe
+```{r}
+freq(data_P2$sexe)
+data_P2 <- data_P2 %>% filter(!is.na(sexe))
+
+#Apres filtrages 
+freq(data_P2$sexe)
+
+```
+```{r}
+
+data_P2 <- data_P2 %>%
+  mutate(Combien_de_comptes_medias_sociaux = case_when(
+    Combien_de_comptes_medias_sociaux == 0 ~ NA_character_,                     
+    Combien_de_comptes_medias_sociaux %in% c(1, 2) ~ "1 ou 2 comptes",              
+    Combien_de_comptes_medias_sociaux %in% c(3, 4, 5) ~ "3 à 5 comptes",         
+    Combien_de_comptes_medias_sociaux %in% c(6:10) ~ "6 comptes et plus",       
+    Combien_de_comptes_medias_sociaux %in% c(12, 14, 15, 20) ~ NA_character_, 
+    TRUE ~ NA_character_                                          
+  ))
+
+
+
+# Vérifier les niveaux de la variable recodée
+table(data_P2$Combien_de_comptes_medias_sociaux)
+
+# Si les niveaux sont corrects et qu'il y a plusieurs catégories, convertir explicitement en facteur
+data_P2$Combien_de_comptes_medias_sociaux <- factor(data_P2$Combien_de_comptes_medias_sociaux, levels = c("1 ou 2 comptes","3 à 5 comptes","6 comptes et plus"))
+
+# Vérifier à nouveau les niveaux de la variable
+levels(data_P2$Combien_de_comptes_medias_sociaux)
+
+
+#Renommé la varaible
+data_P2 <- data_P2 %>%
+  rename(Nbr_compte_MS = Combien_de_comptes_medias_sociaux)
+```
+
+
+
+# Recodage du diplome
+```{r}
+
+levels_ordered <- c("Primaire/Secondaire", "CEGEP / DEP", "Universitaire")
+
+# Recode de la variable Diplome_du_repondant en gardant les valeurs manquantes
+data_P2$Diplome_du_repondant <- factor(recode(data_P2$Diplome_du_repondant,
+  "Primaire" = "Primaire/Secondaire",
+  "Secondaire" = "Primaire/Secondaire",
+  "DEP" = "CEGEP / DEP",
+  "CEGEP_G" = "CEGEP / DEP",
+  "CEGEP_T" = "CEGEP / DEP",
+  "Certificat universitaire" = "Universitaire",
+  "Bacc 1er cycle" = "Universitaire",
+  "Diplome 2e ou 3e cycle" = "Universitaire",
+  .default = NA_character_  # Conserve les valeurs manquantes
+), levels = levels_ordered, ordered = TRUE)
+
+
+# Recode de Diplome_pere
+data_P2$Diplome_pere <- factor(recode(data_P2$Diplome_pere,
+  "Primaire" = "Primaire/Secondaire",
+  "Secondaire" = "Primaire/Secondaire",
+  "DEP" = "CEGEP / DEP",
+  "CEGEPG" = "CEGEP / DEP",
+  "CEGEPT" = "CEGEP / DEP",
+  "Certificat universitaire" = "Universitaire",
+  "Bacc 1er cycle" = "Universitaire",
+  "Diplome 2e ou 3e cycle" = "Universitaire",
+  .default = NA_character_  # Conserve les valeurs manquantes
+), levels = levels_ordered, ordered = TRUE)
+
+# Recode de Diplome_mere
+data_P2$Diplome_mere <- factor(recode(data_P2$Diplome_mere,
+  "Primaire" = "Primaire/Secondaire",
+  "Secondaire" = "Primaire/Secondaire",
+  "DEP" = "CEGEP / DEP",
+  "CEGEPG" = "CEGEP / DEP",
+  "CEGEPT" = "CEGEP / DEP",
+  "Certificat universitaire" = "Universitaire",
+  "Bacc 1er cycle" = "Universitaire",
+  "Diplome 2e ou 3e cycle" = "Universitaire",
+  .default = NA_character_  # Conserve les valeurs manquantes
+), levels = levels_ordered, ordered = TRUE)
+
+# Vérification des fréquences après recodage
+table(data_P2$Diplome_pere, useNA = "ifany")
+table(data_P2$Diplome_mere, useNA = "ifany")
+table(data_P2$Diplome_du_repondant,useNA = "ifany")
+
+
+
+```
+
+#Imputation de la variable sexe
+```{r}
+#freq(data_P2$sexe)
+# Calculer la modalité la plus fréquente
+#mode_sexe <- data_P2 %>%
+  #count(sexe) %>%
+  #filter(n == max(n)) %>%
+  #pull(sexe)
+
+# Remplacer les NA par la modalité la plus fréquente
+#data_P2 <- data_P2 %>%
+  #mutate(sexe = ifelse(is.na(sexe), mode_sexe, sexe))
+
+```
+
+#. Recodages de certaines variables 
+
+```{r}
+# Liste des variables à modifier
+vars_a_modifier <- c(
+  "Suivre_activité_amis_et_famille", "Communiquer_amis_et_famille", 
+  "Partager_propre_matériel_avec_proches", "Partager_propre_matériel_publiquement", 
+  "Suivre_actualités_sur_RSM", "Prendre_connaissance_programmes_gouv", 
+  "Rechercher_information_generale", "Rechercher_info_importante_personnelle", 
+  "Aucune", "Autre"
+)
+
+# Afficher les fréquences avant transformation
+cat("🔹 Fréquences AVANT remplacement des NA :\n")
+for (var in vars_a_modifier) {
+  cat("\n📊 Fréquence de :", var, "\n")
+  print(table(data_P2[[var]], useNA = "always"))  # Affiche les fréquences avec NA
+}
+
+# Remplacer les NA par "Non" pour les variables sélectionnées
+data_P2 <- data_P2 %>%
+  mutate(across(all_of(vars_a_modifier), ~replace_na(.x, "Non")))
+
+# Afficher les fréquences après transformation
+cat("\n🔹 Fréquences APRÈS remplacement des NA :\n")
+for (var in vars_a_modifier) {
+  cat("\n📊 Fréquence de :", var, "\n")
+  print(table(data_P2[[var]], useNA = "always"))  # Vérification après remplacement
+}
+
+```
+
+
+
+#. Labelisation de certaines variables 
+```{r}
+
+#Lieu de residence BC1QC
+freq(data_P2$`BC1QC`)
+data_P2=data_P2 %>% mutate(Lieu_de_residence=`BC1QC`)
+
+
+#Education= diplome du repondant
+#Occupation actuelle = Occupation_du_repondant
+#Siruation_civile_parents
+#Occupation_mere
+#Occupation_pere
+#Information_general=BC6Q1SQ1,BC6Q1SQ1[SQ01](votre mere)
+
+data_P2$Combien_d_usage_regulie <- factor(data_P2$Combien_d_usage_regulie,
+                                          levels = c("Aucun", "Un", "Deux", "Trois", "Quatre", "Plus de quatre"))
+data_P2 <- data_P2 %>%
+  mutate(
+    Votre_mere = factor(Votre_mere, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Votre_pere = factor(Votre_pere, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Votre_soeur = factor(Votre_soeur, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Votre_frere = factor(Votre_frere, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Vos_amis = factor(Vos_amis, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    A_l_ecole = factor(A_l_ecole, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Vos_colleges_de_travail = factor(Vos_colleges_de_travail, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Les_medias_traditionnels = factor(Les_medias_traditionnels, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Les_medias_numeriques_Q1 = factor(Les_medias_numeriques_Q1, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important"))
+  )
+
+
+
+#Renomm
+data_P2 <- data_P2 %>%
+  rename(Nbr_compte_MS_regulier = Combien_d_usage_regulie)
+
+data_P2 <- data_P2 %>%
+  rename(Usage_MS = Comptes_medias_sociaux)
+
+
+```
+
+
+#.  Labelisation des Marqueurs objectifs ##
+```{r}
+data_P2 <- data_P2 %>%
+  mutate(
+    Importance_quiter_nid_1 = factor(Importance_quiter_nid, levels = 1:5, labels = c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")),
+    Importance_emploi_TPL_1 = factor(Importance_emploi_TPL, levels = 1:5, labels = c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")),
+    Importance_vivre_en_couple_1 = factor(Importance_vivre_en_couple, levels = 1:5, labels = c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")),
+    Importance_marie_1er_fois_1 = factor(Importance_marie_1er_fois, levels = 1:5, labels = c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")),
+    Importance_parent_1er_fois_1 = factor(Importance_parent_1er_fois, levels = 1:5, labels = c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important"))
+  )
+
+
+#Renommage
+data_P2 <- data_P2 %>%
+  rename(
+    Quiter_nid = Importance_quiter_nid_1,
+    Emploi_TPL = Importance_emploi_TPL_1,
+    Vivre_en_couple = Importance_vivre_en_couple_1,
+    Marier_1er_fois = Importance_marie_1er_fois_1,
+    Parent_1er_fois = Importance_parent_1er_fois_1
+  )
+
+
+```
+
+
+#. Ponderation
+```{r}
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+```
+
+
+# 1. Tableau pour les Répondants
+```{r message=FALSE, warning=FALSE}
+table_repondants <- tbl_svysummary(
+  data = data_design,
+  by = gpe_age, 
+  include = c(age, sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants**")
+
+
+table_repondants
+```
+
+
+#2. Tableau pour l'utilisation des médias sociaux des repondants
+```{r message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux**")
+
+table_utilisation_medias_sociaux
+```
+
+
+#3. Activités faites sur les médias sociaux
+```{r message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux**")
+
+Table_activités_médias_sociaux
+
+```
+
+
+#4. Quête d'informations
+```{r message=FALSE, warning=FALSE}
+Table_Quête_informatins <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Quête_informations**")
+
+Table_Quête_informatins
+
+```
+
+
+# 5. Tableau pour les Parents des repondants
+```{r message=FALSE, warning=FALSE}
+
+
+Table_parents <- tbl_svysummary(
+  data = data_design,
+  by = gpe_age,  
+  include = c( Diplome_mere, Diplome_pere,Siruation_civile_parents,Occupation_mere,Occupation_pere),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"
+) %>%
+  add_overall() %>%
+  add_p() %>%
+  modify_header(label = "**Caractéristiques**") %>%
+  modify_caption("**Parents**")
+
+Table_parents
+
+```
+
+
+# Combinaison des  tableaux dans un seul tableau
+```{r message=FALSE, warning=FALSE}
+
+final_table <- tbl_stack(
+  tbls = list(table_repondants,table_utilisation_medias_sociaux,Table_activités_médias_sociaux,Table_Quête_informatins,Table_parents),
+  group_header = c("Répondants", "utilisation_medias_sociaux","activités_médias_sociaux","Quête_informatins","Parents")
+)
+
+# Affichage du tableau final
+final_table
+
+```
+
+
+
+# Créer un document Word, ajouter un titre et le tableau, puis sauvegarder le fichier
+```{r message=FALSE, warning=FALSE}
+
+# Convertir le tableau en flextable
+final_table_flex <- as_flex_table(final_table) %>%
+  theme_box() %>%
+  border_inner(border = fp_border(color="black", width = 1)) %>%
+  border_outer(border = fp_border(color="black", width = 2))
+
+
+# Créer un document Word, ajouter un titre et le tableau, puis sauvegarder le fichier
+doc <- read_docx() %>%
+  body_add_par("Portrait sociodémographique des répondants et de leurs parents", style = "heading 1") %>%
+  body_add_flextable(final_table_flex)
+
+# Enregistrer le document Word dans le répertoire courant
+print(doc, target = "final_table.docx")
+
+```
+
+
+
+##Description de notre variabe dépendante
+
+```{r}
+freq(data_P2$Quiter_nid)
+```
+
+
+#- Marqueurs objectifs selon le sexe
+
+1: Pas important du tout
+2: Pas important
+3: plus ou moins important
+4: important
+5: Très important
+
+```{r message=FALSE, warning=FALSE}
+
+class(data_P2$Quiter_nid)
+
+
+table_Marqueurs_objectifs_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois, sexe),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_objectifs_sexe**")
+
+table_Marqueurs_objectifs_sexe
+```
+
+
+
+
+#- Marqueurs objectifs selon l'age 
+```{r message=FALSE, warning=FALSE}
+table_Marqueurs_objectifs_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois, gpe_age),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_objectifs_groupe**")
+
+table_Marqueurs_objectifs_gpe_age
+```
+
+
+
+#---------------GRAPHIQUE1------------------------##########
+
+
+#Création du graphique pour l'ensemble de l'échantillon 
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Supposons que data_P2 soit votre dataframe initial
+
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+# Regrouper les données et calculer les pourcentages
+data_long <- data_design$variables %>%
+  select(Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
+  gather(key = "Marqueur_objectif", value = "Importance") %>%
+  group_by(Marqueur_objectif, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")
+data_long$Importance <- factor(data_long$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages
+a<-ggplot(data_long, aes(x = Marqueur_objectif, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  labs(x = "Marqueur_objectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+   legend.position = "bottom")+
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_pour-echantillion_plot.png", plot = a, width = 10, height = 6)
+
+#RdBu
+#RdYlGn
+
+a
+
+#"BrBG"  
+```
+
+
+# Création du graphique selon le sexe 
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_sexe <- data_design$variables %>%
+  select(sexe, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
+  gather(key = "Marqueur", value = "Importance", -sexe) %>%
+  group_by(sexe, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")
+data_sexe$Importance <- factor(data_sexe$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+b<-ggplot(data_sexe, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~sexe) +
+  labs(x = "Marqueur_objectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+   legend.position = "bottom") +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_sexe_plot.png", plot = b, width = 10, height = 6)
+
+b
+```
+
+
+#Création du graphique selon l'âge
+```{r message=FALSE, warning=FALSE}
+
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_gpe_age <- data_design$variables %>%
+  select(gpe_age, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
+  gather(key = "Marqueur", value = "Importance", -gpe_age) %>%
+  group_by(gpe_age, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")
+data_gpe_age$Importance <- factor(data_gpe_age$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+c<-ggplot(data_gpe_age, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~gpe_age) +
+  labs(x = "Marqueur_objectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+   legend.position = "bottom") +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_age_plot.png", plot = c, width = 10, height = 6)
+
+c
+```
+
+
+
+#Création du graphique selon le milieu de résidence 
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_Lieu_de_residence <- data_design$variables %>%
+  select(Lieu_de_residence, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
+  gather(key = "Marqueur", value = "Importance", -Lieu_de_residence) %>%
+  group_by(Lieu_de_residence, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")
+data_Lieu_de_residence$Importance <- factor(data_Lieu_de_residence$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+d<-ggplot(data_Lieu_de_residence, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~Lieu_de_residence) +
+  labs(x = "Marqueur_objectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+   legend.position = "bottom") +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_milieu_residence_plot.png", plot = d, width = 10, height = 6)
+
+d
+
+```
+
+
+
+#Création du graphique selon l'utilisation des médias sociaux 
+
+```{r message=FALSE, warning=FALSE}
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_Comptes_medias_sociaux <- data_design$variables %>%
+  select(Usage_MS, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
+  gather(key = "Marqueur", value = "Importance", -Usage_MS) %>%
+  group_by(Usage_MS, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas du tout important", "Peu important", "Plus ou moins important", "Important", "Très important")
+data_Comptes_medias_sociaux$Importance <- factor(data_Comptes_medias_sociaux$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+e<-ggplot(data_Comptes_medias_sociaux, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~Usage_MS) +
+  labs(x = "Marqueur_objectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1),
+   legend.position = "bottom") +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_Utilisation_médias_plot.png", plot = e, width = 10, height = 6)
+
+e
+```
+
+
+# . ---------------GrAPHIQUE2------------------#
+#---------------------------------------------##############
+
+
+#Recodage des varaibles d'intérets et  creation de la nouvelle variable
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+
+# Supposons que data_P2 soit votre dataframe initial
+
+# Recatégoriser les variables et créer la nouvelle variable
+data_P2 <- data_P2 %>%
+  mutate(
+    # Recatégorisation des variables
+    Quiter_nid_rec = ifelse(Importance_quiter_nid %in% 1:2, 0, 1),
+    Emploi_TPL_rec = ifelse(Importance_emploi_TPL %in% 1:2, 0, 1),
+    Vivre_en_couple_rec = ifelse(Importance_vivre_en_couple %in% 1:2, 0, 1),
+    Marier_1er_fois_rec = ifelse(Importance_marie_1er_fois %in% 1:2, 0, 1),
+    Parent_1er_fois_rec = ifelse(Importance_parent_1er_fois %in% 1:2, 0, 1),
+    # Création de la nouvelle variable
+    Somme_Importance = Quiter_nid_rec + Emploi_TPL_rec +
+                       Vivre_en_couple_rec + Marier_1er_fois_rec +
+                       Parent_1er_fois_rec
+  )
+
+# Optionnel : convertir la variable Somme_Importance sans  labels explicites
+data_P2 <- data_P2 %>%
+  mutate(
+    Somme_Importance1 = factor(Somme_Importance, levels = 0:5))
+
+
+
+#
+# Optionnel : convertir la variable Somme_Importance en facteur avec des labels explicites
+data_P2 <- data_P2 %>%
+  mutate(
+    Somme_Importance = factor(Somme_Importance, levels = 0:5,
+                              labels = c("0 oui (rien n’est important)", "1 oui", "2 oui",
+                                         "3 oui", "4 oui", "5 oui (tout est important)"))
+  )
+
+```
+
+#-	Graphique de barres empilées pour l’ensemble de l’échantillon
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(scales)
+
+
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+
+# Création du graphique à barres avec pourcentages affichés
+f <- ggplot(data_design$variables, aes(x = Somme_Importance, fill = Somme_Importance)) +
+  geom_bar() +
+  geom_text(stat = "count",
+            aes(label = scales::percent(..count../sum(..count..), accuracy = 0.1) %>% gsub("%", "", .)),  # Enlève le symbole %
+            vjust = -0.5) +
+  labs(
+    title = "",
+    x = "Pourcentage",
+    y = "Nombre d'individus"
+  ) +
+  scale_fill_brewer(palette = "BrBG") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+# Sauvegarder le graphique dans le répertoire spécifié
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_echantillon_plot.png", plot = f, width = 10, height = 6)
+
+f
+
+```
+ 
+#.  selon l'age
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_gpe_age <- data_design$variables %>%
+  group_by(gpe_age, Somme_Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui", 
+                         "4 oui", 
+                         "5 oui (tout est important)")
+data_gpe_age$Somme_Importance <- factor(data_gpe_age$Somme_Importance, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+i<-ggplot(data_gpe_age, aes(x = gpe_age, y = Percentage, fill = Somme_Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "Distribution de l'importance des dimensions par groupe d'âge",
+       x = "Groupe d'âge", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_age_plot.png", plot = i, width = 10, height = 6)
+
+i
+
+```
+
+
+
+# seloN le sexe
+```{r}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_sexe <- data_design$variables %>%
+  group_by(sexe, Somme_Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui", 
+                         "4 oui", 
+                         "5 oui (tout est important)")
+data_sexe$Somme_Importance <- factor(data_sexe$Somme_Importance, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+j<-ggplot(data_sexe, aes(x = sexe, y = Percentage, fill = Somme_Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Sexe", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_sexe_plot.png", plot = j, width = 10, height = 6)
+
+j
+```
+
+
+#selon le milieu de residence
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_Lieu_de_residence <- data_design$variables %>%
+  group_by(Lieu_de_residence, Somme_Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui", 
+                         "4 oui", 
+                         "5 oui (tout est important)")
+data_Lieu_de_residence$Somme_Importance <- factor(data_Lieu_de_residence$Somme_Importance, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+k<-ggplot(data_Lieu_de_residence, aes(x = Lieu_de_residence, y = Percentage, fill = Somme_Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Lieu de residence", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_residence_plot.png", plot = k, width = 10, height = 6)
+
+
+k
+```
+
+#Selon le utilisation des médias  
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(ggplot2)
+library(scales)
+
+# Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_Comptes_medias_sociaux <- data_design$variables %>%
+  group_by(Usage_MS, Somme_Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui", 
+                         "4 oui", 
+                         "5 oui (tout est important)")
+data_Comptes_medias_sociaux$Somme_Importance <- factor(data_Comptes_medias_sociaux$Somme_Importance, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+l<-ggplot(data_Comptes_medias_sociaux, aes(x = Usage_MS, y = Percentage, fill = Somme_Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Utilisation des médias sociaux", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal() +
+  theme(legend.position = "bottom")
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_médias_sociaux_plot.png", plot = l, width = 10, height = 6)
+
+l
+```
+
+
+
+
+
+##Dindo
+```{r message=FALSE, warning=FALSE}
+# Chargement des bibliothèques nécessaires
+library(dplyr)
+library(dendextend)
+library(ade4)
+library(ggdendro)
+library(fastcluster)
+library(devtools)
+#install_github("larmarange/JLutils")
+library(JLutils)
+
+data_interest <- data_design$variables %>%
+  select(Somme_Importance,sexe,gpe_age,Lieu_de_residence) %>%
+  na.omit()
+
+data_interest$Somme_Importance<-as.factor(data_interest$Somme_Importance)
+data_interest$sexe<-as.factor(data_interest$sexe)
+data_interest$gpe_age<-as.factor(data_interest$gpe_age)
+data_interest$Lieu_de_residence<-as.factor(data_interest$Lieu_de_residence)
+
+acm <- dudi.acm(data_interest, scannf = FALSE, nf = 5)
+
+md <- dist.dudi(acm)
+
+arbre <- hclust(md, method = "ward.D2")
+
+```
+
+
+```{r}
+#meilleure partition entre 3 et 20 classes.
+best.cutree(arbre)
+
+```
+
+#Affichage 
+```{r}
+ggdendrogram(arbre, labels = FALSE)
+```
+
+
+```{r}
+# Coloration des branches en fonction des clusters
+library(ggplot2)
+ggplot(color_branches(arbre, k = 6), labels = FALSE)
+
+```
+
+
+#Decoupage pour une analyse fine
+```{r}
+typo <- cutree(arbre, 6)
+freq(typo)
+data_interest$typo<- cutree(arbre,6)
+```
+
+#Caractériser la typologie
+```{r}
+data_interest %>%
+  tbl_summary(by = typo)
+```
+
+
+#classification avec les variables 
+```{r}
+#data_interest
+```
+
+
+
+
+#CAH avec l’extension FactoMineR
+
+```{r message=FALSE, warning=FALSE}
+library(FactoMineR)
+
+
+data_interest <- data_design$variables %>%
+  select(Somme_Importance,sexe,gpe_age,Lieu_de_residence) %>%
+  na.omit()
+
+data_interest$Somme_Importance<-as.factor(data_interest$Somme_Importance)
+data_interest$sexe<-as.factor(data_interest$sexe)
+data_interest$gpe_age<-as.factor(data_interest$gpe_age)
+data_interest$Lieu_de_residence<-as.factor(data_interest$Lieu_de_residence)
+
+
+acm2 <- MCA(data_interest[complete.cases(data_interest), ], ncp = 5, graph = FALSE)
+cah <- HCPC(acm2, graph = FALSE)
+```
+
+
+#Affichage du cluster en 3 partitions
+```{r}
+plot(cah, choice = "tree")
+```
+
+#affichage en 3D
+```{r}
+plot(cah, choice = "3D.map")
+```
+
+#Affichage en en bar
+```{r}
+plot(cah, choice = "bar")
+```
+
+
+#Affichage 
+```{r}
+plot(cah, choice = "map")
+```
+
+
+```{r}
+#cah$data.clust
+```
+
+
+
+
+
+
+
+
+#------##################-----Marqueurs subjectifs------####################------#######
+#--------------------------------------------------------------------------------
+
+#Statistique descriptive
+```{r}
+freq(data_P2$Independant_finance)
+```
+
+Labelisation des variables
+```{r}
+data_P2 <- data_P2 %>%
+  mutate(
+    Propres_responsabilites = factor(Importance_propres_responsabilites, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Propres_decisions = factor(Importance_propres_decisions, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")),
+    Independance_finance = factor(Importance_independant_finance, levels = 1:5, labels = c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important"))
+  )
+
+```
+
+
+
+
+#Marqueurs subjectifs selon le sexe
+```{r message=FALSE, warning=FALSE}
+
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+
+table_Marqueurs_subjectifs_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Propres_responsabilites, Propres_decisions, Independance_finance),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_subjectifs_sexe**")
+
+table_Marqueurs_subjectifs_sexe
+```
+
+#Marqueurs subjectifs selon l'age
+```{r message=FALSE, warning=FALSE}
+table_Marqueurs_subjectifs_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Propres_responsabilites, Propres_decisions, Independance_finance),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_subjectifs_gpe_age**")
+
+table_Marqueurs_subjectifs_gpe_age
+```
+
+
+#Marqueurs subjectifs selon le lieu de residence
+```{r message=FALSE, warning=FALSE}
+table_Marqueurs_subjectifs_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Propres_responsabilites, Propres_decisions, Independance_finance),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_subjectifs_Lieu_de_residence**")
+
+table_Marqueurs_subjectifs_Lieu_de_residence
+```
+
+
+
+#Marqueurs subjectifs selon l'utilisation des médias sociaux
+```{r message=FALSE, warning=FALSE}
+table_Marqueurs_subjectifs_Comptes_medias_sociaux <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Usage_MS,
+    include = c(Propres_responsabilites, Propres_decisions, Independance_finance),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**table_Marqueurs_subjectifs_Comptes_medias_sociaux**")
+
+table_Marqueurs_subjectifs_Comptes_medias_sociaux
+```
+
+#####Graphique marqueurs#####""
+
+
+
+####----------Echantillonnant-----------------##
+
+```{r message=FALSE, warning=FALSE}
+library(ggplot2)
+library(dplyr)
+library(tidyr)
+library(scales)
+
+# Regrouper les données et calculer les pourcentages
+data_long <- data_design$variables %>%
+  select(Propres_responsabilites, Propres_decisions, Independance_finance) %>%
+  gather(key = "Marqueur", value = "Importance") %>%
+  group_by(Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")
+data_long$Importance <- factor(data_long$Importance, levels = levels_importance)
+
+# Créer le graphique à barres empilées horizontal avec affichage des pourcentages
+n<-ggplot(data_long, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(x = "Marqueur_subjectif", y = "Pourcentage", fill = "",
+       title = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "RdBu") +
+  theme_minimal() +
+  theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip()
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_echantillon_plot.png", plot = n, width = 10, height = 6)
+
+n
+```
+
+
+
+
+## Création du graphique selon le sexe ,marqueurs subjectifs
+
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_sexe <- data_design$variables %>%
+  select(sexe,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
+  gather(key = "Marqueur", value = "Importance", -sexe) %>%
+  group_by(sexe, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")
+data_sexe$Importance <- factor(data_sexe$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+n1<-ggplot(data_sexe, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~sexe) +
+  labs(x = "Marqueur_subjectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_sexe_plot.png", plot = n1, width = 10, height = 6)
+
+
+n1
+```
+
+
+# Création du graphique selon l'age ,marqueurs subjectifs
+
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_gpe_age <- data_design$variables %>%
+  select(gpe_age,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
+  gather(key = "Marqueur", value = "Importance", -gpe_age) %>%
+  group_by(gpe_age, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")
+data_gpe_age$Importance <- factor(data_gpe_age$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+n2<-ggplot(data_gpe_age, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~gpe_age) +
+  labs(x = "Marqueur_subjectif", y = "Pourcentage", fill = "") +
+  theme_minimal() + 
+  theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_age_plot.png", plot = n2, width = 10, height = 6)
+
+n2
+
+```
+
+
+# .   Création du graphique selon le lieu de residence ,marqueurs subjectifs
+
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_Lieu_de_residence <- data_design$variables %>%
+  select(Lieu_de_residence,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
+  gather(key = "Marqueur", value = "Importance", -Lieu_de_residence) %>%
+  group_by(Lieu_de_residence, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")
+data_Lieu_de_residence$Importance <- factor(data_Lieu_de_residence$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+n3<-ggplot(data_Lieu_de_residence, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~Lieu_de_residence) +
+  labs(x = "Marqueur_subjectif", y = "Pourcentage", fill = "") +
+  theme_minimal() +
+  theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_milieu_residence_plot.png", plot = n3, width = 10, height = 6)
+
+n3
+
+```
+
+
+# Création du graphique selon l'utilisation des médias sociaux ,marqueurs subjectifs
+
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe initial
+
+# Regrouper les données par sexe et calculer les pourcentages
+data_Comptes_medias_sociaux <- data_design$variables %>%
+  select(Usage_MS,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
+  gather(key = "Marqueur", value = "Importance", -Usage_MS) %>%
+  group_by(Usage_MS, Marqueur, Importance) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable "Importance"
+levels_importance <- c("Pas important du tout", "Pas important", "Plus ou moins important", "Important", "Très important")
+data_Comptes_medias_sociaux$Importance <- factor(data_Comptes_medias_sociaux$Importance, levels = levels_importance)
+
+# Créer le graphique de barres empilées avec les pourcentages par sexe
+n4<-ggplot(data_Comptes_medias_sociaux, aes(x = Marqueur, y = Percentage, fill = Importance)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), position = position_stack(vjust = 0.5), size = 3) +
+  facet_wrap(~Usage_MS) +
+  labs(x = "Marqueur_subjectif", y = "Pourcentage", fill = "") +
+  theme_minimal() + 
+  theme(legend.position = "bottom")+
+  theme(axis.text.x = element_text(angle = 45, hjust = 1)) +
+  coord_flip() +
+  scale_fill_brewer(palette = "RdBu")
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_utilisation_médias_plot.png", plot = n4, width = 10, height = 6)
+
+n4
+
+```
+
+
+
+###Creation de la nouvelle variable 
+
+```{r message=FALSE, warning=FALSE}
+data_P2 <- data_P2 %>%
+  mutate(
+    # Recodage des variables : 1-2 deviennent 0, 3-5 deviennent 1
+    Propres_responsabilites_rec = ifelse(Importance_propres_responsabilites %in% 1:2, 0, 1),
+    Propres_decisions_rec = ifelse(Importance_propres_decisions %in% 1:2, 0, 1),
+    Independance_finance_rec = ifelse(Importance_independant_finance %in% 1:2, 0, 1),
+    # Création de la nouvelle variable somme
+    Somme_Importance_subjectif = Propres_responsabilites_rec+
+Propres_decisions_rec+
+Independance_finance_rec
+
+  )
+
+
+
+# Optionnel : convertir la variable Somme_Importance sans  labels explicites
+data_P2 <- data_P2 %>%
+  mutate(
+    Somme_Importance_subjectif_1 = factor(Somme_Importance_subjectif, levels = 0:3))
+
+
+
+#
+# Optionnel : convertir la variable Somme_Importance en facteur avec des labels explicites
+data_P2 <- data_P2 %>%
+  mutate(
+    Somme_Importance_subjectif = factor(Somme_Importance_subjectif, levels = 0:3,
+                              labels = c("0 oui (rien n’est important)", "1 oui", "2 oui",
+                                          "3 oui (tout est important)"))
+  )
+
+```
+
+#-------------Graphique pour l'echantillon----------########"
+#-------------------------""""""""""""----------------------------------------
+```{r message=FALSE, warning=FALSE}
+# Supposons que data_P2 soit votre dataframe contenant la variable Somme_Importance
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+# Création du graphique à barres avec pourcentages affichés
+o<-ggplot(data_design, aes(x = Somme_Importance_subjectif, fill = Somme_Importance_subjectif)) +
+  geom_bar() +
+  geom_text(stat = "count",
+            aes(label = scales::percent(..count../sum(..count..), accuracy = 0.1) %>% gsub("%", "", .)),
+            vjust = -0.5) +
+  labs(
+    title = "Distribution de l'importance des dimensions",
+    x = "Nombre de dimensions considérées comme importantes",
+    y = "Nombre d'individus"
+  ) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_echantillon_plot.png", plot = o, width = 10, height = 6)
+
+o
+```
+
+
+# selon l'age
+```{r message=FALSE, warning=FALSE}
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+
+# Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_gpe_age <- data_design$variables %>%
+  group_by(gpe_age, Somme_Importance_subjectif) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui (tout est important)")
+data_gpe_age$Somme_Importance_subjectif <- factor(data_gpe_age$Somme_Importance_subjectif, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+o1<-ggplot(data_gpe_age, aes(x = gpe_age, y = Percentage, fill = Somme_Importance_subjectif)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Groupe d'âge", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_selon_age_plot.png", plot = o1, width = 10, height = 6)
+
+o1
+```
+
+
+# selon le sexe
+```{r message=FALSE, warning=FALSE}
+
+ #Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_sexe <- data_design$variables %>%
+  group_by(sexe, Somme_Importance_subjectif) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui (tout est important)")
+data_sexe$Somme_Importance_subjectif <- factor(data_sexe$Somme_Importance_subjectif, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+o2<-ggplot(data_sexe, aes(x = sexe, y = Percentage, fill = Somme_Importance_subjectif)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Sexe", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_selon_sexe_plot.png", plot = o2, width = 10, height = 6)
+
+o2
+```
+
+
+
+#.  selon le milieu de residence
+```{r message=FALSE, warning=FALSE}
+
+ #Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_Lieu_de_residence <- data_design$variables %>%
+  group_by(Lieu_de_residence, Somme_Importance_subjectif) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui (tout est important)")
+data_Lieu_de_residence$Somme_Importance_subjectif <- factor(data_Lieu_de_residence$Somme_Importance_subjectif, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+o3<-ggplot(data_Lieu_de_residence, aes(x = Lieu_de_residence, y = Percentage, fill = Somme_Importance_subjectif)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "",
+       x = "Lieu de residence", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_lieu_de_residence_plot.png", plot = o3, width = 10, height = 6)
+
+o3
+```
+
+
+
+# selon l'utilisation des médias 
+```{r}
+
+ #Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
+# et calculer le nombre d'individus et le pourcentage dans chaque groupe
+data_Comptes_medias_sociaux <- data_design$variables %>%
+  group_by(Usage_MS, Somme_Importance_subjectif) %>%
+  summarise(Count = n()) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Définir l'ordre des niveaux pour la variable Somme_Importance
+levels_importance <- c("0 oui (rien n’est important)", 
+                         "1 oui", 
+                         "2 oui", 
+                         "3 oui (tout est important)")
+data_Comptes_medias_sociaux$Somme_Importance_subjectif <- factor(data_Comptes_medias_sociaux$Somme_Importance_subjectif, levels = levels_importance)
+
+# Création du graphique à barres empilées par groupe d'âge
+o4<-ggplot(data_Comptes_medias_sociaux, aes(x = Usage_MS, y = Percentage, fill = Somme_Importance_subjectif)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(title = "Distribution de l'importance des dimensions selon l'utilisation des médias sociaux",
+       x = "Usage_medias_sociaux", y = "Pourcentage", fill = "") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal()+
+  theme(legend.position = "bottom")
+
+
+
+ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_utilisation_medias_plot.png", plot = o4, width = 10, height = 6)
+
+o4
+```
+
+
+
+
+#Dindogramme variable subjectifs
+
+```{r message=FALSE, warning=FALSE}
+# Chargement des bibliothèques nécessaires
+library(dplyr)
+library(dendextend)
+library(ade4)
+library(ggdendro)
+library(fastcluster)
+library(devtools)
+#install_github("larmarange/JLutils")
+library(JLutils)
+
+data_interest<-0
+# Créer l'objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P2)
+
+# Sélectionner les variables d'intérêt et supprimer les lignes avec des valeurs manquantes
+data_interest <- data_design$variables %>%
+  select(Somme_Importance_subjectif, sexe, gpe_age, Lieu_de_residence) %>%
+  na.omit()
+
+# Convertir les variables en facteurs
+data_interest <- data_interest %>%
+  mutate(across(everything(), as.factor))
+
+# Supprimer les niveaux de facteurs sans occurrences
+data_interest <- data_interest %>%
+  mutate(across(everything(), ~ fct_drop(.)))
+
+# Vérifier la distribution des catégories pour chaque variable
+summary(data_interest)
+
+# Effectuer l'ACM
+acm <- dudi.acm(data_interest, scannf = FALSE, nf = 5)
+
+# Calculer la matrice de distance
+md <- dist.dudi(acm)
+
+# Construire le dendrogramme en utilisant la méthode de Ward
+arbre <- hclust(md, method = "ward.D2")
+
+
+
+```
+
+#meilleure partition entre 3 et 20 classes.
+```{r}
+#meilleure partition entre 3 et 20 classes.
+best.cutree(arbre)
+
+```
+
+
+#
+```{r}
+ggdendrogram(arbre, labels = FALSE)
+```
+
+```{r}
+# Coloration des branches en fonction des clusters
+library(ggplot2)
+ggplot(color_branches(arbre, k = 10), labels = FALSE)
+```
+
+
+```{r}
+typo <- cutree(arbre, 10)
+freq(typo)
+data_interest$typo<- cutree(arbre,10)
+```
+
+```{r}
+data_interest %>%
+  tbl_summary(by = typo)
+```
+
+
+```{r}
+#data_interest
+```
+
+
+
+
+
+#FactoMineR
+```{r message=FALSE, warning=FALSE}
+library(FactoMineR)
+
+data_interest<-0
+data_interest <- data_design$variables %>%
+  select(Somme_Importance_subjectif,sexe,gpe_age,Lieu_de_residence) %>%
+  na.omit()
+
+data_interest$Somme_Importance<-as.factor(data_interest$Somme_Importance_subjectif)
+data_interest$sexe<-as.factor(data_interest$sexe)
+data_interest$gpe_age<-as.factor(data_interest$gpe_age)
+data_interest$Lieu_de_residence<-as.factor(data_interest$Lieu_de_residence)
+
+
+acm2 <- MCA(data_interest[complete.cases(data_interest), ], ncp = 5, graph = FALSE)
+cah <- HCPC(acm2, graph = FALSE)
+```
+
+
+#Affichage du cluster en 3 partitions
+```{r}
+plot(cah, choice = "tree")
+```
+
+#affichage en 3D
+```{r}
+plot(cah, choice = "3D.map")
+```
+
+#Affichage en en bar
+```{r}
+plot(cah, choice = "bar")
+```
+
+
+#Affichage 
+```{r}
+plot(cah, choice = "map")
+```
+
+
+```{r}
+#cah$data.clust
+```
+
+
+
+
+#Les deux variables en meme temps
+
+
+#Graphique pour les deux marqueurs
+
+
+```{r}
+#data_P2$Somme_Importance1 : pour les marqueurs objectifs non transformés en facteurs
+#data_P2$Somme_Importance_subjectif_1
+
+# Normalisation de Somme_Importance1 (min = 0, max = 5)
+
+data_P2 <- data_P2 %>%
+  mutate(Somme_Importance1 = as.numeric(as.character(Somme_Importance1)),  # Conversion en numérique
+         Somme_Importance1_objectif_norm = Somme_Importance1 / 5)
+
+# Catégorisation de Somme_Importance1_objectif_norm en intervalles de 0, 0.5, 1
+# Regrouper les valeurs de Somme_Importance1_objectif_norm
+data_P2 <- data_P2 %>%
+  mutate(Somme_Importance1_objectif_norm = cut(Somme_Importance1_objectif_norm,
+                                              breaks = c(0, 0.33, 0.66, 1),  # Intervalles de proportions
+                                              include.lowest = TRUE,
+                                              labels = c("Faible Importance", "Importance Moyenne", "Haute Importance")))  # Labels
+
+
+# Normalisation de Somme_Importance_subjectif_1 (min = 0, max = 3)
+data_P2 <- data_P2 %>%
+  mutate(Somme_Importance_subjectif_1 = as.numeric(as.character(Somme_Importance_subjectif_1)),
+         Somme_Importance_subjectif_1_norm = round(Somme_Importance_subjectif_1 / 3, 1))
+
+# Catégorisation de Somme_Importance_subjectif_1_norm en intervalles de 0, 0.5, 1
+data_P2 <- data_P2 %>%
+  mutate(Somme_Importance_subjectif_1_norm = cut(Somme_Importance_subjectif_1_norm,
+                                                 breaks = c(0, 0.33, 0.66, 1),  # Intervalles de proportions
+                                              include.lowest = TRUE,
+                                              labels = c("Faible Importance", "Importance Moyenne", "Haute Importance")))  # Labels
+
+
+
+
+#Renommé les varaibles 
+data_P2 <- data_P2 %>%
+  rename(
+    Marq_objectif = Somme_Importance1_objectif_norm,
+    Marq_subjectif = Somme_Importance_subjectif_1_norm
+  )
+
+
+
+
+
+# Préparation des données au format long
+data_long <- data_P2 %>%
+  select(Marq_objectif, Marq_subjectif) %>%
+  pivot_longer(cols = everything(), names_to = "Marqueur", values_to = "Importance") %>%
+  group_by(Marqueur, Importance) %>%
+  summarise(Count = n(), .groups = 'drop') %>%
+  group_by(Marqueur) %>%
+  mutate(Percentage = Count / sum(Count) * 100) %>%
+  ungroup()
+
+# Création du graphique à barres empilées
+graphique <- ggplot(data_long, aes(x = Marqueur, y = Percentage, fill = as.factor(Importance))) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = sprintf("%.1f", Percentage)), 
+            position = position_stack(vjust = 0.5), size = 3) +
+  labs(x = "", y = "Pourcentage", fill = "",
+       title = "Comparaison des marqueurs objectif et subjectif") +
+  scale_y_continuous(labels = percent_format(scale = 1)) +
+  scale_fill_brewer(palette = "PuBu") +
+  theme_minimal() +
+  theme(legend.position = "bottom",
+        axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Sauvegarde du graphique
+ggsave("C:/Users/HP/Desktop/Analyse_Louis/Marqueur_Objectif_subjectif/Somme_subjectif_objecti_echantillon_plot.png", 
+       plot = graphique, width = 10, height = 6)
+
+# Affichage du graphique
+graphique
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+#####Dingogramme
+
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(dendextend)
+library(ade4)
+library(ggdendro)
+library(fastcluster)
+library(devtools)
+#install_github("larmarange/JLutils")
+library(JLutils)
+
+data_interest<-0
+data_interest <- data_design$variables %>%
+  select(Somme_Importance,Somme_Importance_subjectif,gpe_age) %>%
+  na.omit()
+
+# Convertir les variables en facteurs
+data_interest <- data_interest %>%
+  mutate(across(everything(), as.factor))
+
+
+
+# Supprimer les niveaux de facteurs sans occurrences
+data_interest <- data_interest %>%
+  mutate(across(everything(), ~ fct_drop(.)))
+
+
+
+
+
+
+# Suppression des niveaux inutilisés de la variable Somme_Importance_subjectif
+data_interest$Somme_Importance_subjectif <- fct_drop(data_interest$Somme_Importance_subjectif)
+
+# Vérifier la distribution des catégories pour chaque variable
+summary(data_interest)
+
+
+acm <- dudi.acm(data_interest, scannf = FALSE, nf = 5)
+
+md <- dist.dudi(acm)
+
+arbre <- hclust(md, method = "ward.D2")
+
+```
+
+
+#meilleure partition entre 3 et 20 classes.
+```{r}
+#meilleure partition entre 3 et 20 classes.
+best.cutree(arbre)
+
+```
+
+
+#
+```{r}
+ggdendrogram(arbre, labels = FALSE)
+```
+
+```{r}
+# Coloration des branches en fonction des clusters
+library(ggplot2)
+ggplot(color_branches(arbre, k = 9), labels = FALSE)
+```
+
+
+```{r}
+typo <- cutree(arbre, 9)
+freq(typo)
+data_interest$typo<- cutree(arbre,9)
+```
+
+```{r}
+data_interest %>%
+  tbl_summary(by = typo)
+```
+
+
+```{r}
+#data_interest
+```
+
+```{r}
+data_P2 <- data_P2 %>%
+  mutate(
+    Nbr_compte_MS_regulier = replace_na(Nbr_compte_MS_regulier, "Aucun"),
+    Nbr_compte_MS = factor(ifelse(is.na(Nbr_compte_MS), "Aucun", as.character(Nbr_compte_MS)))
+  )
+
+```
+
+
+```{r}
+data_P2$Diplome_du_repondant <- factor(data_P2$Diplome_du_repondant, ordered = FALSE)
+
+data_P2$sexe <- relevel(as.factor(data_P2$sexe), ref = "Homme")
+data_P2$Lieu_de_residence <- relevel(as.factor(data_P2$Lieu_de_residence), ref = "Grand Motreal")
+```
+
+
+
+
+```{r}
+library(readr)  # Charger le package readr
+write_csv(data_P2, "data_P3_.csv")  # Sauvegarde en CSV
+
+```
+
+
+
+#I. Regression
+
+# 1. Fonction pour exécuter la régression logistique
+```{r message=FALSE, warning=FALSE}
+library(dplyr)
+library(broom)
+library(ggplot2)
+library(purrr)
+
+# Fonction pour exécuter la régression logistique et extraire les résultats
+run_logistic_regression <- function(dep_var, indep_vars, model_name, data) {
+  formula <- as.formula(paste(dep_var, "~", paste(indep_vars, collapse = " + ")))
+  model <- glm(formula, data = data, family = binomial)
+  
+  tidy(model, exponentiate = TRUE, conf.int = TRUE) %>%
+    mutate(Model = model_name, Dependent = dep_var) %>%
+    select(term, estimate, conf.low, conf.high, Model, Dependent)
+}
+
+```
+
+
+
+
+
+# 2. Définition des variables
+```{r message=FALSE, warning=FALSE}
+# Variables dépendantes
+dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
+                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
+                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
+                    "Independance_finance_rec")
+
+# Variables indépendantes par modèle
+indep_vars_1a <- c("Usage_MS")  # Modèle 1a
+indep_vars_1b <- c("Nbr_compte_MS")  # Modèle 1b
+indep_vars_1c <- c("Nbr_compte_MS_regulier")  # Modèle 1c
+indep_vars_1d <- c("Usage_MS","Nbr_compte_MS","Nbr_compte_MS_regulier")
+
+
+
+```
+
+
+#3. Boucle pour exécuter tous les modèles et stocker les résultats
+```{r message=FALSE, warning=FALSE}
+
+# Filtrer les données pour ne garder que les personnes ayant répondu "Oui" à Usage_MS
+
+
+# Lancer toutes les régressions et stocker les résultats
+results <- map_dfr(dependent_vars, function(dep_var) {
+  bind_rows(
+    run_logistic_regression(dep_var, indep_vars_1a, "Usage_MS", data_P2),
+    run_logistic_regression(dep_var, indep_vars_1b, "Nbr_compte_MS", data_P2),
+    run_logistic_regression(dep_var, indep_vars_1c, "Nbr_compte_MS_regulier", data_P2),
+    run_logistic_regression(dep_var, indep_vars_1d, "Modèle 1d", data_P2),
+    
+  )
+})
+
+# Renommer les colonnes pour un affichage clair
+results <- results %>%
+  rename(
+    Variable = term,
+    OR = estimate,
+    CI_low = conf.low,
+    CI_high = conf.high
+  )
+
+```
+
+
+
+```{r}
+library(ggplot2)
+
+# Création du forest plot
+ggplot(results, aes(x = OR, y = Variable, xmin = CI_low, xmax = CI_high, color = Model)) +
+  geom_point(size = 3) +  # Points pour les OR
+  geom_errorbarh(height = 0.2) +  # Barres horizontales pour les intervalles de confiance
+  scale_x_continuous(trans = 'log') +  # Transformation de l'axe x en échelle logarithmique
+  labs(x = "Odds Ratio (OR)", y = "Variable", title = "Forest Plot des régressions logistiques") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8)) +  # Taille des labels y
+  theme(legend.position = "bottom")  # Position de la légende
+
+```
+
+
+
+
+
+
+```{r}
+library(ggplot2)
+
+# Création du forest plot avec les variables indépendantes en colonnes et les variables dépendantes en lignes
+gr=ggplot(results, aes(x = OR, y = Dependent, xmin = CI_low, xmax = CI_high, color = Variable)) +
+  geom_point(size = 3) +  # Points pour les OR
+  geom_errorbarh(height = 0.2) +  # Barres horizontales pour les intervalles de confiance
+  scale_x_continuous(trans = 'log') +  # Transformation de l'axe x en échelle logarithmique
+  facet_wrap(~ Model, scales = "free_y", ncol = length(indep_vars_1d)) +  # Facet par modèle avec les indépendantes en colonne
+  labs(x = "Odds Ratio (OR)", y = "Variable Dépendante", title = "Forest Plot des régressions logistiques") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8),  # Taille des labels y
+        legend.position = "bottom")  # Position de la légende
+
+```
+
+
+
+
+```{r}
+library(ggplot2)
+
+# Ajouter une colonne pour indiquer si l'OR est significatif (si l'intervalle de confiance ne contient pas 1)
+results <- results %>%
+  mutate(Significant = ifelse(CI_low > 1 | CI_high < 1, "Significant", "Not Significant"))
+
+# Création du forest plot avec des résultats significatifs mis en évidence
+z=ggplot(results, aes(x = OR, y = Dependent, xmin = CI_low, xmax = CI_high, color = Significant)) +
+  geom_point(size = 3) +  # Points pour les OR
+  geom_errorbarh(height = 0.2) +  # Barres horizontales pour les intervalles de confiance
+  scale_x_continuous(trans = 'log', breaks = c(0.5, 1, 2, 5, 10)) +  # Transformation de l'axe x en échelle logarithmique
+  geom_vline(xintercept = 1, linetype = "dashed", color = "black") +  # Ligne verticale pour OR = 1
+  facet_wrap(~ Model, scales = "free_y", ncol = 2) +  # Facet par modèle avec les indépendantes en colonne
+  labs(x = "Odds Ratio (OR)", y = "Variable Dépendante", title = "Forest Plot des régressions logistiques") +
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 8),  # Taille des labels y
+        legend.position = "bottom")  # Position de la légende
+
+```
+
+
+
+
+
+#2  Essai
+
+```{r message=FALSE, warning=FALSE}
+# Charger les bibliothèques nécessaires
+library(dplyr)
+library(broom)
+library(ggplot2)
+library(purrr)
+library(forestmodel)
+
+
+# Définition des variables dépendantes et indépendantes
+dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
+                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
+                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
+                    "Independance_finance_rec")
+
+# Liste des modèles logistiques par variable dépendante
+models <- lapply(dependent_vars, function(dep_var) {
+  list(
+    "Modèle 1a" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS")), data = data_filtered, family = binomial),
+    "Modèle 1b" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS_regulier")), data = data_filtered, family = binomial),
+    "Modèle 1c" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier")), data = data_filtered, family = binomial),
+    "Modèle 2"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence")), data = data_filtered, family = binomial),
+    "Modèle 3"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence + Diplome_du_repondant")), data = data_filtered, family = binomial)
+  )
+})
+
+# Appliquer forest_model à chaque modèle en ajoutant un titre clair
+lapply(seq_along(models), function(i) {
+  dep_var <- dependent_vars[i]
+  lapply(names(models[[i]]), function(model_name) {
+    cat("\n--- Forest Plot pour", dep_var, "-", model_name, "---\n")  # Ajouter un titre clair
+    print(forest_model(models[[i]][[model_name]]))  # Générer le plot
+  })
+})
+
+
+
+```
+
+
+
+
+
+
