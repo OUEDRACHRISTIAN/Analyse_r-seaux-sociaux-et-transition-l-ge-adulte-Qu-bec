@@ -4,4 +4,3 @@ dir.create("figures")    # Dossier pour les graphiques
 dir.create("references") # Dossier pour les sources bibliographiques
 
 file.create("main.Rmd")  # Création du fichier R Markdown principal
-file.create("README.md") # Ajout d'un fichier README
