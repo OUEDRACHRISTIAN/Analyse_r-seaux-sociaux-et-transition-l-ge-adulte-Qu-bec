@@ -23,7 +23,12 @@ library(dplyr)
 library(ggplot2)
 library(scales)
 
-data_P3_ = read_csv("data_P3_.csv")
+#chooseCRANmirror()
+#11
+#options(repos = c(CRAN = "https://cran.rstudio.com/"))
+#install.packages("here")
+library(here)
+data_P3_ = read_csv(here("data", "data_P3.csv"))
 
 ```
 
