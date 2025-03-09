@@ -1936,8 +1936,11 @@ data_P2$Lieu_de_residence <- relevel(as.factor(data_P2$Lieu_de_residence), ref =
 
 
 ```{r}
-library(readr)  # Charger le package readr
-write_csv(data_P2, "data_P3_.csv")  # Sauvegarde en CSV
+library(readr) 
+library(here)
+#write_csv(data_P2, "data_P3_.csv")  # Sauvegarde en CSV
+write_csv(data_P2, here("data", "data_P3_.csv"))
+
 
 ```
 

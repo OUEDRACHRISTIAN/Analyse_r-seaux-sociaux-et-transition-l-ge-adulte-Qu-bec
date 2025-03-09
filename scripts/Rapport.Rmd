@@ -11,6 +11,19 @@ author: "Christian Cyriaque"
 
 
 ```{r message=FALSE, warning=FALSE}
+# Liste des packages à installer
+packages <- c("officer", "flextable", "tidyverse", "summarytools", 
+              "gtsummary", "survey", "readxl", "dplyr", "ggplot2", "scales","cardx")
+
+# Installer les packages
+install.packages(packages)
+
+# Vérifier si les packages sont correctement installés et les charger
+lapply(packages, require, character.only = TRUE)
+
+
+
+library(cardx)
 library(officer)
 library(flextable)
 library(tidyverse)
@@ -192,7 +205,7 @@ doc <- read_docx() %>%
   body_add_flextable(final_table_flex)
 
 # Enregistrer le document Word dans le répertoire courant
-print(doc, target = "final_table.docx")
+print(doc, target = here("rapport", "Table_final_caracteristiques.docx"))
 
 ```
 
@@ -287,8 +300,8 @@ a<-ggplot(data_long, aes(x = Marqueur_objectif, y = Percentage, fill = Importanc
   scale_fill_brewer(palette = "RdBu")
 
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_pour-echantillion_plot.png", plot = a, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'figures/marqueur_objectif' avec le nom spécifié
+ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_pour-echantillion_plot.png"), plot = a, width = 10, height = 6)
 
 #RdBu
 #RdYlGn
@@ -330,8 +343,9 @@ b<-ggplot(data_sexe, aes(x = Marqueur, y = Percentage, fill = Importance)) +
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_sexe_plot.png", plot = b, width = 10, height = 6)
+
+# Sauvegarder le graphique 
+ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_selon_sexe_plot.png"), plot = a, width = 10, height = 6)
 
 b
 ```
@@ -364,8 +378,10 @@ c<-ggplot(data_gpe_age, aes(x = Marqueur, y = Percentage, fill = Importance)) +
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_age_plot.png", plot = c, width = 10, height = 6)
+
+
+# Sauvegarder le graphique dans le sous-dossier 'figures/marqueur_objectif' avec le nom spécifié
+ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_selon_age_plot.png"), plot = c, width = 10, height = 6)
 
 c
 ```
@@ -400,8 +416,9 @@ d<-ggplot(data_Lieu_de_residence, aes(x = Marqueur, y = Percentage, fill = Impor
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_selon_milieu_residence_plot.png", plot = d, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'figures/marqueur_objectif' avec le nom spécifié
+
+ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_selon_milieu_residence_plot.png"), plot = d, width = 10, height = 6)
 
 d
 
@@ -437,8 +454,8 @@ e<-ggplot(data_Comptes_medias_sociaux, aes(x = Marqueur, y = Percentage, fill = 
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_Objectif/marqueur_objectif_Utilisation_médias_plot.png", plot = e, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'figures/marqueur_objectif' avec le nom spécifié
+ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_Utilisation_médias_plot.png"), plot = e, width = 10, height = 6)
 
 e
 ```
@@ -464,12 +481,12 @@ f <- ggplot(data_design$variables, aes(x = Somme_Importance, fill = Somme_Import
     x = "Pourcentage",
     y = "Nombre d'individus"
   ) +
-  scale_fill_brewer(palette = "BrBG") +
+  scale_fill_brewer(palette = "RdBu") +
   theme_minimal() +
   theme(legend.position = "none")
 
-# Sauvegarder le graphique dans le répertoire spécifié
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_echantillon_plot.png", plot = f, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'Somme_marqueur_objectif' avec le nom spécifié
+ggsave(here("figures","marqueur_objectif", "_somme_importance_echantillon_plot.png"), plot = f, width = 10, height = 6)
 
 f
 
@@ -506,7 +523,8 @@ i<-ggplot(data_gpe_age, aes(x = gpe_age, y = Percentage, fill = Somme_Importance
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_age_plot.png", plot = i, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'Somme_marqueur_objectif'
+ggsave(here("figures","marqueur_objectif", "_somme_importance_selon_age_plot.png"), plot = i, width = 10, height = 6)
 
 i
 
@@ -545,7 +563,8 @@ j<-ggplot(data_sexe, aes(x = sexe, y = Percentage, fill = Somme_Importance)) +
   theme_minimal()+
   theme(legend.position = "bottom")
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_sexe_plot.png", plot = j, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'Somme_marqueur_objectif'
+ggsave(here("figures","marqueur_objectif", "_somme_importance_selon_sexe_plot.png"), plot = j, width = 10, height = 6)
 
 j
 ```
@@ -585,7 +604,8 @@ k<-ggplot(data_Lieu_de_residence, aes(x = Lieu_de_residence, y = Percentage, fil
 
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_selon_residence_plot.png", plot = k, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'Somme_marqueur_objectif'
+ggsave(here("figures","marqueur_objectif", "_somme_importance_selon_residence_plot.png"), plot = k, width = 10, height = 6)
 
 
 k
@@ -617,13 +637,14 @@ l<-ggplot(data_Comptes_medias_sociaux, aes(x = Usage_MS, y = Percentage, fill = 
   geom_text(aes(label = sprintf("%.1f", Percentage)), 
             position = position_stack(vjust = 0.5), size = 3) +
   labs(title = "",
-       x = "Utilisation des médias sociaux", y = "Pourcentage", fill = "") +
+       x = "", y = "Pourcentage", fill = "") +
   scale_y_continuous(labels = percent_format(scale = 1)) +
   scale_fill_brewer(palette = "PuBu") +
   theme_minimal() +
   theme(legend.position = "bottom")
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_objectif/_somme_importance_médias_sociaux_plot.png", plot = l, width = 10, height = 6)
+# Sauvegarder le graphique dans le sous-dossier 'Somme_marqueur_objectif'
+ggsave(here("figures","marqueur_objectif", "_somme_importance_médias_sociaux_plot.png"), plot = l, width = 10, height = 6)
 
 l
 ```
@@ -634,6 +655,9 @@ l
 
 # 21. Dindo
 ```{r message=FALSE, warning=FALSE}
+
+#install.packages(c("dplyr", "dendextend", "ade4", "ggdendro", "fastcluster", "FactoMineR"))
+
 # Chargement des bibliothèques nécessaires
 library(dplyr)
 library(dendextend)
@@ -904,7 +928,8 @@ n<-ggplot(data_long, aes(x = Marqueur, y = Percentage, fill = Importance)) +
   coord_flip()
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_echantillon_plot.png", plot = n, width = 10, height = 6)
+ggsave(here("figures","marqueur_subjectif", "marqueurs_subjectif_echantillon_plot.png"), plot = n, width = 10, height = 6)
+
 
 n
 ```
@@ -943,7 +968,7 @@ n1<-ggplot(data_sexe, aes(x = Marqueur, y = Percentage, fill = Importance)) +
   scale_fill_brewer(palette = "RdBu")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_sexe_plot.png", plot = n1, width = 10, height = 6)
+ggsave(here("figures","marqueur_subjectif", "marqueurs_subjectif_selon_sexe_plot.png"), plot = n1, width = 10, height = 6)
 
 
 n1
@@ -980,7 +1005,8 @@ n2<-ggplot(data_gpe_age, aes(x = Marqueur, y = Percentage, fill = Importance)) +
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_age_plot.png", plot = n2, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "marqueurs_subjectif_selon_age_plot.png"), plot = n2, width = 10, height = 6)
+
 
 n2
 
@@ -1017,7 +1043,8 @@ n3<-ggplot(data_Lieu_de_residence, aes(x = Marqueur, y = Percentage, fill = Impo
   scale_fill_brewer(palette = "RdBu")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_selon_milieu_residence_plot.png", plot = n3, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "marqueurs_subjectif_selon_milieu_residence_plot.png"), plot = n3, width = 10, height = 6)
+
 
 n3
 
@@ -1054,7 +1081,8 @@ n4<-ggplot(data_Comptes_medias_sociaux, aes(x = Marqueur, y = Percentage, fill =
   coord_flip() +
   scale_fill_brewer(palette = "RdBu")
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Marqueur_subjectif/marqueurs_subjectif_utilisation_médias_plot.png", plot = n4, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "marqueurs_subjectif_utilisation_médias_plot.png"), plot = n4, width = 10, height = 6)
+
 
 n4
 
@@ -1086,7 +1114,7 @@ o<-ggplot(data_design, aes(x = Somme_Importance_subjectif, fill = Somme_Importan
   theme(legend.position = "none")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_echantillon_plot.png", plot = o, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "Somme_subjectif_echantillon_plot.png"), plot = o, width = 10, height = 6)
 
 o
 ```
@@ -1124,7 +1152,8 @@ o1<-ggplot(data_gpe_age, aes(x = gpe_age, y = Percentage, fill = Somme_Importanc
   theme(legend.position = "bottom")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_selon_age_plot.png", plot = o1, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "Somme_subjectif_selon_age_plot.png"), plot = o1, width = 10, height = 6)
+
 
 o1
 ```
@@ -1161,7 +1190,8 @@ o2<-ggplot(data_sexe, aes(x = sexe, y = Percentage, fill = Somme_Importance_subj
   theme(legend.position = "bottom")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_selon_sexe_plot.png", plot = o2, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "Somme_subjectif_selon_sexe_plot.png"), plot = o2, width = 10, height = 6)
+
 
 o2
 ```
@@ -1199,7 +1229,8 @@ o3<-ggplot(data_Lieu_de_residence, aes(x = Lieu_de_residence, y = Percentage, fi
   theme(legend.position = "bottom")
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_lieu_de_residence_plot.png", plot = o3, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "Somme_subjectif_lieu_de_residence_plot.png"), plot = o3, width = 10, height = 6)
+
 
 o3
 ```
@@ -1238,7 +1269,8 @@ o4<-ggplot(data_Comptes_medias_sociaux, aes(x = Usage_MS, y = Percentage, fill =
 
 
 
-ggsave("C:/Users/HP/Desktop/Analyse_Louis-20250205T163532Z-001/Analyse_Louis/Somme_marqueur_subjectif/Somme_subjectif_utilisation_medias_plot.png", plot = o4, width = 10, height = 6)
+ggsave(here("figures", "marqueur_subjectif", "Somme_subjectif_utilisation_medias_plot.png"), plot = o4, width = 10, height = 6)
+
 
 o4
 ```
@@ -1413,8 +1445,9 @@ graphique <- ggplot(data_long, aes(x = Marqueur, y = Percentage, fill = as.facto
         axis.text.x = element_text(angle = 45, hjust = 1))
 
 # Sauvegarde du graphique
-ggsave("C:/Users/HP/Desktop/Analyse_Louis/Marqueur_Objectif_subjectif/Somme_subjectif_objecti_echantillon_plot.png", 
+ggsave(here("figures", "marqueur_Objectif_subjectif", "Somme_subjectif_objecti_echantillon_plot.png"), 
        plot = graphique, width = 10, height = 6)
+
 
 # Affichage du graphique
 graphique
@@ -1526,6 +1559,9 @@ data_interest %>%
 
 # 1. Fonction pour exécuter la régression logistique
 ```{r message=FALSE, warning=FALSE}
+
+#install.packages(c("dplyr", "broom", "ggplot2", "purrr", "forestmodel"))
+
 library(dplyr)
 library(broom)
 library(ggplot2)
@@ -1586,40 +1622,11 @@ lapply(seq_along(models), function(i) {
 
 
 
-```{r}
-# Définition des variables dépendantes et indépendantes
-dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
-                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
-                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
-                    "Independance_finance_rec")
-
-# Liste des modèles logistiques par variable dépendante
-models <- lapply(dependent_vars, function(dep_var) {
-  list(
-    "Modèle 1a" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS")), data = data_P3_, family = binomial),
-    "Modèle 1b" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS_regulier")), data = data_P3_, family = binomial),
-    "Modèle 1c" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier")), data = data_P3_, family = binomial),
-    "Modèle 2"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence")), data = data_P3_, family = binomial),
-    "Modèle 3"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence + Diplome_du_repondant")), data = data_P3_, family = binomial)
-  )
-})
-
-# Appliquer forest_model à chaque modèle avec une taille de point réduite
-lapply(seq_along(models), function(i) {
-  dep_var <- dependent_vars[i]
-  lapply(names(models[[i]]), function(model_name) {
-    cat("\n--- Forest Plot pour", dep_var, "-", model_name, "---\n")  # Ajouter un titre clair
-    print(forest_model(models[[i]][[model_name]], point_size = 1.5))  # Réduction de la taille des points
-  })
-})
-
-```
-
-
-
-
 # 4.   Regroupement des regression
 ```{r}
+
+#install.packages(c("dplyr", "broom", "purrr", "stargazer"))
+
 # Charger les bibliothèques nécessaires
 library(dplyr)
 library(broom)
@@ -1659,9 +1666,10 @@ for (dep_var in dependent_vars) {
 # Transformer la liste en un format utilisable par stargazer
 models_flat <- unname(models)  # Supprime les noms pour éviter les erreurs
 
-# Générer le tableau avec Stargazer (format HTML) en utilisant le style "aer" et digits = 2
+
+# Générer le tableau avec Stargazer et enregistrer dans le dossier 'rapport' avec 'here'
 stargazer(models_flat, type = "html", title = "Résultats des régressions logistiques",
-          style = "aer", digits = 2, out = "resultats_regression.html")
+          style = "aer", digits = 2, out = here("rapport", "resultats_regression.html"))
 
 ```
 
@@ -1669,7 +1677,7 @@ stargazer(models_flat, type = "html", title = "Résultats des régressions logis
 
 # 1. Variable Utilisation des médias 
 ```{r}
-
+#install.packages("sjPlot")
 library(sjPlot)
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
@@ -1713,6 +1721,10 @@ plot_models(
   p.shape = TRUE,  # Afficher les formes des points au lieu des valeurs
   grid = TRUE  # Afficher une grille
 )
+
+# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
+ggsave(here("figures", "forestplot", "Utilisation des médias_forestplot.png"), 
+       plot = last_plot(), width = 10, height = 6)
 
 ```
 
@@ -1763,6 +1775,10 @@ plot_models(
   grid = TRUE  # Afficher une grille
 )
 
+
+# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
+ggsave(here("figures", "forestplot", "nombre de de compte des médias_forestplot.png"), 
+       plot = last_plot(), width = 10, height = 6)
 
 ```
 
@@ -1820,6 +1836,9 @@ plot_models(
   grid = TRUE  # Afficher une grille
 )
 
+# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
+ggsave(here("figures", "forestplot", "nombre de de compte regulier_forestplot.png"), 
+       plot = last_plot(), width = 10, height = 6)
 
 ```
 
@@ -1876,6 +1895,11 @@ plot_models(
   p.shape = TRUE,  # Afficher les formes des points au lieu des valeurs
   grid = TRUE  # Afficher une grille
 )
+
+
+# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
+ggsave(here("figures", "forestplot", "Toute _les variables_utilisation des médias_forestplot.png"), 
+       plot = last_plot(), width = 10, height = 6)
 
 ```
 
