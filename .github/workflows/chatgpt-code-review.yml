@@ -16,7 +16,13 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      - name: Install R dependencies
+      # Restaurer l'environnement renv pour installer toutes les dépendances définies dans renv.lock
+      - name: Restore renv environment
+        run: |
+          Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+          Rscript -e "renv::restore()"
+
+      - name: Install additional dependencies if needed
         run: |
           Rscript -e 'install.packages("here", repos="https://cloud.r-project.org")'
           Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
@@ -29,7 +35,3 @@ jobs:
       - name: Render second RMarkdown report
         run: |
           Rscript -e "library(here); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
-
-      - name: Render second RMarkdown report using yaml
-        run: |
-          Rscript -e "library(yaml); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
