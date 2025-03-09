@@ -9,13 +9,16 @@
 #install.packages("ggplot2", repos = "https://cloud.r-project.org")
 
 #install.packages(c("rmarkdown", "ggplot2", "dplyr", "yaml", "here"), repos = "https://cloud.r-project.org")
-install.packages(c("ggplot2", "rmarkdown", "grid", "gridExtra"), repos = "https://cloud.r-project.org")
+#install.packages(c("ggplot2", "rmarkdown", "grid", "gridExtra"), repos = "https://cloud.r-project.org")
 
 # Charger les bibliothèques
 library(here)
 library(rmarkdown)
 library(yaml)
 library(ggplot2)
+library(grid)
+library(gridExtra)
+
 
 # Rendre les rapports au format HTML
 rmarkdown::render(here("scripts", "Rapport.Rmd"), output_dir = here("rapport"))
