@@ -17,39 +17,19 @@ jobs:
       - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # Restaurer l'environnement renv
-      - name: Restore renv environment
+      - name: Install required R packages
         run: |
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages(c('here', 'rmarkdown', 'yaml', 'ggplot2'), repos='https://cloud.r-project.org')"
+
+      - name: Restore renv environment
+        run: |
           Rscript -e "renv::restore()"
-          Rscript -e "renv::status()"
 
-      # Installer yaml sans interaction
-      - name: Install yaml
-        run: |
-          yes | Rscript -e "install.packages('yaml', repos='https://cloud.r-project.org')"
-
-      # Installer le package 'here' sans interaction
-      - name: Install here
-        run: |
-          yes | Rscript -e "install.packages('here', repos='https://cloud.r-project.org')"
-
-      # Installer rmarkdown sans interaction
-      - name: Install rmarkdown
-        run: |
-          yes | Rscript -e "install.packages('rmarkdown', repos='https://cloud.r-project.org')"
-
-      # Installer ggplot2 sans interaction
-      - name: Install ggplot2
-        run: |
-          yes | Rscript -e "install.packages('ggplot2', repos='https://cloud.r-project.org')"
-
-      # Rendre le premier rapport RMarkdown
       - name: Render first RMarkdown report
         run: |
           Rscript -e "library(here); library(rmarkdown); rmarkdown::render(here('scripts', 'Rapport.Rmd'), output_dir = here('rapport'))"
 
-      # Rendre le deuxième rapport RMarkdown
       - name: Render second RMarkdown report
         run: |
           Rscript -e "library(here); library(rmarkdown); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
