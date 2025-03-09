@@ -20,25 +20,17 @@ jobs:
       # Restaurer l'environnement renv
       - name: Restore renv environment
         run: |
-          Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
           Rscript -e "renv::restore()"
           Rscript -e "renv::status()"
 
-      # Installer yaml
-      - name: Install yaml
-        run: Rscript -e "install.packages('yaml', repos='https://cloud.r-project.org')"
-
-      # Installer ici le paquet 'here'
-      - name: Install here
-        run: Rscript -e "install.packages('here', repos='https://cloud.r-project.org')"
-
-      # Installer rmarkdown
-      - name: Install rmarkdown
-        run: Rscript -e "install.packages('rmarkdown', repos='https://cloud.r-project.org')"
-
-      # Installer ggplot2
-      - name: Install ggplot2
-        run: Rscript -e "install.packages('ggplot2', repos='https://cloud.r-project.org')"
+      # Charger les bibliothèques nécessaires
+      - name: Load required libraries
+        run: |
+          Rscript -e "library(renv)"
+          Rscript -e "library(here)"
+          Rscript -e "library(rmarkdown)"
+          Rscript -e "library(ggplot2)"
+          Rscript -e "library(yaml)"
 
       # Rendre le premier rapport RMarkdown
       - name: Render first RMarkdown report
