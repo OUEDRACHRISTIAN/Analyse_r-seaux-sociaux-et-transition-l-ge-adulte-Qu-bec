@@ -23,8 +23,8 @@ jobs:
 
       - name: Render first RMarkdown report
         run: |
-          Rscript -e 'library(here); rmarkdown::render(here("scripts", "Rapport.Rmd"), output_dir = here("rapport"))'
+          Rscript -e "library(here); rmarkdown::render(here("scripts", "Rapport.Rmd""), output_dir = here("rapport"))"
 
       - name: Render second RMarkdown report
         run: |
-          Rscript -e 'library(here); rmarkdown::render(here("main.Rmd"), output_dir = here("rapport"))'
+          Rscript -e "library(here); rmarkdown::render(here("main.Rmd""), output_dir = here("rapport"))"
