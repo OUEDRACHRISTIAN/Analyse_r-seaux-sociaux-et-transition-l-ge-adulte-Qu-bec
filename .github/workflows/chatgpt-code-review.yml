@@ -3,36 +3,28 @@ name: Render Multiple R Markdown Reports in 'rapport' folder
 on:
   push:
     branches:
-      - main  # Le workflow se déclenchera lorsqu'un push sera effectué sur la branche main
+      - main
 
 jobs:
   render_reports:
-    runs-on: ubuntu-latest  # Exécuter le job sur une machine virtuelle Ubuntu
+    runs-on: ubuntu-latest
 
     steps:
-      # Cloner le dépôt
       - name: Checkout repository
-        uses: actions/checkout@v3  # Cette étape va cloner le dépôt GitHub sur la machine virtuelle
+        uses: actions/checkout@v3
 
-      # Installer R
       - name: Set up R
-        uses: r-lib/actions/setup-r@v2  # Installer R sur la machine virtuelle
+        uses: r-lib/actions/setup-r@v2
 
-      # Installer les dépendances nécessaires pour R
       - name: Install R dependencies
         run: |
-          install.packages('here')         # Installer le package 'here' pour gérer les chemins relatifs
-          install.packages('rmarkdown')    # Installer le package 'rmarkdown' pour rendre les fichiers RMarkdown
+          install.packages('here')
+          install.packages('rmarkdown')
 
-      # Exécuter le premier fichier RMarkdown (Rapport.Rmd) et générer le rapport dans le dossier 'rapport'
       - name: Render first RMarkdown report
         run: |
-          Rscript -e "library(here); rmarkdown::render(here('scripts', 'Rapport.Rmd'), output_dir = here('rapport'))"
-          # Cette ligne exécute le premier fichier RMarkdown en utilisant `here` pour garantir que le chemin est relatif
-          # et spécifie le dossier de sortie comme étant le dossier 'rapport'.
+          Rscript -e 'library(here); rmarkdown::render(here("scripts", "Rapport.Rmd"), output_dir = here("rapport"))'
 
-      # Exécuter le deuxième fichier RMarkdown (main.Rmd) et générer le rapport dans le dossier 'rapport'
       - name: Render second RMarkdown report
         run: |
-          Rscript -e "library(here); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
-          # Cette ligne exécute le fichier 'main.Rmd' situé à la racine du dépôt et génère le rapport dans le dossier 'rapport'.
+          Rscript -e 'library(here); rmarkdown::render(here("main.Rmd"), output_dir = here("rapport"))'
