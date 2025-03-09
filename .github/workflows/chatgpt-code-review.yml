@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+  workflow_dispatch:  # Permet d'exécuter le workflow manuellement depuis GitHub
 
 jobs:
   render_reports:
@@ -22,13 +23,11 @@ jobs:
           Rscript -e "install.packages('renv', repos='https://cloud.r-project.org')"
           Rscript -e "renv::restore()"
 
-      # Optionnel : installer ici et rmarkdown (si non gérés par renv)
+      # Installer les dépendances supplémentaires si nécessaires
       - name: Install additional dependencies
         run: |
           Rscript -e 'install.packages("here", repos="https://cloud.r-project.org")'
           Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
-          
-          
 
       - name: Render first RMarkdown report
         run: |
