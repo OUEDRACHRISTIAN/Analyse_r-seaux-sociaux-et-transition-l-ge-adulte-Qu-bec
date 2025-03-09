@@ -18,8 +18,8 @@ jobs:
 
       - name: Install R dependencies
         run: |
-          install.packages('here')
-          install.packages('rmarkdown')
+          install.packages(`'here'')
+          install.packages(`'rmarkdown'')
 
       - name: Render first RMarkdown report
         run: |
