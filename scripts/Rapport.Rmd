@@ -12,14 +12,14 @@ author: "Christian Cyriaque"
 
 ```{r message=FALSE, warning=FALSE}
 # Liste des packages à installer
-packages <- c("officer", "flextable", "tidyverse", "summarytools", 
-              "gtsummary", "survey", "readxl", "dplyr", "ggplot2", "scales","cardx")
+#packages <- c("officer", "flextable", "tidyverse", "summarytools", 
+              #"gtsummary", "survey", "readxl", "dplyr", "ggplot2", "scales","cardx")
 
 # Installer les packages
-install.packages(packages)
+#install.packages(packages)
 
 # Vérifier si les packages sont correctement installés et les charger
-lapply(packages, require, character.only = TRUE)
+#lapply(packages, require, character.only = TRUE)
 
 
 

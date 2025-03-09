@@ -1,9 +1,8 @@
 ---
 title: "Analyse des données"
-author: "Nom du chercheur"
+author: "OUEDRAOGO"
 date: "`r Sys.Date()`"
 output: html_document
-bibliography: references/references.bib
 ---
 
 # Introduction  
@@ -34,4 +33,5 @@ data <- read_csv(here("data", "data_P3.csv"))
 summary(data)
 
 ```
+
 
