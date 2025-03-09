@@ -13,20 +13,9 @@ jobs:
       - name: Vérifier le code source
         uses: actions/checkout@v3  # Vérifie le code source du dépôt
 
-      - name: Installer R et les dépendances
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y r-base  # Installe R dans l'environnement
-
-      - name: Installer les packages R nécessaires
-        run: |
-          R -e "install.packages('here', repos = 'https://cloud.r-project.org')"  # Installer le package 'here'
-          R -e "install.packages('yaml', repos = 'https://cloud.r-project.org')"  # Installer le package 'yaml'
-          R -e "install.packages('ggplot2', repos = 'https://cloud.r-project.org')"  # Installer le package 'ggplot2'
-
       - name: Exécuter le script R
         run: |
-          Rscript -e "library(here); library(ggplot2); library(yaml); source(here::here('Execution des rapports.R'))"  # Exécuter le script avec 'here'
-          
+          Rscript -e "library(here); library(ggplot2); library(yaml); source(here::here('Execution des rapports.R'))"  # Charger les packages et exécuter le script
+
       - name: Confirmer l'exécution
         run: echo "Le script R a été exécuté avec succès."
