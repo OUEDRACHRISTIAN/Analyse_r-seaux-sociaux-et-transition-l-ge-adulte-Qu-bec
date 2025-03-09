@@ -7,7 +7,7 @@ on:
 
 jobs:
   run_script:
-    runs-on: ubuntu-latest  # Utiliser un environnement Ubuntu pour exécuter le script
+    runs-on: ubuntu-latest  # Utilise un environnement Ubuntu pour exécuter le script
 
     steps:
       - name: Vérifier le code source
@@ -21,10 +21,12 @@ jobs:
       - name: Installer les packages R nécessaires
         run: |
           R -e "install.packages('here', repos = 'https://cloud.r-project.org')"  # Installer le package 'here'
+          R -e "install.packages('yaml', repos = 'https://cloud.r-project.org')"  # Installer le package 'yaml'
+          R -e "install.packages('ggplot2', repos = 'https://cloud.r-project.org')"  # Installer le package 'ggplot2'
 
       - name: Exécuter le script R
         run: |
-          Rscript -e "library(here); source(here::here('Execution des rapports.R'))"  # Exécuter le script avec 'here'
+          Rscript -e "library(here); library(ggplot2); library(yaml); source(here::here('Execution des rapports.R'))"  # Exécuter le script avec 'here'
           
       - name: Confirmer l'exécution
         run: echo "Le script R a été exécuté avec succès."
