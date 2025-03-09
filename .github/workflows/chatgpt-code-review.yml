@@ -20,11 +20,16 @@ jobs:
         run: |
           Rscript -e 'install.packages("here", repos="https://cloud.r-project.org")'
           Rscript -e 'install.packages("rmarkdown", repos="https://cloud.r-project.org")'
+          Rscript -e 'install.packages("yaml", repos="https://cloud.r-project.org")'
 
       - name: Render first RMarkdown report
         run: |
-          Rscript -e "library(here); rmarkdown::render(here("scripts", "Rapport.Rmd"), output_dir = here("rapport"))"
+          Rscript -e "library(here); rmarkdown::render(here('scripts', 'Rapport.Rmd'), output_dir = here('rapport'))"
 
       - name: Render second RMarkdown report
         run: |
-          Rscript -e "library(here); rmarkdown::render(here("main.Rmd"), output_dir = here("rapport"))"
+          Rscript -e "library(here); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
+
+      - name: Render second RMarkdown report using yaml
+        run: |
+          Rscript -e "library(yaml); rmarkdown::render(here('main.Rmd'), output_dir = here('rapport'))"
