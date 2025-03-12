@@ -24,31 +24,32 @@ jobs:
         uses: r-lib/actions/setup-r@v2
 
       # 3. Install system dependencies (including Quarto)
-      - name: Install Quarto and system dependencies
+      - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
           wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.0/quarto-1.7.0-linux-amd64.deb
           sudo dpkg -i quarto-1.7.0-linux-amd64.deb
 
-      # 4. Install required R packages and Quarto
-      - name: Install R packages
+      # 4. Install and initialize renv environment
+      - name: Install R packages and initialize renv
         run: |
-          Rscript -e "install.packages(c('renv', 'rmarkdown', 'ggplot2', 'yaml', 'officer', 'flextable', 'tidyverse'))"
+          Rscript -e "install.packages('renv')"
           Rscript -e "renv::init()"
-
-      # 5. Install additional dependencies with renv (if needed)
+          Rscript -e "renv::install(c('rmarkdown', 'ggplot2', 'yaml', 'officer', 'flextable', 'tidyverse'))"
+        
+      # 5. Restore dependencies with renv (to ensure the environment is consistent)
       - name: Restore dependencies using renv
         run: |
           Rscript -e "renv::restore()"
 
-      # 6. Render the RMarkdown file to Word
+      # 6. Render the RMarkdown files to Word
       - name: Render RMarkdown file to Word
         run: |
           Rscript -e 'rmarkdown::render("main.Rmd", output_format="word_document", output_file="rapport/main.docx")'
           Rscript -e 'rmarkdown::render("scripts/rapport.Rmd", output_format="word_document", output_file="rapport/rapport.docx")'
 
-      # 7. Commit and push results if files were generated
+      # 7. Commit and push the results if any files were generated
       - name: Commit and Push results
         run: |
           git config --local user.email "your-email@example.com"
