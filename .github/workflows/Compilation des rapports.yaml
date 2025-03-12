@@ -1,59 +1,40 @@
-name: Compile RMarkdown to Word
+name: Generate PDF Report
 
 on:
   push:
     branches:
       - main
-  pull_request:
-    branches:
-      - main
 
 jobs:
-  generate-docs:
+  generate-pdf:
     runs-on: ubuntu-latest
-    permissions:
-      contents: write
-
     steps:
-      # 1. Check out the repository
-      - name: Check out repository
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-      # 2. Set up R and install system dependencies
-      - name: Set up R
+      # Installe Quarto et LaTeX
+      - name: Setup Quarto
+        uses: quarto-dev/quarto-actions/setup@v2
+        with:
+          tinytex: true
+
+      # Installer les dépendances nécessaires
+      - name: Install R
         uses: r-lib/actions/setup-r@v2
 
-      # 3. Install system dependencies (for Quarto, curl, SSL, etc.)
-      - name: Install system dependencies
+      - name: Install Quarto dependencies
         run: |
-          sudo apt-get update
-          sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+          sudo apt-get install -y pandoc
+          Rscript -e "install.packages('quarto')"
 
-      # 4. Install and load required R packages
-      - name: Install R packages
+      # Compiler les fichiers en PDF
+      - name: Render Rapport and Main Rmd
         run: |
-          Rscript -e 'install.packages(c("here", "rmarkdown", "grid", "gridExtra"), repos="https://cloud.r-project.org")'
+          Rscript -e 'quarto::quarto_render("scripts/Rapport.Rmd", output_format = "pdf_document")'
+          Rscript -e 'quarto::quarto_render("main.Rmd", output_format = "pdf_document")'
 
-      # 5. Render the RMarkdown files to Word and HTML
-      - name: Render RMarkdown to Word
-        run: |
-          Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
-          Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
-
-      - name: Render RMarkdown to HTML (optional)
-        run: |
-          Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
-          Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
-
-      # 6. Commit and push the results if any files were generated
-      - name: Commit and Push results
-        run: |
-          git config --local user.email "your-email@example.com"
-          git config --local user.name "Your Name"
-          git add rapport/*
-          git commit -m "Generated Word and HTML reports" || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
-
-      # 7. Confirmation message
-      - name: Confirmation
-        run: echo "Test terminé avec succès ✅"
+      # Télécharger le PDF généré
+      - name: Upload PDF Artifact
+        uses: actions/upload-artifact@v4.1.0
+        with:
+          name: rapport.pdf
+          path: rapport.pdf
