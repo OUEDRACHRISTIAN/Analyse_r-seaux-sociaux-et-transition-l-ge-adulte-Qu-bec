@@ -3,7 +3,7 @@ name: Export HTML Report After Push
 on:
   push:
     branches:
-      - main  # Remplacer par la branche sur laquelle tu souhaites que ce workflow soit exécuté
+      - main  # Remplace par la branche que tu souhaites surveiller
 
 jobs:
   generate-html:
@@ -19,44 +19,30 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
 
-      # Étape 3: Installer `renv` et restaurer les dépendances du projet
-      - name: Install renv and restore dependencies
-        run: |
-          Rscript -e "install.packages('renv')"  # Installer renv
-          Rscript -e "renv::restore()"  # Restaurer les dépendances à partir du fichier renv.lock
-
-      # Étape 4: Installer les packages nécessaires (ggplot2, knitr, rmarkdown, etc.)
+      # Étape 3: Installer les packages nécessaires (rmarkdown, ggplot2, etc.)
       - name: Install required R packages
         run: |
-          Rscript -e "install.packages(c('ggplot2', 'knitr', 'rmarkdown', 'downlit', 'xml2', 'gt', 'tidyverse'))"
+          Rscript -e "install.packages(c('rmarkdown', 'ggplot2', 'tidyverse'))"
 
-      # Étape 5: Configurer Quarto
-      - name: Setup Quarto
-        uses: quarto-dev/quarto-actions/setup@v2
-        with:
-          tinytex: true  # Installer TinyTeX pour la gestion de la génération HTML et PDF
+      # Étape 4: Compiler le fichier Rmd en HTML
+      - name: Render Rmd to HTML
+        run: |
+          Rscript -e "rmarkdown::render('rapport.Rmd', output_format = 'html_document')"
 
-      # Étape 6: Générer le fichier HTML à partir du fichier Quarto (ou RMarkdown)
-      - name: Render Quarto Project to HTML
-        uses: quarto-dev/quarto-actions/render@v2
-        with:
-          to: html  # Remplacer pdf par html
-          path: rapport.Rmd  # Le chemin vers ton fichier .Rmd
-
-      # Étape 7: Déplacer le fichier HTML généré dans le dossier 'rapport'
+      # Étape 5: Déplacer le fichier HTML généré dans le dossier 'rapport'
       - name: Move HTML to rapport folder
         run: |
-          mkdir -p rapport  # Créer le dossier 'rapport' s'il n'existe pas
+          mkdir -p rapport
           mv rapport.html rapport/  # Déplacer le fichier HTML dans le dossier 'rapport'
 
-      # Étape 8: Télécharger le fichier HTML généré en tant qu'artefact
+      # Étape 6: Télécharger le fichier HTML généré en tant qu'artefact
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v4.1.0
         with:
           name: rapport.html
-          path: rapport/rapport.html  # Chemin vers le fichier HTML dans le dossier 'rapport'
+          path: rapport/rapport.html
 
-      # Étape 9: Commiter et pousser les résultats (le fichier HTML généré)
+      # Étape 7: Commit et push les résultats
       - name: Commit results
         run: |
           git config --local user.email "ouedraogocyriaque1@gmail.com"
