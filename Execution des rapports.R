@@ -1,59 +1,31 @@
-name: Compile RMarkdown to Word
+# Installer et charger renv si besoin
+#install.packages("renv", repos = "https://cloud.r-project.org")
+#renv::restore()
 
-on:
-  push:
-  branches:
-  - main
-pull_request:
-  branches:
-  - main
+# Installer les packages manuellement si besoin
+#install.packages("here", repos = "https://cloud.r-project.org")
+#install.packages("rmarkdown", repos = "https://cloud.r-project.org")
+#install.packages("yaml", repos = "https://cloud.r-project.org")
+#install.packages("ggplot2", repos = "https://cloud.r-project.org")
 
-jobs:
-  generate-docs:
-  runs-on: ubuntu-latest
-permissions:
-  contents: write
+#install.packages(c("rmarkdown", "ggplot2", "dplyr", "yaml", "here"), repos = "https://cloud.r-project.org")
+#install.packages(c("ggplot2", "rmarkdown", "grid", "gridExtra"), repos = "https://cloud.r-project.org")
 
-steps:
-  # 1. Check out the repository
-  - name: Check out repository
-uses: actions/checkout@v4
+# Charger les bibliothèques
+library(here)
+library(rmarkdown)
+library(yaml)
+library(ggplot2)
+library(grid)
+library(gridExtra)
 
-# 2. Set up R and install system dependencies
-- name: Set up R
-uses: r-lib/actions/setup-r@v2
 
-# 3. Install system dependencies (for Quarto, curl, SSL, etc.)
-- name: Install system dependencies
-run: |
-  sudo apt-get update
-sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
+# Rendre les rapports au format HTML
+rmarkdown::render(here("scripts", "Rapport.Rmd"), output_dir = here("rapport"))
+rmarkdown::render(here("main.Rmd"), output_dir = here("rapport"))
 
-# 4. Install and load required R packages
-- name: Install R packages
-run: |
-  Rscript -e 'install.packages(c("here", "rmarkdown",  "ggplot2", "grid", "gridExtra"), repos="https://cloud.r-project.org")'
+# Rendre le rapport au format Word
+rmarkdown::render(here("scripts", "Rapport.Rmd"), output_format = "word_document", output_dir = here("rapport"))
+rmarkdown::render(here("main.Rmd"), output_format = "word_document", output_dir = here("rapport"))
 
-# 5. Render the RMarkdown files to Word and HTML
-- name: Render RMarkdown to Word
-run: |
-  Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
-Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
-
-- name: Render RMarkdown to HTML (optional)
-run: |
-  Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
-Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
-
-# 6. Commit and push the results if any files were generated
-- name: Commit and Push results
-run: |
-  git config --local user.email "your-email@example.com"
-git config --local user.name "Your Name"
-git add rapport/*
-  git commit -m "Generated Word and HTML reports" || echo "No changes to commit"
-git push origin || echo "No changes to commit"
-
-# 7. Confirmation message
-- name: Confirmation
-run: echo "Test terminé avec succès ✅"
+cat("Test terminé avec succès ✅\n")

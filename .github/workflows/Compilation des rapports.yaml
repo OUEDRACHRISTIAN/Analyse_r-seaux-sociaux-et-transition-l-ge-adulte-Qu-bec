@@ -19,41 +19,41 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v4
 
-      # 2. Set up R (install R and dependencies)
-      - name: Install R
+      # 2. Set up R and install system dependencies
+      - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # 3. Install system dependencies (including Quarto)
+      # 3. Install system dependencies (for Quarto, curl, SSL, etc.)
       - name: Install system dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y libcurl4-openssl-dev libssl-dev libxml2-dev
-          wget https://github.com/quarto-dev/quarto-cli/releases/download/v1.7.0/quarto-1.7.0-linux-amd64.deb
-          sudo dpkg -i quarto-1.7.0-linux-amd64.deb
 
-      # 4. Install and initialize renv environment
-      - name: Install R packages and initialize renv
+      # 4. Install and load required R packages
+      - name: Install R packages
         run: |
-          Rscript -e "install.packages('renv')"
-          Rscript -e "renv::init()"
-          Rscript -e "renv::install(c('rmarkdown', 'ggplot2', 'yaml', 'officer', 'flextable', 'tidyverse'))"
-        
-      # 5. Restore dependencies with renv (to ensure the environment is consistent)
-      - name: Restore dependencies using renv
-        run: |
-          Rscript -e "renv::restore()"
+          Rscript -e 'install.packages(c("here", "rmarkdown", "grid", "gridExtra"), repos="https://cloud.r-project.org")'
 
-      # 6. Render the RMarkdown files to Word
-      - name: Render RMarkdown file to Word
+      # 5. Render the RMarkdown files to Word and HTML
+      - name: Render RMarkdown to Word
         run: |
-          Rscript -e 'rmarkdown::render("main.Rmd", output_format="word_document", output_file="rapport/main.docx")'
-          Rscript -e 'rmarkdown::render("scripts/rapport.Rmd", output_format="word_document", output_file="rapport/rapport.docx")'
+          Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
+          Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "word_document", output_dir = here::here("rapport"))'
 
-      # 7. Commit and push the results if any files were generated
+      - name: Render RMarkdown to HTML (optional)
+        run: |
+          Rscript -e 'rmarkdown::render(here::here("scripts", "Rapport.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
+          Rscript -e 'rmarkdown::render(here::here("main.Rmd"), output_format = "html_document", output_dir = here::here("rapport"))'
+
+      # 6. Commit and push the results if any files were generated
       - name: Commit and Push results
         run: |
           git config --local user.email "your-email@example.com"
           git config --local user.name "Your Name"
-          git add rapport/main.docx rapport/rapport.docx
-          git commit -m "Generated Word reports" || echo "No changes to commit"
+          git add rapport/*
+          git commit -m "Generated Word and HTML reports" || echo "No changes to commit"
           git push origin || echo "No changes to commit"
+
+      # 7. Confirmation message
+      - name: Confirmation
+        run: echo "Test terminé avec succès ✅"
