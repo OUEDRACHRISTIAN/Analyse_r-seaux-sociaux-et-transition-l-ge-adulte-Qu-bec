@@ -25,10 +25,10 @@ jobs:
           Rscript -e "install.packages('renv')"  # Installer renv
           Rscript -e "renv::restore()"  # Restaurer les dépendances à partir du fichier renv.lock
 
-      # Étape 4: Installer les packages nécessaires (yaml, ggplot2, etc.)
+      # Étape 4: Installer les packages nécessaires (ggplot2, knitr, rmarkdown, etc.)
       - name: Install required R packages
         run: |
-          Rscript -e "install.packages(c('yaml', 'ggplot2', 'knitr', 'rmarkdown', 'downlit', 'xml2', 'gt', 'tidyverse'))"
+          Rscript -e "install.packages(c('ggplot2', 'knitr', 'rmarkdown', 'downlit', 'xml2', 'gt', 'tidyverse'))"
 
       # Étape 5: Configurer Quarto
       - name: Setup Quarto
