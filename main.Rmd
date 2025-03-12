@@ -1,9 +1,12 @@
 ---
-title: "Analyse exploratoire : `r Sys.Date()`"
-format:
-  pdf:
-    pdf-engine: lualatex
-author: "Christian Cyriaque Wendyam OUEDRAOGO"
+title: "Analyse des données"
+output:
+  word_document: default
+  pdf_document: 
+    latex_engine: xelatex
+  html_document: default
+date: "2025-02-28"
+author: "Christian Cyriaque"
 ---
 
 # Introduction  
