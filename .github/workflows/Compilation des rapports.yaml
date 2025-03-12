@@ -19,14 +19,14 @@ jobs:
       - name: Install R
         uses: r-lib/actions/setup-r@v2
 
-      # Étape 3: Installer `renv` et synchroniser les dépendances
-      - name: Install renv and synchronize dependencies
+      # Étape 3: Installer `renv` et restaurer les dépendances du projet
+      - name: Install renv and restore dependencies
         run: |
-          Rscript -e "install.packages('renv')"
-          Rscript -e "renv::restore()"  # Cette commande va synchroniser les dépendances avec `renv`
+          Rscript -e "install.packages('renv')"  # Installer renv
+          Rscript -e "renv::restore()"  # Restaurer les dépendances à partir du fichier renv.lock
 
-      # Étape 4: Installer les packages nécessaires si ce n'est pas fait par `renv`
-      - name: Install additional required R packages
+      # Étape 4: Installer les packages nécessaires (yaml, ggplot2, etc.)
+      - name: Install required R packages
         run: |
           Rscript -e "install.packages(c('yaml', 'ggplot2', 'knitr', 'rmarkdown', 'downlit', 'xml2', 'gt', 'tidyverse'))"
 
