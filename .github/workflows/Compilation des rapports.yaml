@@ -3,7 +3,7 @@ name: Compile and Export Report
 on:
   push:
     branches:
-      - main  # Exécution du workflow sur la branche principale après un push
+      - main  # Exécution sur push sur la branche principale
 
 jobs:
   compile-report:
