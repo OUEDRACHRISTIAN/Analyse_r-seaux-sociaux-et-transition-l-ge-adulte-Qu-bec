@@ -1,50 +1,55 @@
-name: Export RMarkdown to HTML
+name: Export HTML Report After Push
 
 on:
   push:
     branches:
-      - main  # ou la branche de ton choix
+      - main  # Remplace par la branche que tu souhaites surveiller
 
 jobs:
   generate-html:
     permissions:
-      contents: write  # Permet de pousser dans le dépôt
-    runs-on: ubuntu-latest  # Utilise un environnement Ubuntu pour l'exécution
-
+      contents: write
+    runs-on: ubuntu-latest
     steps:
-      # 1. Vérifier le dépôt
+      # Étape 1: Vérifier le dépôt
       - name: Check out repository
         uses: actions/checkout@v3
 
-      # 2. Installer R et les dépendances nécessaires
+      # Étape 2: Installer R
       - name: Install R
         uses: r-lib/actions/setup-r@v2
 
-      # 3. Installer les packages nécessaires (RMarkdown, knitr, ggplot2, etc.)
-      - name: Install required R packages
+      # Étape 3: Installer renv et restaurer les dépendances
+      - name: Install renv and restore dependencies
         run: |
-          Rscript -e "install.packages(c('rmarkdown', 'knitr', 'ggplot2', 'downlit', 'xml2', 'gt', 'tidyverse'))"
+          Rscript -e "install.packages('renv', repos = 'https://cloud.r-project.org')"
+          Rscript -e "renv::restore()"  # Si tu utilises renv et que tu as un fichier renv.lock
 
-      # 4. Rendre le fichier RMarkdown en HTML
-      - name: Render RMarkdown to HTML
+      # Étape 4: Installer les packages nécessaires manuellement
+      - name: Install additional R packages
         run: |
-          Rscript -e "rmarkdown::render('rapport.Rmd', output_format = 'html_document')"
+          Rscript -e "install.packages(c('rmarkdown', 'yaml', 'ggplot2', 'here', 'dplyr', 'grid', 'gridExtra'), repos = 'https://cloud.r-project.org')"
 
-      # 5. Déplacer le fichier HTML généré dans le dossier 'rapport' 
+      # Étape 5: Exécuter le script R pour générer le rapport
+      - name: Run R script to generate report
+        run: |
+          Rscript scripts/Execution_des_rapports.R  # Assure-toi que le chemin est correct
+
+      # Étape 6: Déplacer le fichier HTML généré dans le dossier 'rapport'
       - name: Move HTML to rapport folder
         run: |
-          mkdir -p rapport  # Crée le dossier 'rapport' s'il n'existe pas
-          mv rapport.html rapport/  # Déplace le fichier HTML généré dans le dossier 'rapport'
+          mkdir -p rapport
+          mv rapport.html rapport/  # Déplacer le fichier HTML dans le dossier 'rapport'
 
-      # 6. Télécharger l'artefact (fichier HTML) généré
+      # Étape 7: Télécharger le fichier HTML généré en tant qu'artefact
       - name: Upload HTML Artifact
         uses: actions/upload-artifact@v4.1.0
         with:
           name: rapport.html
-          path: rapport/rapport.html  # Chemin vers le fichier HTML dans le dossier 'rapport'
+          path: rapport/rapport.html
 
-      # 7. Commit et push du fichier HTML généré
-      - name: Commit and Push Results
+      # Étape 8: Commit et push les résultats (si applicable)
+      - name: Commit results
         run: |
           git config --local user.email "ouedraogocyriaque1@gmail.com"
           git config --local user.name "ChristianCyriaque"
