@@ -21,7 +21,6 @@ jobs:
       # Étape 3 : Installer les packages nécessaires
       - name: Install R packages
         run: |
-          # Installer les packages nécessaires pour le script
           Rscript -e "install.packages('here', repos='https://cloud.r-project.org')"
           Rscript -e "install.packages('rmarkdown', repos='https://cloud.r-project.org')"
           Rscript -e "install.packages('yaml', repos='https://cloud.r-project.org')"
@@ -32,10 +31,10 @@ jobs:
       # Étape 4 : Exécuter le script R 'Execution des rapports.R'
       - name: Run the R script to generate reports
         run: |
-          # Assure-toi que le chemin est correct, par exemple scripts/Execution_des_rapports.R
+          # Vérifie que le fichier R est au bon endroit (exemple : scripts/Execution_des_rapports.R)
           Rscript scripts/Execution_des_rapports.R  
 
-      # Étape 5 : Ajouter l'artefact (les fichiers générés comme les rapports HTML, Word, etc.)
+      # Étape 5 : Télécharger les rapports générés
       - name: Upload reports as artifacts
         uses: actions/upload-artifact@v4.1.0
         with:
