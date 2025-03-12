@@ -1,10 +1,10 @@
 ---
-title: "Analyse_2"
+title: "Rapport"
 output:
-  html_document: default
+  word_document: default
   pdf_document: 
     latex_engine: xelatex
-  word_document: default
+  html_document: default
 date: "2025-02-28"
 author: "Christian Cyriaque"
 ---
