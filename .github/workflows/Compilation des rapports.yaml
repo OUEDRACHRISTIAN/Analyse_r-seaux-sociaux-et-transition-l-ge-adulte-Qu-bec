@@ -1,4 +1,4 @@
-name: Export PDF Report After Push
+name: Export HTML Report After Push
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
       - main  # Remplacer par la branche sur laquelle tu souhaites que ce workflow soit exécuté
 
 jobs:
-  generate-pdf:
+  generate-html:
     permissions:
       contents: write
     runs-on: ubuntu-latest
@@ -34,33 +34,33 @@ jobs:
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
-          tinytex: true  # Installer TinyTeX pour générer des fichiers PDF via LaTeX
+          tinytex: true  # Installer TinyTeX pour la gestion de la génération HTML et PDF
 
-      # Étape 6: Générer le fichier PDF à partir du fichier Quarto (ou RMarkdown)
-      - name: Render Quarto Project to PDF
+      # Étape 6: Générer le fichier HTML à partir du fichier Quarto (ou RMarkdown)
+      - name: Render Quarto Project to HTML
         uses: quarto-dev/quarto-actions/render@v2
         with:
-          to: pdf
-          path: rapport.Rmd  # Le chemin vers ton fichier .Rmd dans le dossier 'rapport'
+          to: html  # Remplacer pdf par html
+          path: rapport.Rmd  # Le chemin vers ton fichier .Rmd
 
-      # Étape 7: Déplacer le PDF généré dans le dossier 'rapport'
-      - name: Move PDF to rapport folder
+      # Étape 7: Déplacer le fichier HTML généré dans le dossier 'rapport'
+      - name: Move HTML to rapport folder
         run: |
           mkdir -p rapport  # Créer le dossier 'rapport' s'il n'existe pas
-          mv rapport.pdf rapport/  # Déplacer le fichier PDF dans le dossier 'rapport'
+          mv rapport.html rapport/  # Déplacer le fichier HTML dans le dossier 'rapport'
 
-      # Étape 8: Télécharger le fichier PDF généré en tant qu'artefact
-      - name: Upload PDF Artifact
+      # Étape 8: Télécharger le fichier HTML généré en tant qu'artefact
+      - name: Upload HTML Artifact
         uses: actions/upload-artifact@v4.1.0
         with:
-          name: rapport.pdf
-          path: rapport/rapport.pdf  # Chemin vers le fichier PDF dans le dossier 'rapport'
+          name: rapport.html
+          path: rapport/rapport.html  # Chemin vers le fichier HTML dans le dossier 'rapport'
 
-      # Étape 9: Commiter et pousser les résultats (le fichier PDF généré)
+      # Étape 9: Commiter et pousser les résultats (le fichier HTML généré)
       - name: Commit results
         run: |
           git config --local user.email "ouedraogocyriaque1@gmail.com"
           git config --local user.name "ChristianCyriaque"
-          git add rapport/rapport.pdf
-          git commit -m 'Rapport PDF généré et mis à jour' || echo "No changes to commit"
+          git add rapport/rapport.html
+          git commit -m 'Rapport HTML généré et mis à jour' || echo "No changes to commit"
           git push origin || echo "No changes to commit"
