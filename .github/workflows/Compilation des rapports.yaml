@@ -1,26 +1,26 @@
-name: Compile and Export Report
+name: Export PDF Report After Push
 
 on:
   push:
     branches:
-      - main  # Exécution sur push sur la branche principale
+      - main  # Remplacer par la branche sur laquelle tu souhaites que ce workflow soit exécuté
 
 jobs:
-  compile-report:
+  generate-pdf:
     permissions:
-      contents: write  # Permissions pour écrire dans le dépôt
+      contents: write
     runs-on: ubuntu-latest
     steps:
       # Étape 1: Vérifier le dépôt
       - name: Check out repository
         uses: actions/checkout@v3
-        
+
       # Étape 2: Installer R
       - name: Install R
         uses: r-lib/actions/setup-r@v2
 
-      # Étape 3: Installer les dépendances R nécessaires
-      - name: Install R packages
+      # Étape 3: Installer les packages nécessaires
+      - name: Install packages
         uses: r-lib/actions/setup-r-dependencies@v2
         with:
           packages: |
@@ -31,18 +31,18 @@ jobs:
             any::gt
             any::tidyverse
 
-      # Étape 4: Configurer Quarto (si tu utilises Quarto pour compiler le fichier)
+      # Étape 4: Configurer Quarto
       - name: Setup Quarto
         uses: quarto-dev/quarto-actions/setup@v2
         with:
           tinytex: true  # Installer TinyTeX pour générer des fichiers PDF via LaTeX
 
-      # Étape 5: Compiler le fichier Quarto (ou RMarkdown) en PDF
+      # Étape 5: Générer le fichier PDF à partir du fichier Quarto (ou RMarkdown)
       - name: Render Quarto Project to PDF
         uses: quarto-dev/quarto-actions/render@v2
         with:
           to: pdf
-          path: rapport/rapport.Rmd  # Le chemin vers ton fichier .Rmd dans le dossier 'rapport'
+          path: rapport.Rmd  # Le chemin vers ton fichier .Rmd dans le dossier 'rapport'
 
       # Étape 6: Déplacer le PDF généré dans le dossier 'rapport'
       - name: Move PDF to rapport folder
@@ -50,9 +50,18 @@ jobs:
           mkdir -p rapport  # Créer le dossier 'rapport' s'il n'existe pas
           mv rapport.pdf rapport/  # Déplacer le fichier PDF dans le dossier 'rapport'
 
-      # Étape 7: Télécharger le fichier PDF généré en tant qu'artifact
+      # Étape 7: Télécharger le fichier PDF généré en tant qu'artefact
       - name: Upload PDF Artifact
         uses: actions/upload-artifact@v4.1.0
         with:
           name: rapport.pdf
           path: rapport/rapport.pdf  # Chemin vers le fichier PDF dans le dossier 'rapport'
+
+      # Étape 8: Commiter et pousser les résultats (le fichier PDF généré)
+      - name: Commit results
+        run: |
+          git config --local user.email "ouedraogocyriaque1@gmail.com"
+          git config --local user.name "ChristianCyriaque"
+          git add rapport/rapport.pdf
+          git commit -m 'Rapport PDF généré et mis à jour' || echo "No changes to commit"
+          git push origin || echo "No changes to commit"
