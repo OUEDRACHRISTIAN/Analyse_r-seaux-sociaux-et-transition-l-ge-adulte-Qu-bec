@@ -1,58 +1,43 @@
-name: Export HTML Report After Push
+name: Exécution des rapports R
 
 on:
   push:
     branches:
-      - main  # Remplace par la branche que tu souhaites surveiller
+      - main  # Exécuter le workflow chaque fois qu'il y a un push dans la branche 'main'
 
 jobs:
-  generate-html:
-    permissions:
-      contents: write
-    runs-on: ubuntu-latest
+  run-reports:
+    runs-on: ubuntu-latest  # Utilisation d'un environnement Ubuntu pour exécuter le script R
+
     steps:
-      # Étape 1: Vérifier le dépôt
-      - name: Check out repository
+      # Étape 1 : Vérifier le dépôt
+      - name: Check out the repository
         uses: actions/checkout@v3
 
-      # Étape 2: Installer R
-      - name: Install R
+      # Étape 2 : Installer R et les dépendances nécessaires
+      - name: Set up R
         uses: r-lib/actions/setup-r@v2
 
-      # Étape 3: Installer les packages nécessaires
-      - name: Install required R packages
+      # Étape 3 : Installer les packages nécessaires
+      - name: Install R packages
         run: |
-          Rscript -e "install.packages('yaml', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('ggplot2', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('rmarkdown', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('here', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('dplyr', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('grid', repos = 'https://cloud.r-project.org')"
-          Rscript -e "install.packages('gridExtra', repos = 'https://cloud.r-project.org')"
+          # Installer les packages nécessaires pour le script
+          Rscript -e "install.packages('here', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages('rmarkdown', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages('yaml', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages('ggplot2', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages('grid', repos='https://cloud.r-project.org')"
+          Rscript -e "install.packages('gridExtra', repos='https://cloud.r-project.org')"
 
-      # Étape 4: Exécuter le script R pour générer le rapport
-      - name: Run R script to generate report
+      # Étape 4 : Exécuter le script R 'Execution des rapports.R'
+      - name: Run the R script to generate reports
         run: |
-          Rscript scripts/Execution_des_rapports.R  # Assure-toi que le chemin est correct
+          # Assure-toi que le chemin est correct, par exemple scripts/Execution_des_rapports.R
+          Rscript scripts/Execution_des_rapports.R  
 
-      # Étape 5: Déplacer le fichier HTML généré dans le dossier 'rapport'
-      - name: Move HTML to rapport folder
-        run: |
-          mkdir -p rapport
-          mv rapport.html rapport/  # Déplacer le fichier HTML dans le dossier 'rapport'
-
-      # Étape 6: Télécharger le fichier HTML généré en tant qu'artefact
-      - name: Upload HTML Artifact
+      # Étape 5 : Ajouter l'artefact (les fichiers générés comme les rapports HTML, Word, etc.)
+      - name: Upload reports as artifacts
         uses: actions/upload-artifact@v4.1.0
         with:
-          name: rapport.html
-          path: rapport/rapport.html
-
-      # Étape 7: Commit et push les résultats (si applicable)
-      - name: Commit results
-        run: |
-          git config --local user.email "ouedraogocyriaque1@gmail.com"
-          git config --local user.name "ChristianCyriaque"
-          git add rapport/rapport.html
-          git commit -m 'Rapport HTML généré et mis à jour' || echo "No changes to commit"
-          git push origin || echo "No changes to commit"
+          name: reports
+          path: rapport/  # Spécifie le dossier où les rapports HTML, Word, etc. sont générés
