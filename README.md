@@ -2,7 +2,7 @@
 Les réseaux sociaux et la transition à l’âge adulte au Québec![image](https://github.com/user-attachments/assets/6913aa37-08b7-4e1f-b3ee-ce76ae74bedd)
 Projet de thèse
 
-Présenté au 
+Presente au 
 Professeur Vissého Adjiwanou
 Directeur de thèse
 
