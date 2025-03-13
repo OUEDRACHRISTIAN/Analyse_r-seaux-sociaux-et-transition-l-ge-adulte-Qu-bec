@@ -1,9 +1,12 @@
 ---
-title: "Etat Recaptulatif de la Collecte de ce jour: `r Sys.Date()`"
-author: "Komlan Samati"
-format:
-  pdf:
-    pdf-engine: lualatex
+title: "Rapport:`r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: 
+    latex_engine: xelatex
+  word_document: default
+date: "2025-02-08"
+author: "Christian Cyriaque"
 ---
 
 
@@ -17,8 +20,6 @@ format:
 
 # Vérifier si les packages sont correctement installés et les charger
 #lapply(packages, require, character.only = TRUE)
-
-
 
 library(cardx)
 library(officer)
@@ -38,10 +39,16 @@ library(scales)
 #options(repos = c(CRAN = "https://cran.rstudio.com/"))
 #install.packages("here")
 library(here)
-data_P3_ = read_csv(here("data", "data_P3.csv"))
+data_P3_ = read_csv(here("data", "data_P3_.csv"))
 
 ```
 
+```{r}
+data_P3_$Nbr_compte_MS_regulier <- factor(data_P3_$Nbr_compte_MS_regulier,
+                                          levels = c("Aucun", "Un", "Deux", "Trois", "Quatre", "Plus de quatre"))
+
+data_P3_$Nbr_compte_MS <- factor(data_P3_$Nbr_compte_MS, levels = c("Aucun", "1 ou 2 comptes","3 à 5 comptes","6 comptes et plus"))
+```
 
 
 #. Ponderation
@@ -1459,10 +1466,6 @@ graphique
 
 
 
-
-
-
-
 ## 42.Dingogramme
 
 ```{r message=FALSE, warning=FALSE}
@@ -1542,10 +1545,6 @@ data_interest %>%
 ```{r}
 #data_interest
 ```
-
-`
-
-
 
 
 
@@ -1900,4 +1899,61 @@ ggsave(here("figures", "forestplot", "Toute _les variables_utilisation des médi
 
 ```
 
+
+
+#Vasy
+```{r}
+#install.packages(c("dplyr", "broom", "purrr", "stargazer"))
+
+# Charger les bibliothèques nécessaires
+library(dplyr)
+library(broom)
+library(purrr)
+library(stargazer)
+
+# Fonction pour exécuter une régression logistique et retourner le modèle
+run_logistic_regression <- function(dep_var, indep_vars, data) {
+  formula <- as.formula(paste(dep_var, "~", paste(indep_vars, collapse = " + ")))
+  model <- glm(formula, data = data, family = binomial)
+  return(model)  # Retourne le modèle au lieu des résultats sous forme de tableau
+}
+
+# Définition des variables dépendantes et indépendantes
+dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
+                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
+                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
+                    "Independance_finance_rec")
+
+indep_vars_list <- list(
+  "Modèle 1a" = c("Usage_MS"),
+  "Modèle 1b" = c("age", "sexe", "Lieu_de_residence", "lieu_de_naissance", 
+                  "Diplome_du_repondant", "Occupation_du_repondant"),
+  "Modèle 1c" = c("Diplome_mere", "Diplome_pere", "Siruation_civile_parents", 
+                  "Occupation_mere", "Occupation_pere"),
+  "Modèle 1d" = c("Suivre_activité_amis_et_famille", "Communiquer_amis_et_famille", 
+                  "Partager_propre_matériel_avec_proches", "Partager_propre_matériel_publiquement", 
+                  "Suivre_actualités_sur_RSM", "Prendre_connaissance_programmes_gouv", 
+                  "Rechercher_information_generale", "Rechercher_info_importante_personnelle", 
+                  "Aucune", "Autre")
+)
+
+# Exécuter toutes les régressions et stocker les modèles
+models <- list()
+
+for (dep_var in dependent_vars) {
+  for (model_name in names(indep_vars_list)) {
+    model <- run_logistic_regression(dep_var, indep_vars_list[[model_name]], data_P3_)
+    models[[paste(dep_var, model_name, sep = "_")]] <- model
+  }
+}
+
+# Transformer la liste en un format utilisable par stargazer
+models_flat <- unname(models)  # Supprime les noms pour éviter les erreurs
+
+
+# Générer le tableau avec Stargazer et enregistrer dans le dossier 'rapport' avec 'here'
+stargazer(models_flat, type = "html", title = "Résultats des régressions logistiques",
+          style = "aer", digits = 2, out = here("rapport", "resultats_regression_1.html"))
+
+```
 

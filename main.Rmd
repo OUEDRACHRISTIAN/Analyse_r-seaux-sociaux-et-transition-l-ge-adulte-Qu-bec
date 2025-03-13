@@ -1,9 +1,11 @@
 ---
-title: "Etat Recaptulatif de la Collecte de ce jour: `r Sys.Date()`"
-
-format:
-  pdf:
-    pdf-engine: lualatex
+title: "Analyse exploratoire: `r Sys.Date()`"
+output:
+  html_document: default
+  pdf_document: 
+    latex_engine: xelatex
+  word_document: default
+date: "2025-02-08"
 author: "Christian Cyriaque"
 ---
 
