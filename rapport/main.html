@@ -13,7 +13,7 @@
 
 <meta name="date" content="2025-02-08" />
 
-<title>Analyse exploratoire: 2025-03-13</title>
+<title>Analyse exploratoire: 2025-03-19</title>
 
 <script>// Pandoc 2.9 adds attributes on both header and div. We remove the former (to
 // be compatible with the behavior of Pandoc < 2.8).
@@ -356,7 +356,7 @@ pre code {
 
 
 
-<h1 class="title toc-ignore">Analyse exploratoire: 2025-03-13</h1>
+<h1 class="title toc-ignore">Analyse exploratoire: 2025-03-19</h1>
 <h4 class="author">Christian Cyriaque</h4>
 <h4 class="date">2025-02-08</h4>
 
@@ -368,27 +368,6 @@ pre code {
 </div>
 <div id="importation-des-données" class="section level1">
 <h1>Importation des données</h1>
-<pre class="r"><code># Charger les librairies
-library(readr)
-library(ggplot2)
-#chooseCRANmirror()
-#11
-#options(repos = c(CRAN = &quot;https://cran.rstudio.com/&quot;))
-
-#install.packages(&quot;here&quot;)
-
-library(here)# Construire le chemin lui meme
-data &lt;- read_csv(here(&quot;data&quot;, &quot;data_P3.csv&quot;))</code></pre>
-<pre><code>## Rows: 723 Columns: 598
-## ── Column specification ────────────────────────────────────────────────────────────────────────
-## Delimiter: &quot;,&quot;
-## chr  (342): startlanguage, Pa1, FORM, BC1QA, BC1QB, BC1QC, BC1QD, BC1Q1SQ2, BC1Q1SQ3, BC1Q1S...
-## dbl  (153): id, lastpage, seed, BC1Q1SQ1, BC1Q1SQ2A, BC1Q2SQ1A[SQ001], BC1Q2SQ1A[SQ002], BC2...
-## lgl  (100): Pa1Time, FORMTime, BC1QATime, BC1QBTime, BC1QCTime, BC1QDTime, BC1Q1SQ1Time, BC1...
-## dttm   (3): submitdate, startdate, datestamp
-## 
-## ℹ Use `spec()` to retrieve the full column specification for this data.
-## ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.</code></pre>
 </div>
 <div id="analyse-exploratoire" class="section level1">
 <h1>Analyse exploratoire</h1>
@@ -397,154 +376,170 @@ data &lt;- read_csv(here(&quot;data&quot;, &quot;data_P3.csv&quot;))</code></pre
 ##  Min.   :  11.0   Min.   :2023-07-05 07:49:58.00   Min.   :15   Length:723        
 ##       seed             startdate                        datestamp                     
 ##  Min.   :2.793e+06   Min.   :2023-07-05 07:41:50.00   Min.   :2023-07-05 07:49:58.00  
-##      Pa1                FORM              BC1QA              BC1QB              BC1QC          
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##     BC1QD              BC1Q1SQ1       BC1Q1SQ2           BC1Q1SQ2A       BC1Q1SQ3        
-##  Length:723         Min.   :18.00   Length:723         Min.   : 0.00   Length:723        
-##    BC1Q1SQ4           BC1Q1SQ5           BC1Q1SQ6           BC1Q1SQ7           BC1Q1SQ8        
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC1Q2SQ1[SQ001]    BC1Q2SQ1[SQ002]    BC1Q2SQ1[SQ003]    BC1Q2SQ1A[SQ001] BC1Q2SQ1A[SQ002]
-##  Length:723         Length:723         Length:723         Min.   :   0     Min.   : 0.000  
-##  BC1Q2SQ2[SQ001]    BC1Q2SQ2[SQ002]    BC1Q2SQ3[SQ001]    BC1Q2SQ3[SQ002]    BC1Q2SQ4[SQ001]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC1Q2SQ4[SQ002]      BC1Q2SQ5         Instructions2      BC2Q1[SQ001]       BC2Q1[SQ002]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC2Q1[SQ003]       BC2Q1[SQ004]       BC2Q1[SQ005]          BC2Q2A            BC2Q2A1         
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC2Q2A1[other]         BC2Q2B            BC2Q2C              BC2Q2D        BC2Q2E         
-##  Length:723         Min.   :       1   Length:723         Min.   :   0   Length:723        
-##      BC2Q2F        BC2Q2G            BC2Q2G1          BC2Q2H[SQ001]      BC2Q2I         
-##  Min.   :   0   Length:723         Length:723         Min.   : 0.00   Length:723        
-##  BC2Q2J[SQ001]     BC2Q2K          BC2Q2L[SQ001]  BC2Q3[SQ001]       BC2Q3[SQ002]      
-##  Min.   :2000   Length:723         Min.   :   4   Length:723         Length:723        
-##  BC2Q3[SQ003]          BC2Q4A          BC2Q4B[SQ001]      BC2Q4C          BC2Q4D[SQ001] 
-##  Length:723         Length:723         Min.   :   16   Length:723         Min.   :   3  
-##     BC2Q4E          BC2Q4F[SQ001]  Instructions3        BC3Q1SQ1         BC3Q1SQ2[SQ001]   
-##  Length:723         Min.   :  18   Length:723         Length:723         Length:723        
-##  BC3Q1SQ2[SQ002]    BC3Q1SQ2[SQ003]    BC3Q1SQ2[SQ004]    BC3Q1SQ2[SQ005]    BC3Q1SQ2[SQ006]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q1SQ2[SQ007]    BC3Q1SQ2[SQ008]    BC3Q1SQ2[SQ009]    BC3Q1SQ2[SQ010]    BC3Q1SQ2[SQ011]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q1SQ2[SQ012]    BC3Q2SQ1[SQ001]    BC3Q2SQ2[SQ001]  BC3Q3SQ1[SQ001]    BC3Q3SQ1[SQ002]   
-##  Length:723         Length:723         Min.   : 1.000   Length:723         Length:723        
-##  BC3Q3SQ1[SQ003]    BC3Q3SQ1[SQ004]    BC3Q3SQ1[SQ005]    BC3Q3SQ1[SQ006]    BC3Q3SQ1[SQ007]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q3SQ1[SQ008]    BC3Q3SQ1[SQ09]     BC3Q3SQ1[SQ010]    BC3Q3SQ1[SQ011]    BC3Q3SQ1[SQ012]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q3SQ1[SQ013]    BC3Q3SQ1[SQ014]    BC3Q3SQ1[SQ015]    BC3Q3SQ1[SQ016]    BC3Q3SQ1[SQ017]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q4[SQ001]       BC3Q4[SQ002]       BC3Q4[SQ003]       BC3Q4[SQ004]       BC3Q4[SQ005]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q5SQ1[SQ001]    BC3Q5SQ1[SQ002]    BC3Q5SQ1[SQ003]    BC3Q5SQ1[SQ004]    BC3Q5SQ1[SQ005]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC3Q5SQ1[SQ006]    BC3Q5SQ1[SQ007]    BC3Q5SQ1[SQ008]    BC3Q5SQ1[SQ009]    BC3Q5SQ1[SQ010]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##    BC3Q5SQ2         BC3Q5SQ3[SQ001]    BC3Q5SQ3[SQ002]     BC3Q6[SQ001]    BC3Q6[SQ002]  
-##  Length:723         Length:723         Length:723         Min.   :1.000   Min.   :1.000  
-##   BC3Q6[SQ003]    BC3Q6[SQ004]    BC3Q6[SQ005]    BC3Q6[SQ006]    BC3Q6[SQ007]  
+##      Pa1                FORM              BC1QA              BC1QB          
+##  Length:723         Length:723         Length:723         Length:723        
+##     BC1QC              BC1QD              BC1Q1SQ1       BC1Q1SQ2           BC1Q1SQ2A    
+##  Length:723         Length:723         Min.   :18.00   Length:723         Min.   : 0.00  
+##    BC1Q1SQ3           BC1Q1SQ4           BC1Q1SQ5           BC1Q1SQ6        
+##  Length:723         Length:723         Length:723         Length:723        
+##    BC1Q1SQ7           BC1Q1SQ8         BC1Q2SQ1[SQ001]    BC1Q2SQ1[SQ002]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC1Q2SQ1[SQ003]    BC1Q2SQ1A[SQ001] BC1Q2SQ1A[SQ002] BC1Q2SQ2[SQ001]    BC1Q2SQ2[SQ002]   
+##  Length:723         Min.   :   0     Min.   : 0.000   Length:723         Length:723        
+##  BC1Q2SQ3[SQ001]    BC1Q2SQ3[SQ002]    BC1Q2SQ4[SQ001]    BC1Q2SQ4[SQ002]   
+##  Length:723         Length:723         Length:723         Length:723        
+##    BC1Q2SQ5         Instructions2      BC2Q1[SQ001]       BC2Q1[SQ002]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC2Q1[SQ003]       BC2Q1[SQ004]       BC2Q1[SQ005]          BC2Q2A         
+##  Length:723         Length:723         Length:723         Length:723        
+##    BC2Q2A1          BC2Q2A1[other]         BC2Q2B            BC2Q2C              BC2Q2D    
+##  Length:723         Length:723         Min.   :       1   Length:723         Min.   :   0  
+##     BC2Q2E              BC2Q2F        BC2Q2G            BC2Q2G1          BC2Q2H[SQ001]  
+##  Length:723         Min.   :   0   Length:723         Length:723         Min.   : 0.00  
+##     BC2Q2I          BC2Q2J[SQ001]     BC2Q2K          BC2Q2L[SQ001]  BC2Q3[SQ001]      
+##  Length:723         Min.   :2000   Length:723         Min.   :   4   Length:723        
+##  BC2Q3[SQ002]       BC2Q3[SQ003]          BC2Q4A          BC2Q4B[SQ001]      BC2Q4C         
+##  Length:723         Length:723         Length:723         Min.   :   16   Length:723        
+##  BC2Q4D[SQ001]     BC2Q4E          BC2Q4F[SQ001]  Instructions3        BC3Q1SQ1        
+##  Min.   :   3   Length:723         Min.   :  18   Length:723         Length:723        
+##  BC3Q1SQ2[SQ001]    BC3Q1SQ2[SQ002]    BC3Q1SQ2[SQ003]    BC3Q1SQ2[SQ004]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q1SQ2[SQ005]    BC3Q1SQ2[SQ006]    BC3Q1SQ2[SQ007]    BC3Q1SQ2[SQ008]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q1SQ2[SQ009]    BC3Q1SQ2[SQ010]    BC3Q1SQ2[SQ011]    BC3Q1SQ2[SQ012]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q2SQ1[SQ001]    BC3Q2SQ2[SQ001]  BC3Q3SQ1[SQ001]    BC3Q3SQ1[SQ002]    BC3Q3SQ1[SQ003]   
+##  Length:723         Min.   : 1.000   Length:723         Length:723         Length:723        
+##  BC3Q3SQ1[SQ004]    BC3Q3SQ1[SQ005]    BC3Q3SQ1[SQ006]    BC3Q3SQ1[SQ007]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q3SQ1[SQ008]    BC3Q3SQ1[SQ09]     BC3Q3SQ1[SQ010]    BC3Q3SQ1[SQ011]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q3SQ1[SQ012]    BC3Q3SQ1[SQ013]    BC3Q3SQ1[SQ014]    BC3Q3SQ1[SQ015]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q3SQ1[SQ016]    BC3Q3SQ1[SQ017]    BC3Q4[SQ001]       BC3Q4[SQ002]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q4[SQ003]       BC3Q4[SQ004]       BC3Q4[SQ005]       BC3Q5SQ1[SQ001]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q5SQ1[SQ002]    BC3Q5SQ1[SQ003]    BC3Q5SQ1[SQ004]    BC3Q5SQ1[SQ005]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q5SQ1[SQ006]    BC3Q5SQ1[SQ007]    BC3Q5SQ1[SQ008]    BC3Q5SQ1[SQ009]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC3Q5SQ1[SQ010]      BC3Q5SQ2         BC3Q5SQ3[SQ001]    BC3Q5SQ3[SQ002]     BC3Q6[SQ001]  
+##  Length:723         Length:723         Length:723         Length:723         Min.   :1.000  
+##   BC3Q6[SQ002]    BC3Q6[SQ003]    BC3Q6[SQ004]    BC3Q6[SQ005]    BC3Q6[SQ006]  
 ##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
-##   BC3Q6[SQ008]    BC3Q6[SQ009]    BC3Q6[SQ010]    BC3Q6[SQ011]    BC3Q6SQ12        
-##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000   Length:723        
-##   BC3Q6SQ13            BC3Q7           Intructions5          BC5Q1               BC5Q2         
-##  Length:723         Length:723         Length:723         Length:723         Min.   :     0.0  
-##     BC5Q3           BC5Q4[SQ001]       BC5Q4[SQ002]       BC5Q4[SQ003]       BC5Q4[SQ004]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC5Q4[SQ005]       BC5Q4[SQ006]       BC5Q4[SQ007]       BC5Q4[SQ008]       BC5Q4[SQ009]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
+##   BC3Q6[SQ007]    BC3Q6[SQ008]    BC3Q6[SQ009]    BC3Q6[SQ010]    BC3Q6[SQ011]  
+##  Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000   Min.   :1.000  
+##   BC3Q6SQ12          BC3Q6SQ13            BC3Q7           Intructions5      
+##  Length:723         Length:723         Length:723         Length:723        
+##     BC5Q1               BC5Q2             BC5Q3           BC5Q4[SQ001]      
+##  Length:723         Min.   :     0.0   Length:723         Length:723        
+##  BC5Q4[SQ002]       BC5Q4[SQ003]       BC5Q4[SQ004]       BC5Q4[SQ005]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q4[SQ006]       BC5Q4[SQ007]       BC5Q4[SQ008]       BC5Q4[SQ009]      
+##  Length:723         Length:723         Length:723         Length:723        
 ##  BC5Q4[other]           BC5Q5         BC5Q6[SQ001]       BC5Q6[SQ002]       BC5Q6[SQ003]      
 ##  Length:723         Min.   :  0.000   Length:723         Length:723         Length:723        
-##  BC5Q6[SQ004]       BC5Q7[SQ001]       BC5Q7[SQ002]       BC5Q8[SQ001]       BC5Q8[SQ002]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC5Q8[SQ003]       BC5Q8[SQ004]       BC5Q8[SQ005]       BC5Q8[SQ006]       BC5Q8[SQ007]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC5Q8[SQ008]       BC5Q8[SQ009]       BC5Q8[SQ010]       BC5Q8[SQ012]       BC5Q8[other]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC5Q9[SQ001]       BC5Q9[SQ002]       BC5Q9[SQ003]       BC5Q9[SQ004]       BC5Q9[SQ005]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC5Q9[SQ006]       BC5Q9[other]       Intrustions6       BC6Q1SQ1[SQ01]     BC6Q1SQ1[SQ002]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q1SQ1[SQ03]     BC6Q1SQ1[SQ04]     BC6Q1SQ1[SQ0]      BC6Q1SQ1[SQ06]     BC6Q1SQ1[SQ07]    
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q1SQ1[SQ08]     BC6Q1SQ1[SQ09]       BC6Q1SQ2         BC6Q1SQ3[SQ001]    BC6Q1SQ3[SQ002]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q1SQ3[SQ003]    BC6Q1SQ3[SQ004]    BC6Q1SQ3[SQ005]    BC6Q1SQ4[SQ001]  BC6Q1SQ4[SQ002] 
-##  Length:723         Length:723         Length:723         Min.   : 0.000   Min.   :  0.00  
-##  BC6Q1SQ5[SQ001]    BC6Q1SQ5[SQ002]    BC6Q1SQ5[SQ003]    BC6Q1SQ5[SQ004]    BC6Q1SQ5[SQ005]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q2SQ1[SQ001]      BC6Q2SQ2           BC6Q2SQ3           BC6Q2SQ4           BC6Q2SQ5        
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##   BC6Q2SQ5A          BC6Q2SQ5B           BC6Q2SQ6         BC6Q2SQ7[SQ001]    BC6Q2SQ7[SQ002]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q2SQ7[SQ003]     BC6Q2SQ7A         BC6Q3SQ1[SQ001]    BC6Q3SQ1[SQ002]    BC6Q3SQ1[SQ003]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q3SQ1[SQ004]    BC6Q3SQ1[SQ005]    BC6Q3SQ2[SQ001]    BC6Q3SQ2[SQ002]    BC6Q3SQ2[SQ003]   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC6Q3SQ3[SQ001]    BC6Q3SQ3[SQ002]    BC6Q3SQ3[SQ003]    BC6Q3SQ3[SQ004]    Instructions7     
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##     BC7Q1              BC7Q2              BC7Q3              BC7Q4              BC7Q5          
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##     BC7Q6               BC7Q7       Instructions8      BC8Q1SQ1[SQ001]  BC8Q1SQ2[SQ001] 
-##  Length:723         Min.   : 2.00   Length:723         Min.   : 1.000   Min.   : 1.000  
-##  BC8Q1SQ3[SQ001]    BC8Q2[SQ001]       BC8Q2[SQ002]       BC8Q2[SQ003]       BC8Q2[SQ004]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC8Q2[SQ005]       BC8Q2[SQ006]       BC8Q2[SQ007]       BC8Q2[SQ008]       BC8Q2[SQ009]      
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  BC8Q2[SQ010]       BC8Q2[SQ011]       BC8Q2[SQ012]       BC8Q2[SQ013]       interviewtime    
-##  Length:723         Length:723         Length:723         Length:723         Min.   :  233.2  
-##  groupTime45292    Pa1Time        FORMTime       groupTime39484    BC1QATime     
-##  Min.   :   4.85   Mode:logical   Mode:logical   Min.   :  23.84   Mode:logical  
-##  BC1QBTime      BC1QCTime      BC1QDTime      BC1Q1SQ1Time   BC1Q1SQ2Time   BC1Q1SQ2ATime 
+##  BC5Q6[SQ004]       BC5Q7[SQ001]       BC5Q7[SQ002]       BC5Q8[SQ001]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q8[SQ002]       BC5Q8[SQ003]       BC5Q8[SQ004]       BC5Q8[SQ005]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q8[SQ006]       BC5Q8[SQ007]       BC5Q8[SQ008]       BC5Q8[SQ009]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q8[SQ010]       BC5Q8[SQ012]       BC5Q8[other]       BC5Q9[SQ001]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q9[SQ002]       BC5Q9[SQ003]       BC5Q9[SQ004]       BC5Q9[SQ005]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC5Q9[SQ006]       BC5Q9[other]       Intrustions6       BC6Q1SQ1[SQ01]    
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q1SQ1[SQ002]    BC6Q1SQ1[SQ03]     BC6Q1SQ1[SQ04]     BC6Q1SQ1[SQ0]     
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q1SQ1[SQ06]     BC6Q1SQ1[SQ07]     BC6Q1SQ1[SQ08]     BC6Q1SQ1[SQ09]    
+##  Length:723         Length:723         Length:723         Length:723        
+##    BC6Q1SQ2         BC6Q1SQ3[SQ001]    BC6Q1SQ3[SQ002]    BC6Q1SQ3[SQ003]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q1SQ3[SQ004]    BC6Q1SQ3[SQ005]    BC6Q1SQ4[SQ001]  BC6Q1SQ4[SQ002]  BC6Q1SQ5[SQ001]   
+##  Length:723         Length:723         Min.   : 0.000   Min.   :  0.00   Length:723        
+##  BC6Q1SQ5[SQ002]    BC6Q1SQ5[SQ003]    BC6Q1SQ5[SQ004]    BC6Q1SQ5[SQ005]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q2SQ1[SQ001]      BC6Q2SQ2           BC6Q2SQ3           BC6Q2SQ4        
+##  Length:723         Length:723         Length:723         Length:723        
+##    BC6Q2SQ5          BC6Q2SQ5A          BC6Q2SQ5B           BC6Q2SQ6        
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q2SQ7[SQ001]    BC6Q2SQ7[SQ002]    BC6Q2SQ7[SQ003]     BC6Q2SQ7A        
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q3SQ1[SQ001]    BC6Q3SQ1[SQ002]    BC6Q3SQ1[SQ003]    BC6Q3SQ1[SQ004]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q3SQ1[SQ005]    BC6Q3SQ2[SQ001]    BC6Q3SQ2[SQ002]    BC6Q3SQ2[SQ003]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC6Q3SQ3[SQ001]    BC6Q3SQ3[SQ002]    BC6Q3SQ3[SQ003]    BC6Q3SQ3[SQ004]   
+##  Length:723         Length:723         Length:723         Length:723        
+##  Instructions7         BC7Q1              BC7Q2              BC7Q3          
+##  Length:723         Length:723         Length:723         Length:723        
+##     BC7Q4              BC7Q5              BC7Q6               BC7Q7       Instructions8     
+##  Length:723         Length:723         Length:723         Min.   : 2.00   Length:723        
+##  BC8Q1SQ1[SQ001]  BC8Q1SQ2[SQ001]  BC8Q1SQ3[SQ001]    BC8Q2[SQ001]       BC8Q2[SQ002]      
+##  Min.   : 1.000   Min.   : 1.000   Length:723         Length:723         Length:723        
+##  BC8Q2[SQ003]       BC8Q2[SQ004]       BC8Q2[SQ005]       BC8Q2[SQ006]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC8Q2[SQ007]       BC8Q2[SQ008]       BC8Q2[SQ009]       BC8Q2[SQ010]      
+##  Length:723         Length:723         Length:723         Length:723        
+##  BC8Q2[SQ011]       BC8Q2[SQ012]       BC8Q2[SQ013]       interviewtime     groupTime45292   
+##  Length:723         Length:723         Length:723         Min.   :  233.2   Min.   :   4.85  
+##  Pa1Time        FORMTime       groupTime39484    BC1QATime      BC1QBTime      BC1QCTime     
+##  Mode:logical   Mode:logical   Min.   :  23.84   Mode:logical   Mode:logical   Mode:logical  
+##  BC1QDTime      BC1Q1SQ1Time   BC1Q1SQ2Time   BC1Q1SQ2ATime  BC1Q1SQ3Time   BC1Q1SQ4Time  
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC1Q1SQ3Time   BC1Q1SQ4Time   BC1Q1SQ5Time   BC1Q1SQ6Time   BC1Q1SQ7Time   BC1Q1SQ8Time  
+##  BC1Q1SQ5Time   BC1Q1SQ6Time   BC1Q1SQ7Time   BC1Q1SQ8Time   groupTime39485    BC1Q2SQ1Time  
+##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Min.   :  18.66   Mode:logical  
+##  BC1Q2SQ1ATime  BC1Q2SQ2Time   BC1Q2SQ3Time   BC1Q2SQ4Time   BC1Q2SQ5Time   groupTime45290   
+##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Min.   :   3.14  
+##  Instructions2Time groupTime39821    BC2Q1Time      BC2Q2ATime     BC2Q2A1Time   
+##  Mode:logical      Min.   :  26.55   Mode:logical   Mode:logical   Mode:logical  
+##  BC2Q2BTime     BC2Q2CTime     BC2Q2DTime     BC2Q2ETime     BC2Q2FTime     BC2Q2GTime    
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  groupTime39485    BC1Q2SQ1Time   BC1Q2SQ1ATime  BC1Q2SQ2Time   BC1Q2SQ3Time   BC1Q2SQ4Time  
-##  Min.   :  18.66   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC1Q2SQ5Time   groupTime45290    Instructions2Time groupTime39821    BC2Q1Time     
-##  Mode:logical   Min.   :   3.14   Mode:logical      Min.   :  26.55   Mode:logical  
-##  BC2Q2ATime     BC2Q2A1Time    BC2Q2BTime     BC2Q2CTime     BC2Q2DTime     BC2Q2ETime    
+##  BC2Q2G1Time    BC2Q2HTime     BC2Q2ITime     BC2Q2JTime     BC2Q2KTime     BC2Q2LTime    
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC2Q2FTime     BC2Q2GTime     BC2Q2G1Time    BC2Q2HTime     BC2Q2ITime     BC2Q2JTime    
+##  BC2Q3Time      BC2Q4ATime     BC2Q4BTime     BC2Q4CTime     BC2Q4DTime     BC2Q4ETime    
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC2Q2KTime     BC2Q2LTime     BC2Q3Time      BC2Q4ATime     BC2Q4BTime     BC2Q4CTime    
+##  BC2Q4FTime     groupTime45467      Instructions3Time groupTime39856     BC3Q1SQ1Time  
+##  Mode:logical   Min.   :    2.980   Mode:logical      Min.   :   41.09   Mode:logical  
+##  BC3Q1SQ2Time   BC3Q2SQ1Time   BC3Q2SQ2Time   BC3Q3SQ1Time   BC3Q4Time      BC3Q5SQ1Time  
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC2Q4DTime     BC2Q4ETime     BC2Q4FTime     groupTime45467      Instructions3Time
-##  Mode:logical   Mode:logical   Mode:logical   Min.   :    2.980   Mode:logical     
-##  groupTime39856     BC3Q1SQ1Time   BC3Q1SQ2Time   BC3Q2SQ1Time   BC3Q2SQ2Time   BC3Q3SQ1Time  
-##  Min.   :   41.09   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC3Q4Time      BC3Q5SQ1Time   BC3Q5SQ2Time   BC3Q5SQ3Time   BC3Q6Time      BC3Q6SQ12Time 
+##  BC3Q5SQ2Time   BC3Q5SQ3Time   BC3Q6Time      BC3Q6SQ12Time  BC3Q6SQ13Time  BC3Q7Time     
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC3Q6SQ13Time  BC3Q7Time      groupTime45469     Intructions5Time groupTime39893   
-##  Mode:logical   Mode:logical   Min.   :    2.50   Mode:logical     Min.   :   5.55  
-##  BC5Q1Time      BC5Q2Time      BC5Q3Time      BC5Q4Time      BC5Q5Time      BC5Q6Time     
+##  groupTime45469     Intructions5Time groupTime39893    BC5Q1Time      BC5Q2Time     
+##  Min.   :    2.50   Mode:logical     Min.   :   5.55   Mode:logical   Mode:logical  
+##  BC5Q3Time      BC5Q4Time      BC5Q5Time      BC5Q6Time      BC5Q7Time      BC5Q8Time     
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC5Q7Time      BC5Q8Time      BC5Q9Time      groupTime45471      Intrustions6Time
-##  Mode:logical   Mode:logical   Mode:logical   Min.   :    2.510   Mode:logical    
-##  groupTime39899    BC6Q1SQ1Time   BC6Q1SQ2Time   BC6Q1SQ3Time   BC6Q1SQ4Time   BC6Q1SQ5Time  
-##  Min.   :   31.7   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC6Q2SQ1Time   BC6Q2SQ2Time   BC6Q2SQ3Time   BC6Q2SQ4Time   BC6Q2SQ5Time   BC6Q2SQ5ATime 
+##  BC5Q9Time      groupTime45471      Intrustions6Time groupTime39899    BC6Q1SQ1Time  
+##  Mode:logical   Min.   :    2.510   Mode:logical     Min.   :   31.7   Mode:logical  
+##  BC6Q1SQ2Time   BC6Q1SQ3Time   BC6Q1SQ4Time   BC6Q1SQ5Time   BC6Q2SQ1Time   BC6Q2SQ2Time  
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC6Q2SQ5BTime  BC6Q2SQ6Time   BC6Q2SQ7Time   BC6Q2SQ7ATime  BC6Q3SQ1Time   BC6Q3SQ2Time  
+##  BC6Q2SQ3Time   BC6Q2SQ4Time   BC6Q2SQ5Time   BC6Q2SQ5ATime  BC6Q2SQ5BTime  BC6Q2SQ6Time  
 ##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  BC6Q3SQ3Time   groupTime45472     Instructions7Time groupTime39917     BC7Q1Time     
-##  Mode:logical   Min.   :    2.51   Mode:logical      Min.   :   12.12   Mode:logical  
-##  BC7Q2Time      BC7Q3Time      BC7Q4Time      BC7Q5Time      BC7Q6Time      BC7Q7Time     
-##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical  
-##  groupTime45473    Instructions8Time groupTime39919     BC8Q1SQ1Time   BC8Q1SQ2Time  
-##  Min.   :   2.37   Mode:logical      Min.   :    8.89   Mode:logical   Mode:logical  
-##  BC8Q1SQ3Time   BC8Q2Time           PON             sexe                age       
-##  Mode:logical   Mode:logical   Min.   :0.2308   Length:723         Min.   :18.00  
-##  lieu_de_naissance  Annees_au_Quebec_R    genre           laugue_parlee     
-##  Length:723         Min.   : 0.00      Length:723         Length:723        
-##  Diplome_du_repondant Revenu_annuel_du_repondant Occupation_du_repondant
-##  Length:723           Length:723                 Length:723             
-##  Etat_civil_du_repondant lieu_de_naissance_mere lieu_de_naissance_pere
-##  Length:723              Length:723             Length:723            
-##  lieu_de_naissance_les_deux Annees_au_Quebec_parents Mois_au_Quebec_parents Diplome_mere      
-##  Length:723                 Min.   : 0.00            Min.   : 0.000         Length:723        
-##  Diplome_pere       Occupation_mere    Occupation_pere    Type_de_domicile_mere
-##  Length:723         Length:723         Length:723         Length:723           
-##  Type_de_domicile_pere Siruation_civile_parents Importance_quiter_nid Importance_emploi_TPL
-##  Length:723            Length:723               Min.   :1.00          Min.   :1.00         
+##  BC6Q2SQ7Time   BC6Q2SQ7ATime  BC6Q3SQ1Time   BC6Q3SQ2Time   BC6Q3SQ3Time   groupTime45472    
+##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Mode:logical   Min.   :    2.51  
+##  Instructions7Time groupTime39917     BC7Q1Time      BC7Q2Time      BC7Q3Time     
+##  Mode:logical      Min.   :   12.12   Mode:logical   Mode:logical   Mode:logical  
+##  BC7Q4Time      BC7Q5Time      BC7Q6Time      BC7Q7Time      groupTime45473   
+##  Mode:logical   Mode:logical   Mode:logical   Mode:logical   Min.   :   2.37  
+##  Instructions8Time groupTime39919     BC8Q1SQ1Time   BC8Q1SQ2Time   BC8Q1SQ3Time  
+##  Mode:logical      Min.   :    8.89   Mode:logical   Mode:logical   Mode:logical  
+##  BC8Q2Time           PON             sexe                age        lieu_de_naissance 
+##  Mode:logical   Min.   :0.2308   Length:723         Min.   :18.00   Length:723        
+##  Annees_au_Quebec_R    genre           laugue_parlee      Diplome_du_repondant
+##  Min.   : 0.00      Length:723         Length:723         Length:723          
+##  Revenu_annuel_du_repondant Occupation_du_repondant Etat_civil_du_repondant
+##  Length:723                 Length:723              Length:723             
+##  lieu_de_naissance_mere lieu_de_naissance_pere lieu_de_naissance_les_deux
+##  Length:723             Length:723             Length:723                
+##  Annees_au_Quebec_parents Mois_au_Quebec_parents Diplome_mere       Diplome_pere      
+##  Min.   : 0.00            Min.   : 0.000         Length:723         Length:723        
+##  Occupation_mere    Occupation_pere    Type_de_domicile_mere Type_de_domicile_pere
+##  Length:723         Length:723         Length:723            Length:723           
+##  Siruation_civile_parents Importance_quiter_nid Importance_emploi_TPL
+##  Length:723               Min.   :1.00          Min.   :1.00         
 ##  Importance_vivre_en_couple Importance_marie_1er_fois Importance_parent_1er_fois
 ##  Min.   :1.00               Min.   :1.000             Min.   :1.000             
 ##  N_a_pas_quiter_le_nid_1er_fois Principale_raison_depart nbre_annee_depart_maison
@@ -577,10 +572,10 @@ data &lt;- read_csv(here(&quot;data&quot;, &quot;data_P3.csv&quot;))</code></pre
 ##  Min.   :1.000        Min.   :1.000       Min.   :1.000       Min.   :1.000  
 ##  Aux_grandes_corporations Aux_marchands_locaux Aux_gens_d_affaires Medias_sociaux_numeriques
 ##  Min.   :1.000            Min.   :1.00         Min.   :1.000       Min.   :1.000            
-##  Information_vehiculee_par_numerique Medias_conventionnels Internet_en_general Aux_influenceurs
-##  Min.   :1.000                       Min.   :1.000         Min.   :1.000       Min.   :1.000   
-##  Aux_vedettes_du_show_bis Aider_les_autres_pour_bien_parraitre
-##  Min.   :1.000            Min.   :1.000                       
+##  Information_vehiculee_par_numerique Medias_conventionnels Internet_en_general
+##  Min.   :1.000                       Min.   :1.000         Min.   :1.000      
+##  Aux_influenceurs Aux_vedettes_du_show_bis Aider_les_autres_pour_bien_parraitre
+##  Min.   :1.000    Min.   :1.000            Min.   :1.000                       
 ##  Aider_les_autres_pour_bien_parraitre_in Aider_les_autres_en_crise
 ##  Min.   :1.000                           Min.   :1.000            
 ##  Aider_les_autres_lorsque_demander Aider_les_autres_aide_en_retour
@@ -611,82 +606,84 @@ data &lt;- read_csv(here(&quot;data&quot;, &quot;data_P3.csv&quot;))</code></pre
 ##  Length:723             Length:723                      Length:723                 
 ##  Partager_propre_matériel_avec_proches Partager_propre_matériel_publiquement
 ##  Length:723                            Length:723                           
-##  Suivre_actualités_sur_RSM Prendre_connaissance_programmes_gouv Rechercher_information_generale
-##  Length:723                Length:723                           Length:723                     
-##  Rechercher_info_importante_personnelle    Aucune             Autre           Nombre_d_heures  
-##  Length:723                             Length:723         Length:723         Min.   : 0.0000  
-##  Nombre_d_heures_sur_RSM_Jour Utilise_telephone_lors_interactions_reelles
-##  Min.   : 0.50                Min.   :1.000                              
-##  Altere_mon_identite_inoffensive Altere_mon_identite_pour_manipuler
-##  Min.   :1.000                   Min.   :1.000                     
-##  Suit_la_vie_des_autres_sans_etre_connu   Travail             Etudes         
-##  Min.   :1.000                          Length:723         Length:723        
-##  Reste_en_ligne_plus_longtemps_que_prevu Perte_de_sommeil   Fait_moins_d_activite_physique
-##  Length:723                              Length:723         Length:723                    
-##  Difficulte_avec_concentration_dans_taches Probleme_relationnel_avec_parents_ou_amis
-##  Length:723                                Length:723                               
-##  Senti_de_l_anxiete Senti_deprime      Senti_envieux_des_autres Senti_intimide_harcele
-##  Length:723         Length:723         Length:723               Length:723            
-##  Senti_frustre_ou_en_colere Pas_eu_d_effets_negatifs Aucun_besoin_interet_temps
-##  Length:723                 Length:723               Length:723                
-##  Inquietude_securite_vie_privee Manque_de_confiance_connaissances Acces_restraint_a_internet
-##  Length:723                     Length:723                        Length:723                
-##  Subi_intimidation_ou_farcelement A_eu_une_experience_negative  Votre_mere       
-##  Length:723                       Length:723                   Length:723        
-##   Votre_pere        Votre_soeur        Votre_frere          Vos_amis          A_l_ecole        
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  Vos_colleges_de_travail Les_medias_traditionnels Les_medias_numeriques_Q1
-##  Length:723              Length:723               Length:723              
-##  Se_renseigner_aux_nouvelles La_television        La_radio         La_presse_ecrite  
-##  Length:723                  Length:723         Length:723         Length:723        
-##  Les_medias_numeriques_actualité L_internet_en_general Nombre_de_minutes   Facebook        
-##  Length:723                      Length:723            Min.   :  0.00    Length:723        
-##    Twitter            YouTube            Tic_toc           Instagram        
-##  Length:723         Length:723         Length:723         Length:723        
-##  Importance_suivre_actualité Informe_ou_non     Type_d_information
-##  Length:723                  Length:723         Length:723        
-##  Niveau_d_interet_face_aux_details Attitude_face_a_une_nouvelle Processus_de_validation
-##  Length:723                        Length:723                   Length:723             
-##  Pourquoi_ne_pas_valider Consulter_meme_medias
-##  Length:723              Length:723           
-##  Ecouter_ou_lire_journalistes_partagent_pas_mes_idees Changer_d_avis_apres_une_nouvelle
-##  Length:723                                           Length:723                       
-##  Valider_une_nouvelle_nouvelle Valider_la_nouvelle_nouvelle Nouvelles_et_information_en_general
-##  Length:723                    Length:723                   Length:723                         
-##  Information_consulter_personnellement Nouvelles_preparees_par_journalistes
-##  Length:723                            Length:723                          
-##  Commentaires_animateurs_radio Nouvelles_source_amis_et_proches
-##  Length:723                    Length:723                      
-##  Nouvelles_sur_medias_sociaux_en_general Nouvelles_sur_medias_sociaux_par_journalistes
-##  Length:723                              Length:723                                   
-##  Nouvelles_sur_medias_sociaux_par_connaissances Proprietaire_influence_contenu
-##  Length:723                                     Length:723                    
-##  Medias_essentiel_pour_democratie Poloticiens_manipulent_les_journalistes
-##  Length:723                       Length:723                             
-##  Difficultes_source_fiable_ou_non Securite_qui_preoccupe_le_plus
-##  Length:723                       Length:723                    
-##  Preoccupe_par_securite_economique Preoccupe_par_securite_face_a_ma_reputation
-##  Length:723                        Length:723                                 
-##  Preoccupe_par_securite_physique Mes_parametres_refletent_mes_attitudes   Pourquoi        
+##  Suivre_actualités_sur_RSM Prendre_connaissance_programmes_gouv
+##  Length:723                Length:723                          
+##  Rechercher_information_generale Rechercher_info_importante_personnelle    Aucune         
 ##  Length:723                      Length:723                             Length:723        
-##  Satisfation_face_a_la_vie Niveau_de_bonheur Situation_sociale_souhaitee  Avec_la_mere 
-##  Min.   : 1.000            Min.   : 1.000    Min.   :1.000               Min.   :1.00  
-##   Avec_le_pere   Avec_leurs_freres_et_soeurs Avec_blonde_ou_chum Avec_leurs_amis
-##  Min.   :1.000   Min.   :1.000               Min.   :1.000       Min.   :1.000  
+##     Autre           Nombre_d_heures   Nombre_d_heures_sur_RSM_Jour
+##  Length:723         Min.   : 0.0000   Length:723                  
+##  Utilise_telephone_lors_interactions_reelles Altere_mon_identite_inoffensive
+##  Length:723                                  Length:723                     
+##  Altere_mon_identite_pour_manipuler Suit_la_vie_des_autres_sans_etre_connu   Travail         
+##  Length:723                         Length:723                             Length:723        
+##     Etudes          Reste_en_ligne_plus_longtemps_que_prevu Perte_de_sommeil  
+##  Length:723         Length:723                              Length:723        
+##  Fait_moins_d_activite_physique Difficulte_avec_concentration_dans_taches
+##  Length:723                     Length:723                               
+##  Probleme_relationnel_avec_parents_ou_amis Senti_de_l_anxiete Senti_deprime     
+##  Length:723                                Length:723         Length:723        
+##  Senti_envieux_des_autres Senti_intimide_harcele Senti_frustre_ou_en_colere
+##  Length:723               Length:723             Length:723                
+##  Pas_eu_d_effets_negatifs Aucun_besoin_interet_temps Inquietude_securite_vie_privee
+##  Length:723               Length:723                 Length:723                    
+##  Manque_de_confiance_connaissances Acces_restraint_a_internet Subi_intimidation_ou_farcelement
+##  Length:723                        Length:723                 Length:723                      
+##  A_eu_une_experience_negative  Votre_mere         Votre_pere        Votre_soeur       
+##  Length:723                   Length:723         Length:723         Length:723        
+##  Votre_frere          Vos_amis          A_l_ecole         Vos_colleges_de_travail
+##  Length:723         Length:723         Length:723         Length:723             
+##  Les_medias_traditionnels Les_medias_numeriques_Q1 Se_renseigner_aux_nouvelles
+##  Length:723               Length:723               Length:723                 
+##  La_television        La_radio         La_presse_ecrite   Les_medias_numeriques_actualité
+##  Length:723         Length:723         Length:723         Length:723                     
+##  L_internet_en_general Nombre_de_minutes   Facebook           Twitter         
+##  Length:723            Min.   :  0.00    Length:723         Length:723        
+##    YouTube            Tic_toc           Instagram         Importance_suivre_actualité
+##  Length:723         Length:723         Length:723         Length:723                 
+##  Informe_ou_non     Type_d_information Niveau_d_interet_face_aux_details
+##  Length:723         Length:723         Length:723                       
+##  Attitude_face_a_une_nouvelle Processus_de_validation Pourquoi_ne_pas_valider
+##  Length:723                   Length:723              Length:723             
+##  Consulter_meme_medias Ecouter_ou_lire_journalistes_partagent_pas_mes_idees
+##  Length:723            Length:723                                          
+##  Changer_d_avis_apres_une_nouvelle Valider_une_nouvelle_nouvelle Valider_la_nouvelle_nouvelle
+##  Length:723                        Length:723                    Length:723                  
+##  Nouvelles_et_information_en_general Information_consulter_personnellement
+##  Length:723                          Length:723                           
+##  Nouvelles_preparees_par_journalistes Commentaires_animateurs_radio
+##  Length:723                           Length:723                   
+##  Nouvelles_source_amis_et_proches Nouvelles_sur_medias_sociaux_en_general
+##  Length:723                       Length:723                             
+##  Nouvelles_sur_medias_sociaux_par_journalistes Nouvelles_sur_medias_sociaux_par_connaissances
+##  Length:723                                    Length:723                                    
+##  Proprietaire_influence_contenu Medias_essentiel_pour_democratie
+##  Length:723                     Length:723                      
+##  Poloticiens_manipulent_les_journalistes Difficultes_source_fiable_ou_non
+##  Length:723                              Length:723                      
+##  Securite_qui_preoccupe_le_plus Preoccupe_par_securite_economique
+##  Length:723                     Length:723                       
+##  Preoccupe_par_securite_face_a_ma_reputation Preoccupe_par_securite_physique
+##  Length:723                                  Length:723                     
+##  Mes_parametres_refletent_mes_attitudes   Pourquoi         Satisfation_face_a_la_vie
+##  Length:723                             Length:723         Min.   : 1.000           
+##  Niveau_de_bonheur Situation_sociale_souhaitee  Avec_la_mere   Avec_le_pere  
+##  Min.   : 1.000    Min.   :1.000               Min.   :1.00   Min.   :1.000  
+##  Avec_leurs_freres_et_soeurs Avec_blonde_ou_chum Avec_leurs_amis
+##  Min.   :1.000               Min.   :1.000       Min.   :1.000  
 ##  Avec_leurs_collegues_de_travail Avec_leurs_colleges_etudiants Avec_les_autres_en_general
 ##  Min.   :1.000                   Min.   :1.00                  Min.   :1.000             
 ##  Avec_leur_choix_de_carriere Avec_leur_situation_financiere Avec_votre_sante_physique
 ##  Min.   :1.00                Min.   :1.000                  Min.   :1.00             
 ##  Avec_leur_sante_mentale Avec_leurs_habitudes_de_vie   gpe_age          Lieu_de_residence 
 ##  Min.   :1.000           Min.   :1.000               Length:723         Length:723        
-##   Quiter_nid         Emploi_TPL        Vivre_en_couple    Marier_1er_fois    Parent_1er_fois   
-##  Length:723         Length:723         Length:723         Length:723         Length:723        
-##  Quiter_nid_rec   Emploi_TPL_rec   Vivre_en_couple_rec Marier_1er_fois_rec Parent_1er_fois_rec
-##  Min.   :0.0000   Min.   :0.0000   Min.   :0.0000      Min.   :0.0000      Min.   :0.0000     
-##  Somme_Importance   Somme_Importance1 Propres_responsabilites Propres_decisions 
-##  Length:723         Min.   :0.000     Length:723              Length:723        
-##  Independance_finance Propres_responsabilites_rec Propres_decisions_rec
-##  Length:723           Min.   :0.0000              Min.   :0.0000       
+##   Quiter_nid         Emploi_TPL        Vivre_en_couple    Marier_1er_fois   
+##  Length:723         Length:723         Length:723         Length:723        
+##  Parent_1er_fois    Quiter_nid_rec   Emploi_TPL_rec   Vivre_en_couple_rec Marier_1er_fois_rec
+##  Length:723         Min.   :0.0000   Min.   :0.0000   Min.   :0.0000      Min.   :0.0000     
+##  Parent_1er_fois_rec Somme_Importance   Somme_Importance1 Propres_responsabilites
+##  Min.   :0.0000      Length:723         Min.   :0.000     Length:723             
+##  Propres_decisions  Independance_finance Propres_responsabilites_rec Propres_decisions_rec
+##  Length:723         Length:723           Min.   :0.0000              Min.   :0.0000       
 ##  Independance_finance_rec Somme_Importance_subjectif Somme_Importance_subjectif_1
 ##  Min.   :0.0000           Length:723                 Min.   :0.000               
 ##  Marq_objectif      Marq_subjectif    

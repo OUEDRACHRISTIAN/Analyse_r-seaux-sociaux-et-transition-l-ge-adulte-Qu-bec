@@ -12,7 +12,7 @@ author: "Christian Cyriaque"
 # Introduction  
 
 # Importation des données  
-```{r load-data, echo=TRUE}
+```{r load-data, message=FALSE, warning=FALSE, echo=FALSE}
 
 
 # Charger les librairies
@@ -25,7 +25,7 @@ library(ggplot2)
 #install.packages("here")
 
 library(here)# Construire le chemin lui meme
-data <- read_csv(here("data", "data_P3.csv"))
+data <- read_csv(here("data", "data_P3_.csv"))
 
 ```
 
