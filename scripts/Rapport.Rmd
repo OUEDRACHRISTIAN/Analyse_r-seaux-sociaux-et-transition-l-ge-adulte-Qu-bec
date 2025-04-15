@@ -187,8 +187,6 @@ Table_Quête_informatins
 
 # 5. Tableau pour les Parents des repondants
 ```{r message=FALSE, warning=FALSE}
-
-
 Table_parents <- tbl_svysummary(
   data = data_design,
   by = gpe_age,  
@@ -210,7 +208,7 @@ Table_parents
 ```
 
 
-# 7. Combinaison des  tableaux dans un seul tableau
+# 6. Combinaison des  tableaux dans un seul tableau
 ```{r message=FALSE, warning=FALSE}
 
 final_table <- tbl_stack(
@@ -242,6 +240,810 @@ doc <- read_docx() %>%
 
 # Enregistrer le document Word dans le répertoire courant
 print(doc, target = here("rapport", "Table_final_caracteristiques.docx"))
+
+```
+
+#
+# 0. Tableau pour les Répondants selon le sexe
+```{r message=FALSE, warning=FALSE}
+table_repondants_sexe <- tbl_svysummary(
+  data = data_design,
+  by = sexe, 
+  include = c(age, sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants**")
+
+
+table_repondants_sexe
+```
+
+
+# 0. Tableau pour l'utilisation des médias sociaux des repondants selon le sexe
+```{r message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux**")
+
+table_utilisation_medias_sociaux_sexe
+```
+
+
+# 0. Activités faites sur les médias sociaux selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux**")
+
+Table_activités_médias_sociaux_sexe
+
+```
+
+
+# 0. Quête d'informations selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_Quête_informatins_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Quête_informations**")
+
+Table_Quête_informatins_sexe
+
+```
+
+
+# 0. Tableau pour les Parents des repondants
+```{r message=FALSE, warning=FALSE}
+
+Table_parents_sexe <- tbl_svysummary(
+  data = data_design,
+  by = sexe,  
+  include = c( Diplome_mere, Diplome_pere,Situation_civile_parents,Occupation_mere,Occupation_pere),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"
+) %>%
+  add_overall() %>%
+  add_p() %>%
+  modify_header(label = "**Caractéristiques**") %>%
+  modify_caption("**Parents**")
+
+Table_parents_sexe
+
+```
+
+
+
+
+
+# 9. Orientation politique
+
+#Sexe . 
+```{r message=FALSE, warning=FALSE}
+Table_Orientation_politique_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Orientation_politique),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Orientation_politique_sexe**")
+
+Table_Orientation_politique_sexe
+```
+
+
+# . Groupe d'age
+```{r message=FALSE, warning=FALSE}
+Table_Orientation_politique_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(Orientation_politique),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Orientation_politique_gpe_age**")
+
+Table_Orientation_politique_gpe_age
+
+```
+
+
+# . Lieu de residence
+```{r message=FALSE, warning=FALSE}
+Table_Orientation_politique_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(Orientation_politique),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Orientation_politique_Lieu_de_residence**")
+
+Table_Orientation_politique_Lieu_de_residence
+
+```
+
+#Visualisation 
+```{r message=FALSE, warning=FALSE}
+data_P3_ %>% summarise(moyenne_Orientation_politique=weighted.mean(Orientation_politique,data_P3_$PON),
+                   ecart_type_Orientation_politique=sd(Orientation_politique))
+
+# Examen de la normalité
+
+ggplot(data_P3_, aes(x=Orientation_politique, y=..density..))+
+  geom_histogram(fill="lightblue")+
+  geom_density(color="darkred")
+
+shapiro.test(data_P3_$Orientation_politique)
+
+```
+# 10. Etat civil du répondant 
+
+# 10.1. Etat civil du répondant selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_Etat_civil_repondant_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Etat_civil_du_repondant),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**TTable_Etat_civil_repondant_sexe**")
+
+Table_Etat_civil_repondant_sexe
+```
+
+# 10.2. Etat civil du répondant selon gpe_age
+```{r message=FALSE, warning=FALSE}
+Table_Etat_civil_repondant_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(Etat_civil_du_repondant),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**TTable_Etat_civil_repondant_gpe_age**")
+
+Table_Etat_civil_repondant_gpe_age
+```
+
+# 10.3. Etat civil du répondant selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_Etat_civil_repondant_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(Etat_civil_du_repondant),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**TTable_Etat_civil_repondant_Lieu_de_residence**")
+
+Table_Etat_civil_repondant_Lieu_de_residence
+```
+
+# 11. Lieu de naissance des parents (mères pères) 
+
+# 11.1. Lieu de naissance des parents (mères) par sexe 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_meres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(lieu_de_naissance_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_meres_sexe**")
+
+Table_Lieu_naissance_parents_meres_sexe
+```
+
+# 11.2. Lieu de naissance des parents (mères) par age 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_meres_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(lieu_de_naissance_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_meres_gpe_age**")
+
+Table_Lieu_naissance_parents_meres_gpe_age
+```
+
+
+
+# 11.3. Lieu de naissance des parents (mères) par lieu de residence 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_meres_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(lieu_de_naissance_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_meres_Lieu_de_residence**")
+
+Table_Lieu_naissance_parents_meres_Lieu_de_residence
+```
+
+
+# 12.1. Lieu de naissance des parents (pères) par sexe 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_peres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(lieu_de_naissance_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_peres_sexe**")
+
+Table_Lieu_naissance_parents_peres_sexe
+```
+
+# 12.2. Lieu de naissance des parents (mères) par age 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_peres_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(lieu_de_naissance_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_peres_gpe_age**")
+
+Table_Lieu_naissance_parents_peres_gpe_age
+```
+
+# 12.3. Lieu de naissance des parents (pères) par lieu de residence 
+```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_peres_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(lieu_de_naissance_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_peres_Lieu_de_residence**")
+
+Table_Lieu_naissance_parents_peres_Lieu_de_residence
+```
+
+# 13. Le type de domicile des parents (mères pères) 
+
+# 13.1. Le type de domicile des parents (mères) selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_meres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Type_de_domicile_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_meres_sexe**")
+
+Table_type_domicile_parents_meres_sexe
+```
+
+# 13.2. Lieu de naissance des parents (mères) par age 
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_meres_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(Type_de_domicile_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_meres_gpe_age**")
+
+Table_type_domicile_parents_meres_gpe_age
+```
+
+
+# 13.3. Lieu de naissance des parents (pères) par lieu de residence 
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_meres_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(Type_de_domicile_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_meres_Lieu_de_residence**")
+
+Table_type_domicile_parents_meres_Lieu_de_residence
+```
+
+
+
+# 14.1. Le type de domicile des parents (pères) selon le sexe
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_peres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Type_de_domicile_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_peres_sexe**")
+
+Table_type_domicile_parents_peres_sexe
+```
+
+# 14.2. Lieu de naissance des parents (pères) par age 
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_peres_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by =gpe_age,
+    include = c(Type_de_domicile_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_peres_gpe_age**")
+
+Table_type_domicile_parents_peres_gpe_age
+```
+
+
+# 14.3. Lieu de naissance des parents (p) par lieu de residence 
+```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_peres_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(Type_de_domicile_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_peres_Lieu_de_residence**")
+
+Table_type_domicile_parents_peres_Lieu_de_residence
+```
+
+# 14.4. Nombre de comptes MSN inscrits selon le groupe d'âge 
+```{r message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nbr_compte_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_age**")
+
+table_Nbr_compte_MS_age
+```
+
+
+# 14.5. Nombre de comptes MSN inscrits selon le  sexe 
+```{r message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nbr_compte_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_sexe**")
+
+table_Nbr_compte_MS_sexe
+```
+
+
+# 14.6. Nombre de comptes MSN regulier  inscrits selon le groupe d'âge 
+```{r message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_regulier_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_regulier_age**")
+
+table_Nbr_compte_MS_regulier_age
+```
+
+
+# 14.7. Nombre de comptes MSN regulier inscrits selon le sexe 
+```{r message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_regulier_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_regulier_sexe**")
+
+table_Nbr_compte_MS_regulier_sexe
+```
+
+
+# 14.8. Nombres d’heures passées sur les MSN par jour selon le sexe
+```{r message=FALSE, warning=FALSE}
+table_Nombre_d_heures_sur_RSM_Jour_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nombre_d_heures_sur_RSM_Jour_sexe**")
+
+table_Nombre_d_heures_sur_RSM_Jour_sexe
+```
+
+# 14.9. Nombres d’heures passées sur les MSN par jour selon l'age
+```{r message=FALSE, warning=FALSE}
+table_Nombre_d_heures_sur_RSM_Jour_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nombre_d_heures_sur_RSM_Jour_age**")
+
+table_Nombre_d_heures_sur_RSM_Jour_age
+```
+# 14.10. l’utilisation des médias sociaux selon l’âge
+```{r message=FALSE, warning=FALSE}
+table_Usage_MS_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Usage_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Usage_MS_age**")
+
+table_Usage_MS_age
+```
+
+
+# 14.10. l’utilisation des médias sociaux selon le sexe
+```{r message=FALSE, warning=FALSE}
+table_Usage_MS_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Usage_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Usage_MS_sexe**")
+
+table_Usage_MS_sexe
+```
+# . Création du graphique selon l’utilisation des médias sociaux selon le sexe et l'age 
+```{r}
+library(survey)
+library(ggplot2)
+library(dplyr)
+library(srvyr)
+
+# Conversion en objet srvyr si ce n'est pas déjà fait
+data_svy <- as_survey_design(data_design)
+
+# Calcul des proportions pondérées par sexe et groupe d'âge
+graph_data <- data_svy %>%
+  group_by(sexe, gpe_age, Usage_MS) %>%
+  summarize(p = survey_mean(vartype = "ci")) %>%
+  filter(!is.na(Usage_MS))
+
+# Création du graphique
+ggplot(graph_data, aes(x = gpe_age, y = p, fill = Usage_MS)) +
+  geom_bar(stat = "identity", position = "fill") +
+  facet_wrap(~ sexe) +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Utilisation des médias sociaux selon le sexe et l’âge",
+    x = "Groupe d’âge",
+    y = "Proportion",
+    fill = "Utilisation des médias sociaux"
+  ) +
+  theme_minimal()
+
+```
+
+# . Création du graphique selon l’utilisation des médias sociaux selon le sexe 
+```{r}
+library(survey)
+library(ggplot2)
+library(dplyr)
+library(srvyr)
+
+# Conversion en objet srvyr si ce n'est pas déjà fait
+data_svy <- as_survey_design(data_design)
+
+# Calcul des proportions pondérées par sexe et groupe d'âge
+graph_data <- data_svy %>%
+  group_by(sexe, Usage_MS) %>%
+  summarize(p = survey_mean(vartype = "ci")) %>%
+  filter(!is.na(Usage_MS))
+
+# Création du graphique
+ggplot(graph_data, aes(x = sexe, y = p, fill = Usage_MS)) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Utilisation des médias sociaux selon le sexe",
+    x = "Groupe d’âge",
+    y = "Proportion",
+    fill = "Utilisation des médias sociaux"
+  ) +
+  theme_minimal()
+
+```
+
+# . Création du graphique selon l’utilisation des médias sociaux selon le groupe d'age
+```{r}
+library(survey)
+library(ggplot2)
+library(dplyr)
+library(srvyr)
+
+# Conversion en objet srvyr si ce n'est pas déjà fait
+data_svy <- as_survey_design(data_design)
+
+# Calcul des proportions pondérées par sexe et groupe d'âge
+graph_data <- data_svy %>%
+  group_by( gpe_age, Usage_MS) %>%
+  summarize(p = survey_mean(vartype = "ci")) %>%
+  filter(!is.na(Usage_MS))
+
+# Création du graphique
+ggplot(graph_data, aes(x = gpe_age, y = p, fill = Usage_MS)) +
+  geom_bar(stat = "identity", position = "fill") +
+  scale_y_continuous(labels = scales::percent_format()) +
+  labs(
+    title = "Utilisation des médias sociaux selon le groupe  d’âge",
+    x = "Groupe d’âge",
+    y = "Proportion",
+    fill = "Utilisation des médias sociaux"
+  ) +
+  theme_minimal()
 
 ```
 
@@ -302,6 +1104,7 @@ table_Marqueurs_objectifs_gpe_age
 
 # II.3. Marqueurs objectifs selon le lieu de residence 
 ```{r message=FALSE, warning=FALSE}
+
 table_Marqueurs_objectifs_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -516,9 +1319,6 @@ e
 
 
 #III . Ensemble de l'echantillon
-
-
-
 
 # III.1.	Graphique de barres empilées pour l’ensemble de l’échantillon
 
@@ -832,14 +1632,10 @@ plot(cah, choice = "map")
 
 # V. MARQUEURS SUBJECTIFS
 
-
-
 # V.1. Marqueurs subjectifs selon le sexe
 ```{r message=FALSE, warning=FALSE}
 
 # Créer l'objet de design en tenant compte des pondérations
-
-
 table_Marqueurs_subjectifs_sexe <- 
   data_design %>%
   tbl_svysummary(
@@ -880,6 +1676,7 @@ table_Marqueurs_subjectifs_gpe_age <-
   modify_caption("**table_Marqueurs_subjectifs_gpe_age**")
 
 table_Marqueurs_subjectifs_gpe_age
+
 ```
 
 
@@ -1562,10 +2359,6 @@ data_interest %>%
 ```
 
 
-
-
-
-
 # IX.  Regression  
 
 # 1. Fonction pour exécuter la régression logistique
@@ -1593,12 +2386,9 @@ run_logistic_regression <- function(dep_var, indep_vars, model_name, data) {
 ```
 
 
-
-
-
 # 3 .Forest avec forest_model 
 
-```{r , message=FALSE, warning=FALSE, echo=FALSE}
+```{r}
 
 #Définition des variables dépendantes et indépendantes
 dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
@@ -1612,30 +2402,33 @@ models <- lapply(dependent_vars, function(dep_var) {
     "Modèle 1a" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS")), data = data_P3_, family = binomial),
     "Modèle 1b" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS_regulier")), data = data_P3_, family = binomial),
     "Modèle 1c" = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier")), data = data_P3_, family = binomial),
-    "Modèle 2"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence")), data = data_P3_, family = binomial),
-    "Modèle 3"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + age + sexe + Lieu_de_residence + Diplome_du_repondant")), data = data_P3_, family = binomial)
+    "Modèle 2"  = glm(as.formula(paste(dep_var, "~ Nbr_compte_MS + Nbr_compte_MS_regulier + gpe_age + sexe + Lieu_de_residence")), data = data_P3_, family = binomial)
   )
 })
 
-# Appliquer forest_model à chaque modèle en ajoutant un titre clair
+```
+
+
+# 3.1. Appliquer forest_model à chaque modèle en ajoutant des options de format
+```{r}
+# Appliquer forest_model à chaque modèle en ajoutant des options de format
 lapply(seq_along(models), function(i) {
   dep_var <- dependent_vars[i]
   lapply(names(models[[i]]), function(model_name) {
     cat("\n--- Forest Plot pour", dep_var, "-", model_name, "---\n")  # Ajouter un titre clair
-    print(forest_model(models[[i]][[model_name]]))  # Générer le plot
+    
+    # Générer le Forest Plot avec format ajusté
+    print(forest_model(models[[i]][[model_name]], factor_separate_line = T, 
+                       format_options = list(colour = "black", shape = 20, banded = T, 
+                                             text_size = 5, point_size = 2)))  
   })
 })
-
-
-
 ```
-
 
 
 
 # 4.Regroupement des regression avec stargazer
 ```{r , message=FALSE, warning=FALSE, echo=FALSE}
-
 #install.packages(c("dplyr", "broom", "purrr", "stargazer"))
 
 # Charger les bibliothèques nécessaires
@@ -1688,7 +2481,6 @@ stargazer(models_flat, type = "html", title = "Résultats des régressions logis
 # 5. Insertion des variables
 ```{r}
 #install.packages(c("dplyr", "broom", "purrr", "stargazer"))
-
 # Charger les bibliothèques nécessaires
 library(dplyr)
 library(broom)
@@ -1709,12 +2501,18 @@ dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec",
                     "Independance_finance_rec")
 
 indep_vars_list <- list(
+  
   "Modèle 1a" = c("Usage_MS"),
-  "Modèle 1b" = c("age", "sexe", "Lieu_de_residence", "lieu_de_naissance", 
-                  "Diplome_du_repondant", "Occupation_du_repondant","Nombre_d_heures_sur_RSM_Jour"),
-  "Modèle 1c" = c("Diplome_mere", "Diplome_pere", "Situation_civile_parents", 
+  
+  "Modèle 1b" = c("Usage_MS","age", "sexe", "Lieu_de_residence", "lieu_de_naissance", 
+                  "Diplome_du_repondant", "Occupation_du_repondant"),
+  
+  
+  "Modèle 1c" = c("Usage_MS","age", "sexe", "Lieu_de_residence", "lieu_de_naissance", 
+                  "Diplome_du_repondant", "Occupation_du_repondant","Diplome_mere", "Diplome_pere", "Situation_civile_parents", 
                   "Occupation_mere", "Occupation_pere"),
-  "Modèle 1d" = c("Suivre_activité_amis_et_famille", "Communiquer_amis_et_famille", 
+  
+  "Modèle 1d" = c("Usage_MS","Suivre_activité_amis_et_famille", "Communiquer_amis_et_famille", 
                   "Partager_propre_matériel_avec_proches", "Partager_propre_matériel_publiquement", 
                   "Suivre_actualités_sur_RSM", "Prendre_connaissance_programmes_gouv", 
                   "Rechercher_information_generale", "Rechercher_info_importante_personnelle", 
@@ -1744,6 +2542,7 @@ stargazer(models_flat, type = "html", title = "Résultats des régressions logis
 
 
 # x. Forest plot avec  sjPlot
+
 
 # X.1. Variable Utilisation des médias 
 ```{r}
@@ -1789,8 +2588,11 @@ plot_models(
   show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
   show.p = FALSE,  # Ne pas afficher les p-valeurs
   p.shape = TRUE,  # Afficher les formes des points au lieu des valeurs
-  grid = TRUE  # Afficher une grille
+   vline.color = "black",
+  grid = F# Afficher une grille
 )
+
+
 
 # Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
 ggsave(here("figures", "forestplot", "Utilisation des médias_forestplot.png"), 
@@ -1798,63 +2600,9 @@ ggsave(here("figures", "forestplot", "Utilisation des médias_forestplot.png"),
 
 ```
 
-# X.2. Variable Utilisation des médias 
-```{r}
-#install.packages("sjPlot")
-library(sjPlot)
-# Fonction pour générer un modèle logistique
-generate_logistic_model <- function(dep_var, indep_var, data) {
-  formula <- as.formula(paste(dep_var, "~", indep_var))
-  model <- glm(formula, data = data, family = binomial)
-  return(model)
-}
-
-# Liste des variables dépendantes
-dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
-                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
-                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
-                    "Independance_finance_rec")
-
-# Variable indépendante (Usage_MS uniquement)
-indep_vars_1a <- "Usage_MS"
-
-# Créer une liste vide pour stocker les modèles
-model_list <- list()
-m_labels <- c()  # Liste pour stocker les labels des modèles
-
-# Appliquer les régressions pour chaque variable dépendante
-for (dep_var in dependent_vars) {
-  model_list[[paste0(dep_var, "_Usage_MS")]] <- generate_logistic_model(dep_var, indep_vars_1a, data_P3_)
-  
-  # Ajouter les labels incrémentés dans m_labels
-  m_labels <- c(m_labels, paste0(dep_var, ""))  # Label pour Usage_MS uniquement
-}
-
-# Vérification des modèles et des labels
-#print(names(model_list))  # Afficher les noms des modèles
-#print(m_labels)  # Afficher les labels
-
-# Appliquer plot_models avec les modèles et les labels
-plot_models(
-  model_list,
-  axis.labels = c("Usage des Médias Sociaux"),  # Seule variable indépendante
-  m.labels = m_labels,  # Utilisation des labels incrémentés
-  show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
-  show.p = FALSE,  # Ne pas afficher les p-valeurs
-  show.legend = F,
-  p.shape = F,  # Afficher les formes des points au lieu des valeurs
-  grid = TRUE  # Afficher une grille
-)
-
-# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
-ggsave(here("figures", "forestplot", "Utilisation des médias_forestplot1.png"), 
-       plot = last_plot(), width = 10, height = 6)
-
-```
 
 
-
-# X.3.  nombre de de compte des médias
+# X.2.  nombre de de compte des médias
 ```{r}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
@@ -1890,6 +2638,7 @@ for (dep_var in dependent_vars) {
 #print(m_labels)  # Afficher les labels
 
 # Appliquer plot_models avec les modèles et les labels
+
 plot_models(
   model_list,
   m.labels = m_labels,  # Utilisation des labels incrémentés
@@ -1897,7 +2646,8 @@ plot_models(
   show.p = FALSE,  # Ne pas afficher les p-valeurs
   p.shape = TRUE, 
   show.legend = TRUE,# Afficher les formes des points au lieu des valeurs
-  grid = TRUE# Afficher une grille
+  grid =F,   #Afficher une grille
+   vline.color = "black"
 )
 
 
@@ -1907,62 +2657,8 @@ ggsave(here("figures", "forestplot", "nombre de de compte des médias_forestplot
 
 ```
 
-# X.4 nombre de de compte des médias 
-```{r}
-# Fonction pour générer un modèle logistique
-generate_logistic_model <- function(dep_var, indep_var, data) {
-  formula <- as.formula(paste(dep_var, "~", indep_var))
-  model <- glm(formula, data = data, family = binomial)
-  return(model)
-}
 
-# Liste des variables dépendantes
-dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
-                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
-                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
-                    "Independance_finance_rec")
-
-# Variable indépendante : Nombre de Comptes MS
-indep_vars_1b <- "Nbr_compte_MS"  # Ajout de "Nbr_compte_MS"
-
-# Créer une liste vide pour stocker les modèles
-model_list <- list()
-m_labels <- c()  # Liste pour stocker les labels des modèles
-
-# Appliquer les régressions pour chaque variable dépendante
-for (dep_var in dependent_vars) {
-  model_list[[paste0(dep_var, "_Nbr_compte_MS")]] <- generate_logistic_model(dep_var, indep_vars_1b, data_P3_)
-  
-  # Ajouter les labels incrémentés dans m_labels
-  m_labels <- c(m_labels,
-                paste0(dep_var, ""))  # Label pour Nbr_compte_MS
-}
-
-# Vérification des modèles et des labels
-#print(names(model_list))  # Afficher les noms des modèles
-#print(m_labels)  # Afficher les labels
-
-# Appliquer plot_models avec les modèles et les labels
-plot_models(
-  model_list,
-  m.labels = m_labels,  # Utilisation des labels incrémentés
-  show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
-  show.p = FALSE,  # Ne pas afficher les p-valeurs
-  p.shape = F, 
-  show.legend = F,# Afficher les formes des points au lieu des valeurs
-  grid = TRUE# Afficher une grille
-)
-
-
-# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
-ggsave(here("figures", "forestplot", "nombre de de compte des médias_forestplot1.png"), 
-       plot = last_plot(), width = 10, height = 6)
-
-```
-
-
-
-# X.5. Variable utilisation de compte regulier
+# X.3. Variable utilisation de compte regulier
 ```{r}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
@@ -2010,7 +2706,8 @@ plot_models(
   show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
   show.p = FALSE,  # Ne pas afficher les p-valeurs
   p.shape = TRUE,  # Afficher les formes des points au lieu des valeurs
-  grid = TRUE  # Afficher une grille
+  grid = F,  # Afficher une grille
+  vline.color = "black"
 )
 
 # Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
@@ -2020,68 +2717,8 @@ ggsave(here("figures", "forestplot", "nombre de de compte regulier_forestplot.pn
 ```
 
 
-# X.6. Variable utilisation de compte regulier 
-```{r}
-# Fonction pour générer un modèle logistique
-generate_logistic_model <- function(dep_var, indep_var, data) {
-  formula <- as.formula(paste(dep_var, "~", indep_var))
-  model <- glm(formula, data = data, family = binomial)
-  return(model)
-}
 
-# Liste des variables dépendantes
-dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
-                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
-                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
-                    "Independance_finance_rec")
-
-# Variable indépendante : Nombre de Comptes MS Régulier
-indep_vars_1c <- "Nbr_compte_MS_regulier"  # Remplacement par "Nbr_compte_MS_regulier"
-
-# Créer une liste vide pour stocker les modèles
-model_list <- list()
-m_labels <- c()  # Liste pour stocker les labels des modèles
-
-# Appliquer les régressions pour chaque variable dépendante
-for (dep_var in dependent_vars) {
-  model <- generate_logistic_model(dep_var, indep_vars_1c, data_P3_)
-  model_list[[paste0(dep_var, "_Nbr_compte_MS_regulier")]] <- model
-  
-  # Ajouter les labels incrémentés dans m_labels
-  m_labels <- c(m_labels,
-                paste0(dep_var, ""))  # Label pour Nbr_compte_MS_regulier
-  
-  # Afficher les résultats de la régression pour chaque modèle
-  #cat("\nRésultats de la régression pour", dep_var, "avec Nbr_compte_MS_regulier:\n")
-  #print(summary(model))  # Afficher le résumé du modèle
-}
-
-# Vérification des modèles et des labels
-#print(names(model_list))  # Afficher les noms des modèles
-#print(m_labels)  # Afficher les labels
-
-# Appliquer plot_models avec les modèles et les labels
-plot_models(
-  model_list,
-    # Ajout de Nbr_compte_MS_regulier
-  m.labels = m_labels,  # Utilisation des labels incrémentés
-  show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
-  show.p = FALSE,  # Ne pas afficher les p-valeurs
-  p.shape = F,  # Afficher les formes des points au lieu des valeurs
-  show.legend = F,
-  grid = TRUE  # Afficher une grille
-)
-
-# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
-ggsave(here("figures", "forestplot", "nombre de de compte regulier_forestplot1.png"), 
-       plot = last_plot(), width = 10, height = 6)
-
-```
-
-
-
-
-# X.7. Nombre d'heure par Jour
+# X.4. Nombre d'heure par Jour
 ```{r}
 library(sjPlot)
 library(ggplot2)
@@ -2121,11 +2758,10 @@ p <- plot_models(
   show.p = FALSE,  
   show.legend = T,  
   p.shape = T, 
-  grid = T  
-) +
-  theme_minimal() +  # Style épuré
-  scale_linetype_manual(values = rep("solid", length(dependent_vars))) +  
-  scale_size_manual(values = rep(1.2, length(dependent_vars)))  
+  grid = F,
+  vline.color = "black"
+) 
+
 
 # Enregistrement du graphique
 ggsave(here("figures", "forestplot", "nombre_d_heures_sur_RSM_Jour_forestplot.png"), 
@@ -2137,63 +2773,7 @@ p
 
 
 
-# X.8. Nombre d'heure par Jour 
-```{r}
-library(sjPlot)
-library(ggplot2)
-library(here)
-
-# Fonction pour générer un modèle logistique
-generate_logistic_model <- function(dep_var, indep_var, data) {
-  formula <- as.formula(paste(dep_var, "~", indep_var))
-  model <- glm(formula, data = data, family = binomial)
-  return(model)
-}
-
-# Liste des variables dépendantes
-dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
-                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
-                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
-                    "Independance_finance_rec")
-
-# Variable indépendante
-indep_vars_1b <- "Nombre_d_heures_sur_RSM_Jour"  
-
-# Stockage des modèles et labels
-model_list <- list()
-m_labels <- c()  
-
-# Boucle pour ajuster les modèles logistiques
-for (dep_var in dependent_vars) {
-  model_list[[dep_var]] <- generate_logistic_model(dep_var, indep_vars_1b, data_P3_)
-  m_labels <- c(m_labels, dep_var)
-}
-
-# Génération du graphique avec un style uniforme
-p <- plot_models(
-  model_list,
-  m.labels = m_labels,  
-  show.values = FALSE,  
-  show.p = FALSE,  
-  show.legend = F,  
-  p.shape = F, 
-  grid = T  
-) +
-  theme_minimal() +  # Style épuré
-  scale_linetype_manual(values = rep("solid", length(dependent_vars))) +  
-  scale_size_manual(values = rep(1.2, length(dependent_vars)))  
-
-# Enregistrement du graphique
-ggsave(here("figures", "forestplot", "nombre_d_heures_sur_RSM_Jour_forestplot1.png"), 
-       plot = p, width = 10, height = 6)
-p
-```
-
-
-
-
-
-# X.9.. variables concernant les médias
+# X.5. variables concernant les médias
 ```{r}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
@@ -2243,7 +2823,8 @@ plot_models(
   show.p = FALSE,  # Ne pas afficher les p-valeurs
   p.shape = T,  # Afficher les formes des points au lieu des valeurs
   show.legend = T,
-  grid = TRUE  # Afficher une grille
+  grid = F,  # Afficher une grille
+  vline.color = "black"
 )
 
 
@@ -2254,8 +2835,13 @@ ggsave(here("figures", "forestplot", "Toute _les variables_utilisation des médi
 ```
 
 
-# X.10. variables concernant les médias 
+# X.6. Inversion des axes pour la variables Utilisation des médias sociaux
 ```{r}
+library(gtsummary)
+library(dplyr)
+library(ggplot2)
+
+
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
   formula <- as.formula(paste(dep_var, "~", indep_var))
@@ -2269,48 +2855,259 @@ dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec",
                     "Propres_responsabilites_rec", "Propres_decisions_rec", 
                     "Independance_finance_rec")
 
-# Variables indépendantes
+# Variable indépendante (Usage_MS uniquement)
 indep_vars_1a <- "Usage_MS"
+
+# Data frame pour stocker les résultats issus de gtsummary
+results_df <- data.frame()
+
+# Boucle sur chaque variable dépendante
+for (dep in dependent_vars) {
+  mod <- generate_logistic_model(dep, indep_vars_1a, data_P3_)
+  
+  # Création du tableau de régression avec gtsummary
+  tbl <- tbl_regression(mod, exponentiate = TRUE)
+  
+  # Extraction du tableau sous forme de data frame et filtrage pour garder uniquement Usage_MS
+  tb <- tbl$table_body %>% 
+    filter(variable == indep_vars_1a) %>% 
+    mutate(outcome = dep)  # Ajout du nom de la variable dépendante
+  
+  # Ajout au data frame final
+  results_df <- bind_rows(results_df, tb)
+}
+
+# Visualisation : Forest Plot des Odds Ratios pour Usage_MS sur chaque résultat
+ggplot(results_df, aes(x = outcome, y = estimate, ymin = conf.low, ymax = conf.high)) +
+  geom_pointrange(color = "blue", size = 1) +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +  # Référence : OR = 1
+  coord_flip() +
+  theme_minimal() +
+  labs(title = "Forest Plot des modèles logistiques (Usage_MS)",
+       x = "Variables dépendantes",
+       y = "Odds Ratio (IC 95%)") +
+  theme(axis.text.y = element_text(size = 12))
+
+# Sauvegarde du graphique
+ggsave(here("figures", "forestplot", "Utilisation_des_medias_forestplot_gtsummary.png"), 
+       width = 10, height = 6)
+
+```
+
+
+# X.7. Comparaion des modeles  
+```{r}
+library(ggplot2)
+library(broom)
+library(dplyr)
+
+# Fonction pour générer un modèle logistique
+generate_logistic_model <- function(dep_var, indep_var, data) {
+  formula <- as.formula(paste(dep_var, "~", indep_var))
+  model <- glm(formula, data = data, family = binomial)
+  return(model)
+}
+
+# Liste des variables dépendantes
+dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
+                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
+                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
+                    "Independance_finance_rec")
+
+# Variable indépendante : Nombre de Comptes MS
 indep_vars_1b <- "Nbr_compte_MS"
-indep_vars_1c <- "Nbr_compte_MS_regulier"
 
 # Créer une liste vide pour stocker les modèles
 model_list <- list()
 m_labels <- c()  # Liste pour stocker les labels des modèles
 
-# Appliquer les régressions pour chaque variable dépendante
+# Appliquer les régressions pour chaque variable dépendante et récupérer les coefficients
 for (dep_var in dependent_vars) {
-  model_list[[paste0(dep_var, "_Usage_MS")]] <- generate_logistic_model(dep_var, indep_vars_1a, data_P3_)
-  model_list[[paste0(dep_var, "_Nbr_compte_MS")]] <- generate_logistic_model(dep_var, indep_vars_1b, data_P3_)
-  model_list[[paste0(dep_var, "_Nbr_compte_MS_regulier")]] <- generate_logistic_model(dep_var, indep_vars_1c, data_P3_)
-  
-  # Ajouter les labels incrémentés dans m_labels
-  m_labels <- c(m_labels,
-                paste0(dep_var, "_1"),  # Label pour Usage_MS
-                paste0(dep_var, "_2"),  # Label pour Nbr_compte_MS
-                paste0(dep_var, "_3"))  # Label pour Nbr_compte_MS_regulier
+  model <- generate_logistic_model(dep_var, indep_vars_1b, data_P3_)
+  model_list[[paste0(dep_var, "_Nbr_compte_MS")]] <- model
+  m_labels <- c(m_labels, paste(dep_var, "vs Nbr_compte_MS"))
 }
 
-# Vérification des modèles et des labels
-#print(names(model_list))  # Afficher les noms des modèles
-#print(m_labels)  # Afficher les labels
+# Extraire les coefficients des modèles
+results <- lapply(seq_along(model_list), function(i) {
+  tidy(model_list[[i]]) %>%
+    mutate(model = m_labels[i])  # Ajouter le label pour chaque modèle
+}) %>%
+  bind_rows()  # Combiner tous les résultats en un seul data frame
 
-# Appliquer plot_models avec les modèles et les labels
-plot_models(
-  model_list,
-    # Sans la combinaison
-  m.labels = m_labels,  # Utilisation des labels incrémentés
-  show.values = FALSE,  # Ne pas afficher les valeurs numériques des coefficients
-  show.p = FALSE,  # Ne pas afficher les p-valeurs
-  p.shape = F,  # Afficher les formes des points au lieu des valeurs
-  show.legend = F,
-  grid = TRUE  # Afficher une grille
+# Créer le graphique avec ggplot2
+ggplot(results, aes(x = term, y = estimate, color = model, shape = model)) +
+  geom_point(size = 4) +  # Afficher les points pour chaque estimation de coefficient
+  geom_line(aes(group = model), linetype = "solid") +  # Relier les points entre eux pour chaque modèle
+  scale_shape_manual(values = 1:length(m_labels)) +  # Attribuer des formes uniques pour chaque modèle
+  scale_color_manual(values = rainbow(length(m_labels))) +  # Couleurs personnalisées pour chaque modèle
+  labs(x = "Termes", y = "Estimations des coefficients", title = "Comparaison des coefficients des modèles logistiques") +
+  theme_minimal() +
+  theme(
+    legend.position = "top",  # Légende en haut
+    axis.text.x = element_text(angle = 45, hjust = 1),  # Rotation des labels des termes
+    panel.grid.major = element_blank(),  # Pas de grille principale
+    panel.grid.minor = element_blank(),  # Pas de grille mineure
+    legend.title = element_blank()  # Enlever le titre de la légende
+  )
+
+```
+
+
+#Marqueur objectifs
+```{r}
+
+# Définition de la fonction
+transform_values <- function(x) {
+  ifelse(is.na(x), x, ifelse(x == 0, 6, x * 12))
+}
+
+# Application des transformations
+data_P3_$nbre_annee_depart_maison <- transform_values(data_P3_$nbre_annee_depart_maison)
+data_P3_$nbre_annee_depart_vivre_avec_conjoint <- transform_values(data_P3_$nbre_annee_depart_vivre_avec_conjoint)
+data_P3_$nbre_annees_depuis_la_naissance_du_1er_enfant <- transform_values(data_P3_$nbre_annees_depuis_la_naissance_du_1er_enfant)
+data_P3_$nbre_annee_depuis_commencent_travail <- transform_values(data_P3_$nbre_annee_depuis_commencent_travail)
+
+# Remplacement des NA par des valeurs spécifiques
+data_P3_$nbre_annee_depart_maison[is.na(data_P3_$nbre_annee_depart_maison)] <- "Pas_quitter_maison_familial"
+data_P3_$nbre_annee_depart_vivre_avec_conjoint[is.na(data_P3_$nbre_annee_depart_vivre_avec_conjoint)] <- "Jamais_vecu_conjoint_12mois"
+data_P3_$nbre_annees_depuis_la_naissance_du_1er_enfant[is.na(data_P3_$nbre_annees_depuis_la_naissance_du_1er_enfant)] <- "pas_eu_1er_d'enfant"
+data_P3_$nbre_annee_depuis_commencent_travail[is.na(data_P3_$nbre_annee_depuis_commencent_travail)] <- "Pas_encore_emploi"
+
+
+```
+
+```{r}
+data_P3_$nbre_mois_retour_nid_familial_1ere_fois <- data_P3_$`BC2Q2H[SQ001]`
+data_P3_$nbre_mois_retour_nid_familial_1ere_fois[is.na(data_P3_$nbre_mois_retour_nid_familial_1ere_fois)] <- "Pas_revenu_chez_parent"
+
+```
+
+
+```{r}
+# Création de la nouvelle variable sans écraser l'ancienne
+data_P3_$nbre_année_marié_1er_fois <- data_P3_$BC2Q2F  
+
+# Remplacement des 0 par 6
+data_P3_$nbre_année_marié_1er_fois[data_P3_$nbre_année_marié_1er_fois == 0] <- 6  
+
+# Transformation des autres valeurs (2023 - valeur) * 12
+data_P3_$nbre_année_marié_1er_fois <- ifelse(
+  data_P3_$nbre_année_marié_1er_fois != 6 & !is.na(data_P3_$nbre_année_marié_1er_fois), 
+  (2023 - data_P3_$nbre_année_marié_1er_fois) * 12, 
+  data_P3_$nbre_année_marié_1er_fois
 )
 
+# Remplacement des NA par "Pas encore marié"
+data_P3_$nbre_année_marié_1er_fois[is.na(data_P3_$nbre_année_marié_1er_fois)] <- "Pas_encore_marié"
 
-# Générer le graphique et enregistrer dans le dossier 'figures/forestplot'
-ggsave(here("figures", "forestplot", "Toute _les variables_utilisation des médias_forestplot1.png"), 
-       plot = last_plot(), width = 10, height = 6)
+```
+
+
+
+# Recodage generale marqueurs subjectifs
+```{r}
+# Remplacement des 0 par 6 et multiplication des autres valeurs par 12
+transform_values <- function(x) {
+  ifelse(is.na(x), x, ifelse(x == 0, 6, x * 12))
+}
+
+# Appliquer la transformation aux trois variables
+data_P3_$nbre_annee_depuis_independant_financierement <- transform_values(data_P3_$nbre_annee_depuis_independant_financierement)
+data_P3_$nbre_annee_depuis_prendre_propes_decisionsl <- transform_values(data_P3_$nbre_annee_depuis_prendre_propes_decisionsl)
+data_P3_$nbre_annee_depuis_prendre_propes_resondabilitésl <- transform_values(data_P3_$nbre_annee_depuis_prendre_propes_resondabilitésl)
+
+# Remplacement des NA par des valeurs spécifiques
+data_P3_$nbre_annee_depuis_prendre_propes_resondabilitésl[is.na(data_P3_$nbre_annee_depuis_prendre_propes_resondabilitésl)] <- "Pas_accepter_propres_responsabilités"
+data_P3_$nbre_annee_depuis_prendre_propes_decisionsl[is.na(data_P3_$nbre_annee_depuis_prendre_propes_decisionsl)] <- "Pas_capable_prendre_propres_décisions"
+data_P3_$nbre_annee_depuis_independant_financierement[is.na(data_P3_$nbre_annee_depuis_independant_financierement)] <- "Pas_indépendant_financièrement"
+
+```
+
+
+
+
+#Classement des marqueurs  objectifs jugés plus important selon les individus
+```{r}
+# Définir les noms des colonnes de score
+score_vars <- c("Importance_quiter_nid", "Importance_emploi_TPL", 
+                "Importance_vivre_en_couple", "Importance_marie_1er_fois", 
+                "Importance_parent_1er_fois")
+
+# Vérifier que ces colonnes existent dans data_P3_
+if(!all(score_vars %in% names(data_P3_))){
+  stop("Certaines colonnes de scores ne sont pas présentes dans data_P3_. Vérifie les noms exacts.")
+}
+
+# S'assurer que les colonnes de score sont de type numérique
+data_P3_[, score_vars] <- lapply(data_P3_[, score_vars], function(x) as.numeric(as.character(x)))
+
+# Créer une copie de data_P3_ pour ne pas écraser les données originales
+data_marqueur <- data_P3_
+
+# Pour chaque individu, parcourir les marqueurs et retenir le ou les marqueurs ayant la valeur maximale
+data_marqueur$Marqueur_plus_important <- apply(data_marqueur[, score_vars], 1, function(x) {
+  max_val <- -Inf      # Initialisation avec une valeur très basse
+  markers <- c()       # Vecteur pour stocker les noms des marqueurs
+  for(i in seq_along(x)) {
+    if(x[i] > max_val) {
+      max_val <- x[i]
+      markers <- names(x)[i]  # Nouveau maximum trouvé, on réinitialise la liste
+    } else if(x[i] == max_val) {
+      markers <- c(markers, names(x)[i])  # Valeur égale, on ajoute le marqueur à la liste
+    }
+  }
+  # Enlever les doublons (au cas où) et retourner les marqueurs séparés par une virgule
+  paste(unique(markers), collapse = ", ")
+})
+
+# Afficher un aperçu du résultat
+
+~#View(data_marqueur %>% select(Importance_quiter_nid,Importance_emploi_TPL, 
+                            #Importance_vivre_en_couple,Importance_marie_1er_fois, 
+                             #Importance_parent_1er_fois,Marqueur_plus_important))
+head(data_marqueur[, c(score_vars, "Marqueur_plus_important")])
+
+```
+
+
+
+
+#Classement des marqueurs  subjectifs jugés plus important selon les individus
+```{r}
+# Définir les noms des colonnes subjectives
+subj_vars <- c("Importance_independant_finance", "Importance_propres_decisions", 
+               "Importance_propres_responsabilites")
+
+# Vérifier que ces colonnes existent dans data_P3_
+if(!all(subj_vars %in% names(data_P3_))){
+  stop("Certaines colonnes subjectives ne sont pas présentes dans data_P3_. Vérifie les noms exacts.")
+}
+
+# S'assurer que les colonnes subjectives sont de type numérique
+data_P3_[, subj_vars] <- lapply(data_P3_[, subj_vars], function(x) as.numeric(as.character(x)))
+
+# Créer une nouvelle base de données pour les variables subjectives
+data_marqueur_subj <- data_P3_
+
+# Pour chaque individu, parcourir les variables subjectives et retenir le ou les marqueur(s) avec la note maximale
+data_marqueur_subj$Marqueur_plus_important_subj <- apply(data_marqueur_subj[, subj_vars], 1, function(x) {
+  max_val <- -Inf      # Initialisation avec une valeur très basse
+  markers <- c()       # Vecteur pour stocker les noms des marqueurs subjectifs
+  for(i in seq_along(x)) {
+    if(x[i] > max_val) {
+      max_val <- x[i]
+      markers <- names(x)[i]  # Nouveau maximum trouvé, on réinitialise la liste
+    } else if(x[i] == max_val) {
+      markers <- c(markers, names(x)[i])  # En cas d'égalité, on ajoute le marqueur
+    }
+  }
+  # Concaténer les marqueurs trouvés, en éliminant d'éventuels doublons
+  paste(unique(markers), collapse = ", ")
+})
+
+# Afficher un aperçu du résultat
+View(data_marqueur_subj[, c(subj_vars, "Marqueur_plus_important_subj")])
 
 ```
 

@@ -1895,7 +1895,7 @@ graphique
 
 
 
-#####Dingogramme
+#####Dendogramme
 
 ```{r message=FALSE, warning=FALSE}
 library(dplyr)
