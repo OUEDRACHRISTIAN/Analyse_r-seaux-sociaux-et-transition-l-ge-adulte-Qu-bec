@@ -13,7 +13,6 @@ author: "Christian Cyriaque"
 
 
 ```{r message=FALSE, warning=FALSE}
-
 library(officer)
 library(flextable)
 library(tidyverse)
@@ -27,7 +26,7 @@ library(here)
 data_P2 = read_csv(here("data","data_P2.csv"))
 ```
 
-# Creons une variable gp_age
+# Creons une variable 
 ```{r}
 
 data_P2 <- 
@@ -38,6 +37,167 @@ data_P2 <-
 
 freq(data_P2$gpe_age)
 
+
+
+
+
+#
+data_P2 <- data_P2 %>%
+  mutate(
+    lieu_de_naissance = ifelse(lieu_de_naissance == "Hors du Canada", 
+                               "Hors du Quebec", 
+                               lieu_de_naissance),
+    
+    lieu_de_naissance_mere = ifelse(lieu_de_naissance_mere == "Hors du Canada",
+                                    "Hors du Québec",
+                                    lieu_de_naissance_mere),
+    
+    lieu_de_naissance_pere = ifelse(lieu_de_naissance_pere == "Hors du Canada",
+                                    "Hors du Québec",
+                                    lieu_de_naissance_pere),
+    
+    lieu_de_naissance_les_deux = ifelse(lieu_de_naissance_les_deux == "Hors du Canada",
+                                        "Hors du Québec",
+                                        lieu_de_naissance_les_deux)
+  )
+
+
+
+
+#Occupation_du_repondant
+data_P2 <- data_P2 %>%
+  mutate(Occupation_du_repondant = case_when(
+    Occupation_du_repondant %in% c(
+      "À la maison TPL",
+      "Sans travail mais recherche",
+      "Sans travail sans recherche"
+    ) ~ "Sans travail",
+    
+    Occupation_du_repondant %in% c(
+      "Étudiant PTL S",
+      "Étudiant TPA S"
+    ) ~ "Étudiant",
+    
+    Occupation_du_repondant %in% c(
+      "Travail et études TPA",
+      "Travail PTL études TPA",
+      "Travail TPA études PTL"
+    ) ~ "Travail et études",
+    
+    Occupation_du_repondant %in% c(
+      "Travail TPA S",
+      "Travail TPL S"
+    ) ~ "Travail",
+    
+    TRUE ~ Occupation_du_repondant
+  ))
+
+
+#Revenu_annuel_du_repondant
+data_P2 <- data_P2 %>%
+  mutate(Revenu_annuel_du_repondant = case_when(
+    Revenu_annuel_du_repondant %in% c("Ne sait pas", "Préfère ne pas répondre") ~ "Ne sait pas",
+    TRUE ~ Revenu_annuel_du_repondant
+  ))
+
+
+
+
+data_P2 <- data_P2 %>%
+  mutate(
+    Occupation_mere = case_when(
+      Occupation_mere %in% c(
+        "Agriculeurs exploitants",
+        "Artisants, commerçants, chef",
+        "Ouvriers"
+      ) ~ "Travailleurs",
+      
+      Occupation_mere %in% c(
+        "Autre sans activité professionnelle",
+        "Retraités"
+      ) ~ "Sans travail",
+      
+      TRUE ~ Occupation_mere
+    ),
+    
+    Occupation_pere = case_when(
+      Occupation_pere %in% c(
+        "Agriculeurs exploitants",
+        "Artisants, commerçants, chef",
+        "Ouvriers"
+      ) ~ "Travailleurs",
+      
+      Occupation_pere %in% c(
+        "Autre sans activité professionnelle",
+        "Retraités"
+      ) ~ "Sans travail",
+      
+      TRUE ~ Occupation_pere
+    )
+  )
+
+
+
+
+data_P2 <- data_P2 %>%
+  mutate(Siruation_civile_parents = case_when(
+    Siruation_civile_parents %in% c(
+      "Les deux sont defunts",
+      "Un des deux est defunt"
+    ) ~ "Au moins un des deux est défunts",
+    
+    TRUE ~ Siruation_civile_parents
+  ))
+
+
+
+
+#
+data_P2 <- data_P2 %>%
+  mutate(Etat_civil_du_repondant = case_when(
+    Etat_civil_du_repondant %in% c(
+      "Célibataire, jamais marié",
+      "Divorsé, séparé",
+      "Veuf"
+    ) ~ "Sans conjoint",
+    
+    Etat_civil_du_repondant %in% c(
+      "Conjoint de fait avec enfant",
+      "Marié avec enfant"
+    ) ~ "Avec conjoint et enfant",
+    
+    Etat_civil_du_repondant %in% c(
+      "Conjoint de fait sans enfant",
+      "Marié sans enfant"
+    ) ~ "Avec conjoint sans enfant",
+    
+    TRUE ~ Etat_civil_du_repondant
+  ))
+
+
+
+data_P2 <- data_P2 %>%
+  mutate(Type_de_domicile_mere = case_when(
+    Type_de_domicile_mere %in% c(
+      "Propriétaire condo",
+      "Propriétaire maison"
+    ) ~ "Propriétaire",
+    
+    TRUE ~ Type_de_domicile_mere
+  ))
+
+
+
+
+data_P2 <- data_P2 %>%
+  mutate(Type_de_domicile_pere = case_when(
+    Type_de_domicile_pere %in% c("Propriétaire condo", "Propriétaire maison") ~ "Propriétaire",
+    Type_de_domicile_pere %in% c("En RAP", "Incaecere") ~ "Autres",
+    TRUE ~ Type_de_domicile_pere
+  ))
+
+
+#table(data_P2$lieu_de_naissance)
 ```
 
 
@@ -229,7 +389,7 @@ vars_a_modifier <- c(
 # Afficher les fréquences avant transformation
 cat("🔹 Fréquences AVANT remplacement des NA :\n")
 for (var in vars_a_modifier) {
-  cat("\n📊 Fréquence de :", var, "\n")
+  cat("\n Fréquence de :", var, "\n")
   print(table(data_P2[[var]], useNA = "always"))  # Affiche les fréquences avec NA
 }
 
@@ -240,7 +400,7 @@ data_P2 <- data_P2 %>%
 # Afficher les fréquences après transformation
 cat("\n🔹 Fréquences APRÈS remplacement des NA :\n")
 for (var in vars_a_modifier) {
-  cat("\n📊 Fréquence de :", var, "\n")
+  cat("\n Fréquence de :", var, "\n")
   print(table(data_P2[[var]], useNA = "always"))  # Vérification après remplacement
 }
 
@@ -421,8 +581,6 @@ Table_Quête_informatins
 
 # 5. Tableau pour les Parents des repondants
 ```{r message=FALSE, warning=FALSE}
-
-
 Table_parents <- tbl_svysummary(
   data = data_design,
   by = gpe_age,  

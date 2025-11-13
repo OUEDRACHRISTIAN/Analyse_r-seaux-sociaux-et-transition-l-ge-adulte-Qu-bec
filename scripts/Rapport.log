@@ -1,0 +1,4085 @@
+This is XeTeX, Version 3.141592653-2.6-0.999997 (TeX Live 2025) (preloaded format=xelatex 2025.4.30)  30 APR 2025 14:13
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**Rapport.tex
+(./Rapport.tex
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-14>
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2024/06/29 v1.4n Standard LaTeX document class
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2024/06/29 v1.4n Standard LaTeX file (size option)
+)
+\c@part=\count268
+\c@section=\count269
+\c@subsection=\count270
+\c@subsubsection=\count271
+\c@paragraph=\count272
+\c@subparagraph=\count273
+\c@figure=\count274
+\c@table=\count275
+\abovecaptionskip=\skip49
+\belowcaptionskip=\skip50
+\bibindent=\dimen146
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsmath.sty
+Package: amsmath 2024/11/05 v2.17t AMS math features
+\@mathmargin=\skip51
+For additional information on amsmath, use the `?' option.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amstext.sty
+Package: amstext 2021/08/26 v2.01 AMS text
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsgen.sty
+File: amsgen.sty 1999/11/30 v2.0 generic functions
+\@emptytoks=\toks17
+\ex@=\dimen147
+)) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsbsy.sty
+Package: amsbsy 1999/11/29 v1.2d Bold Symbols
+\pmbraise@=\dimen148
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsmath/amsopn.sty
+Package: amsopn 2022/04/08 v2.04 operator names
+)
+\inf@bad=\count276
+LaTeX Info: Redefining \frac on input line 233.
+\uproot@=\count277
+\leftroot@=\count278
+LaTeX Info: Redefining \overline on input line 398.
+LaTeX Info: Redefining \colon on input line 409.
+\classnum@=\count279
+\DOTSCASE@=\count280
+LaTeX Info: Redefining \ldots on input line 495.
+LaTeX Info: Redefining \dots on input line 498.
+LaTeX Info: Redefining \cdots on input line 619.
+\Mathstrutbox@=\box53
+\strutbox@=\box54
+LaTeX Info: Redefining \big on input line 721.
+LaTeX Info: Redefining \Big on input line 722.
+LaTeX Info: Redefining \bigg on input line 723.
+LaTeX Info: Redefining \Bigg on input line 724.
+\big@size=\dimen149
+LaTeX Font Info:    Redeclaring font encoding OML on input line 742.
+LaTeX Font Info:    Redeclaring font encoding OMS on input line 743.
+\macc@depth=\count281
+LaTeX Info: Redefining \bmod on input line 904.
+LaTeX Info: Redefining \pmod on input line 909.
+LaTeX Info: Redefining \smash on input line 939.
+LaTeX Info: Redefining \relbar on input line 969.
+LaTeX Info: Redefining \Relbar on input line 970.
+\c@MaxMatrixCols=\count282
+\dotsspace@=\muskip17
+\c@parentequation=\count283
+\dspbrk@lvl=\count284
+\tag@help=\toks18
+\row@=\count285
+\column@=\count286
+\maxfields@=\count287
+\andhelp@=\toks19
+\eqnshift@=\dimen150
+\alignsep@=\dimen151
+\tagshift@=\dimen152
+\tagwidth@=\dimen153
+\totwidth@=\dimen154
+\lineht@=\dimen155
+\@envbody=\toks20
+\multlinegap=\skip52
+\multlinetaggap=\skip53
+\mathdisplay@stack=\toks21
+LaTeX Info: Redefining \[ on input line 2953.
+LaTeX Info: Redefining \] on input line 2954.
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amssymb.sty
+Package: amssymb 2013/01/14 v3.01 AMS font symbols
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/amsfonts.sty
+Package: amsfonts 2013/01/14 v3.01 Basic AMSFonts support
+\symAMSa=\mathgroup4
+\symAMSb=\mathgroup5
+LaTeX Font Info:    Redeclaring math symbol \hbar on input line 98.
+LaTeX Font Info:    Overwriting math alphabet `\mathfrak' in version `bold'
+(Font)                  U/euf/m/n --> U/euf/b/n on input line 106.
+)) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/lmodern.sty
+Package: lmodern 2015/05/01 v1.6.1 Latin Modern Fonts
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/cmr/m/n --> OT1/lmr/m/n on input line 22.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `normal'
+(Font)                  OML/cmm/m/it --> OML/lmm/m/it on input line 23.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/cmsy/m/n --> OMS/lmsy/m/n on input line 24.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 25.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 26.
+LaTeX Font Info:    Overwriting symbol font `letters' in version `bold'
+(Font)                  OML/cmm/b/it --> OML/lmm/b/it on input line 27.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/cmsy/b/n --> OMS/lmsy/b/n on input line 28.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/cmex/m/n --> OMX/lmex/m/n on input line 29.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 31.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/cmss/m/n --> OT1/lmss/m/n on input line 32.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/cmr/m/it --> OT1/lmr/m/it on input line 33.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 34.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `bold'
+(Font)                  OT1/cmr/bx/n --> OT1/lmr/bx/n on input line 35.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/cmss/bx/n --> OT1/lmss/bx/n on input line 36.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `bold'
+(Font)                  OT1/cmr/bx/it --> OT1/lmr/bx/it on input line 37.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/cmtt/m/n --> OT1/lmtt/m/n on input line 38.
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/iftex.sty
+Package: iftex 2024/12/12 v1.0g TeX engine tests
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math.sty (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3kernel/expl3.sty
+Package: expl3 2025-04-14 L3 programming layer (loader) 
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3backend/l3backend-xetex.def
+File: l3backend-xetex.def 2025-04-14 L3 backend support: XeTeX
+\g__graphics_track_int=\count288
+\g__pdfannot_backend_int=\count289
+\g__pdfannot_backend_link_int=\count290
+))
+Package: unicode-math 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-xetex.sty
+Package: unicode-math-xetex 2023/08/13 v0.8r Unicode maths in XeLaTeX and LuaLaTeX
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/xparse/xparse.sty
+Package: xparse 2024-08-16 L3 Experimental document command parser
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/l3packages/l3keys2e/l3keys2e.sty
+Package: l3keys2e 2024-08-16 LaTeX2e option processing using LaTeX3 keys
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.sty
+Package: fontspec 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec-xetex.sty
+Package: fontspec-xetex 2024/05/11 v2.9e Font selection for XeLaTeX and LuaLaTeX
+\l__fontspec_script_int=\count291
+\l__fontspec_language_int=\count292
+\l__fontspec_strnum_int=\count293
+\l__fontspec_tmp_int=\count294
+\l__fontspec_tmpa_int=\count295
+\l__fontspec_tmpb_int=\count296
+\l__fontspec_tmpc_int=\count297
+\l__fontspec_em_int=\count298
+\l__fontspec_emdef_int=\count299
+\l__fontspec_strong_int=\count300
+\l__fontspec_strongdef_int=\count301
+\l__fontspec_tmpa_dim=\dimen156
+\l__fontspec_tmpb_dim=\dimen157
+\l__fontspec_tmpc_dim=\dimen158
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fontenc.sty
+Package: fontenc 2021/04/29 v2.0v Standard LaTeX package
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fontspec/fontspec.cfg))) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/fix-cm.sty
+Package: fix-cm 2020/11/24 v1.1t fixes to LaTeX
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/ts1enc.def
+File: ts1enc.def 2001/06/05 v3.0e (jk/car/fm) Standard LaTeX file
+LaTeX Font Info:    Redeclaring font encoding TS1 on input line 47.
+))
+\g__um_fam_int=\count302
+\g__um_fonts_used_int=\count303
+\l__um_primecount_int=\count304
+\g__um_primekern_muskip=\muskip18
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/unicode-math/unicode-math-table.tex))) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/upquote/upquote.sty
+Package: upquote 2012/04/19 v1.3 upright-quote and grave-accent glyphs in verbatim
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/textcomp.sty
+Package: textcomp 2024/04/24 v2.1b Standard LaTeX package
+)) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.sty
+Package: microtype 2025/02/11 v3.2a Micro-typographical refinements (RS)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/keyval.sty
+Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
+\KV@toks@=\toks22
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
+\etb@tempcnta=\count305
+)
+\MT@toks=\toks23
+\MT@tempbox=\box55
+\MT@count=\count306
+LaTeX Info: Redefining \noprotrusionifhmode on input line 1087.
+LaTeX Info: Redefining \leftprotrusion on input line 1088.
+\MT@prot@toks=\toks24
+LaTeX Info: Redefining \rightprotrusion on input line 1107.
+LaTeX Info: Redefining \textls on input line 1449.
+\MT@outer@kern=\dimen159
+LaTeX Info: Redefining \microtypecontext on input line 2053.
+LaTeX Info: Redefining \textmicrotypecontext on input line 2070.
+\MT@listname@count=\count307
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype-xetex.def
+File: microtype-xetex.def 2025/02/11 v3.2a Definitions specific to xetex (RS)
+LaTeX Info: Redefining \lsstyle on input line 443.
+LaTeX Info: Redefining \lslig on input line 451.
+\MT@outer@space=\skip54
+)
+Package microtype Info: Loading configuration file microtype.cfg.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/microtype.cfg
+File: microtype.cfg 2025/02/11 v3.2a microtype main configuration file (RS)
+)
+LaTeX Info: Redefining \microtypesetup on input line 3065.
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/parskip/parskip.sty
+Package: parskip 2021-03-14 v2.0h non-zero parskip adjustments
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvoptions/kvoptions.sty
+Package: kvoptions 2022-06-15 v3.15 Key value format for package options (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/ltxcmds/ltxcmds.sty
+Package: ltxcmds 2023-12-04 v1.26 LaTeX kernel commands for general use (HO)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/kvsetkeys/kvsetkeys.sty
+Package: kvsetkeys 2022-10-05 v1.19 Key value parser (HO)
+))) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/xcolor/xcolor.sty
+Package: xcolor 2024/09/29 v3.02 LaTeX color extensions (UK)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/color.cfg
+File: color.cfg 2016/01/02 v1.6 sample color configuration
+)
+Package xcolor Info: Driver file: xetex.def on input line 274.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-def/xetex.def
+File: xetex.def 2022/09/22 v5.0n Graphics/color driver for xetex
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/mathcolor.ltx)
+Package xcolor Info: Model `cmy' substituted by `cmy0' on input line 1349.
+Package xcolor Info: Model `RGB' extended on input line 1365.
+Package xcolor Info: Model `HTML' substituted by `rgb' on input line 1367.
+Package xcolor Info: Model `Hsb' substituted by `hsb' on input line 1368.
+Package xcolor Info: Model `tHsb' substituted by `hsb' on input line 1369.
+Package xcolor Info: Model `HSB' substituted by `hsb' on input line 1370.
+Package xcolor Info: Model `Gray' substituted by `gray' on input line 1371.
+Package xcolor Info: Model `wave' substituted by `hsb' on input line 1372.
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/geometry/geometry.sty
+Package: geometry 2020/01/02 v5.9 Page Geometry
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/iftex/ifvtex.sty
+Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
+)
+\Gm@cnth=\count308
+\Gm@cntv=\count309
+\c@Gm@tempcnt=\count310
+\Gm@bindingoffset=\dimen160
+\Gm@wd@mp=\dimen161
+\Gm@odd@mp=\dimen162
+\Gm@even@mp=\dimen163
+\Gm@layoutwidth=\dimen164
+\Gm@layoutheight=\dimen165
+\Gm@layouthoffset=\dimen166
+\Gm@layoutvoffset=\dimen167
+\Gm@dimlist=\toks25
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphicx.sty
+Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/graphics.sty
+Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics/trig.sty
+Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
+)
+Package graphics Info: Driver file: xetex.def on input line 106.
+)
+\Gin@req@height=\dimen168
+\Gin@req@width=\dimen169
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/setspace/setspace.sty
+Package: setspace 2022/12/04 v6.7b set line spacing
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/indentfirst.sty
+Package: indentfirst 2023/07/02 v1.03 Indent first paragraph (DPC)
+)
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.963629354430423.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.963629354430423.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.963629354430423.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 0.944047646899576.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 0.944047646899576.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.001911883116192.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.001911883116192.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 0.9818514257111176.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 0.9818514257111176.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 1.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'TimesNewRoman(0)' created for font 'Times
+(fontspec)             New Roman' with options
+(fontspec)             [Scale=MatchLowercase,Ligatures=TeX,Scale=1].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.: <->s*[1]"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.: <->s*[1]"Times
+(fontspec)             New
+(fontspec)             Roman/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.: <->s*[1]"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1]"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.: <->s*[1]"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.: <->s*[1]"Times
+(fontspec)             New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;mapping=tex-text;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1]"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;+smcp;mapping=tex-text;"
+
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 10.0pt on input line 62.
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.9999965884395865.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.9999965884395865.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman scale = 0.9999965884395865.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 0.9796758700672793.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/B scale = 0.9796758700672793.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.039723894282441.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/I scale = 1.039723894282441.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 1.018906358084128.
+
+
+Package fontspec Info: 
+(fontspec)             Times New Roman/BI scale = 1.018906358084128.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'TimesNewRoman(1)' created for font 'Times
+(fontspec)             New Roman' with options [Scale=MatchLowercase].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[0.9999965884395865]"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[0.9999965884395865]"Times New
+(fontspec)             Roman/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[0.9796758700672793]"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[0.9796758700672793]"Times New
+(fontspec)             Roman/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[1.039723894282441]"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1.039723894282441]"Times New
+(fontspec)             Roman/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1.018906358084128]"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1.018906358084128]"Times New
+(fontspec)             Roman/BI/OT:script=latn;language=dflt;+smcp;"
+
+LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/TimesNewRoman(1)/m/n on input line 62.
+LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
+(Font)                  OT1/lmr/m/it --> TU/TimesNewRoman(1)/m/it on input line 62.
+LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
+(Font)                  OT1/lmr/bx/n --> TU/TimesNewRoman(1)/b/n on input line 62.
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/B scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/B scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/B scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/B scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/I scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/I scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/I scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/I scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/BI scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/BI scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/BI scale = 0.8625210024688017.
+
+
+Package fontspec Info: 
+(fontspec)             Arial/BI scale = 1.0.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'Arial(0)' created for font 'Arial' with
+(fontspec)             options [Scale=MatchLowercase,Scale=1.0].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/OT:script=latn;language=dflt;"
+(fontspec)             - 'small caps'  (m/sc) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/B/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/B/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'italic' (m/it) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/I/OT:script=latn;language=dflt;"
+(fontspec)             - 'italic small caps'  (m/scit) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/I/OT:script=latn;language=dflt;+smcp;"
+(fontspec)             - 'bold italic' (b/it) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/BI/OT:script=latn;language=dflt;"
+(fontspec)             - 'bold italic small caps'  (b/scit) with NFSS spec.:
+(fontspec)             <->s*[1.0]"Arial/BI/OT:script=latn;language=dflt;+smcp;"
+
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/babel.sty
+Package: babel 2025/04/29 v25.8 The multilingual framework for pdfLaTeX, LuaLaTeX and XeLaTeX
+\babel@savecnt=\count311
+\U@D=\dimen170
+\l@unhyphenated=\language6
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/xebabel.def)
+\bbl@readstream=\read2
+\bbl@dirlevel=\count312
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel-french/french.ldf
+Language: french 2024-07-25 v3.6c French support from the babel system
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/babel/locale/fr/babel-french.tex
+Package babel Info: Importing font and identification data for french
+(babel)             from babel-fr.ini. Reported on input line 11.
+)
+Package babel Info: Hyphen rules for 'acadian' set to \l@french
+(babel)             (\language5). Reported on input line 91.
+Package babel Info: Hyphen rules for 'canadien' set to \l@french
+(babel)             (\language5). Reported on input line 92.
+\FB@stdchar=\count313
+Package french.ldf Info: No need for active punctuation characters
+(french.ldf)             with this version of XeTeX!
+(french.ldf)             reported on input line 312.
+\FB@punctthick=\XeTeXcharclass4
+\FB@punctthin=\XeTeXcharclass5
+\FB@punctnul=\XeTeXcharclass6
+\FB@guilo=\XeTeXcharclass7
+\FB@guilf=\XeTeXcharclass8
+\FB@guilnul=\XeTeXcharclass9
+\FBguill@level=\count314
+\FBold@everypar=\toks26
+\FB@Mht=\dimen171
+\mc@charclass=\count315
+\mc@charfam=\count316
+\mc@charslot=\count317
+\std@mcc=\count318
+\dec@mcc=\count319
+\FB@parskip=\dimen172
+\listindentFB=\dimen173
+\descindentFB=\dimen174
+\labelindentFB=\dimen175
+\labelwidthFB=\dimen176
+\leftmarginFB=\dimen177
+\parindentFFN=\dimen178
+\FBfnindent=\dimen179
+)) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/carlisle/scalefnt.sty) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/fancyhdr/fancyhdr.sty
+Package: fancyhdr 2025/02/07 v5.2 Extensive control of page headers and footers
+\f@nch@headwidth=\skip55
+\f@nch@offset@elh=\skip56
+\f@nch@offset@erh=\skip57
+\f@nch@offset@olh=\skip58
+\f@nch@offset@orh=\skip59
+\f@nch@offset@elf=\skip60
+\f@nch@offset@erf=\skip61
+\f@nch@offset@olf=\skip62
+\f@nch@offset@orf=\skip63
+\f@nch@height=\skip64
+\f@nch@footalignment=\skip65
+\f@nch@widthL=\skip66
+\f@nch@widthC=\skip67
+\f@nch@widthR=\skip68
+\@temptokenb=\toks27
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/titlesec/titlesec.sty
+Package: titlesec 2025/01/04 v2.17 Sectioning titles
+\ttl@box=\box56
+\beforetitleunit=\skip69
+\aftertitleunit=\skip70
+\ttl@plus=\dimen180
+\ttl@minus=\dimen181
+\ttl@toksa=\toks28
+\titlewidth=\dimen182
+\titlewidthlast=\dimen183
+\titlewidthfirst=\dimen184
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/booktabs/booktabs.sty
+Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
+\heavyrulewidth=\dimen185
+\lightrulewidth=\dimen186
+\cmidrulewidth=\dimen187
+\belowrulesep=\dimen188
+\belowbottomsep=\dimen189
+\aboverulesep=\dimen190
+\abovetopsep=\dimen191
+\cmidrulesep=\dimen192
+\cmidrulekern=\dimen193
+\defaultaddspace=\dimen194
+\@cmidla=\count320
+\@cmidlb=\count321
+\@aboverulesep=\dimen195
+\@belowrulesep=\dimen196
+\@thisruleclass=\count322
+\@lastruleclass=\count323
+\@thisrulewidth=\dimen197
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption.sty
+Package: caption 2023/08/05 v3.6o Customizing captions (AR)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/caption3.sty
+Package: caption3 2023/07/31 v2.4d caption3 kernel (AR)
+\caption@tempdima=\dimen198
+\captionmargin=\dimen199
+\caption@leftmargin=\dimen256
+\caption@rightmargin=\dimen257
+\caption@width=\dimen258
+\caption@indent=\dimen259
+\caption@parindent=\dimen260
+\caption@hangindent=\dimen261
+Package caption Info: Standard document class detected.
+Package caption Info: french babel package is loaded.
+)
+\c@caption@flags=\count324
+\c@continuedfloat=\count325
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/longtable.sty
+Package: longtable 2024-10-27 v4.22 Multi-page Table package (DPC)
+\LTleft=\skip71
+\LTright=\skip72
+\LTpre=\skip73
+\LTpost=\skip74
+\LTchunksize=\count326
+\LTcapwidth=\dimen262
+\LT@head=\box57
+\LT@firsthead=\box58
+\LT@foot=\box59
+\LT@lastfoot=\box60
+\LT@gbox=\box61
+\LT@cols=\count327
+\LT@rows=\count328
+\c@LT@tables=\count329
+\c@LT@chunks=\count330
+\LT@p@ftn=\toks29
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/colortbl/colortbl.sty
+Package: colortbl 2024/07/06 v1.0i Color table columns (DPC)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/tools/array.sty
+Package: array 2024/10/17 v2.6g Tabular extension package (FMi)
+\col@sep=\dimen263
+\ar@mcellbox=\box62
+\extrarowheight=\dimen264
+\NC@list=\toks30
+\extratabsurround=\skip75
+\backup@length=\skip76
+\ar@cellbox=\box63
+)
+\everycr=\toks31
+\minrowclearance=\skip77
+\rownum=\count331
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/anyfontsize/anyfontsize.sty
+Invalid UTF-8 byte or sequence at line 3 replaced by U+FFFD.
+Invalid UTF-8 byte or sequence at line 3 replaced by U+FFFD.
+Package: anyfontsize 2007/11/22 anyfontsize.sty by pts
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/multirow/multirow.sty
+Package: multirow 2024/11/12 v2.9 Span multiple rows of a table
+\multirow@colwidth=\skip78
+\multirow@cntb=\count332
+\multirow@dima=\skip79
+\bigstrutjot=\dimen265
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/natbib/natbib.sty
+Package: natbib 2010/09/13 8.31b (PWD, AO)
+\bibhang=\skip80
+\bibsep=\skip81
+LaTeX Info: Redefining \cite on input line 694.
+\c@NAT@ctr=\count333
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bookmark.sty
+Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hyperref.sty
+Package: hyperref 2024-11-05 v7.01l Hypertext links for LaTeX
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/kvdefinekeys/kvdefinekeys.sty
+Package: kvdefinekeys 2019-12-19 v1.6 Define keys (HO)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdfescape/pdfescape.sty
+Package: pdfescape 2019/12/09 v1.15 Implements pdfTeX's escape features (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/pdftexcmds/pdftexcmds.sty
+Package: pdftexcmds 2020-06-27 v0.33 Utility functions of pdfTeX for LuaTeX (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/infwarerr/infwarerr.sty
+Package: infwarerr 2019/12/03 v1.5 Providing info/warning/error messages (HO)
+)
+Package pdftexcmds Info: \pdf@primitive is available.
+Package pdftexcmds Info: \pdf@ifprimitive is available.
+Package pdftexcmds Info: \pdfdraftmode not found.
+)) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hycolor/hycolor.sty
+Package: hycolor 2020-01-27 v1.10 Color options for hyperref/bookmark (HO)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/nameref.sty
+Package: nameref 2023-11-26 v2.56 Cross-referencing by name of section
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/refcount/refcount.sty
+Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/gettitlestring/gettitlestring.sty
+Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
+)
+\c@section@level=\count334
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/stringenc/stringenc.sty
+Package: stringenc 2019/11/29 v1.12 Convert strings between diff. encodings (HO)
+)
+\@linkdim=\dimen266
+\Hy@linkcounter=\count335
+\Hy@pagecounter=\count336
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/pd1enc.def
+File: pd1enc.def 2024-11-05 v7.01l Hyperref: PDFDocEncoding definition (HO)
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/intcalc/intcalc.sty
+Package: intcalc 2019/12/15 v1.3 Expandable calculations with integers (HO)
+)
+\Hy@SavedSpaceFactor=\count337
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/puenc.def
+File: puenc.def 2024-11-05 v7.01l Hyperref: PDF Unicode definition (HO)
+)
+Package hyperref Info: Option `unicode' set `true' on input line 4040.
+Package hyperref Info: Hyper figures OFF on input line 4157.
+Package hyperref Info: Link nesting OFF on input line 4162.
+Package hyperref Info: Hyper index ON on input line 4165.
+Package hyperref Info: Plain pages OFF on input line 4172.
+Package hyperref Info: Backreferencing OFF on input line 4177.
+Package hyperref Info: Implicit mode ON; LaTeX internals redefined.
+Package hyperref Info: Bookmarks ON on input line 4424.
+\c@Hy@tempcnt=\count338
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/url/url.sty
+\Urlmuskip=\muskip19
+Package: url 2013/09/16  ver 3.4  Verb mode for urls, etc.
+)
+LaTeX Info: Redefining \url on input line 4763.
+\XeTeXLinkMargin=\dimen267
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bitset/bitset.sty
+Package: bitset 2019/12/09 v1.3 Handle bit-vector datatype (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/bigintcalc/bigintcalc.sty
+Package: bigintcalc 2019/12/15 v1.5 Expandable calculations on big integers (HO)
+))
+\Fld@menulength=\count339
+\Field@Width=\dimen268
+\Fld@charsize=\dimen269
+Package hyperref Info: Hyper figures OFF on input line 6042.
+Package hyperref Info: Link nesting OFF on input line 6047.
+Package hyperref Info: Hyper index ON on input line 6050.
+Package hyperref Info: backreferencing OFF on input line 6057.
+Package hyperref Info: Link coloring OFF on input line 6062.
+Package hyperref Info: Link coloring with OCG OFF on input line 6067.
+Package hyperref Info: PDF/A mode OFF on input line 6072.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atbegshi-ltx.sty
+Package: atbegshi-ltx 2021/01/10 v1.0c Emulation of the original atbegshi
+package with kernel methods
+)
+\Hy@abspage=\count340
+\c@Item=\count341
+\c@Hfootnote=\count342
+)
+Package hyperref Info: Driver (autodetected): hxetex.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/hyperref/hxetex.def
+File: hxetex.def 2024-11-05 v7.01l Hyperref driver for XeTeX
+\pdfm@box=\box64
+\c@Hy@AnnotLevel=\count343
+\HyField@AnnotCount=\count344
+\Fld@listcount=\count345
+\c@bookmark@seq@number=\count346
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/rerunfilecheck/rerunfilecheck.sty
+Package: rerunfilecheck 2022-07-10 v1.10 Rerun checks for auxiliary files (HO)
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/base/atveryend-ltx.sty
+Package: atveryend-ltx 2020/08/19 v1.0a Emulation of the original atveryend package
+with kernel methods
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/generic/uniquecounter/uniquecounter.sty
+Package: uniquecounter 2019/12/15 v1.4 Provide unlimited unique counter (HO)
+)
+Package uniquecounter Info: New unique counter `rerunfilecheck' on input line 285.
+)
+\Hy@SectionHShift=\skip82
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/bookmark/bkm-dvipdfm.def
+File: bkm-dvipdfm.def 2023-12-10 v1.31 bookmark driver for dvipdfm (HO)
+\BKM@id=\count347
+)) (./Rapport.aux)
+\openout1 = `Rapport.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 104.
+LaTeX Font Info:    ... okay on input line 104.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 12.0pt on input line 104.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 104.
+LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
+(Font)                  OT1/lmss/bx/n --> TU/lmss/b/n on input line 104.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 104.
+LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/b/n on input line 104.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(0)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <->s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
+(Font)              scaled to size 12.45282pt on input line 104.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(1)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=10.2-},{Size=7.2-10.2,Font=latinmodern-math.otf,Style=MathScript},{Size=-7.2,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf}].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <10.2->s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<7.2-10.2>s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-7.2>s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.037736795366909]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 12.45282pt on input line 104.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `normal' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
+(Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input line 104.
+LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
+(Font)              `operators' in the math version `bold' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
+(Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on input line 104.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037840569046446.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037840569046446.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037840569046446.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037840569046446.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037840569046446.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(2)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=10.2-},{Size=7.2-10.2,Font=latinmodern-math.otf,Style=MathScript},{Size=-7.2,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=1.0001,FontAdjustment={\fontdimen
+(fontspec)             8\font =8.43056pt\relax \fontdimen 9\font
+(fontspec)             =4.90642pt\relax \fontdimen 10\font =5.52905pt\relax
+(fontspec)             \fontdimen 11\font =8.54263pt\relax \fontdimen 12\font
+(fontspec)             =4.29622pt\relax \fontdimen 13\font =4.52037pt\relax
+(fontspec)             \fontdimen 14\font =4.52037pt\relax \fontdimen 15\font
+(fontspec)             =3.59886pt\relax \fontdimen 16\font =3.07585pt\relax
+(fontspec)             \fontdimen 17\font =3.07585pt\relax \fontdimen 18\font
+(fontspec)             =3.1132pt\relax \fontdimen 19\font =2.49057pt\relax
+(fontspec)             \fontdimen 22\font =3.1132pt\relax \fontdimen 20\font
+(fontspec)             =0pt\relax \fontdimen 21\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <10.2->s*[1.037840569046446]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<7.2-10.2>s*[1.037840569046446]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-7.2>s*[1.037840569046446]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.037840569046446]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `normal' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
+(Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on input line 104.
+LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
+(Font)              `symbols' in the math version `bold' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
+(Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on input line 104.
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037633021687372.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037633021687372.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037633021687372.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037633021687372.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037736795366909.
+
+
+Package fontspec Info: 
+(fontspec)             latinmodern-math scale = 1.037633021687372.
+
+
+Package fontspec Info: 
+(fontspec)             Font family 'latinmodern-math.otf(3)' created for font
+(fontspec)             'latinmodern-math.otf' with options
+(fontspec)             [Scale=MatchLowercase,BoldItalicFont={},ItalicFont={},SmallCapsFont={},Script=Math,SizeFeatures={{Size=10.2-},{Size=7.2-10.2,Font=latinmodern-math.otf,Style=MathScript},{Size=-7.2,Font=latinmodern-math.otf,Style=MathScriptScript}},BoldFont={latinmodern-math.otf},ScaleAgain=0.9999,FontAdjustment={\fontdimen
+(fontspec)             8\font =0.49811pt\relax \fontdimen 9\font
+(fontspec)             =2.49057pt\relax \fontdimen 10\font =2.07962pt\relax
+(fontspec)             \fontdimen 11\font =1.38226pt\relax \fontdimen 12\font
+(fontspec)             =7.4717pt\relax \fontdimen 13\font =0pt\relax }].
+(fontspec)              
+(fontspec)              This font family consists of the following NFSS
+(fontspec)             series/shapes:
+(fontspec)              
+(fontspec)             - 'normal' (m/n) with NFSS spec.:
+(fontspec)             <10.2->s*[1.037633021687372]"[latinmodern-math.otf]/OT:script=math;language=dflt;"<7.2-10.2>s*[1.037633021687372]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=0;"<-7.2>s*[1.037633021687372]"[latinmodern-math.otf]/OT:script=math;language=dflt;+ssty=1;"
+(fontspec)             - 'bold' (b/n) with NFSS spec.:
+(fontspec)             <->s*[1.037633021687372]"[latinmodern-math.otf]/OT:script=math;language=dflt;"
+
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `normal' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on input line 104.
+LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
+(Font)              `largesymbols' in the math version `bold' on input line 104.
+LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
+(Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on input line 104.
+LaTeX Info: Redefining \microtypecontext on input line 104.
+Package microtype Info: Applying patch `item' on input line 104.
+Package microtype Info: Applying patch `toc' on input line 104.
+Package microtype Info: Applying patch `eqnum' on input line 104.
+Package microtype Info: Applying patch `footnote' on input line 104.
+Package microtype Info: Applying patch `verbatim' on input line 104.
+LaTeX Info: Redefining \microtypesetup on input line 104.
+Package microtype Info: Character protrusion enabled (level 2).
+Package microtype Info: Using protrusion set `basicmath'.
+Package microtype Info: No adjustment of tracking.
+Package microtype Info: No adjustment of spacing.
+Package microtype Info: No adjustment of kerning.
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `TimesNewRoman' (encoding: TU).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+*geometry* driver: auto-detecting
+*geometry* detected driver: xetex
+*geometry* verbose mode - [ preamble ] result:
+* driver: xetex
+* paper: a4paper
+* layout: <same size as paper>
+* layoutoffset:(h,v)=(0.0pt,0.0pt)
+* modes: 
+* h-part:(L,W,R)=(43.36243pt, 510.78302pt, 43.36243pt)
+* v-part:(T,H,B)=(43.36243pt, 758.32199pt, 43.36243pt)
+* \paperwidth=597.50787pt
+* \paperheight=845.04684pt
+* \textwidth=510.78302pt
+* \textheight=758.32199pt
+* \oddsidemargin=-28.90756pt
+* \evensidemargin=-28.90756pt
+* \topmargin=-65.90756pt
+* \headheight=12.0pt
+* \headsep=25.0pt
+* \topskip=10.0pt
+* \footskip=30.0pt
+* \marginparwidth=65.0pt
+* \marginparsep=11.0pt
+* \columnsep=10.0pt
+* \skip\footins=9.0pt plus 4.0pt minus 2.0pt
+* \hoffset=0.0pt
+* \voffset=0.0pt
+* \mag=1000
+* \@twocolumnfalse
+* \@twosidefalse
+* \@mparswitchfalse
+* \@reversemarginfalse
+* (1in=72.27pt=25.4mm, 1cm=28.453pt)
+
+LaTeX Info: Redefining \up on input line 104.
+Package caption Info: Begin \AtBeginDocument code.
+Package caption Info: hyperref package is loaded.
+Package caption Info: longtable package is loaded.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/caption/ltcaption.sty
+Package: ltcaption 2021/01/08 v1.4c longtable captions (AR)
+)
+Package caption Info: End \AtBeginDocument code.
+Package hyperref Info: Link coloring OFF on input line 104.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 17.28pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 8.71696pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
+(Font)              scaled to size 6.22641pt on input line 106.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 106.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/lm/omllmm.fd
+File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 12.4541pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 8.71785pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
+(Font)              scaled to size 6.22705pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 12.45154pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 8.71606pt on input line 106.
+LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
+(Font)              scaled to size 6.22577pt on input line 106.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 106.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsa.fd
+File: umsa.fd 2013/01/14 v3.01 AMS symbols A
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msa.cfg
+File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
+)
+LaTeX Font Info:    Trying to load font information for U+msb on input line 106.
+(c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/amsfonts/umsb.fd
+File: umsb.fd 2013/01/14 v3.01 AMS symbols B
+) (c:/Users/HP/AppData/Roaming/TinyTeX/texmf-dist/tex/latex/microtype/mt-msb.cfg
+File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
+)
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 12.0pt on input line 109.
+(./Rapport.toc
+
+[1
+
+]
+
+[2]
+
+[3]
+
+[4])
+\tf@toc=\write3
+\openout3 = `Rapport.toc'.
+
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/it' will be
+(Font)              scaled to size 12.0pt on input line 124.
+
+
+[5]
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/sc' will be
+(Font)              scaled to size 10.0pt on input line 128.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/b/n' will be
+(Font)              scaled to size 10.0pt on input line 128.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/n' will be
+(Font)              scaled to size 8.4pt on input line 132.
+LaTeX Font Info:    Font shape `TU/TimesNewRoman(0)/m/it' will be
+(Font)              scaled to size 8.4pt on input line 132.
+
+Overfull \hbox (9.28064pt too wide) in alignment at lines 130--172
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 174--176
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 231--233
+
+ []
+
+
+
+[6]
+Overfull \hbox (88.69861pt too wide) in alignment at lines 245--287
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 289--291
+
+ []
+
+
+
+[7]
+Overfull \hbox (29.97595pt too wide) in alignment at lines 307--333
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 335--337
+
+ []
+
+
+
+[8]
+Overfull \hbox (11.92322pt too wide) in alignment at lines 349--375
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 377--379
+
+ []
+
+
+
+[9]
+Overfull \hbox (109.39392pt too wide) in alignment at lines 391--417
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 419--421
+
+ []
+
+
+
+[10]
+Overfull \hbox (65.26111pt too wide) in alignment at lines 439--474
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 476--478
+
+ []
+
+
+
+[11]
+Overfull \hbox (47.20837pt too wide) in alignment at lines 491--526
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 528--530
+
+ []
+
+
+
+[12]
+Overfull \hbox (144.67908pt too wide) in alignment at lines 541--576
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 578--580
+
+ []
+
+
+
+[13]
+Underfull \hbox (badness 10000) in paragraph at lines 657--658
+
+ []
+
+
+LaTeX Warning: Float too large for page by 92.47702pt on input line 659.
+
+
+
+[14]
+Underfull \hbox (badness 10000) in paragraph at lines 730--731
+
+ []
+
+
+LaTeX Warning: Float too large for page by 92.47702pt on input line 732.
+
+
+
+[15]
+Overfull \hbox (27.33846pt too wide) in alignment at lines 742--801
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 803--804
+
+ []
+
+
+LaTeX Warning: Float too large for page by 92.47702pt on input line 805.
+
+
+
+[16]
+Overfull \hbox (39.60876pt too wide) in alignment at lines 821--860
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 862--864
+
+ []
+
+
+
+[17]
+Overfull \hbox (21.55603pt too wide) in alignment at lines 876--915
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 917--919
+
+ []
+
+
+
+[18]
+Overfull \hbox (119.02673pt too wide) in alignment at lines 931--970
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 972--974
+
+ []
+
+
+
+[19]
+Overfull \hbox (47.20837pt too wide) in alignment at lines 987--1182
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1184--1186
+
+ []
+
+
+LaTeX Warning: Float too large for page by 1992.62393pt on input line 1187.
+
+
+
+[20]
+
+[21]
+Underfull \hbox (badness 10000) in paragraph at lines 1220--1221
+
+ []
+
+
+
+[22]
+Underfull \hbox (badness 10000) in paragraph at lines 1242--1243
+
+ []
+
+
+
+[23]
+Underfull \hbox (badness 10000) in paragraph at lines 1264--1265
+
+ []
+
+
+
+[24]
+File: Rapport_files/figure-latex/unnamed-chunk-25-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-25-1.pdf>
+
+
+[25]
+
+[26]
+Underfull \hbox (badness 10000) in paragraph at lines 1329--1330
+
+ []
+
+
+
+[27]
+Underfull \hbox (badness 10000) in paragraph at lines 1358--1359
+
+ []
+
+
+
+[28]
+Overfull \hbox (32.65291pt too wide) in alignment at lines 1372--1385
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1387--1388
+
+ []
+
+
+
+[29]
+Underfull \hbox (badness 10000) in paragraph at lines 1417--1418
+
+ []
+
+
+
+[30]
+Underfull \hbox (badness 10000) in paragraph at lines 1442--1443
+
+ []
+
+
+
+[31]
+Overfull \hbox (4.65096pt too wide) in alignment at lines 1455--1464
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1466--1467
+
+ []
+
+
+
+[32]
+Underfull \hbox (badness 10000) in paragraph at lines 1496--1497
+
+ []
+
+
+
+[33]
+Underfull \hbox (badness 10000) in paragraph at lines 1521--1522
+
+ []
+
+
+
+[34]
+Overfull \hbox (1.31697pt too wide) in alignment at lines 1534--1543
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1545--1546
+
+ []
+
+
+
+[35]
+Underfull \hbox (badness 10000) in paragraph at lines 1576--1577
+
+ []
+
+
+
+[36]
+Underfull \hbox (badness 10000) in paragraph at lines 1601--1602
+
+ []
+
+
+
+[37]
+Overfull \hbox (6.48494pt too wide) in alignment at lines 1614--1624
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1626--1627
+
+ []
+
+
+
+[38]
+Underfull \hbox (badness 10000) in paragraph at lines 1658--1659
+
+ []
+
+
+
+[39]
+Underfull \hbox (badness 10000) in paragraph at lines 1684--1685
+
+ []
+
+
+
+[40]
+Overfull \hbox (3.15096pt too wide) in alignment at lines 1697--1708
+[] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1710--1711
+
+ []
+
+
+
+[41]
+Underfull \hbox (badness 10000) in paragraph at lines 1740--1742
+
+ []
+
+
+
+[42]
+Underfull \hbox (badness 10000) in paragraph at lines 1765--1767
+
+ []
+
+
+
+[43]
+Overfull \hbox (26.71814pt too wide) in alignment at lines 1780--1788
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1790--1792
+
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-44-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-44-1.pdf>
+
+
+[44]
+Underfull \hbox (badness 10000) in paragraph at lines 1837--1839
+
+ []
+
+
+
+[45]
+Underfull \hbox (badness 10000) in paragraph at lines 1864--1866
+
+ []
+
+
+
+[46]
+Overfull \hbox (37.7279pt too wide) in alignment at lines 1879--1889
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1891--1893
+
+ []
+
+
+
+[47]
+Underfull \hbox (badness 10000) in paragraph at lines 1926--1928
+
+ []
+
+
+
+[48]
+Underfull \hbox (badness 10000) in paragraph at lines 1955--1957
+
+ []
+
+
+
+[49]
+Overfull \hbox (68.71228pt too wide) in alignment at lines 1969--1981
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 1983--1985
+
+ []
+
+
+Overfull \hbox (29.97595pt too wide) in alignment at lines 2000--2011
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2013--2015
+
+ []
+
+
+Overfull \hbox (11.92322pt too wide) in alignment at lines 2025--2036
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2038--2040
+
+ []
+
+
+Overfull \hbox (109.39392pt too wide) in alignment at lines 2051--2062
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2064--2066
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2121--2123
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2170--2172
+
+ []
+
+
+Overfull \hbox (71.74744pt too wide) in alignment at lines 2182--2217
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2219--2221
+
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-57-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-57-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2228--2229
+[][] 
+ []
+
+
+
+[50]
+Overfull \vbox (76.14018pt too high) has occurred while \output is active []
+
+
+
+[51]
+File: Rapport_files/figure-latex/unnamed-chunk-58-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-58-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2234--2235
+[][] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-59-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-59-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2240--2241
+[][] 
+ []
+
+
+
+[52]
+File: Rapport_files/figure-latex/unnamed-chunk-60-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-60-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2246--2247
+[][] 
+ []
+
+
+
+[53]
+File: Rapport_files/figure-latex/unnamed-chunk-61-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-61-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2252--2253
+[][] 
+ []
+
+
+
+[54]
+File: Rapport_files/figure-latex/unnamed-chunk-62-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-62-1.pdf>
+
+Overfull \hbox (369.45023pt too wide) in paragraph at lines 2262--2263
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.9.1 Graphique de barres empilées pour l’ensemble de l’échantillon[] [] 
+ []
+
+
+
+[55]
+File: Rapport_files/figure-latex/unnamed-chunk-63-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-63-1.pdf>
+
+Overfull \hbox (270.10062pt too wide) in paragraph at lines 2268--2269
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.9.2 Somme des marqueurs objectifs selon l’age[] [] 
+ []
+
+
+
+[56]
+File: Rapport_files/figure-latex/unnamed-chunk-64-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-64-1.pdf>
+
+Overfull \hbox (277.42679pt too wide) in paragraph at lines 2274--2275
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.9.3 Somme des marqueurs objectifs selon le sexe[] [] 
+ []
+
+
+
+[57]
+File: Rapport_files/figure-latex/unnamed-chunk-65-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-65-1.pdf>
+
+Overfull \hbox (351.8682pt too wide) in paragraph at lines 2280--2281
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.9.4 Somme des marqueurs objectifs selon le milieu de residence[] [] 
+ []
+
+
+
+[58]
+File: Rapport_files/figure-latex/unnamed-chunk-66-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-66-1.pdf>
+
+Overfull \hbox (364.12015pt too wide) in paragraph at lines 2286--2287
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.9.5 Somme des marqueurs objectifs selon le utilisation des médias[] [] 
+ []
+
+
+
+[59]
+File: Rapport_files/figure-latex/unnamed-chunk-69-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-69-1.pdf>
+
+Overfull \hbox (110.32913pt too wide) in paragraph at lines 2302--2303
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.1.10.2 Affichage[] [] 
+ []
+
+
+
+[60]
+File: Rapport_files/figure-latex/unnamed-chunk-70-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-70-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2304--2305
+[][] 
+ []
+
+
+
+[61]
+
+[62]
+Overfull \hbox (39.11346pt too wide) in alignment at lines 2328--2349
+[] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2351--2352
+
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-75-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-75-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2360--2361
+[][] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-76-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-76-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2362--2363
+[][] 
+ []
+
+
+
+[63]
+File: Rapport_files/figure-latex/unnamed-chunk-77-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-77-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2364--2365
+[][] 
+ []
+
+
+
+[64]
+File: Rapport_files/figure-latex/unnamed-chunk-78-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-78-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2366--2367
+[][] 
+ []
+
+
+
+[65]
+Underfull \hbox (badness 10000) in paragraph at lines 2404--2406
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2441--2443
+
+ []
+
+
+Overfull \hbox (71.74744pt too wide) in alignment at lines 2453--2476
+[] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2478--2480
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2515--2517
+
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-84-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-84-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2524--2525
+[][] 
+ []
+
+
+
+[66]
+File: Rapport_files/figure-latex/unnamed-chunk-85-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-85-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2530--2531
+[][] 
+ []
+
+
+
+[67]
+File: Rapport_files/figure-latex/unnamed-chunk-86-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-86-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2536--2537
+[][] 
+ []
+
+
+
+[68]
+File: Rapport_files/figure-latex/unnamed-chunk-87-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-87-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2542--2543
+[][] 
+ []
+
+
+
+[69]
+File: Rapport_files/figure-latex/unnamed-chunk-88-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-88-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2549--2550
+[][] 
+ []
+
+
+
+[70]
+File: Rapport_files/figure-latex/unnamed-chunk-89-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-89-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2556--2557
+[][] 
+ []
+
+
+
+[71]
+File: Rapport_files/figure-latex/unnamed-chunk-90-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-90-1.pdf>
+
+Overfull \hbox (262.77444pt too wide) in paragraph at lines 2562--2563
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.10.1 Somme marqueurs subjectifs selon l’age[] [] 
+ []
+
+
+
+[72]
+File: Rapport_files/figure-latex/unnamed-chunk-91-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-91-1.pdf>
+
+Overfull \hbox (298.76663pt too wide) in paragraph at lines 2568--2569
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.10.2 Sommme des marqueurs subjectifs selon le sexe[] [] 
+ []
+
+
+
+[73]
+File: Rapport_files/figure-latex/unnamed-chunk-92-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-92-1.pdf>
+
+Overfull \hbox (312.54984pt too wide) in paragraph at lines 2574--2575
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.10.3 Somme des marqueurs selon le milieu de residence[] [] 
+ []
+
+
+
+[74]
+File: Rapport_files/figure-latex/unnamed-chunk-93-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-93-1.pdf>
+
+Overfull \hbox (372.13382pt too wide) in paragraph at lines 2580--2581
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.10.4 Somme des marqueurs subjectifs selon l’utilisation des médias[] [] 
+ []
+
+
+
+[75]
+
+[76]
+File: Rapport_files/figure-latex/unnamed-chunk-96-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-96-1.pdf>
+
+Overfull \hbox (91.45023pt too wide) in paragraph at lines 2609--2610
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.11.2 Arbre[] [] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-97-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-97-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2611--2612
+[][] 
+ []
+
+
+
+[77]
+
+[78]
+Overfull \hbox (283.87206pt too wide) in alignment at lines 2639--2658
+[] [] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2660--2661
+
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-102-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-102-1.pdf>
+
+Overfull \hbox (246.32327pt too wide) in paragraph at lines 2668--2669
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.11.4 Classification subjectifs FactoMineR[] [] 
+ []
+
+
+
+[79]
+File: Rapport_files/figure-latex/unnamed-chunk-103-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-103-1.pdf>
+
+Overfull \hbox (125.09515pt too wide) in paragraph at lines 2670--2672
+[]\TU/TimesNewRoman(0)/m/n/12 #affichage en 3D [] 
+ []
+
+
+
+[80]
+File: Rapport_files/figure-latex/unnamed-chunk-104-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-104-1.pdf>
+
+Overfull \hbox (109.66702pt too wide) in paragraph at lines 2676--2677
+[] []|\TU/TimesNewRoman(0)/b/n/12 2.2.11.5 Affichage[] [] 
+ []
+
+
+
+[81]
+File: Rapport_files/figure-latex/unnamed-chunk-105-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-105-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2678--2679
+[][] 
+ []
+
+
+
+[82]
+File: Rapport_files/figure-latex/unnamed-chunk-107-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-107-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2688--2689
+[][] 
+ []
+
+
+
+[83]
+
+[84]
+File: Rapport_files/figure-latex/unnamed-chunk-110-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-110-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2718--2719
+[][] 
+ []
+
+
+
+[85]
+File: Rapport_files/figure-latex/unnamed-chunk-111-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-111-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2720--2721
+[][] 
+ []
+
+
+
+[86]
+
+[87]
+Overfull \hbox (224.73846pt too wide) in alignment at lines 2747--2767
+[] [] [] [] [] [] [] [] [] [] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2769--2770
+
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2779--2783
+[]\TU/TimesNewRoman(0)/m/n/12 dependent_vars <- c(“Quiter_nid_rec”, “Emploi_TPL_rec”, “Vivre_en_couple_rec”, “Ma-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 2779--2783
+\TU/TimesNewRoman(0)/m/n/12 rier_1er_fois_rec”, “Parent_1er_fois_rec”, “Propres_responsabilites_rec”, “Propres_decisions_rec”,
+ []
+
+
+Overfull \hbox (45.41684pt too wide) in paragraph at lines 2789--2789
+[]\TU/lmtt/m/n/12 "Modèle 2"  =  Nbr_compte_MS + Nbr_compte_MS_regulier + gpe_age + sexe + Lieu_de_residence[] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-117-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2796--2797
+[][] 
+ []
+
+
+
+[88]
+File: Rapport_files/figure-latex/unnamed-chunk-117-2.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-2.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2803--2804
+[][] 
+ []
+
+
+
+[89]
+File: Rapport_files/figure-latex/unnamed-chunk-117-3.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-3.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2810--2811
+[][] 
+ []
+
+
+
+[90]
+File: Rapport_files/figure-latex/unnamed-chunk-117-4.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-4.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2817--2818
+[][] 
+ []
+
+
+
+[91]
+File: Rapport_files/figure-latex/unnamed-chunk-117-5.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-5.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2824--2825
+[][] 
+ []
+
+
+
+[92]
+File: Rapport_files/figure-latex/unnamed-chunk-117-6.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-6.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2831--2832
+[][] 
+ []
+
+
+
+[93]
+File: Rapport_files/figure-latex/unnamed-chunk-117-7.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-7.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2838--2839
+[][] 
+ []
+
+
+
+[94]
+File: Rapport_files/figure-latex/unnamed-chunk-117-8.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-8.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2845--2846
+[][] 
+ []
+
+
+
+[95]
+File: Rapport_files/figure-latex/unnamed-chunk-117-9.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-9.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2852--2853
+[][] 
+ []
+
+
+
+[96]
+File: Rapport_files/figure-latex/unnamed-chunk-117-10.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-10.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2859--2860
+[][] 
+ []
+
+
+
+[97]
+File: Rapport_files/figure-latex/unnamed-chunk-117-11.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-11.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2866--2867
+[][] 
+ []
+
+
+
+[98]
+File: Rapport_files/figure-latex/unnamed-chunk-117-12.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-12.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2873--2874
+[][] 
+ []
+
+
+
+[99]
+File: Rapport_files/figure-latex/unnamed-chunk-117-13.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-13.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2880--2881
+[][] 
+ []
+
+
+
+[100]
+File: Rapport_files/figure-latex/unnamed-chunk-117-14.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-14.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2887--2888
+[][] 
+ []
+
+
+
+[101]
+File: Rapport_files/figure-latex/unnamed-chunk-117-15.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-15.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2894--2895
+[][] 
+ []
+
+
+
+[102]
+File: Rapport_files/figure-latex/unnamed-chunk-117-16.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-16.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2901--2902
+[][] 
+ []
+
+
+
+[103]
+File: Rapport_files/figure-latex/unnamed-chunk-117-17.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-17.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2908--2909
+[][] 
+ []
+
+
+
+[104]
+File: Rapport_files/figure-latex/unnamed-chunk-117-18.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-18.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2915--2916
+[][] 
+ []
+
+
+
+[105]
+File: Rapport_files/figure-latex/unnamed-chunk-117-19.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-19.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2922--2923
+[][] 
+ []
+
+
+
+[106]
+File: Rapport_files/figure-latex/unnamed-chunk-117-20.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-20.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2929--2930
+[][] 
+ []
+
+
+
+[107]
+File: Rapport_files/figure-latex/unnamed-chunk-117-21.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-21.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2936--2937
+[][] 
+ []
+
+
+
+[108]
+File: Rapport_files/figure-latex/unnamed-chunk-117-22.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-22.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2943--2944
+[][] 
+ []
+
+
+
+[109]
+File: Rapport_files/figure-latex/unnamed-chunk-117-23.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-23.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2950--2951
+[][] 
+ []
+
+
+
+[110]
+File: Rapport_files/figure-latex/unnamed-chunk-117-24.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-24.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2957--2958
+[][] 
+ []
+
+
+
+[111]
+File: Rapport_files/figure-latex/unnamed-chunk-117-25.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-25.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2964--2965
+[][] 
+ []
+
+
+
+[112]
+File: Rapport_files/figure-latex/unnamed-chunk-117-26.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-26.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2971--2972
+[][] 
+ []
+
+
+
+[113]
+File: Rapport_files/figure-latex/unnamed-chunk-117-27.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-27.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2978--2979
+[][] 
+ []
+
+
+
+[114]
+File: Rapport_files/figure-latex/unnamed-chunk-117-28.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-28.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2985--2986
+[][] 
+ []
+
+
+
+[115]
+File: Rapport_files/figure-latex/unnamed-chunk-117-29.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-29.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2992--2993
+[][] 
+ []
+
+
+
+[116]
+File: Rapport_files/figure-latex/unnamed-chunk-117-30.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-30.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 2999--3000
+[][] 
+ []
+
+
+
+[117]
+File: Rapport_files/figure-latex/unnamed-chunk-117-31.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-31.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3006--3007
+[][] 
+ []
+
+
+
+[118]
+File: Rapport_files/figure-latex/unnamed-chunk-117-32.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-32.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3013--3014
+[][] 
+ []
+
+
+
+[119]
+File: Rapport_files/figure-latex/unnamed-chunk-117-33.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-33.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3020--3021
+[][] 
+ []
+
+
+
+[120]
+File: Rapport_files/figure-latex/unnamed-chunk-117-34.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-34.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3027--3028
+[][] 
+ []
+
+
+
+[121]
+File: Rapport_files/figure-latex/unnamed-chunk-117-35.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-35.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3034--3035
+[][] 
+ []
+
+
+
+[122]
+File: Rapport_files/figure-latex/unnamed-chunk-117-36.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-36.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3041--3042
+[][] 
+ []
+
+
+
+[123]
+File: Rapport_files/figure-latex/unnamed-chunk-117-37.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-37.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3050--3051
+[][] 
+ []
+
+
+
+[124]
+File: Rapport_files/figure-latex/unnamed-chunk-117-38.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-38.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3057--3058
+[][] 
+ []
+
+
+
+[125]
+File: Rapport_files/figure-latex/unnamed-chunk-117-39.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-39.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3064--3065
+[][] 
+ []
+
+
+
+[126]
+File: Rapport_files/figure-latex/unnamed-chunk-117-40.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-40.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3071--3072
+[][] 
+ []
+
+
+
+[127]
+File: Rapport_files/figure-latex/unnamed-chunk-117-41.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-41.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3080--3081
+[][] 
+ []
+
+
+
+[128]
+File: Rapport_files/figure-latex/unnamed-chunk-117-42.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-42.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3087--3088
+[][] 
+ []
+
+
+
+[129]
+File: Rapport_files/figure-latex/unnamed-chunk-117-43.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-43.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3094--3095
+[][] 
+ []
+
+
+
+[130]
+File: Rapport_files/figure-latex/unnamed-chunk-117-44.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-44.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3101--3102
+[][] 
+ []
+
+
+
+[131]
+File: Rapport_files/figure-latex/unnamed-chunk-117-45.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-45.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3110--3111
+[][] 
+ []
+
+
+
+[132]
+File: Rapport_files/figure-latex/unnamed-chunk-117-46.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-46.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3117--3118
+[][] 
+ []
+
+
+
+[133]
+File: Rapport_files/figure-latex/unnamed-chunk-117-47.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-47.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3124--3125
+[][] 
+ []
+
+
+
+[134]
+File: Rapport_files/figure-latex/unnamed-chunk-117-48.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-48.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3131--3132
+[][] 
+ []
+
+
+
+[135]
+File: Rapport_files/figure-latex/unnamed-chunk-117-49.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-49.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3140--3141
+[][] 
+ []
+
+
+
+[136]
+File: Rapport_files/figure-latex/unnamed-chunk-117-50.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-50.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3147--3148
+[][] 
+ []
+
+
+
+[137]
+File: Rapport_files/figure-latex/unnamed-chunk-117-51.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-51.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3154--3155
+[][] 
+ []
+
+
+
+[138]
+File: Rapport_files/figure-latex/unnamed-chunk-117-52.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-52.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3161--3162
+[][] 
+ []
+
+
+
+[139]
+File: Rapport_files/figure-latex/unnamed-chunk-117-53.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-53.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3170--3171
+[][] 
+ []
+
+
+
+[140]
+File: Rapport_files/figure-latex/unnamed-chunk-117-54.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-54.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3177--3178
+[][] 
+ []
+
+
+
+[141]
+File: Rapport_files/figure-latex/unnamed-chunk-117-55.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-55.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3184--3185
+[][] 
+ []
+
+
+
+[142]
+File: Rapport_files/figure-latex/unnamed-chunk-117-56.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-56.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3191--3192
+[][] 
+ []
+
+
+
+[143]
+File: Rapport_files/figure-latex/unnamed-chunk-117-57.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-57.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3200--3201
+[][] 
+ []
+
+
+
+[144]
+File: Rapport_files/figure-latex/unnamed-chunk-117-58.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-58.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3207--3208
+[][] 
+ []
+
+
+
+[145]
+File: Rapport_files/figure-latex/unnamed-chunk-117-59.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-59.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3214--3215
+[][] 
+ []
+
+
+
+[146]
+File: Rapport_files/figure-latex/unnamed-chunk-117-60.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-60.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3221--3222
+[][] 
+ []
+
+
+
+[147]
+File: Rapport_files/figure-latex/unnamed-chunk-117-61.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-61.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3230--3231
+[][] 
+ []
+
+
+
+[148]
+File: Rapport_files/figure-latex/unnamed-chunk-117-62.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-62.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3237--3238
+[][] 
+ []
+
+
+
+[149]
+File: Rapport_files/figure-latex/unnamed-chunk-117-63.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-63.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3244--3245
+[][] 
+ []
+
+
+
+[150]
+File: Rapport_files/figure-latex/unnamed-chunk-117-64.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-117-64.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3251--3252
+[][] 
+ []
+
+
+
+[151]
+Underfull \hbox (badness 10000) in paragraph at lines 3257--3261
+[]\TU/TimesNewRoman(0)/m/n/12 dependent_vars <- c(“Quiter_nid_rec”, “Emploi_TPL_rec”, “Vivre_en_couple_rec”, “Ma-
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 3257--3261
+\TU/TimesNewRoman(0)/m/n/12 rier_1er_fois_rec”, “Parent_1er_fois_rec”, “Propres_responsabilites_rec”, “Propres_decisions_rec”,
+ []
+
+
+Underfull \hbox (badness 1803) in paragraph at lines 3262--3266
+\TU/TimesNewRoman(0)/m/n/12 “Modèle 1c” = c(“Nbr_compte_MS_regulier”), “Modèle 1d” = c(“Usage_MS”, “Nbr_compte_MS”,
+ []
+
+
+Overfull \hbox (162.83696pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <table style="text-align:center"><caption><strong>Résultats des régressions logistiques</strong></caption>[] 
+ []
+
+
+
+[152]
+Overfull \hbox (2208.41699pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="4">Quiter_nid_rec</td><td colspan="4">Emploi_TPL_rec</td><td colspan="4">Vivre_en_couple_rec</td><td colspan="4">Marier_1er_fois_rec</td><td colspan="4">Parent_1er_fois_rec</td><td colspan="4">Propres_responsabilites_rec</td><td colspan="4">Propres_decisions_rec</td><td colspan="4">Independance_finance_rec</td></tr>[] 
+ []
+
+
+Overfull \hbox (2282.50496pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td><td>(4)</td><td>(5)</td><td>(6)</td><td>(7)</td><td>(8)</td><td>(9)</td><td>(10)</td><td>(11)</td><td>(12)</td><td>(13)</td><td>(14)</td><td>(15)</td><td>(16)</td><td>(17)</td><td>(18)</td><td>(19)</td><td>(20)</td><td>(21)</td><td>(22)</td><td>(23)</td><td>(24)</td><td>(25)</td><td>(26)</td><td>(27)</td><td>(28)</td><td>(29)</td><td>(30)</td><td>(31)</td><td>(32)</td></tr>[] 
+ []
+
+
+Overfull \hbox (3178.61671pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Usage_MSOui</td><td>1.25<sup>***</sup></td><td></td><td></td><td>1.02</td><td>1.38<sup>***</sup></td><td></td><td></td><td>0.05</td><td>-0.17</td><td></td><td></td><td>-2.15<sup>*</sup></td><td>-1.16<sup>***</sup></td><td></td><td></td><td>-1.50</td><td>-0.82<sup>***</sup></td><td></td><td></td><td>-0.95</td><td>2.58<sup>***</sup></td><td></td><td></td><td>14.03</td><td>2.74<sup>***</sup></td><td></td><td></td><td>13.69</td><td>2.14<sup>***</sup></td><td></td><td></td><td>30.26</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.82889pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(0.30)</td><td></td><td></td><td>(1.46)</td><td>(0.32)</td><td></td><td></td><td>(1.45)</td><td>(0.28)</td><td></td><td></td><td>(1.21)</td><td>(0.28)</td><td></td><td></td><td>(1.33)</td><td>(0.30)</td><td></td><td></td><td>(1.09)</td><td>(0.38)</td><td></td><td></td><td>(855.46)</td><td>(0.41)</td><td></td><td></td><td>(830.95)</td><td>(0.38)</td><td></td><td></td><td>(2,135.27)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2894.34872pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS1 ou 2 comptes</td><td></td><td>1.07<sup>***</sup></td><td></td><td>0.32</td><td></td><td>1.12<sup>***</sup></td><td></td><td>1.05</td><td></td><td>0.19</td><td></td><td>1.16</td><td></td><td>-1.03<sup>***</sup></td><td></td><td>0.43</td><td></td><td>-0.63<sup>**</sup></td><td></td><td>-0.05</td><td></td><td>2.51<sup>***</sup></td><td></td><td>2.17<sup>*</sup></td><td></td><td>2.95<sup>***</sup></td><td></td><td>2.80<sup>**</sup></td><td></td><td>1.75<sup>***</sup></td><td></td><td>-14.08</td></tr>[] 
+ []
+
+
+Overfull \hbox (2165.10887pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.33)</td><td></td><td>(1.15)</td><td></td><td>(0.37)</td><td></td><td>(1.20)</td><td></td><td>(0.30)</td><td></td><td>(0.91)</td><td></td><td>(0.30)</td><td></td><td>(1.13)</td><td></td><td>(0.31)</td><td></td><td>(0.85)</td><td></td><td>(0.54)</td><td></td><td>(1.30)</td><td></td><td>(0.65)</td><td></td><td>(1.38)</td><td></td><td>(0.48)</td><td></td><td>(1,559.36)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2894.30074pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS3 à 5 comptes</td><td></td><td>1.26<sup>***</sup></td><td></td><td>0.28</td><td></td><td>1.42<sup>***</sup></td><td></td><td>0.96</td><td></td><td>-0.04</td><td></td><td>0.62</td><td></td><td>-0.91<sup>***</sup></td><td></td><td>0.67</td><td></td><td>-0.73<sup>**</sup></td><td></td><td>-0.22</td><td></td><td>2.49<sup>***</sup></td><td></td><td>2.07<sup>*</sup></td><td></td><td>2.61<sup>***</sup></td><td></td><td>2.47<sup>**</sup></td><td></td><td>2.13<sup>***</sup></td><td></td><td>-14.12</td></tr>[] 
+ []
+
+
+Overfull \hbox (2165.10887pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.30)</td><td></td><td>(1.14)</td><td></td><td>(0.34)</td><td></td><td>(1.20)</td><td></td><td>(0.28)</td><td></td><td>(0.90)</td><td></td><td>(0.28)</td><td></td><td>(1.12)</td><td></td><td>(0.29)</td><td></td><td>(0.84)</td><td></td><td>(0.42)</td><td></td><td>(1.21)</td><td></td><td>(0.45)</td><td></td><td>(1.25)</td><td></td><td>(0.43)</td><td></td><td>(1,559.36)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (3011.73273pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS6 comptes et plus</td><td></td><td>0.96<sup>**</sup></td><td></td><td>-0.28</td><td></td><td>1.45<sup>***</sup></td><td></td><td>0.37</td><td></td><td>-0.64<sup>*</sup></td><td></td><td>-0.02</td><td></td><td>-1.55<sup>***</sup></td><td></td><td>0.14</td><td></td><td>-1.05<sup>***</sup></td><td></td><td>-0.48</td><td></td><td>3.39<sup>***</sup></td><td></td><td>3.02<sup>**</sup></td><td></td><td>3.30<sup>***</sup></td><td></td><td>3.07<sup>**</sup></td><td></td><td>1.99<sup>***</sup></td><td></td><td>-14.34</td></tr>[] 
+ []
+
+
+Overfull \hbox (2165.0609pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.39)</td><td></td><td>(1.17)</td><td></td><td>(0.49)</td><td></td><td>(1.26)</td><td></td><td>(0.34)</td><td></td><td>(0.92)</td><td></td><td>(0.38)</td><td></td><td>(1.15)</td><td></td><td>(0.35)</td><td></td><td>(0.86)</td><td></td><td>(1.05)</td><td></td><td>(1.52)</td><td></td><td>(1.05)</td><td></td><td>(1.54)</td><td></td><td>(0.67)</td><td></td><td>(1,559.36)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2758.37677pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS_regulierUn</td><td></td><td></td><td>1.19<sup>***</sup></td><td>-0.02</td><td></td><td></td><td>1.24<sup>***</sup></td><td>0.26</td><td></td><td></td><td>-0.01</td><td>0.98</td><td></td><td></td><td>-1.06<sup>***</sup></td><td>-0.14</td><td></td><td></td><td>-0.80<sup>**</sup></td><td>0.11</td><td></td><td></td><td>2.45<sup>***</sup></td><td>-13.52</td><td></td><td></td><td>2.36<sup>***</sup></td><td>-13.81</td><td></td><td></td><td>1.54<sup>***</sup></td><td>-14.48</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.79291pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.38)</td><td>(1.13)</td><td></td><td></td><td>(0.43)</td><td>(1.17)</td><td></td><td></td><td>(0.32)</td><td>(0.87)</td><td></td><td></td><td>(0.33)</td><td>(0.88)</td><td></td><td></td><td>(0.32)</td><td>(0.80)</td><td></td><td></td><td>(0.66)</td><td>(855.46)</td><td></td><td></td><td>(0.66)</td><td>(830.95)</td><td></td><td></td><td>(0.52)</td><td>(1,458.68)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2684.22878pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS_regulierDeux</td><td></td><td></td><td>0.84<sup>***</sup></td><td>-0.35</td><td></td><td></td><td>0.87<sup>**</sup></td><td>-0.08</td><td></td><td></td><td>0.05</td><td>1.23</td><td></td><td></td><td>-0.89<sup>***</sup></td><td>-0.05</td><td></td><td></td><td>-0.49</td><td>0.48</td><td></td><td></td><td>2.19<sup>***</sup></td><td>-13.78</td><td></td><td></td><td>2.97<sup>***</sup></td><td>-13.13</td><td></td><td></td><td>1.87<sup>***</sup></td><td>-14.13</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.75693pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.32)</td><td>(1.11)</td><td></td><td></td><td>(0.35)</td><td>(1.15)</td><td></td><td></td><td>(0.29)</td><td>(0.87)</td><td></td><td></td><td>(0.29)</td><td>(0.86)</td><td></td><td></td><td>(0.30)</td><td>(0.79)</td><td></td><td></td><td>(0.49)</td><td>(855.46)</td><td></td><td></td><td>(0.66)</td><td>(830.95)</td><td></td><td></td><td>(0.48)</td><td>(1,458.68)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2832.52477pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS_regulierTrois</td><td></td><td></td><td>1.52<sup>***</sup></td><td>0.43</td><td></td><td></td><td>1.43<sup>***</sup></td><td>0.60</td><td></td><td></td><td>0.15</td><td>1.64<sup>*</sup></td><td></td><td></td><td>-0.92<sup>***</sup></td><td>-0.13</td><td></td><td></td><td>-0.58<sup>*</sup></td><td>0.50</td><td></td><td></td><td>2.57<sup>***</sup></td><td>-13.46</td><td></td><td></td><td>2.48<sup>***</sup></td><td>-13.59</td><td></td><td></td><td>3.10<sup>***</sup></td><td>-12.86</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.8049pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.36)</td><td>(1.14)</td><td></td><td></td><td>(0.40)</td><td>(1.18)</td><td></td><td></td><td>(0.30)</td><td>(0.88)</td><td></td><td></td><td>(0.30)</td><td>(0.88)</td><td></td><td></td><td>(0.31)</td><td>(0.80)</td><td></td><td></td><td>(0.59)</td><td>(855.46)</td><td></td><td></td><td>(0.59)</td><td>(830.95)</td><td></td><td></td><td>(0.78)</td><td>(1,458.68)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2789.27676pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS_regulierQuatre</td><td></td><td></td><td>1.00<sup>***</sup></td><td>-0.07</td><td></td><td></td><td>1.92<sup>***</sup></td><td>1.13</td><td></td><td></td><td>-0.20</td><td>1.32</td><td></td><td></td><td>-1.44<sup>***</sup></td><td>-0.63</td><td></td><td></td><td>-1.06<sup>***</sup></td><td>0.02</td><td></td><td></td><td>2.70<sup>***</sup></td><td>-13.30</td><td></td><td></td><td>2.19<sup>***</sup></td><td>-13.82</td><td></td><td></td><td>1.57<sup>***</sup></td><td>-14.39</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.78091pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.38)</td><td>(1.15)</td><td></td><td></td><td>(0.54)</td><td>(1.24)</td><td></td><td></td><td>(0.32)</td><td>(0.89)</td><td></td><td></td><td>(0.36)</td><td>(0.90)</td><td></td><td></td><td>(0.34)</td><td>(0.81)</td><td></td><td></td><td>(0.77)</td><td>(855.46)</td><td></td><td></td><td>(0.66)</td><td>(830.95)</td><td></td><td></td><td>(0.55)</td><td>(1,458.68)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2826.34477pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Nbr_compte_MS_regulierPlus de quatre</td><td></td><td></td><td>1.41<sup>***</sup></td><td>0.57</td><td></td><td></td><td>2.52<sup>***</sup></td><td>1.98</td><td></td><td></td><td>-0.37</td><td>1.39</td><td></td><td></td><td>-1.40<sup>***</sup></td><td>-0.39</td><td></td><td></td><td>-0.88<sup>**</sup></td><td>0.29</td><td></td><td></td><td>2.35<sup>***</sup></td><td>-13.80</td><td></td><td></td><td>2.97<sup>***</sup></td><td>-13.02</td><td></td><td></td><td>2.16<sup>***</sup></td><td>-13.72</td></tr>[] 
+ []
+
+
+Overfull \hbox (2189.76892pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.46)</td><td>(1.19)</td><td></td><td></td><td>(0.77)</td><td>(1.37)</td><td></td><td></td><td>(0.35)</td><td>(0.91)</td><td></td><td></td><td>(0.39)</td><td>(0.92)</td><td></td><td></td><td>(0.36)</td><td>(0.83)</td><td></td><td></td><td>(0.78)</td><td>(855.46)</td><td></td><td></td><td>(1.05)</td><td>(830.95)</td><td></td><td></td><td>(0.78)</td><td>(1,458.68)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (4420.71269pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Constant</td><td>0.51<sup>*</sup></td><td>0.60<sup>**</sup></td><td>0.62<sup>**</sup></td><td>0.51<sup>*</sup></td><td>0.92<sup>***</sup></td><td>0.97<sup>***</sup></td><td>1.00<sup>***</sup></td><td>0.92<sup>***</sup></td><td>0.36</td><td>0.26</td><td>0.22</td><td>0.36</td><td>0.14</td><td>-0.00</td><td>0.03</td><td>0.14</td><td>0.75<sup>***</sup></td><td>0.67<sup>**</sup></td><td>0.62<sup>**</sup></td><td>0.75<sup>***</sup></td><td>1.01<sup>***</sup></td><td>1.06<sup>***</sup></td><td>1.16<sup>***</sup></td><td>1.01<sup>***</sup></td><td>1.10<sup>***</sup></td><td>1.14<sup>***</sup></td><td>1.25<sup>***</sup></td><td>1.10<sup>***</sup></td><td>1.20<sup>***</sup></td><td>1.33<sup>***</sup></td><td>1.35<sup>***</sup></td><td>1.20<sup>***</sup></td></tr>[] 
+ []
+
+
+
+[153]
+Overfull \hbox (2733.64491pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(0.28)</td><td>(0.27)</td><td>(0.26)</td><td>(0.28)</td><td>(0.30)</td><td>(0.28)</td><td>(0.28)</td><td>(0.30)</td><td>(0.27)</td><td>(0.26)</td><td>(0.25)</td><td>(0.27)</td><td>(0.27)</td><td>(0.25)</td><td>(0.25)</td><td>(0.27)</td><td>(0.29)</td><td>(0.27)</td><td>(0.26)</td><td>(0.29)</td><td>(0.30)</td><td>(0.29)</td><td>(0.30)</td><td>(0.30)</td><td>(0.31)</td><td>(0.30)</td><td>(0.30)</td><td>(0.31)</td><td>(0.32)</td><td>(0.31)</td><td>(0.31)</td><td>(0.32)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2214.59709pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Observations</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td><td>723</td></tr>[] 
+ []
+
+
+Overfull \hbox (2999.15678pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Log Likelihood</td><td>-315.41</td><td>-315.39</td><td>-313.21</td><td>-311.17</td><td>-237.53</td><td>-237.03</td><td>-232.36</td><td>-231.00</td><td>-497.08</td><td>-492.34</td><td>-495.05</td><td>-487.95</td><td>-424.60</td><td>-423.55</td><td>-422.54</td><td>-419.93</td><td>-497.10</td><td>-496.17</td><td>-494.40</td><td>-492.76</td><td>-115.32</td><td>-113.94</td><td>-116.87</td><td>-113.14</td><td>-99.44</td><td>-97.93</td><td>-100.55</td><td>-96.88</td><td>-130.39</td><td>-131.35</td><td>-129.13</td><td>-127.15</td></tr>[] 
+ []
+
+
+Overfull \hbox (2887.84502pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Akaike Inf. Crit.</td><td>634.83</td><td>638.78</td><td>638.43</td><td>642.33</td><td>479.06</td><td>482.07</td><td>476.72</td><td>481.99</td><td>998.15</td><td>992.68</td><td>1,002.10</td><td>995.89</td><td>853.19</td><td>855.10</td><td>857.08</td><td>859.86</td><td>998.19</td><td>1,000.33</td><td>1,000.80</td><td>1,005.52</td><td>234.64</td><td>235.87</td><td>245.73</td><td>246.29</td><td>202.87</td><td>203.86</td><td>213.09</td><td>213.77</td><td>264.78</td><td>270.71</td><td>270.26</td><td>274.29</td></tr>[] 
+ []
+
+
+Overfull \hbox (879.71689pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Notes:</em></td><td colspan="32" style="text-align:left"><sup>***</sup>Significant at the 1 percent level.</td></tr>[] 
+ []
+
+
+Overfull \hbox (348.23694pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td colspan="32" style="text-align:left"><sup>**</sup>Significant at the 5 percent level.</td></tr>[] 
+ []
+
+
+Overfull \hbox (348.23694pt too wide) in paragraph at lines 3309--3309
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td colspan="32" style="text-align:left"><sup>*</sup>Significant at the 10 percent level.</td></tr>[] 
+ []
+
+
+Overfull \hbox (162.83696pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <table style="text-align:center"><caption><strong>Résultats des régressions logistiques</strong></caption>[] 
+ []
+
+
+Overfull \hbox (2208.41699pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"></td><td colspan="4">Quiter_nid_rec</td><td colspan="4">Emploi_TPL_rec</td><td colspan="4">Vivre_en_couple_rec</td><td colspan="4">Marier_1er_fois_rec</td><td colspan="4">Parent_1er_fois_rec</td><td colspan="4">Propres_responsabilites_rec</td><td colspan="4">Propres_decisions_rec</td><td colspan="4">Independance_finance_rec</td></tr>[] 
+ []
+
+
+Overfull \hbox (2282.50496pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(1)</td><td>(2)</td><td>(3)</td><td>(4)</td><td>(5)</td><td>(6)</td><td>(7)</td><td>(8)</td><td>(9)</td><td>(10)</td><td>(11)</td><td>(12)</td><td>(13)</td><td>(14)</td><td>(15)</td><td>(16)</td><td>(17)</td><td>(18)</td><td>(19)</td><td>(20)</td><td>(21)</td><td>(22)</td><td>(23)</td><td>(24)</td><td>(25)</td><td>(26)</td><td>(27)</td><td>(28)</td><td>(29)</td><td>(30)</td><td>(31)</td><td>(32)</td></tr>[] 
+ []
+
+
+Overfull \hbox (5205.59653pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left">Usage_MSOui</td><td>1.25<sup>***</sup></td><td>1.04<sup>***</sup></td><td>1.08<sup>***</sup></td><td>0.73<sup>*</sup></td><td>1.38<sup>***</sup></td><td>1.29<sup>***</sup></td><td>1.32<sup>***</sup></td><td>0.83<sup>*</sup></td><td>-0.17</td><td>-0.31</td><td>-0.26</td><td>-0.23</td><td>-1.16<sup>***</sup></td><td>-1.31<sup>***</sup></td><td>-1.51<sup>***</sup></td><td>-0.90<sup>**</sup></td><td>-0.82<sup>***</sup></td><td>-0.90<sup>***</sup></td><td>-1.01<sup>***</sup></td><td>-0.37</td><td>2.58<sup>***</sup></td><td>2.46<sup>***</sup></td><td>2.68<sup>***</sup></td><td>1.57<sup>**</sup></td><td>2.74<sup>***</sup></td><td>2.61<sup>***</sup></td><td>3.05<sup>***</sup></td><td>2.06<sup>***</sup></td><td>2.14<sup>***</sup></td><td>1.74<sup>***</sup></td><td>1.79<sup>***</sup></td><td>1.30<sup>**</sup></td></tr>[] 
+ []
+
+
+Overfull \hbox (2733.64491pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(0.30)</td><td>(0.33)</td><td>(0.37)</td><td>(0.42)</td><td>(0.32)</td><td>(0.38)</td><td>(0.46)</td><td>(0.47)</td><td>(0.28)</td><td>(0.31)</td><td>(0.34)</td><td>(0.37)</td><td>(0.28)</td><td>(0.31)</td><td>(0.35)</td><td>(0.38)</td><td>(0.30)</td><td>(0.32)</td><td>(0.36)</td><td>(0.38)</td><td>(0.38)</td><td>(0.47)</td><td>(0.56)</td><td>(0.64)</td><td>(0.41)</td><td>(0.50)</td><td>(0.63)</td><td>(0.75)</td><td>(0.38)</td><td>(0.45)</td><td>(0.50)</td><td>(0.59)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2257.85675pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">age</td><td></td><td>0.02</td><td>0.04</td><td></td><td></td><td>-0.01</td><td>0.01</td><td></td><td></td><td>0.05<sup>**</sup></td><td>0.08<sup>***</sup></td><td></td><td></td><td>-0.03</td><td>-0.01</td><td></td><td></td><td>-0.02</td><td>-0.01</td><td></td><td></td><td>-0.07</td><td>-0.03</td><td></td><td></td><td>-0.02</td><td>-0.00</td><td></td><td></td><td>0.04</td><td>0.11<sup>*</sup></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.41286pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.03)</td><td>(0.03)</td><td></td><td></td><td>(0.04)</td><td>(0.05)</td><td></td><td></td><td>(0.02)</td><td>(0.03)</td><td></td><td></td><td>(0.03)</td><td>(0.03)</td><td></td><td></td><td>(0.02)</td><td>(0.03)</td><td></td><td></td><td>(0.06)</td><td>(0.07)</td><td></td><td></td><td>(0.06)</td><td>(0.08)</td><td></td><td></td><td>(0.05)</td><td>(0.07)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2603.85272pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">sexeHomme</td><td></td><td>-0.68<sup>***</sup></td><td>-0.65<sup>***</sup></td><td></td><td></td><td>-0.29</td><td>-0.15</td><td></td><td></td><td>-0.21</td><td>-0.25</td><td></td><td></td><td>-0.12</td><td>-0.29</td><td></td><td></td><td>-0.07</td><td>-0.17</td><td></td><td></td><td>-1.00<sup>**</sup></td><td>-0.76</td><td></td><td></td><td>-1.08<sup>**</sup></td><td>-0.87</td><td></td><td></td><td>-1.26<sup>***</sup></td><td>-1.61<sup>***</sup></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.37688pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.22)</td><td>(0.24)</td><td></td><td></td><td>(0.27)</td><td>(0.30)</td><td></td><td></td><td>(0.16)</td><td>(0.18)</td><td></td><td></td><td>(0.19)</td><td>(0.21)</td><td></td><td></td><td>(0.16)</td><td>(0.18)</td><td></td><td></td><td>(0.46)</td><td>(0.50)</td><td></td><td></td><td>(0.50)</td><td>(0.58)</td><td></td><td></td><td>(0.42)</td><td>(0.49)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2443.19681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Lieu_de_residenceGrand Motreal</td><td></td><td>0.40<sup>*</sup></td><td>0.29</td><td></td><td></td><td>0.15</td><td>0.10</td><td></td><td></td><td>0.15</td><td>0.01</td><td></td><td></td><td>-0.25</td><td>-0.39<sup>*</sup></td><td></td><td></td><td>0.14</td><td>0.05</td><td></td><td></td><td>0.73<sup>*</sup></td><td>1.09<sup>**</sup></td><td></td><td></td><td>0.62</td><td>0.56</td><td></td><td></td><td>0.37</td><td>0.28</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.40086pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.21)</td><td>(0.24)</td><td></td><td></td><td>(0.26)</td><td>(0.30)</td><td></td><td></td><td>(0.16)</td><td>(0.18)</td><td></td><td></td><td>(0.18)</td><td>(0.20)</td><td></td><td></td><td>(0.16)</td><td>(0.18)</td><td></td><td></td><td>(0.40)</td><td>(0.48)</td><td></td><td></td><td>(0.45)</td><td>(0.57)</td><td></td><td></td><td>(0.37)</td><td>(0.42)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2202.15286pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">lieu_de_naissanceHors du Quebec</td><td></td><td>-1.24</td><td>12.10</td><td></td><td></td><td>-0.44</td><td>-1.50</td><td></td><td></td><td>0.98</td><td>0.25</td><td></td><td></td><td>-0.27</td><td>-0.95</td><td></td><td></td><td>0.29</td><td>0.01</td><td></td><td></td><td>-0.50</td><td>16.14</td><td></td><td></td><td>0.88</td><td>18.68</td><td></td><td></td><td>-0.98</td><td>16.18</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2226.77695pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.14)</td><td>(529.81)</td><td></td><td></td><td>(1.06)</td><td>(1.42)</td><td></td><td></td><td>(0.79)</td><td>(0.91)</td><td></td><td></td><td>(0.77)</td><td>(1.02)</td><td></td><td></td><td>(0.80)</td><td>(0.92)</td><td></td><td></td><td>(1.69)</td><td>(3,702.09)</td><td></td><td></td><td>(1.59)</td><td>(5,923.19)</td><td></td><td></td><td>(1.64)</td><td>(6,016.49)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+
+[154]
+Overfull \hbox (2572.92876pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">lieu_de_naissanceProvinde de Quebec</td><td></td><td>-1.59<sup>**</sup></td><td>-1.77<sup>**</sup></td><td></td><td></td><td>-0.26</td><td>-0.66</td><td></td><td></td><td>0.15</td><td>-0.05</td><td></td><td></td><td>-0.99<sup>***</sup></td><td>-1.05<sup>***</sup></td><td></td><td></td><td>-0.44</td><td>-0.40</td><td></td><td></td><td>-0.48</td><td>-0.25</td><td></td><td></td><td>0.60</td><td>0.22</td><td></td><td></td><td>-0.94</td><td>-0.94</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.38887pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.75)</td><td>(0.80)</td><td></td><td></td><td>(0.57)</td><td>(0.71)</td><td></td><td></td><td>(0.34)</td><td>(0.39)</td><td></td><td></td><td>(0.34)</td><td>(0.40)</td><td></td><td></td><td>(0.34)</td><td>(0.39)</td><td></td><td></td><td>(1.07)</td><td>(1.16)</td><td></td><td></td><td>(0.83)</td><td>(1.03)</td><td></td><td></td><td>(1.07)</td><td>(1.19)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2245.4488pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_du_repondantCEGEP / DEP</td><td></td><td>0.01</td><td>-0.02</td><td></td><td></td><td>-0.30</td><td>-0.23</td><td></td><td></td><td>0.03</td><td>0.06</td><td></td><td></td><td>0.68<sup>**</sup></td><td>0.48</td><td></td><td></td><td>0.19</td><td>0.23</td><td></td><td></td><td>0.34</td><td>0.28</td><td></td><td></td><td>0.43</td><td>0.60</td><td></td><td></td><td>-0.40</td><td>-0.52</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.37688pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.30)</td><td>(0.35)</td><td></td><td></td><td>(0.41)</td><td>(0.50)</td><td></td><td></td><td>(0.23)</td><td>(0.26)</td><td></td><td></td><td>(0.28)</td><td>(0.31)</td><td></td><td></td><td>(0.23)</td><td>(0.26)</td><td></td><td></td><td>(0.54)</td><td>(0.67)</td><td></td><td></td><td>(0.56)</td><td>(0.75)</td><td></td><td></td><td>(0.52)</td><td>(0.63)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2338.13681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_du_repondantUniversitaire</td><td></td><td>-0.04</td><td>0.21</td><td></td><td></td><td>-0.81<sup>*</sup></td><td>-0.83</td><td></td><td></td><td>-0.01</td><td>0.07</td><td></td><td></td><td>0.59<sup>**</sup></td><td>0.39</td><td></td><td></td><td>0.03</td><td>0.06</td><td></td><td></td><td>0.73</td><td>0.36</td><td></td><td></td><td>0.81</td><td>0.75</td><td></td><td></td><td>-0.23</td><td>-0.91</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2140.38887pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(0.32)</td><td>(0.38)</td><td></td><td></td><td>(0.42)</td><td>(0.53)</td><td></td><td></td><td>(0.24)</td><td>(0.29)</td><td></td><td></td><td>(0.29)</td><td>(0.34)</td><td></td><td></td><td>(0.24)</td><td>(0.29)</td><td></td><td></td><td>(0.57)</td><td>(0.74)</td><td></td><td></td><td>(0.63)</td><td>(0.87)</td><td></td><td></td><td>(0.57)</td><td>(0.72)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2375.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantÉtudiant PTL S</td><td></td><td>-1.19</td><td>-0.65</td><td></td><td></td><td>-1.60</td><td>-16.79</td><td></td><td></td><td>0.20</td><td>0.38</td><td></td><td></td><td>-0.64</td><td>-0.76</td><td></td><td></td><td>-0.94<sup>*</sup></td><td>-0.71</td><td></td><td></td><td>-15.16</td><td>-17.08</td><td></td><td></td><td>-15.43</td><td>-17.67</td><td></td><td></td><td>-15.35</td><td>-18.40</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.41699pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.11)</td><td>(1.16)</td><td></td><td></td><td>(1.11)</td><td>(1,230.76)</td><td></td><td></td><td>(0.48)</td><td>(0.54)</td><td></td><td></td><td>(0.54)</td><td>(0.60)</td><td></td><td></td><td>(0.51)</td><td>(0.57)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2270.10878pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantÉtudiant TPA S</td><td></td><td>-2.02</td><td>-1.88</td><td></td><td></td><td>-17.06</td><td>-63.91</td><td></td><td></td><td>0.25</td><td>-0.07</td><td></td><td></td><td>0.17</td><td>-0.46</td><td></td><td></td><td>-1.04</td><td>-1.36</td><td></td><td></td><td>2.32</td><td>-2.52</td><td></td><td></td><td>-16.86</td><td>-19.64</td><td></td><td></td><td>1.77</td><td>-1.52</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2331.94499pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.81)</td><td>(2.02)</td><td></td><td></td><td>(618.92)</td><td>(4,731.04)</td><td></td><td></td><td>(1.48)</td><td>(1.57)</td><td></td><td></td><td>(1.53)</td><td>(1.68)</td><td></td><td></td><td>(1.53)</td><td>(1.69)</td><td></td><td></td><td>(4,303.07)</td><td>(5,475.48)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(4,547.31)</td><td>(10,461.40)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2603.81676pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantSans travail mais recherche</td><td></td><td>-2.02<sup>*</sup></td><td>-1.66</td><td></td><td></td><td>-1.86</td><td>-16.85</td><td></td><td></td><td>-0.34</td><td>0.09</td><td></td><td></td><td>-0.75</td><td>-1.03</td><td></td><td></td><td>-1.65<sup>**</sup></td><td>-1.42<sup>*</sup></td><td></td><td></td><td>-0.03</td><td>-1.11</td><td></td><td></td><td>-15.96</td><td>-18.30</td><td></td><td></td><td>-16.54</td><td>-20.59</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.369pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.20)</td><td>(1.28)</td><td></td><td></td><td>(1.24)</td><td>(1,230.76)</td><td></td><td></td><td>(0.64)</td><td>(0.71)</td><td></td><td></td><td>(0.78)</td><td>(0.91)</td><td></td><td></td><td>(0.69)</td><td>(0.76)</td><td></td><td></td><td>(1,927.90)</td><td>(3,117.28)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2542.08876pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantSans travail sans recherche</td><td></td><td>-3.00<sup>**</sup></td><td>-3.26<sup>*</sup></td><td></td><td></td><td>-2.23</td><td>-0.41</td><td></td><td></td><td>-1.21</td><td>0.16</td><td></td><td></td><td>2.38<sup>*</sup></td><td>15.33</td><td></td><td></td><td>0.60</td><td>14.10</td><td></td><td></td><td>0.89</td><td>-3.30</td><td></td><td></td><td>0.51</td><td>-0.45</td><td></td><td></td><td>0.02</td><td>-3.25</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2350.38896pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.48)</td><td>(1.95)</td><td></td><td></td><td>(1.60)</td><td>(4,326.79)</td><td></td><td></td><td>(1.24)</td><td>(1.55)</td><td></td><td></td><td>(1.27)</td><td>(619.60)</td><td></td><td></td><td>(1.24)</td><td>(564.28)</td><td></td><td></td><td>(3,408.87)</td><td>(6,707.60)</td><td></td><td></td><td>(3,386.46)</td><td>(12,372.44)</td><td></td><td></td><td>(3,413.74)</td><td>(11,624.92)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2375.21681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantTravail et études TPA</td><td></td><td>-2.21</td><td>-2.10</td><td></td><td></td><td>-2.41<sup>*</sup></td><td>-17.75</td><td></td><td></td><td>0.14</td><td>0.35</td><td></td><td></td><td>1.22</td><td>1.13</td><td></td><td></td><td>-0.24</td><td>0.43</td><td></td><td></td><td>-16.79</td><td>-18.84</td><td></td><td></td><td>-16.72</td><td>-18.97</td><td></td><td></td><td>0.76</td><td>0.47</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.369pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.39)</td><td>(1.45)</td><td></td><td></td><td>(1.40)</td><td>(1,230.76)</td><td></td><td></td><td>(0.92)</td><td>(0.96)</td><td></td><td></td><td>(1.00)</td><td>(1.05)</td><td></td><td></td><td>(0.98)</td><td>(1.02)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(2,709.33)</td><td>(6,712.42)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2350.49683pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantTravail PTL études TPA</td><td></td><td>-1.79</td><td>-1.39</td><td></td><td></td><td>-1.32</td><td>-16.21</td><td></td><td></td><td>0.16</td><td>0.42</td><td></td><td></td><td>-0.05</td><td>-0.13</td><td></td><td></td><td>-0.74</td><td>-0.45</td><td></td><td></td><td>-15.82</td><td>-17.92</td><td></td><td></td><td>-15.37</td><td>-17.87</td><td></td><td></td><td>-15.11</td><td>-18.87</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.41699pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.12)</td><td>(1.17)</td><td></td><td></td><td>(1.13)</td><td>(1,230.76)</td><td></td><td></td><td>(0.51)</td><td>(0.56)</td><td></td><td></td><td>(0.55)</td><td>(0.59)</td><td></td><td></td><td>(0.54)</td><td>(0.58)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2430.75287pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantTravail TPA études PTL</td><td></td><td>-1.66</td><td>-1.13</td><td></td><td></td><td>-1.06</td><td>-15.94</td><td></td><td></td><td>0.56</td><td>0.73</td><td></td><td></td><td>-0.50</td><td>-0.65</td><td></td><td></td><td>-0.98<sup>**</sup></td><td>-0.69</td><td></td><td></td><td>-15.58</td><td>-17.81</td><td></td><td></td><td>-15.60</td><td>-17.88</td><td></td><td></td><td>-15.61</td><td>-19.02</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.41699pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.08)</td><td>(1.13)</td><td></td><td></td><td>(1.10)</td><td>(1,230.76)</td><td></td><td></td><td>(0.45)</td><td>(0.52)</td><td></td><td></td><td>(0.51)</td><td>(0.56)</td><td></td><td></td><td>(0.49)</td><td>(0.54)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+
+[155]
+Overfull \hbox (2375.14482pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantTravail TPA S</td><td></td><td>-1.69</td><td>-1.46</td><td></td><td></td><td>-2.27<sup>**</sup></td><td>-17.66</td><td></td><td></td><td>0.40</td><td>0.81</td><td></td><td></td><td>-0.32</td><td>-0.37</td><td></td><td></td><td>-0.64</td><td>-0.23</td><td></td><td></td><td>-15.23</td><td>-17.15</td><td></td><td></td><td>-16.26</td><td>-17.68</td><td></td><td></td><td>-16.38</td><td>-19.77</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.38101pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.14)</td><td>(1.22)</td><td></td><td></td><td>(1.12)</td><td>(1,230.76)</td><td></td><td></td><td>(0.54)</td><td>(0.64)</td><td></td><td></td><td>(0.60)</td><td>(0.69)</td><td></td><td></td><td>(0.57)</td><td>(0.65)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2375.13283pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_du_repondantTravail TPL S</td><td></td><td>-1.39</td><td>-1.20</td><td></td><td></td><td>-0.50</td><td>-15.48</td><td></td><td></td><td>0.27</td><td>0.39</td><td></td><td></td><td>-0.48</td><td>-0.64</td><td></td><td></td><td>-0.89<sup>**</sup></td><td>-0.60</td><td></td><td></td><td>-15.26</td><td>-17.63</td><td></td><td></td><td>-14.53</td><td>-16.99</td><td></td><td></td><td>-14.99</td><td>-18.43</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2313.405pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td>(1.06)</td><td>(1.10)</td><td></td><td></td><td>(1.07)</td><td>(1,230.76)</td><td></td><td></td><td>(0.42)</td><td>(0.47)</td><td></td><td></td><td>(0.46)</td><td>(0.51)</td><td></td><td></td><td>(0.45)</td><td>(0.49)</td><td></td><td></td><td>(1,156.44)</td><td>(1,735.43)</td><td></td><td></td><td>(1,141.83)</td><td>(3,027.33)</td><td></td><td></td><td>(1,135.88)</td><td>(2,717.89)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1992.09279pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_mereCEGEP / DEP</td><td></td><td></td><td>-0.27</td><td></td><td></td><td></td><td>-0.68</td><td></td><td></td><td></td><td>-0.01</td><td></td><td></td><td></td><td>0.47<sup>*</sup></td><td></td><td></td><td></td><td>-0.19</td><td></td><td></td><td></td><td>0.24</td><td></td><td></td><td></td><td>0.37</td><td></td><td></td><td></td><td>-0.71</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.35)</td><td></td><td></td><td></td><td>(0.45)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.60)</td><td></td><td></td><td></td><td>(0.79)</td><td></td><td></td><td></td><td>(0.61)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1998.23682pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_mereUniversitaire</td><td></td><td></td><td>-0.64</td><td></td><td></td><td></td><td>-0.96<sup>*</sup></td><td></td><td></td><td></td><td>-0.16</td><td></td><td></td><td></td><td>0.34</td><td></td><td></td><td></td><td>0.02</td><td></td><td></td><td></td><td>0.26</td><td></td><td></td><td></td><td>-0.11</td><td></td><td></td><td></td><td>0.34</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.79683pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.40)</td><td></td><td></td><td></td><td>(0.51)</td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.33)</td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.71)</td><td></td><td></td><td></td><td>(0.87)</td><td></td><td></td><td></td><td>(0.74)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1967.38481pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_pereCEGEP / DEP</td><td></td><td></td><td>0.15</td><td></td><td></td><td></td><td>0.36</td><td></td><td></td><td></td><td>-0.03</td><td></td><td></td><td></td><td>0.02</td><td></td><td></td><td></td><td>0.14</td><td></td><td></td><td></td><td>0.88</td><td></td><td></td><td></td><td>0.22</td><td></td><td></td><td></td><td>1.05<sup>*</sup></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.30)</td><td></td><td></td><td></td><td>(0.39)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.25)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.60)</td><td></td><td></td><td></td><td>(0.79)</td><td></td><td></td><td></td><td>(0.57)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1924.1248pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Diplome_pereUniversitaire</td><td></td><td></td><td>0.23</td><td></td><td></td><td></td><td>0.40</td><td></td><td></td><td></td><td>-0.22</td><td></td><td></td><td></td><td>-0.15</td><td></td><td></td><td></td><td>-0.30</td><td></td><td></td><td></td><td>0.75</td><td></td><td></td><td></td><td>-0.46</td><td></td><td></td><td></td><td>0.57</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.36)</td><td></td><td></td><td></td><td>(0.45)</td><td></td><td></td><td></td><td>(0.27)</td><td></td><td></td><td></td><td>(0.31)</td><td></td><td></td><td></td><td>(0.27)</td><td></td><td></td><td></td><td>(0.68)</td><td></td><td></td><td></td><td>(0.83)</td><td></td><td></td><td></td><td>(0.63)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2134.22083pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Situation_civile_parentsLes deux sont defunts</td><td></td><td></td><td>-2.50<sup>**</sup></td><td></td><td></td><td></td><td>-1.49</td><td></td><td></td><td></td><td>0.02</td><td></td><td></td><td></td><td>0.40</td><td></td><td></td><td></td><td>1.58</td><td></td><td></td><td></td><td>14.36</td><td></td><td></td><td></td><td>15.53</td><td></td><td></td><td></td><td>16.11</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1917.89688pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.08)</td><td></td><td></td><td></td><td>(1.34)</td><td></td><td></td><td></td><td>(0.98)</td><td></td><td></td><td></td><td>(0.92)</td><td></td><td></td><td></td><td>(1.17)</td><td></td><td></td><td></td><td>(3,783.80)</td><td></td><td></td><td></td><td>(6,237.83)</td><td></td><td></td><td></td><td>(6,607.18)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1973.56479pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Situation_civile_parentsSepare</td><td></td><td></td><td>-0.22</td><td></td><td></td><td></td><td>-0.88</td><td></td><td></td><td></td><td>-0.13</td><td></td><td></td><td></td><td>-0.16</td><td></td><td></td><td></td><td>-0.01</td><td></td><td></td><td></td><td>-1.32</td><td></td><td></td><td></td><td>-1.33</td><td></td><td></td><td></td><td>0.01</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.78484pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.44)</td><td></td><td></td><td></td><td>(0.57)</td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.31)</td><td></td><td></td><td></td><td>(0.27)</td><td></td><td></td><td></td><td>(0.94)</td><td></td><td></td><td></td><td>(1.23)</td><td></td><td></td><td></td><td>(0.77)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2115.68079pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Situation_civile_parentsToujours ensemble</td><td></td><td></td><td>-0.59<sup>*</sup></td><td></td><td></td><td></td><td>-0.77</td><td></td><td></td><td></td><td>0.01</td><td></td><td></td><td></td><td>-0.11</td><td></td><td></td><td></td><td>-0.10</td><td></td><td></td><td></td><td>-1.11</td><td></td><td></td><td></td><td>-0.96</td><td></td><td></td><td></td><td>-0.15</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.77284pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.35)</td><td></td><td></td><td></td><td>(0.50)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.26)</td><td></td><td></td><td></td><td>(0.23)</td><td></td><td></td><td></td><td>(0.81)</td><td></td><td></td><td></td><td>(1.11)</td><td></td><td></td><td></td><td>(0.62)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2072.42079pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Situation_civile_parentsUn des deux est defunt</td><td></td><td></td><td>-0.50</td><td></td><td></td><td></td><td>-0.19</td><td></td><td></td><td></td><td>-0.20</td><td></td><td></td><td></td><td>-0.36</td><td></td><td></td><td></td><td>0.13</td><td></td><td></td><td></td><td>-1.39</td><td></td><td></td><td></td><td>-1.40</td><td></td><td></td><td></td><td>-1.53</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.77284pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(0.67)</td><td></td><td></td><td></td><td>(0.95)</td><td></td><td></td><td></td><td>(0.44)</td><td></td><td></td><td></td><td>(0.50)</td><td></td><td></td><td></td><td>(0.44)</td><td></td><td></td><td></td><td>(1.21)</td><td></td><td></td><td></td><td>(1.47)</td><td></td><td></td><td></td><td>(1.08)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+
+[156]
+Overfull \hbox (2035.32881pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereArtisants, commerçants, chef</td><td></td><td></td><td>0.85</td><td></td><td></td><td></td><td>-2.22</td><td></td><td></td><td></td><td>0.19</td><td></td><td></td><td></td><td>0.31</td><td></td><td></td><td></td><td>1.86</td><td></td><td></td><td></td><td>-1.06</td><td></td><td></td><td></td><td>-1.36</td><td></td><td></td><td></td><td>-2.08</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.96489pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.77)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.30)</td><td></td><td></td><td></td><td>(1.42)</td><td></td><td></td><td></td><td>(1.46)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2078.6008pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereAutre sans activité professionnelle</td><td></td><td></td><td>0.64</td><td></td><td></td><td></td><td>-1.65</td><td></td><td></td><td></td><td>1.29</td><td></td><td></td><td></td><td>1.01</td><td></td><td></td><td></td><td>2.35</td><td></td><td></td><td></td><td>-1.07</td><td></td><td></td><td></td><td>-0.04</td><td></td><td></td><td></td><td>-1.81</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.96489pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.80)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.33)</td><td></td><td></td><td></td><td>(1.45)</td><td></td><td></td><td></td><td>(1.49)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2016.80084pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereCadres, intélets supérieurs</td><td></td><td></td><td>1.37</td><td></td><td></td><td></td><td>0.22</td><td></td><td></td><td></td><td>1.43</td><td></td><td></td><td></td><td>0.63</td><td></td><td></td><td></td><td>2.08</td><td></td><td></td><td></td><td>0.09</td><td></td><td></td><td></td><td>18.16</td><td></td><td></td><td></td><td>-2.00</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.96489pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.76)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.30)</td><td></td><td></td><td></td><td>(1.41)</td><td></td><td></td><td></td><td>(1.46)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,157.83)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1911.76482pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereEmployés</td><td></td><td></td><td>1.54</td><td></td><td></td><td></td><td>-0.70</td><td></td><td></td><td></td><td>1.13</td><td></td><td></td><td></td><td>0.75</td><td></td><td></td><td></td><td>2.14</td><td></td><td></td><td></td><td>-0.06</td><td></td><td></td><td></td><td>-0.08</td><td></td><td></td><td></td><td>-1.55</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.96489pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.73)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.26)</td><td></td><td></td><td></td><td>(1.37)</td><td></td><td></td><td></td><td>(1.43)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1905.56085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereOuvriers</td><td></td><td></td><td>1.43</td><td></td><td></td><td></td><td>-2.47</td><td></td><td></td><td></td><td>1.73</td><td></td><td></td><td></td><td>0.87</td><td></td><td></td><td></td><td>1.75</td><td></td><td></td><td></td><td>0.20</td><td></td><td></td><td></td><td>17.56</td><td></td><td></td><td></td><td>16.09</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.92888pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.93)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.42)</td><td></td><td></td><td></td><td>(1.53)</td><td></td><td></td><td></td><td>(1.54)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,746.90)</td><td></td><td></td><td></td><td>(10,809.16)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2004.46484pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_merePréfère ne pas répondre</td><td></td><td></td><td>1.24</td><td></td><td></td><td></td><td>14.05</td><td></td><td></td><td></td><td>1.78</td><td></td><td></td><td></td><td>0.75</td><td></td><td></td><td></td><td>2.05</td><td></td><td></td><td></td><td>13.32</td><td></td><td></td><td></td><td>-0.43</td><td></td><td></td><td></td><td>13.49</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.9409pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(2.32)</td><td></td><td></td><td></td><td>(4,021.65)</td><td></td><td></td><td></td><td>(1.56)</td><td></td><td></td><td></td><td>(1.68)</td><td></td><td></td><td></td><td>(1.73)</td><td></td><td></td><td></td><td>(6,504.07)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,866.63)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2010.64482pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereProfessions intermédiaires</td><td></td><td></td><td>0.70</td><td></td><td></td><td></td><td>-1.31</td><td></td><td></td><td></td><td>1.25</td><td></td><td></td><td></td><td>0.41</td><td></td><td></td><td></td><td>2.08</td><td></td><td></td><td></td><td>0.92</td><td></td><td></td><td></td><td>0.31</td><td></td><td></td><td></td><td>-2.23</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.9529pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.76)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.29)</td><td></td><td></td><td></td><td>(1.41)</td><td></td><td></td><td></td><td>(1.45)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1917.93282pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_mereRetraités</td><td></td><td></td><td>1.36</td><td></td><td></td><td></td><td>-0.83</td><td></td><td></td><td></td><td>1.15</td><td></td><td></td><td></td><td>1.08</td><td></td><td></td><td></td><td>2.33</td><td></td><td></td><td></td><td>-0.65</td><td></td><td></td><td></td><td>-0.37</td><td></td><td></td><td></td><td>-2.25</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1954.96489pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.77)</td><td></td><td></td><td></td><td>(3,698.84)</td><td></td><td></td><td></td><td>(1.29)</td><td></td><td></td><td></td><td>(1.41)</td><td></td><td></td><td></td><td>(1.45)</td><td></td><td></td><td></td><td>(5,963.80)</td><td></td><td></td><td></td><td>(10,011.26)</td><td></td><td></td><td></td><td>(10,033.05)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2072.4088pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereArtisants, commerçants, chef</td><td></td><td></td><td>-0.54</td><td></td><td></td><td></td><td>-16.16</td><td></td><td></td><td></td><td>-1.00</td><td></td><td></td><td></td><td>-0.80</td><td></td><td></td><td></td><td>-1.30</td><td></td><td></td><td></td><td>-15.19</td><td></td><td></td><td></td><td>-16.13</td><td></td><td></td><td></td><td>1.24</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.61691pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.30)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.79)</td><td></td><td></td><td></td><td>(0.74)</td><td></td><td></td><td></td><td>(0.86)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(5,372.91)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2078.51682pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereCadres, intélets supérieurs</td><td></td><td></td><td>-0.75</td><td></td><td></td><td></td><td>-15.49</td><td></td><td></td><td></td><td>-0.91</td><td></td><td></td><td></td><td>-0.64</td><td></td><td></td><td></td><td>-1.25</td><td></td><td></td><td></td><td>-16.66</td><td></td><td></td><td></td><td>-16.62</td><td></td><td></td><td></td><td>-16.56</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.6049pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.26)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.78)</td><td></td><td></td><td></td><td>(0.73)</td><td></td><td></td><td></td><td>(0.86)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(4,908.06)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+
+[157]
+Overfull \hbox (1961.16884pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereEmployés</td><td></td><td></td><td>-0.72</td><td></td><td></td><td></td><td>-15.92</td><td></td><td></td><td></td><td>-0.73</td><td></td><td></td><td></td><td>-0.88</td><td></td><td></td><td></td><td>-1.27</td><td></td><td></td><td></td><td>-15.98</td><td></td><td></td><td></td><td>-16.12</td><td></td><td></td><td></td><td>-16.73</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.6169pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.24)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.74)</td><td></td><td></td><td></td><td>(0.68)</td><td></td><td></td><td></td><td>(0.82)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(4,908.06)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1961.15683pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereOuvriers</td><td></td><td></td><td>-0.22</td><td></td><td></td><td></td><td>-15.91</td><td></td><td></td><td></td><td>-0.21</td><td></td><td></td><td></td><td>-0.58</td><td></td><td></td><td></td><td>-1.00</td><td></td><td></td><td></td><td>-15.93</td><td></td><td></td><td></td><td>-16.46</td><td></td><td></td><td></td><td>-16.11</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.62889pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.31)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.81)</td><td></td><td></td><td></td><td>(0.75)</td><td></td><td></td><td></td><td>(0.88)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(4,908.06)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2029.18478pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_perePréfère ne pas répondre</td><td></td><td></td><td>-0.77</td><td></td><td></td><td></td><td>-2.02</td><td></td><td></td><td></td><td>-0.82</td><td></td><td></td><td></td><td>-0.38</td><td></td><td></td><td></td><td>-0.33</td><td></td><td></td><td></td><td>-0.87</td><td></td><td></td><td></td><td>-15.64</td><td></td><td></td><td></td><td>0.20</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.6049pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.81)</td><td></td><td></td><td></td><td>(2,356.87)</td><td></td><td></td><td></td><td>(1.12)</td><td></td><td></td><td></td><td>(1.12)</td><td></td><td></td><td></td><td>(1.28)</td><td></td><td></td><td></td><td>(3,740.99)</td><td></td><td></td><td></td><td>(4,724.36)</td><td></td><td></td><td></td><td>(6,349.00)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2146.54482pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereProfessions intermédiaires</td><td></td><td></td><td>-0.27</td><td></td><td></td><td></td><td>-16.30</td><td></td><td></td><td></td><td>-0.96</td><td></td><td></td><td></td><td>-0.74</td><td></td><td></td><td></td><td>-1.60<sup>*</sup></td><td></td><td></td><td></td><td>-16.56</td><td></td><td></td><td></td><td>-17.00</td><td></td><td></td><td></td><td>-17.05</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.6169pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.29)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.80)</td><td></td><td></td><td></td><td>(0.75)</td><td></td><td></td><td></td><td>(0.87)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(4,908.06)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2208.34482pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereRetraités</td><td></td><td></td><td>-0.91</td><td></td><td></td><td></td><td>-16.98</td><td></td><td></td><td></td><td>-1.55<sup>**</sup></td><td></td><td></td><td></td><td>-1.50<sup>**</sup></td><td></td><td></td><td></td><td>-1.89<sup>**</sup></td><td></td><td></td><td></td><td>-15.87</td><td></td><td></td><td></td><td>-16.12</td><td></td><td></td><td></td><td>-16.10</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.62889pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.27)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.77)</td><td></td><td></td><td></td><td>(0.73)</td><td></td><td></td><td></td><td>(0.85)</td><td></td><td></td><td></td><td>(2,808.33)</td><td></td><td></td><td></td><td>(4,724.35)</td><td></td><td></td><td></td><td>(4,908.06)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2084.76881pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Occupation_pereSans activité profes</td><td></td><td></td><td>0.51</td><td></td><td></td><td></td><td>-15.95</td><td></td><td></td><td></td><td>-0.50</td><td></td><td></td><td></td><td>-0.68</td><td></td><td></td><td></td><td>-1.99<sup>**</sup></td><td></td><td></td><td></td><td>-0.15</td><td></td><td></td><td></td><td>-0.53</td><td></td><td></td><td></td><td>0.02</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.56891pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td>(1.65)</td><td></td><td></td><td></td><td>(1,829.36)</td><td></td><td></td><td></td><td>(0.94)</td><td></td><td></td><td></td><td>(0.91)</td><td></td><td></td><td></td><td>(1.01)</td><td></td><td></td><td></td><td>(3,823.90)</td><td></td><td></td><td></td><td>(6,445.63)</td><td></td><td></td><td></td><td>(6,488.31)</td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1961.19284pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Suivre_activité_amis_et_familleOui</td><td></td><td></td><td></td><td>0.11</td><td></td><td></td><td></td><td>0.39</td><td></td><td></td><td></td><td>0.30</td><td></td><td></td><td></td><td>-0.15</td><td></td><td></td><td></td><td>0.00</td><td></td><td></td><td></td><td>0.04</td><td></td><td></td><td></td><td>0.59</td><td></td><td></td><td></td><td>0.84</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.29)</td><td></td><td></td><td></td><td>(0.33)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.62)</td><td></td><td></td><td></td><td>(0.65)</td><td></td><td></td><td></td><td>(0.52)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2115.7048pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Communiquer_amis_et_familleOui</td><td></td><td></td><td></td><td>0.30</td><td></td><td></td><td></td><td>0.21</td><td></td><td></td><td></td><td>-0.19</td><td></td><td></td><td></td><td>-0.12</td><td></td><td></td><td></td><td>-0.48<sup>**</sup></td><td></td><td></td><td></td><td>1.47<sup>***</sup></td><td></td><td></td><td></td><td>0.14</td><td></td><td></td><td></td><td>0.51</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.79683pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.35)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.54)</td><td></td><td></td><td></td><td>(0.70)</td><td></td><td></td><td></td><td>(0.53)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2090.94882pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Partager_propre_matériel_avec_prochesOui</td><td></td><td></td><td></td><td>0.51<sup>*</sup></td><td></td><td></td><td></td><td>0.09</td><td></td><td></td><td></td><td>-0.06</td><td></td><td></td><td></td><td>-0.02</td><td></td><td></td><td></td><td>0.30</td><td></td><td></td><td></td><td>-0.16</td><td></td><td></td><td></td><td>0.16</td><td></td><td></td><td></td><td>-0.45</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.74886pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.33)</td><td></td><td></td><td></td><td>(0.19)</td><td></td><td></td><td></td><td>(0.21)</td><td></td><td></td><td></td><td>(0.19)</td><td></td><td></td><td></td><td>(0.57)</td><td></td><td></td><td></td><td>(0.66)</td><td></td><td></td><td></td><td>(0.50)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2103.3568pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Partager_propre_matériel_publiquementOui</td><td></td><td></td><td></td><td>-0.27</td><td></td><td></td><td></td><td>0.20</td><td></td><td></td><td></td><td>0.05</td><td></td><td></td><td></td><td>0.45<sup>**</sup></td><td></td><td></td><td></td><td>-0.07</td><td></td><td></td><td></td><td>-0.23</td><td></td><td></td><td></td><td>-0.22</td><td></td><td></td><td></td><td>-0.37</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.74886pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.28)</td><td></td><td></td><td></td><td>(0.36)</td><td></td><td></td><td></td><td>(0.20)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.20)</td><td></td><td></td><td></td><td>(0.60)</td><td></td><td></td><td></td><td>(0.66)</td><td></td><td></td><td></td><td>(0.50)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+
+[158]
+Overfull \hbox (1942.6768pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Suivre_actualités_sur_RSMOui</td><td></td><td></td><td></td><td>-0.10</td><td></td><td></td><td></td><td>-0.21</td><td></td><td></td><td></td><td>-0.01</td><td></td><td></td><td></td><td>-0.31</td><td></td><td></td><td></td><td>0.08</td><td></td><td></td><td></td><td>0.12</td><td></td><td></td><td></td><td>0.48</td><td></td><td></td><td></td><td>0.44</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.29)</td><td></td><td></td><td></td><td>(0.17)</td><td></td><td></td><td></td><td>(0.19)</td><td></td><td></td><td></td><td>(0.17)</td><td></td><td></td><td></td><td>(0.55)</td><td></td><td></td><td></td><td>(0.63)</td><td></td><td></td><td></td><td>(0.50)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2103.32079pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Prendre_connaissance_programmes_gouvOui</td><td></td><td></td><td></td><td>-0.23</td><td></td><td></td><td></td><td>0.56</td><td></td><td></td><td></td><td>-0.24</td><td></td><td></td><td></td><td>-0.13</td><td></td><td></td><td></td><td>-0.42<sup>*</sup></td><td></td><td></td><td></td><td>-0.52</td><td></td><td></td><td></td><td>-0.86</td><td></td><td></td><td></td><td>-0.89</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.77284pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.35)</td><td></td><td></td><td></td><td>(0.51)</td><td></td><td></td><td></td><td>(0.24)</td><td></td><td></td><td></td><td>(0.29)</td><td></td><td></td><td></td><td>(0.25)</td><td></td><td></td><td></td><td>(0.72)</td><td></td><td></td><td></td><td>(0.77)</td><td></td><td></td><td></td><td>(0.60)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1973.54083pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Rechercher_information_generaleOui</td><td></td><td></td><td></td><td>0.30</td><td></td><td></td><td></td><td>-0.06</td><td></td><td></td><td></td><td>0.02</td><td></td><td></td><td></td><td>-0.06</td><td></td><td></td><td></td><td>-0.20</td><td></td><td></td><td></td><td>0.62</td><td></td><td></td><td></td><td>0.25</td><td></td><td></td><td></td><td>0.03</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.26)</td><td></td><td></td><td></td><td>(0.31)</td><td></td><td></td><td></td><td>(0.18)</td><td></td><td></td><td></td><td>(0.21)</td><td></td><td></td><td></td><td>(0.18)</td><td></td><td></td><td></td><td>(0.62)</td><td></td><td></td><td></td><td>(0.67)</td><td></td><td></td><td></td><td>(0.51)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2022.98082pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Rechercher_info_importante_personnelleOui</td><td></td><td></td><td></td><td>0.44</td><td></td><td></td><td></td><td>0.49</td><td></td><td></td><td></td><td>-0.12</td><td></td><td></td><td></td><td>0.06</td><td></td><td></td><td></td><td>-0.14</td><td></td><td></td><td></td><td>-0.50</td><td></td><td></td><td></td><td>-0.20</td><td></td><td></td><td></td><td>0.29</td></tr>[] 
+ []
+
+
+Overfull \hbox (1843.76085pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(0.36)</td><td></td><td></td><td></td><td>(0.45)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.25)</td><td></td><td></td><td></td><td>(0.22)</td><td></td><td></td><td></td><td>(0.65)</td><td></td><td></td><td></td><td>(0.75)</td><td></td><td></td><td></td><td>(0.63)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1849.95288pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">AucuneOui</td><td></td><td></td><td></td><td>14.36</td><td></td><td></td><td></td><td>13.85</td><td></td><td></td><td></td><td>0.52</td><td></td><td></td><td></td><td>-13.85</td><td></td><td></td><td></td><td>-1.05</td><td></td><td></td><td></td><td>14.02</td><td></td><td></td><td></td><td>13.43</td><td></td><td></td><td></td><td>13.09</td></tr>[] 
+ []
+
+
+Overfull \hbox (1942.65288pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(840.27)</td><td></td><td></td><td></td><td>(840.27)</td><td></td><td></td><td></td><td>(1.25)</td><td></td><td></td><td></td><td>(509.65)</td><td></td><td></td><td></td><td>(1.25)</td><td></td><td></td><td></td><td>(1,385.38)</td><td></td><td></td><td></td><td>(1,385.38)</td><td></td><td></td><td></td><td>(840.27)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (1856.09691pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">AutreOui</td><td></td><td></td><td></td><td>15.08</td><td></td><td></td><td></td><td>14.68</td><td></td><td></td><td></td><td>-13.97</td><td></td><td></td><td></td><td>-14.75</td><td></td><td></td><td></td><td>12.85</td><td></td><td></td><td></td><td>15.59</td><td></td><td></td><td></td><td>15.49</td><td></td><td></td><td></td><td>14.39</td></tr>[] 
+ []
+
+
+Overfull \hbox (2004.42891pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td>(1,455.40)</td><td></td><td></td><td></td><td>(1,455.40)</td><td></td><td></td><td></td><td>(535.41)</td><td></td><td></td><td></td><td>(882.74)</td><td></td><td></td><td></td><td>(535.41)</td><td></td><td></td><td></td><td>(2,399.54)</td><td></td><td></td><td></td><td>(2,399.54)</td><td></td><td></td><td></td><td>(1,455.40)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (3852.1288pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Constant</td><td>0.51<sup>*</sup></td><td>3.16<sup>**</sup></td><td>2.65</td><td>0.48<sup>*</sup></td><td>0.92<sup>***</sup></td><td>3.12<sup>**</sup></td><td>35.90</td><td>0.89<sup>***</sup></td><td>0.36</td><td>-1.37<sup>*</sup></td><td>-1.98</td><td>0.41</td><td>0.14</td><td>2.12<sup>**</sup></td><td>2.11</td><td>0.18</td><td>0.75<sup>***</sup></td><td>2.40<sup>***</sup></td><td>1.44</td><td>0.72<sup>**</sup></td><td>1.01<sup>***</sup></td><td>18.58</td><td>35.66</td><td>0.98<sup>***</sup></td><td>1.10<sup>***</sup></td><td>16.19</td><td>35.16</td><td>1.07<sup>***</sup></td><td>1.20<sup>***</sup></td><td>17.50</td><td>37.62</td><td>1.17<sup>***</sup></td></tr>[] 
+ []
+
+
+Overfull \hbox (2906.63701pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td>(0.28)</td><td>(1.48)</td><td>(2.04)</td><td>(0.28)</td><td>(0.30)</td><td>(1.51)</td><td>(3,442.33)</td><td>(0.30)</td><td>(0.27)</td><td>(0.80)</td><td>(1.43)</td><td>(0.28)</td><td>(0.27)</td><td>(0.89)</td><td>(1.62)</td><td>(0.27)</td><td>(0.29)</td><td>(0.83)</td><td>(1.55)</td><td>(0.29)</td><td>(0.30)</td><td>(1,156.44)</td><td>(5,540.02)</td><td>(0.30)</td><td>(0.31)</td><td>(1,141.83)</td><td>(9,331.16)</td><td>(0.31)</td><td>(0.32)</td><td>(1,135.88)</td><td>(9,162.97)</td><td>(0.32)</td></tr>[] 
+ []
+
+
+Overfull \hbox (1547.15681pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr>[] 
+ []
+
+
+Overfull \hbox (2214.50114pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Observations</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td><td>723</td><td>714</td><td>638</td><td>723</td></tr>[] 
+ []
+
+
+Overfull \hbox (2980.56882pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Log Likelihood</td><td>-315.41</td><td>-296.68</td><td>-258.77</td><td>-308.47</td><td>-237.53</td><td>-219.16</td><td>-174.38</td><td>-233.20</td><td>-497.08</td><td>-483.67</td><td>-416.38</td><td>-493.89</td><td>-424.60</td><td>-400.14</td><td>-345.67</td><td>-418.13</td><td>-497.10</td><td>-481.90</td><td>-417.37</td><td>-489.52</td><td>-115.32</td><td>-103.37</td><td>-85.29</td><td>-109.97</td><td>-99.44</td><td>-87.12</td><td>-64.74</td><td>-97.60</td><td>-130.39</td><td>-116.79</td><td>-93.26</td><td>-126.10</td></tr>[] 
+ []
+
+
+Overfull \hbox (2875.40106pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left">Akaike Inf. Crit.</td><td>634.83</td><td>629.35</td><td>601.54</td><td>640.94</td><td>479.06</td><td>474.31</td><td>432.75</td><td>490.39</td><td>998.15</td><td>1,003.33</td><td>916.76</td><td>1,011.79</td><td>853.19</td><td>836.29</td><td>775.34</td><td>860.26</td><td>998.19</td><td>999.79</td><td>918.74</td><td>1,003.05</td><td>234.64</td><td>242.73</td><td>254.57</td><td>243.94</td><td>202.87</td><td>210.25</td><td>213.49</td><td>219.19</td><td>264.78</td><td>269.58</td><td>270.52</td><td>276.20</td></tr>[] 
+ []
+
+
+Overfull \hbox (879.71689pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td colspan="33" style="border-bottom: 1px solid black"></td></tr><tr><td style="text-align:left"><em>Notes:</em></td><td colspan="32" style="text-align:left"><sup>***</sup>Significant at the 1 percent level.</td></tr>[] 
+ []
+
+
+Overfull \hbox (348.23694pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td colspan="32" style="text-align:left"><sup>**</sup>Significant at the 5 percent level.</td></tr>[] 
+ []
+
+
+Overfull \hbox (348.23694pt too wide) in paragraph at lines 3483--3483
+[]\TU/lmtt/m/n/12 ## <tr><td style="text-align:left"></td><td colspan="32" style="text-align:left"><sup>*</sup>Significant at the 10 percent level.</td></tr>[] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-120-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-120-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3492--3493
+[][] 
+ []
+
+
+
+[159]
+File: Rapport_files/figure-latex/unnamed-chunk-121-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-121-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3498--3499
+[][] 
+ []
+
+
+
+[160]
+File: Rapport_files/figure-latex/unnamed-chunk-122-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-122-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3504--3505
+[][] 
+ []
+
+
+
+[161]
+File: Rapport_files/figure-latex/unnamed-chunk-123-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-123-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3509--3510
+[][] 
+ []
+
+
+
+[162]
+File: Rapport_files/figure-latex/unnamed-chunk-124-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-124-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3515--3516
+[][] 
+ []
+
+
+
+[163]
+File: Rapport_files/figure-latex/unnamed-chunk-125-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-125-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3522--3523
+[][] 
+ []
+
+
+
+[164]
+File: Rapport_files/figure-latex/unnamed-chunk-126-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-126-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3529--3530
+[][] 
+ []
+
+
+
+[165]
+
+[166]
+Overfull \hbox (2.15665pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##    Marqueurs_ordonnés_subj                                         Marqueurs_sub[] 
+ []
+
+
+Overfull \hbox (2.15645pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##    <chr>                                                                   <int>[] 
+ []
+
+
+Overfull \hbox (2.15681pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  1 Importance_independant_finance | Importance_propres_responsabi~             2[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  2 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  3 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  4 Importance_propres_decisions | Importance_independant_finance ~             4[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  5 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+
+Overfull \hbox (2.14482pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  6 Importance_independant_finance | Importance_propres_responsabi~             2[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  7 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+
+Overfull \hbox (2.1568pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  8 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+
+Overfull \hbox (2.13283pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ##  9 Importance_propres_responsabilites | Importance_independant_fi~             6[] 
+ []
+
+
+Overfull \hbox (2.15681pt too wide) in paragraph at lines 3571--3571
+[]\TU/lmtt/m/n/12 ## 10 Importance_independant_finance | Importance_propres_decisions ~             1[] 
+ []
+
+File: Rapport_files/figure-latex/unnamed-chunk-137-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-137-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3577--3578
+[][] 
+ []
+
+
+
+[167]
+File: Rapport_files/figure-latex/unnamed-chunk-139-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-139-1.pdf>
+File: Rapport_files/figure-latex/unnamed-chunk-139-2.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-139-2.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3584--3586
+[][]
+ []
+
+
+
+[168]
+
+[169]
+Overfull \vbox (297.1746pt too high) has occurred while \output is active []
+
+
+
+[170]
+File: Rapport_files/figure-latex/unnamed-chunk-141-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-141-1.pdf>
+File: Rapport_files/figure-latex/unnamed-chunk-142-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-142-1.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3599--3600
+[][] 
+ []
+
+
+
+[171]
+File: Rapport_files/figure-latex/unnamed-chunk-143-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-143-1.pdf>
+Missing character: There is no 🔹 (U+1F539) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3601--3610
+[][]
+ []
+
+
+
+[172]
+Missing character: There is no 🔹 (U+1F539) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no 🔹 (U+1F539) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+
+
+[173]
+File: Rapport_files/figure-latex/unnamed-chunk-151-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-151-1.pdf>
+File: Rapport_files/figure-latex/unnamed-chunk-151-2.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-151-2.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3635--3637
+[][]
+ []
+
+
+
+[174]
+
+[175]
+Overfull \vbox (329.08363pt too high) has occurred while \output is active []
+
+
+
+[176]
+File: Rapport_files/figure-latex/unnamed-chunk-153-1.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-153-1.pdf>
+File: Rapport_files/figure-latex/unnamed-chunk-153-2.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-153-2.pdf>
+File: Rapport_files/figure-latex/unnamed-chunk-153-3.pdf Graphic file (type pdf)
+<use Rapport_files/figure-latex/unnamed-chunk-153-3.pdf>
+
+Overfull \hbox (42.6899pt too wide) in paragraph at lines 3641--3644
+[][]
+ []
+
+
+
+[177]
+Overfull \vbox (297.1746pt too high) has occurred while \output is active []
+
+
+
+[178]
+Missing character: There is no 🔵 (U+1F535) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+
+Overfull \hbox (94.85692pt too wide) in paragraph at lines 3657--3657
+[]\TU/lmtt/m/n/12 Représente un cheminement étalé avec une montée progressive d’importance donnée à chaque marqueur.[] 
+ []
+
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+
+Overfull \hbox (85.85686pt too wide) in paragraph at lines 3657--3657
+[]\TU/lmtt/m/n/12 ✅ Profil : transition douce, où tous les aspects de la vie adulte sont valorisés au fil du temps.[] 
+ []
+
+
+
+[179]
+Missing character: There is no 🟡 (U+1F7E1) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no 🟣 (U+1F7E3) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no 🟠 (U+1F7E0) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+
+Overfull \hbox (258.89687pt too wide) in paragraph at lines 3692--3692
+[]\TU/lmtt/m/n/12 ✅ Profil atypique : importance donnée d’abord aux relations et responsabilités familiales avant l’indépendance ou le travail.[] 
+ []
+
+Missing character: There is no 🔵 (U+1F535) in font Times New Roman/OT:script=latn;language=dflt;mapping=tex-text;!
+
+
+[180]
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+Missing character: There is no ✅ (U+2705) in font [lmmono12-regular]:!
+
+Overfull \hbox (79.67691pt too wide) in paragraph at lines 3704--3704
+[]\TU/lmtt/m/n/12 ✅ Profil : l’affectif précède l’indépendance économique dans la représentation de la transition.[] 
+ []
+
+
+
+[181]
+
+[182]
+
+[183]
+
+[184]
+
+[185]
+
+[186]
+
+[187]
+
+[188]
+
+[189]
+
+[190]
+
+[191]
+
+[192]
+
+[193]
+
+[194]
+
+[195]
+
+[196]
+
+[197]
+
+[198]
+
+[199]
+
+[200]
+
+[201]
+
+[202] (./Rapport.aux)
+ ***********
+LaTeX2e <2024-11-01> patch level 2
+L3 programming layer <2025-04-14>
+ ***********
+ ) 
+Here is how much of TeX's memory you used:
+ 24503 strings out of 472203
+ 494147 string characters out of 5526397
+ 1437269 words of memory out of 5000000
+ 50612 multiletter control sequences out of 15000+600000
+ 630526 words of font info for 94 fonts, out of 8000000 for 9000
+ 36 hyphenation exceptions out of 8191
+ 90i,13n,116p,1196b,800s stack positions out of 10000i,1000n,20000p,200000b,200000s
+
+Output written on Rapport.pdf (202 pages).

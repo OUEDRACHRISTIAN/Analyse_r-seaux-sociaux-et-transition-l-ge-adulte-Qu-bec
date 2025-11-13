@@ -1,16 +1,55 @@
 ---
-title: "Rapport:`r Sys.Date()`"
-output:
-  html_document: default
-  pdf_document: 
+title: "Les réseaux sociaux et la transition à l’âge adulte au Québec  - `r Sys.Date()`"
+author: "OUEDRAOGO Christian Cyriaque"
+date: "`r Sys.Date()`"
+output: 
+ 
+  word_document: 
+    toc: true
+    toc_depth: 3
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    citation_package: natbib
+    fig_caption: true
+    keep_tex: true
+    highlight: tango
+    fig_width: 12
+    fig_height: 12
     latex_engine: xelatex
-  word_document: default
-date: "2025-02-08"
-author: "Christian Cyriaque"
+  html_document: default
+header-includes:
+  - \usepackage{geometry}
+  - \geometry{a4paper, margin=0.6in}
+  - \usepackage{setspace}
+  - \setstretch{1.8}
+  - \usepackage{indentfirst}
+  - \setlength{\parindent}{1.5cm}
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+  - \newfontfamily\sffamilyfont{Arial}[Scale=1.0]
+  - \renewcommand{\normalsize}{\fontsize{12}{14}\selectfont}
+  - \renewcommand{\figurename}{Figure}
+  - \renewcommand{\contentsname}{TABLE DES MATIÈRES}
+  - \renewcommand{\tablename}{Tableau}
+  - \renewcommand{\sffamily}{\sffamilyfont}
+  - \usepackage[french]{babel}
+  - \usepackage{amsmath}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyfoot[L]{OUEDRAOGO Christian Cyriaque}
+  - \fancyfoot[R]{Projet}
+  - \usepackage{titlesec}
+  - \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+  - \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+  - \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
 ---
 
 
-```{r message=FALSE, warning=FALSE}
+
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 # Liste des packages à installer
 #packages <- c("officer", "flextable", "tidyverse", "summarytools", 
               #"gtsummary", "survey", "readxl", "dplyr", "ggplot2", "scales","cardx")
@@ -43,8 +82,9 @@ data_P3_ = read_csv(here("data", "data_P3_.csv"))
 
 ```
 
-#Ordonner
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 # Liste des variables initiales
 variables <- c("Votre_mere", "Votre_pere", "Votre_soeur", "Votre_frere", 
                "Vos_amis", "A_l_ecole", "Vos_colleges_de_travail", 
@@ -62,10 +102,9 @@ data_P3_[variables] <- lapply(data_P3_[variables], function(x) {
   factor(x, levels = importance_levels, ordered = TRUE)
 })
 
-
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_P3_$Nbr_compte_MS_regulier <- factor(data_P3_$Nbr_compte_MS_regulier,
                                           levels = c("Aucun", "Un", "Deux", "Trois", "Quatre", "Plus de quatre"))
 
@@ -79,23 +118,50 @@ data_P3_$Diplome_du_repondant <- factor(data_P3_$Diplome_du_repondant, levels = 
 
 data_P3_ <- data_P3_ %>%
   rename(Situation_civile_parents = Siruation_civile_parents)
+
+
+
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Nombre_d_heures_sur_RSM_Jour = ifelse(
+      Nbr_compte_MS_regulier == "Aucun" & Nombre_d_heures_sur_RSM_Jour == "Ne sait pas",
+      "00h",
+      Nombre_d_heures_sur_RSM_Jour
+    )
+  )
+
+
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Nombre_d_heures_sur_RSM_Jour = case_when(
+      Nombre_d_heures_sur_RSM_Jour %in% c("4.0 à 5.0 heures", "6 heures et plus") ~ "4 heures et plus",
+      TRUE ~ Nombre_d_heures_sur_RSM_Jour
+    )
+  )
+
+
 ```
 
 
-#. Ponderation de la base de données.
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Créer l'objet de design en tenant compte des pondérations
 data_design <- svydesign(id = ~id, weights = ~PON, data = data_P3_)
 ```
 
-# I.    Statistique descriptives
+# Statistique descriptives
+## Tableau pour les Répondants 
+### Tableau pour les Répondants selon le groupe d'âge
 
-# 1. Tableau pour les Répondants
-```{r message=FALSE, warning=FALSE}
-table_repondants <- tbl_svysummary(
+#valeurs et attitudes
+#	Le fait d’être inscrit ou non à un réseau social
+```{r}
+table_repondants_Usage_MS <- tbl_svysummary(
   data = data_design,
-  by = gpe_age, 
-  include = c(age, sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  by = Usage_MS,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
   
   statistic = list(
     all_continuous() ~ "{mean}",
@@ -107,16 +173,149 @@ table_repondants <- tbl_svysummary(
   add_overall() %>%  # ajouter la colonne « Ensemble »
   add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
   modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Répondants**")
+  modify_caption("**Répondants selon le fait d’être inscrit ou non à un réseau social**")
 
-
-table_repondants
+table_repondants_Usage_MS
 ```
 
 
-# 2. Tableau pour l'utilisation des médias sociaux des repondants
-```{r message=FALSE, warning=FALSE}
-table_utilisation_medias_sociaux <- 
+#Nombre de réseaux sociaux utilisés régulièrement
+```{r}
+table_repondants_Nbr__MS_regulier <- tbl_svysummary(
+  data = data_design,
+  by = Nbr_compte_MS_regulier,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le Nombre de reseaux sociaux utilisés régulièrement**")
+
+table_repondants_Nbr__MS_regulier
+```
+
+#Le temps passé chaque jour
+```{r}
+table_repondants_Nbre_hres_RSM_Jour <- tbl_svysummary(
+  data = data_design,
+  by = Nombre_d_heures_sur_RSM_Jour,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le temps passé chaque jour**")
+
+table_repondants_Nbre_hres_RSM_Jour
+```
+
+
+#####
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_gpe_age <- tbl_svysummary(
+  data = data_design,
+  by = gpe_age,
+  include = c(sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  #add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le groupe d'âge**")
+
+#table_repondants_gpe_age
+```
+\vspace{1cm}
+
+### Tableau pour les Répondants selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_sexe <- tbl_svysummary(
+  data = data_design,
+  by = sexe, 
+  include = c(gpe_age,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  #add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le sexe**")
+
+
+#table_repondants_sexe
+```
+
+#Selon le groupe d'âge et par sexe
+```{r}
+table_grp_age_sexe <- tbl_merge(
+  tbls = list(table_repondants_gpe_age, table_repondants_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_grp_age_sexe
+
+```
+
+
+
+### Tableau pour les Répondants selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_Lieu_de_residence <- tbl_svysummary(
+  data = data_design,
+  by = Lieu_de_residence, 
+  include = c(age,sexe,gpe_age,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le Lieu de residence**")
+
+
+ table_repondants_Lieu_de_residence
+```
+
+\vspace{1cm}
+
+## Tableau pour l'utilisation des médias sociaux 
+
+### Utilisation des médias sociaux selon le groupe d'âge
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_gpe_age <- 
   data_design %>%
   tbl_svysummary(
     by = gpe_age,
@@ -129,17 +328,78 @@ table_utilisation_medias_sociaux <-
   missing = "no"  
 ) %>%
   add_overall() %>%  
-  add_p() %>%        
+  #add_p() %>%        
   modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Utilisation_médias_sociaux**")
+  modify_caption("**Utilisation_médias_sociaux selon le groupe d'age**")
 
-table_utilisation_medias_sociaux
+#table_utilisation_medias_sociaux_gpe_age
 ```
 
 
-# 3. Activités faites sur les médias sociaux
-```{r message=FALSE, warning=FALSE}
-Table_activités_médias_sociaux <- 
+### Utilisation des médias sociaux selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux selon le sexe**")
+
+#table_utilisation_medias_sociaux_sexe
+```
+
+#Tableau pour l'utilisation des médias sociaux par groupe d'age et par sexe
+```{r}
+table_medias_sociaux_grp_age_sexe <- tbl_merge(
+  tbls = list(table_utilisation_medias_sociaux_gpe_age, table_utilisation_medias_sociaux_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_medias_sociaux_grp_age_sexe
+
+```
+
+
+### Utilisation des médias sociaux selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux selon le lieu de residence**")
+
+#table_utilisation_medias_sociaux_Lieu_de_residence
+```
+
+## Activités faites sur les médias sociaux
+
+### Activités faites sur les médias sociaux selon le groupe d'âge
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_gpe_age <- 
   data_design %>%
   tbl_svysummary(
     by = gpe_age,
@@ -153,18 +413,83 @@ Table_activités_médias_sociaux <-
   missing = "no"  # ne pas afficher les valeurs manquantes
 ) %>%
   add_overall() %>%  
-  add_p() %>%        
+  #add_p() %>%        
   modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Activités médias sociaux**")
+  modify_caption("**Activités médias sociaux selon le groupe d'âge**")
 
-Table_activités_médias_sociaux
+#Table_activités_médias_sociaux_gpe_age
 
 ```
 
 
-# 4. Quête d'informations
-```{r message=FALSE, warning=FALSE}
-Table_Quête_informatins <- 
+### Activités faites sur les médias sociaux selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux selon le sexe**")
+
+#Table_activités_médias_sociaux_sexe
+```
+
+
+#Activités faites sur les médias sociaux par grpe dage et par sexe
+```{r}
+table_activités_médias_sociaux_grp_age_sexe <- tbl_merge(
+  tbls = list(Table_activités_médias_sociaux_gpe_age, Table_activités_médias_sociaux_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_activités_médias_sociaux_grp_age_sexe
+
+```
+
+
+### Activités faites sur les médias sociaux selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux selon le lieu de residence**")
+
+Table_activités_médias_sociaux_Lieu_de_residence
+```
+
+
+## Quête d'informations
+
+### Quête d'informations selon groupe d'âge
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Quête_informations_gpe_age <- 
   data_design %>%
   tbl_svysummary(
     by =gpe_age,
@@ -177,17 +502,67 @@ Table_Quête_informatins <-
   missing = "no"  
 ) %>%
   add_overall() %>%  
+  add_p() %>% 
   modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Quête_informations**")
+  modify_caption("**Quête_informations selon le groupe d'âge**")
 
-Table_Quête_informatins
-
+Table_Quête_informations_gpe_age
 ```
 
 
-# 5. Tableau pour les Parents des repondants
-```{r message=FALSE, warning=FALSE}
-Table_parents <- tbl_svysummary(
+### Quête d'informations selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Quête_informations_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_p() %>% 
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Quête_informations selon le sexe**")
+
+Table_Quête_informations_sexe
+```
+
+### Quête d'informations selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Quête_informations_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by =Lieu_de_residence,
+    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_p() %>% 
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Quête_informations selon le lieu de residence**")
+
+Table_Quête_informations_Lieu_de_residence
+
+```
+
+## Tableau pour les Parents des repondants
+
+###  Parents des repondants selon le groupe d'âge
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_parents_gpe_age <- tbl_svysummary(
   data = data_design,
   by = gpe_age,  
   include = c( Diplome_mere, Diplome_pere,Situation_civile_parents,Occupation_mere,Occupation_pere),
@@ -201,18 +576,66 @@ Table_parents <- tbl_svysummary(
   add_overall() %>%
   add_p() %>%
   modify_header(label = "**Caractéristiques**") %>%
-  modify_caption("**Parents**")
+  modify_caption("**Parents selon le groupe d'âge**")
 
-Table_parents
+Table_parents_gpe_age
+
+```
+
+###  Parents des repondants selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_parents_sexe <- tbl_svysummary(
+  data = data_design,
+  by = sexe,  
+  include = c( Diplome_mere, Diplome_pere,Situation_civile_parents,Occupation_mere,Occupation_pere),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"
+) %>%
+  add_overall() %>%
+  add_p() %>%
+  modify_header(label = "**Caractéristiques**") %>%
+  modify_caption("**Parents selon le sexe**")
+
+Table_parents_sexe
+
+```
+
+###  Parents des repondants selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_parents_Lieu_de_residence <- tbl_svysummary(
+  data = data_design,
+  by = Lieu_de_residence,  
+  include = c( Diplome_mere, Diplome_pere,Situation_civile_parents,Occupation_mere,Occupation_pere),
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"
+) %>%
+  add_overall() %>%
+  add_p() %>%
+  modify_header(label = "**Caractéristiques**") %>%
+  modify_caption("**Parents selon le lieu de residence**")
+
+Table_parents_Lieu_de_residence
 
 ```
 
 
-# 6. Combinaison des  tableaux dans un seul tableau
-```{r message=FALSE, warning=FALSE}
+
+### Combinaison des  tableaux dans un seul tableau
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 final_table <- tbl_stack(
-  tbls = list(table_repondants,table_utilisation_medias_sociaux,Table_activités_médias_sociaux,Table_Quête_informatins,Table_parents),
+  tbls = list(table_repondants_sexe,table_utilisation_medias_sociaux_sexe,Table_activités_médias_sociaux_sexe,Table_Quête_informations_sexe,Table_parents_sexe),
   group_header = c("Répondants", "utilisation_medias_sociaux","activités_médias_sociaux","Quête_informatins","Parents")
 )
 
@@ -221,10 +644,9 @@ final_table
 
 ```
 
-
-
-# 8. Créer un document Word, ajouter un titre et le tableau, puis sauvegarder le fichier
-```{r message=FALSE, warning=FALSE}
+### Créer un document Word, ajouter un titre et le tableau, puis sauvegarder le fichier
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Convertir le tableau en flextable
 final_table_flex <- as_flex_table(final_table) %>%
@@ -243,155 +665,12 @@ print(doc, target = here("rapport", "Table_final_caracteristiques.docx"))
 
 ```
 
-#
-# 0. Tableau pour les Répondants selon le sexe
-```{r message=FALSE, warning=FALSE}
-table_repondants_sexe <- tbl_svysummary(
-  data = data_design,
-  by = sexe, 
-  include = c(age, sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
-  
-  statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p}   ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  # ne pas afficher les valeurs manquantes
-) %>%
-  add_overall() %>%  # ajouter la colonne « Ensemble »
-  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Répondants**")
 
 
-table_repondants_sexe
-```
-
-
-# 0. Tableau pour l'utilisation des médias sociaux des repondants selon le sexe
-```{r message=FALSE, warning=FALSE}
-table_utilisation_medias_sociaux_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by = sexe,
-    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Utilisation_médias_sociaux**")
-
-table_utilisation_medias_sociaux_sexe
-```
-
-
-# 0. Activités faites sur les médias sociaux selon le sexe
-```{r message=FALSE, warning=FALSE}
-Table_activités_médias_sociaux_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by = sexe,
-    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
-    
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  # ne pas afficher les valeurs manquantes
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Activités médias sociaux**")
-
-Table_activités_médias_sociaux_sexe
-
-```
-
-
-# 0. Quête d'informations selon le sexe
-```{r message=FALSE, warning=FALSE}
-Table_Quête_informatins_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(Votre_mere, Votre_pere, Votre_soeur, Votre_frere, Vos_amis, A_l_ecole, Vos_colleges_de_travail, Les_medias_traditionnels, Les_medias_numeriques_Q1),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Quête_informations**")
-
-Table_Quête_informatins_sexe
-
-```
-
-
-# 0. Tableau pour les Parents des repondants
-```{r message=FALSE, warning=FALSE}
-
-Table_parents_sexe <- tbl_svysummary(
-  data = data_design,
-  by = sexe,  
-  include = c( Diplome_mere, Diplome_pere,Situation_civile_parents,Occupation_mere,Occupation_pere),
-  statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"
-) %>%
-  add_overall() %>%
-  add_p() %>%
-  modify_header(label = "**Caractéristiques**") %>%
-  modify_caption("**Parents**")
-
-Table_parents_sexe
-
-```
-
-
-
-
-
-# 9. Orientation politique
-
-#Sexe . 
-```{r message=FALSE, warning=FALSE}
-Table_Orientation_politique_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(Orientation_politique),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Table_Orientation_politique_sexe**")
-
-Table_Orientation_politique_sexe
-```
-
-
-# . Groupe d'age
-```{r message=FALSE, warning=FALSE}
+## Orientation politique 
+### Orientation politique selon le groupe d'age
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Orientation_politique_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -413,8 +692,32 @@ Table_Orientation_politique_gpe_age
 ```
 
 
-# . Lieu de residence
-```{r message=FALSE, warning=FALSE}
+### Orientation politique selon le Sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Orientation_politique_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Orientation_politique),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Orientation_politique_sexe**")
+
+Table_Orientation_politique_sexe
+```
+
+
+### Orientation politique selon le lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Orientation_politique_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -435,8 +738,9 @@ Table_Orientation_politique_Lieu_de_residence
 
 ```
 
-#Visualisation 
-```{r message=FALSE, warning=FALSE}
+### Visualisation de la variable Orientation Politique 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Orientation Politique", fig.align='center', out.width="90%"}
 data_P3_ %>% summarise(moyenne_Orientation_politique=weighted.mean(Orientation_politique,data_P3_$PON),
                    ecart_type_Orientation_politique=sd(Orientation_politique))
 
@@ -449,31 +753,11 @@ ggplot(data_P3_, aes(x=Orientation_politique, y=..density..))+
 shapiro.test(data_P3_$Orientation_politique)
 
 ```
-# 10. Etat civil du répondant 
 
-# 10.1. Etat civil du répondant selon le sexe
-```{r message=FALSE, warning=FALSE}
-Table_Etat_civil_repondant_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(Etat_civil_du_repondant),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**TTable_Etat_civil_repondant_sexe**")
-
-Table_Etat_civil_repondant_sexe
-```
-
-# 10.2. Etat civil du répondant selon gpe_age
-```{r message=FALSE, warning=FALSE}
+## Etat civil du répondant 
+### Etat civil du répondant selon gpe_age
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Etat_civil_repondant_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -493,8 +777,32 @@ Table_Etat_civil_repondant_gpe_age <-
 Table_Etat_civil_repondant_gpe_age
 ```
 
-# 10.3. Etat civil du répondant selon le sexe
-```{r message=FALSE, warning=FALSE}
+### Etat civil du répondant selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Etat_civil_repondant_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Etat_civil_du_repondant),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**TTable_Etat_civil_repondant_sexe**")
+
+Table_Etat_civil_repondant_sexe
+```
+
+
+### Etat civil du répondant selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Etat_civil_repondant_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -514,31 +822,11 @@ Table_Etat_civil_repondant_Lieu_de_residence <-
 Table_Etat_civil_repondant_Lieu_de_residence
 ```
 
-# 11. Lieu de naissance des parents (mères pères) 
+## Lieu de naissance des parents (mères pères) 
 
-# 11.1. Lieu de naissance des parents (mères) par sexe 
-```{r message=FALSE, warning=FALSE}
-Table_Lieu_naissance_parents_meres_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(lieu_de_naissance_mere),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Table_Lieu_naissance_parents_meres_sexe**")
-
-Table_Lieu_naissance_parents_meres_sexe
-```
-
-# 11.2. Lieu de naissance des parents (mères) par age 
-```{r message=FALSE, warning=FALSE}
+### Lieu de naissance des parents (mères) par groupe  d'âge 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Lieu_naissance_parents_meres_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -559,9 +847,31 @@ Table_Lieu_naissance_parents_meres_gpe_age
 ```
 
 
+### Lieu de naissance des parents (mères) par sexe 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_meres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(lieu_de_naissance_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_meres_sexe**")
 
-# 11.3. Lieu de naissance des parents (mères) par lieu de residence 
-```{r message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_meres_sexe
+```
+
+### Lieu de naissance des parents (mères) selon le lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Lieu_naissance_parents_meres_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -581,30 +891,11 @@ Table_Lieu_naissance_parents_meres_Lieu_de_residence <-
 Table_Lieu_naissance_parents_meres_Lieu_de_residence
 ```
 
+## Lieu de naissance des parents ( pères) 
 
-# 12.1. Lieu de naissance des parents (pères) par sexe 
-```{r message=FALSE, warning=FALSE}
-Table_Lieu_naissance_parents_peres_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(lieu_de_naissance_pere),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Table_Lieu_naissance_parents_peres_sexe**")
-
-Table_Lieu_naissance_parents_peres_sexe
-```
-
-# 12.2. Lieu de naissance des parents (mères) par age 
-```{r message=FALSE, warning=FALSE}
+### Lieu de naissance des parents (mères) par age 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Lieu_naissance_parents_peres_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -624,8 +915,32 @@ Table_Lieu_naissance_parents_peres_gpe_age <-
 Table_Lieu_naissance_parents_peres_gpe_age
 ```
 
-# 12.3. Lieu de naissance des parents (pères) par lieu de residence 
-```{r message=FALSE, warning=FALSE}
+
+### Lieu de naissance des parents (pères) par sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_Lieu_naissance_parents_peres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(lieu_de_naissance_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_Lieu_naissance_parents_peres_sexe**")
+
+Table_Lieu_naissance_parents_peres_sexe
+```
+
+### Lieu de naissance des parents (pères) par lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_Lieu_naissance_parents_peres_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -645,31 +960,11 @@ Table_Lieu_naissance_parents_peres_Lieu_de_residence <-
 Table_Lieu_naissance_parents_peres_Lieu_de_residence
 ```
 
-# 13. Le type de domicile des parents (mères pères) 
+## Le type de domicile des parents (mères)
 
-# 13.1. Le type de domicile des parents (mères) selon le sexe
-```{r message=FALSE, warning=FALSE}
-Table_type_domicile_parents_meres_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(Type_de_domicile_mere),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Table_type_domicile_parents_meres_sexe**")
-
-Table_type_domicile_parents_meres_sexe
-```
-
-# 13.2. Lieu de naissance des parents (mères) par age 
-```{r message=FALSE, warning=FALSE}
+### Lieu de naissance des parents (mères) par groupe d'âge 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_type_domicile_parents_meres_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -689,9 +984,31 @@ Table_type_domicile_parents_meres_gpe_age <-
 Table_type_domicile_parents_meres_gpe_age
 ```
 
+### Le type de domicile des parents (mères) selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_type_domicile_parents_meres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Type_de_domicile_mere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_meres_sexe**")
 
-# 13.3. Lieu de naissance des parents (pères) par lieu de residence 
-```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_meres_sexe
+```
+
+### Lieu de naissance des parents (pères) par lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_type_domicile_parents_meres_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -713,29 +1030,10 @@ Table_type_domicile_parents_meres_Lieu_de_residence
 
 
 
-# 14.1. Le type de domicile des parents (pères) selon le sexe
-```{r message=FALSE, warning=FALSE}
-Table_type_domicile_parents_peres_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by =sexe,
-    include = c(Type_de_domicile_pere),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Table_type_domicile_parents_peres_sexe**")
-
-Table_type_domicile_parents_peres_sexe
-```
-
-# 14.2. Lieu de naissance des parents (pères) par age 
-```{r message=FALSE, warning=FALSE}
+## Le type de domicile des parents (pères) 
+\newpage
+### Lieu de naissance des parents (pères) par groupe  d'âge 
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_type_domicile_parents_peres_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -755,9 +1053,31 @@ Table_type_domicile_parents_peres_gpe_age <-
 Table_type_domicile_parents_peres_gpe_age
 ```
 
+### Le type de domicile des parents (pères)  selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_type_domicile_parents_peres_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by =sexe,
+    include = c(Type_de_domicile_pere),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Table_type_domicile_parents_peres_sexe**")
 
-# 14.3. Lieu de naissance des parents (p) par lieu de residence 
-```{r message=FALSE, warning=FALSE}
+Table_type_domicile_parents_peres_sexe
+```
+
+### Lieu de naissance des parents (peres) par lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 Table_type_domicile_parents_peres_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -777,143 +1097,12 @@ Table_type_domicile_parents_peres_Lieu_de_residence <-
 Table_type_domicile_parents_peres_Lieu_de_residence
 ```
 
-# 14.4. Nombre de comptes MSN inscrits selon le groupe d'âge 
-```{r message=FALSE, warning=FALSE}
-table_Nbr_compte_MS_age <- 
-  data_design %>%
-  tbl_svysummary(
-    by = gpe_age,
-    include = c(Nbr_compte_MS),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nbr_compte_MS_age**")
 
-table_Nbr_compte_MS_age
-```
+## Utilisation des médias sociaux
 
-
-# 14.5. Nombre de comptes MSN inscrits selon le  sexe 
-```{r message=FALSE, warning=FALSE}
-table_Nbr_compte_MS_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by = sexe,
-    include = c(Nbr_compte_MS),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nbr_compte_MS_sexe**")
-
-table_Nbr_compte_MS_sexe
-```
-
-
-# 14.6. Nombre de comptes MSN regulier  inscrits selon le groupe d'âge 
-```{r message=FALSE, warning=FALSE}
-table_Nbr_compte_MS_regulier_age <- 
-  data_design %>%
-  tbl_svysummary(
-    by = gpe_age,
-    include = c(Nbr_compte_MS_regulier),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nbr_compte_MS_regulier_age**")
-
-table_Nbr_compte_MS_regulier_age
-```
-
-
-# 14.7. Nombre de comptes MSN regulier inscrits selon le sexe 
-```{r message=FALSE, warning=FALSE}
-table_Nbr_compte_MS_regulier_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by = sexe,
-    include = c(Nbr_compte_MS_regulier),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nbr_compte_MS_regulier_sexe**")
-
-table_Nbr_compte_MS_regulier_sexe
-```
-
-
-# 14.8. Nombres d’heures passées sur les MSN par jour selon le sexe
-```{r message=FALSE, warning=FALSE}
-table_Nombre_d_heures_sur_RSM_Jour_sexe <- 
-  data_design %>%
-  tbl_svysummary(
-    by = sexe,
-    include = c(Nombre_d_heures_sur_RSM_Jour),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nombre_d_heures_sur_RSM_Jour_sexe**")
-
-table_Nombre_d_heures_sur_RSM_Jour_sexe
-```
-
-# 14.9. Nombres d’heures passées sur les MSN par jour selon l'age
-```{r message=FALSE, warning=FALSE}
-table_Nombre_d_heures_sur_RSM_Jour_age <- 
-  data_design %>%
-  tbl_svysummary(
-    by = gpe_age,
-    include = c(Nombre_d_heures_sur_RSM_Jour),
-    statistic = list(
-    all_continuous() ~ "{mean}",
-    all_categorical() ~ "{p} ({n})"
-  ),
-  digits=~ c(1,0),
-  missing = "no"  
-) %>%
-  add_overall() %>%  
-  add_p() %>%        
-  modify_header(label = "**Caractéristiques**") %>% 
-  modify_caption("**Nombre_d_heures_sur_RSM_Jour_age**")
-
-table_Nombre_d_heures_sur_RSM_Jour_age
-```
-# 14.10. l’utilisation des médias sociaux selon l’âge
-```{r message=FALSE, warning=FALSE}
+### Utilisation des médias sociaux selon le groupe d’âge
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Usage_MS_age <- 
   data_design %>%
   tbl_svysummary(
@@ -935,8 +1124,9 @@ table_Usage_MS_age
 ```
 
 
-# 14.10. l’utilisation des médias sociaux selon le sexe
-```{r message=FALSE, warning=FALSE}
+### Utilisation des médias sociaux  selon le sexe
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Usage_MS_sexe <- 
   data_design %>%
   tbl_svysummary(
@@ -956,8 +1146,33 @@ table_Usage_MS_sexe <-
 
 table_Usage_MS_sexe
 ```
-# . Création du graphique selon l’utilisation des médias sociaux selon le sexe et l'age 
-```{r}
+
+
+### Utilisation des médias sociaux  selon lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Usage_MS_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Usage_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Usage_MS_sexe selon le lieu de residence**")
+
+table_Usage_MS_Lieu_de_residence
+```
+
+### Création du graphique selon l’utilisation des médias sociaux selon le sexe et l'age 
+```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="Utilisation des médias sociaux selon le sexe et l'age", fig.align='center', out.width="90%"}
 library(survey)
 library(ggplot2)
 library(dplyr)
@@ -987,72 +1202,231 @@ ggplot(graph_data, aes(x = gpe_age, y = p, fill = Usage_MS)) +
 
 ```
 
-# . Création du graphique selon l’utilisation des médias sociaux selon le sexe 
-```{r}
-library(survey)
-library(ggplot2)
-library(dplyr)
-library(srvyr)
 
-# Conversion en objet srvyr si ce n'est pas déjà fait
-data_svy <- as_survey_design(data_design)
+## Nombre de comptes MSN inscrits
+\newpage
+### Nombre de comptes MSN inscrits selon le groupe d'âge 
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nbr_compte_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_age**")
 
-# Calcul des proportions pondérées par sexe et groupe d'âge
-graph_data <- data_svy %>%
-  group_by(sexe, Usage_MS) %>%
-  summarize(p = survey_mean(vartype = "ci")) %>%
-  filter(!is.na(Usage_MS))
-
-# Création du graphique
-ggplot(graph_data, aes(x = sexe, y = p, fill = Usage_MS)) +
-  geom_bar(stat = "identity", position = "fill") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  labs(
-    title = "Utilisation des médias sociaux selon le sexe",
-    x = "Groupe d’âge",
-    y = "Proportion",
-    fill = "Utilisation des médias sociaux"
-  ) +
-  theme_minimal()
-
-```
-
-# . Création du graphique selon l’utilisation des médias sociaux selon le groupe d'age
-```{r}
-library(survey)
-library(ggplot2)
-library(dplyr)
-library(srvyr)
-
-# Conversion en objet srvyr si ce n'est pas déjà fait
-data_svy <- as_survey_design(data_design)
-
-# Calcul des proportions pondérées par sexe et groupe d'âge
-graph_data <- data_svy %>%
-  group_by( gpe_age, Usage_MS) %>%
-  summarize(p = survey_mean(vartype = "ci")) %>%
-  filter(!is.na(Usage_MS))
-
-# Création du graphique
-ggplot(graph_data, aes(x = gpe_age, y = p, fill = Usage_MS)) +
-  geom_bar(stat = "identity", position = "fill") +
-  scale_y_continuous(labels = scales::percent_format()) +
-  labs(
-    title = "Utilisation des médias sociaux selon le groupe  d’âge",
-    x = "Groupe d’âge",
-    y = "Proportion",
-    fill = "Utilisation des médias sociaux"
-  ) +
-  theme_minimal()
-
+table_Nbr_compte_MS_age
 ```
 
 
+### Nombre de comptes MSN inscrits selon le sexe 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nbr_compte_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_sexe**")
 
-# II. MARQUEURS OBJECTIFS 
+table_Nbr_compte_MS_sexe
+```
 
-# II.1. Marqueurs objectifs selon le sexe
-```{r message=FALSE, warning=FALSE}
+
+###  Nombre de comptes MSN inscrits selon le lieu de residence 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Nbr_compte_MS),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_sexe**")
+
+table_Nbr_compte_MS_Lieu_de_residence
+```
+
+
+## Nombre de comptes MSN regulier  
+
+### Nombre de comptes MSN regulier inscrits selon le groupe d'âge 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+
+table_Nbr_compte_MS_regulier_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_regulier_age**")
+
+table_Nbr_compte_MS_regulier_age
+```
+
+
+### Nombre de comptes MSN regulier inscrits selon le sexe 
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_regulier_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_regulier_sexe**")
+
+table_Nbr_compte_MS_regulier_sexe
+```
+\vspace{1cm}
+### Nombre de comptes MSN regulier inscrits selon le lieu de residence
+\newpage
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nbr_compte_MS_regulier_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Nbr_compte_MS_regulier),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nbr_compte_MS_regulier_Lieu_de_residence**")
+
+table_Nbr_compte_MS_regulier_Lieu_de_residence
+```
+
+
+## Nombres d’heures passées sur les MSN par jour 
+
+###  Nombres d’heures passées sur les MSN par jour selon le groupe d' âge
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nombre_d_heures_sur_RSM_Jour_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nombre_d_heures_sur_RSM_Jour_age**")
+
+table_Nombre_d_heures_sur_RSM_Jour_age
+```
+
+
+### Nombres d’heures passées sur les MSN par jour selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nombre_d_heures_sur_RSM_Jour_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nombre_d_heures_sur_RSM_Jour_sexe**")
+
+table_Nombre_d_heures_sur_RSM_Jour_sexe
+```
+
+
+### Nombres d’heures passées sur les MSN par jour selon le lieu de residence
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_Nombre_d_heures_sur_RSM_Jour_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Nombre_d_heures_sur_RSM_Jour_Lieu_de_residence**")
+
+table_Nombre_d_heures_sur_RSM_Jour_Lieu_de_residence
+```
+
+
+# Analyse des marqueurs objectifs et subjectifs 
+
+## Analyse des marqueurs objectifs 
+
+### Marqueurs objectifs selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Marqueurs_objectifs_sexe <- 
   data_design %>%
   tbl_svysummary(
@@ -1076,8 +1450,8 @@ table_Marqueurs_objectifs_sexe
 
 
 
-# II.2. Marqueurs objectifs selon l'age 
-```{r message=FALSE, warning=FALSE}
+### Marqueurs objectifs selon l'age 
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Marqueurs_objectifs_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -1102,8 +1476,8 @@ table_Marqueurs_objectifs_gpe_age
 
 
 
-# II.3. Marqueurs objectifs selon le lieu de residence 
-```{r message=FALSE, warning=FALSE}
+### Marqueurs objectifs selon le lieu de residence 
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 table_Marqueurs_objectifs_Lieu_de_residence <- 
   data_design %>%
@@ -1128,10 +1502,9 @@ table_Marqueurs_objectifs_Lieu_de_residence
 
 
 
-# II.4.Création du graphique pour l'ensemble de l'échantillon 
+### Création du graphique pour l'ensemble de l'échantillon 
 
-```{r message=FALSE, warning=FALSE}
-
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données et calculer les pourcentages
 data_long <- data_design$variables %>%
   select(Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
@@ -1169,9 +1542,9 @@ a
 ```
 
 
-# II.5. Création du graphique selon le sexe 
+### Création du graphique selon le sexe 
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Supposons que data_P2 soit votre dataframe initial
 
@@ -1204,12 +1577,12 @@ b<-ggplot(data_sexe, aes(x = Marqueur, y = Percentage, fill = Importance)) +
 # Sauvegarder le graphique 
 ggsave(here("figures", "marqueur_objectif", "marqueur_objectif_selon_sexe_plot.png"), plot = a, width = 10, height = 6)
 
-b
+ b
 ```
 
 
-# II.6. Création du graphique selon l'âge
-```{r message=FALSE, warning=FALSE}
+### Création du graphique selon l'âge
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données selon le groupe d'age et calculer les pourcentages
 data_gpe_age <- data_design$variables %>%
   select(gpe_age, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
@@ -1245,8 +1618,8 @@ c
 
 
 
-# II.7. Création du graphique selon le milieu de résidence 
-```{r message=FALSE, warning=FALSE}
+### Création du graphique selon le milieu de résidence 
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Regrouper les données selo le milieu de residence et calculer les pourcentages
 data_Lieu_de_residence <- data_design$variables %>%
@@ -1283,9 +1656,9 @@ d
 
 
 
-# II.8. Création du graphique selon l'utilisation des médias sociaux 
+### Création du graphique selon l'utilisation des médias sociaux 
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données selon l'utilisation des médias sociaux et calculer les pourcentages
 data_Comptes_medias_sociaux <- data_design$variables %>%
   select(Usage_MS, Quiter_nid, Emploi_TPL, Vivre_en_couple, Marier_1er_fois, Parent_1er_fois) %>%
@@ -1318,11 +1691,11 @@ e
 ```
 
 
-#III . Ensemble de l'echantillon
+### Somme des marqueurs pour l'ensemble de l'echantillon
 
-# III.1.	Graphique de barres empilées pour l’ensemble de l’échantillon
+#### Graphique de barres empilées pour l’ensemble de l’échantillon
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Création du graphique à barres avec pourcentages affichés
 f <- ggplot(data_design$variables, aes(x = Somme_Importance, fill = Somme_Importance)) +
@@ -1346,8 +1719,8 @@ f
 
 ```
  
-# III.2.  Graphique avec la somme des marqueurs selon l'age
-```{r message=FALSE, warning=FALSE}
+#### Somme des marqueurs objectifs selon l'age
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données par groupe d'âge et par modalité de Somme_Importance,
 # et calculer le nombre d'individus et le pourcentage dans chaque groupe
 data_gpe_age <- data_design$variables %>%
@@ -1386,8 +1759,8 @@ i
 
 
 
-# III.3. Graphique avec la somme des marqueurs selon le sexe
-```{r}
+#### Somme des marqueurs objectifs selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données par sexe et par modalité de Somme_Importance,
 # et calculer le nombre d'individus et le pourcentage dans chaque groupe
 data_sexe <- data_design$variables %>%
@@ -1424,9 +1797,10 @@ j
 ```
 
 
-# III.4. Graphique avec la somme des marqueurs selon le milieu de residence
+#### Somme des marqueurs objectifs selon le milieu de residence
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 data_Lieu_de_residence <- data_design$variables %>%
   group_by(Lieu_de_residence, Somme_Importance) %>%
   summarise(Count = n()) %>%
@@ -1463,8 +1837,8 @@ ggsave(here("figures","marqueur_objectif", "_somme_importance_selon_residence_pl
 k
 ```
 
-# III.5. Graphique avec la somme des marqueurs Selon le utilisation des médias  
-```{r message=FALSE, warning=FALSE}
+#### Somme des marqueurs objectifs selon le utilisation des médias  
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 data_Comptes_medias_sociaux <- data_design$variables %>%
   group_by(Usage_MS, Somme_Importance) %>%
@@ -1502,10 +1876,10 @@ l
 
 
 
-# IV. Classification
+### Classification
 
-# IV.1. Dindogramme pour les marqueurs objectis
-```{r message=FALSE, warning=FALSE}
+#### Dindogramme pour les marqueurs objectis
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 #install.packages(c("dplyr", "dendextend", "ade4", "ggdendro", "fastcluster", "FactoMineR"))
 
@@ -1540,18 +1914,18 @@ arbre <- hclust(md, method = "ward.D2")
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 #meilleure partition entre 3 et 20 classes.
 best.cutree(arbre)
 ```
 
-#Affichage 
-```{r}
+####  Affichage 
+```{r, echo=T, message=FALSE, warning=FALSE}
 ggdendrogram(arbre, labels = FALSE)
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Coloration des branches en fonction des clusters
 library(ggplot2)
 ggplot(color_branches(arbre, k = 6), labels = FALSE)
@@ -1559,29 +1933,31 @@ ggplot(color_branches(arbre, k = 6), labels = FALSE)
 ```
 
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #Decoupage pour une analyse fine
-```{r}
 typo <- cutree(arbre, 6)
 freq(typo)
 data_interest$typo<- cutree(arbre,6)
 ```
 
-# 22. Caractériser la typologie
-```{r}
+#### Typologie
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_interest %>%
   tbl_summary(by = typo)
 ```
 
 
-#classification avec les variables 
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+##classification avec les variables 
 #data_interest
 ```
 
 
 
-# IV.2. DindogrammeCAH avec l’extension FactoMineR pour les marqueurs objectis
-```{r message=FALSE, warning=FALSE}
+### DindogrammeCAH avec l’extension FactoMineR pour les marqueurs objectis
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 data_interest <- data_design$variables %>%
   select(Somme_Importance,sexe,gpe_age,Lieu_de_residence) %>%
@@ -1598,29 +1974,32 @@ cah <- HCPC(acm2, graph = FALSE)
 ```
 
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #Affichage du cluster en 3 partitions
-```{r}
 plot(cah, choice = "tree")
 ```
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #affichage en 3D
-```{r}
 plot(cah, choice = "3D.map")
 ```
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #Affichage en en bar
-```{r}
 plot(cah, choice = "bar")
 ```
 
 
-#Affichage 
-```{r}
+ 
+```{r, echo=FALSE, message=FALSE, warning=FALSE}
 plot(cah, choice = "map")
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 #cah$data.clust
 ```
 
@@ -1630,11 +2009,10 @@ plot(cah, choice = "map")
 
 
 
-# V. MARQUEURS SUBJECTIFS
+## Analyse des marqueurs subjectifs 
 
-# V.1. Marqueurs subjectifs selon le sexe
-```{r message=FALSE, warning=FALSE}
-
+### Marqueurs subjectifs selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Créer l'objet de design en tenant compte des pondérations
 table_Marqueurs_subjectifs_sexe <- 
   data_design %>%
@@ -1656,8 +2034,8 @@ table_Marqueurs_subjectifs_sexe <-
 table_Marqueurs_subjectifs_sexe
 ```
 
-# V.2. Marqueurs subjectifs selon l'age
-```{r message=FALSE, warning=FALSE}
+### Marqueurs subjectifs selon l'age
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Marqueurs_subjectifs_gpe_age <- 
   data_design %>%
   tbl_svysummary(
@@ -1676,12 +2054,11 @@ table_Marqueurs_subjectifs_gpe_age <-
   modify_caption("**table_Marqueurs_subjectifs_gpe_age**")
 
 table_Marqueurs_subjectifs_gpe_age
-
 ```
 
 
-# V.3. Marqueurs subjectifs selon le lieu de residence
-```{r message=FALSE, warning=FALSE}
+### Marqueurs subjectifs selon le lieu de residence
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Marqueurs_subjectifs_Lieu_de_residence <- 
   data_design %>%
   tbl_svysummary(
@@ -1704,8 +2081,8 @@ table_Marqueurs_subjectifs_Lieu_de_residence
 
 
 
-# V.4. Marqueurs subjectifs selon l'utilisation des médias sociaux
-```{r message=FALSE, warning=FALSE}
+### Marqueurs subjectifs selon l'utilisation des médias sociaux
+```{r, echo=T, message=FALSE, warning=FALSE}
 table_Marqueurs_subjectifs_Comptes_medias_sociaux <- 
   data_design %>%
   tbl_svysummary(
@@ -1730,11 +2107,9 @@ table_Marqueurs_subjectifs_Comptes_medias_sociaux
 
 
 
-# VI. Echantillonnange
+### Gaphique pour tout l' Echantillon
 
-# VI.1. Gaphique Echantillonnange
-
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(dplyr)
 library(tidyr)
@@ -1777,9 +2152,9 @@ n
 
 
 
-# VI.2.  Création du graphique selon le sexe 
+###   Graphique des marqueurs subjectifs selon le sexe 
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données par sexe et calculer les pourcentages
 data_sexe <- data_design$variables %>%
   select(sexe,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
@@ -1813,8 +2188,8 @@ n1
 ```
 
 
-# VI.3.  Création du graphique selon l'age 
-```{r message=FALSE, warning=FALSE}
+###  Graphique des marqueurs selon l'age 
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données par sexe et calculer les pourcentages
 data_gpe_age <- data_design$variables %>%
   select(gpe_age,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
@@ -1848,9 +2223,9 @@ n2
 ```
 
 
-# VI.4.    Création du graphique selon le lieu de residence 
+### Graphique des marqueuers subjectifs selon le lieu de residence 
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Regrouper les données selon le lieu de residence et calculer les pourcentages
 data_Lieu_de_residence <- data_design$variables %>%
@@ -1886,9 +2261,9 @@ n3
 ```
 
 
-# VI.5. Création du graphique selon l'utilisation des médias sociaux 
+### Graphique des marqueurs subjectifs selon l'utilisation des médias sociaux 
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Regrouper les données  et calculer les pourcentages
 data_Comptes_medias_sociaux <- data_design$variables %>%
   select(Usage_MS,Propres_responsabilites, Propres_decisions, Independance_finance) %>%
@@ -1923,9 +2298,9 @@ n4
 
 
 
-# VI.6. Graphique avec  la somme des marqueurs subjectifs pour l'ensemble de l'echantillon
+### Graphique avec  la somme des marqueurs subjectifs pour l'ensemble de l'echantillon
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 
 # Création du graphique à barres avec pourcentages affichés
 o<-ggplot(data_design, aes(x = Somme_Importance_subjectif, fill = Somme_Importance_subjectif)) +
@@ -1949,8 +2324,8 @@ o
 ```
 
 
-## VI.7.  Somme marqueurs subjectifs selon l'age
-```{r message=FALSE, warning=FALSE}
+####  Somme marqueurs subjectifs selon l'age
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_gpe_age <- data_design$variables %>%
   group_by(gpe_age, Somme_Importance_subjectif) %>%
   summarise(Count = n()) %>%
@@ -1984,8 +2359,8 @@ o1
 ```
 
 
-# VI.8. selon le sexe
-```{r message=FALSE, warning=FALSE}
+#### Sommme des marqueurs subjectifs  selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_sexe <- data_design$variables %>%
   group_by(sexe, Somme_Importance_subjectif) %>%
   summarise(Count = n()) %>%
@@ -2020,8 +2395,8 @@ o2
 
 
 
-# VI.9.  selon le milieu de residence
-```{r message=FALSE, warning=FALSE}
+#### Somme des marqueurs selon le milieu de residence
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_Lieu_de_residence <- data_design$variables %>%
   group_by(Lieu_de_residence, Somme_Importance_subjectif) %>%
   summarise(Count = n()) %>%
@@ -2056,8 +2431,8 @@ o3
 
 
 
-# VI.10. selon l'utilisation des médias 
-```{r}
+#### Somme des marqueurs subjectifs selon l'utilisation des médias 
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_Comptes_medias_sociaux <- data_design$variables %>%
   group_by(Usage_MS, Somme_Importance_subjectif) %>%
   summarise(Count = n()) %>%
@@ -2094,11 +2469,11 @@ o4
 
 
 
-# VII. Classification subjectifs
+### Classification subjectifs
 
-# VII.1.  Dindogramme subjectifs
+####  Dindogramme subjectifs
 
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Chargement des bibliothèques nécessaires
 library(dplyr)
 library(dendextend)
@@ -2142,39 +2517,47 @@ arbre <- hclust(md, method = "ward.D2")
 
 ```
 
-#meilleure partition entre 3 et 20 classes.
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #meilleure partition entre 3 et 20 classes.
 best.cutree(arbre)
 
 ```
 
 
-#
-```{r}
+#### Arbre 
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 ggdendrogram(arbre, labels = FALSE)
+
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 # Coloration des branches en fonction des clusters
 library(ggplot2)
 ggplot(color_branches(arbre, k = 10), labels = FALSE)
+
 ```
 
+#### Typologie
+```{r, echo=T, message=FALSE, warning=FALSE}
 
-```{r}
 typo <- cutree(arbre, 10)
 freq(typo)
 data_interest$typo<- cutree(arbre,10)
+
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 data_interest %>%
   tbl_summary(by = typo)
+
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 #data_interest
 ```
 
@@ -2182,8 +2565,8 @@ data_interest %>%
 
 
 
-# VII.2.  Classification subjectifs FactoMineR
-```{r message=FALSE, warning=FALSE}
+####  Classification subjectifs FactoMineR
+```{r, echo=T, message=FALSE, warning=FALSE}
 library(FactoMineR)
 
 data_interest<-0
@@ -2202,41 +2585,39 @@ cah <- HCPC(acm2, graph = FALSE)
 ```
 
 
-#Affichage du cluster en 3 partitions
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 plot(cah, choice = "tree")
 ```
 
 #affichage en 3D
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 plot(cah, choice = "3D.map")
 ```
 
-#Affichage en en bar
-```{r}
+#### Affichage
+```{r, echo=T, message=FALSE, warning=FALSE}
 plot(cah, choice = "bar")
 ```
 
 
-#Affichage 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 plot(cah, choice = "map")
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 #cah$data.clust
 ```
 
 
 
 
-# VIII. Marqueurs objectifs et subjectifs
+# Observations simultanées des marqueurs objectifs et subjectifs
 
+## Graphique pour les Marqueurs objectifs et subjectifs  
 
-# VIII.1. Graphique pour les Marqueurs objectifs et subjectifs  
-
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Préparation des données au format long
 data_long <- data_design$variables %>%
   select(Marq_objectif, Marq_subjectif) %>%
@@ -2270,17 +2651,9 @@ graphique
 
 ```
 
+## Classification pour les deux marqueurs et choix du meilleur k
 
-
-
-
-
-
-
-
-# VIII.2. Classification dindo
-
-```{r message=FALSE, warning=FALSE}
+```{r, echo=T, message=FALSE, warning=FALSE}
 library(dplyr)
 library(dendextend)
 library(ade4)
@@ -2322,48 +2695,460 @@ arbre <- hclust(md, method = "ward.D2")
 ```
 
 
-#meilleure partition entre 3 et 20 classes.
-```{r}
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 #meilleure partition entre 3 et 20 classes.
 best.cutree(arbre)
 
 ```
 
 
-#
-```{r}
+## Arbre de decisison
+```{r, echo=T, message=FALSE, warning=FALSE}
 ggdendrogram(arbre, labels = FALSE)
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Coloration des branches en fonction des clusters
 library(ggplot2)
 ggplot(color_branches(arbre, k = 9), labels = FALSE)
 ```
 
-
-```{r}
+## Typologie
+```{r, echo=T, message=FALSE, warning=FALSE}
 typo <- cutree(arbre, 9)
 freq(typo)
 data_interest$typo<- cutree(arbre,9)
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_interest %>%
   tbl_summary(by = typo)
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 #data_interest
 ```
 
 
-# IX.  Regression  
+================================================
+================================================
+#regression avec la variable Justice sociale 
+================================================
+================================================
 
-# 1. Fonction pour exécuter la régression logistique
-```{r message=FALSE, warning=FALSE}
+```{r}
+library("MASS")
+```
 
+
+
+```{r}
+
+data_P3_$Justice_sociale <- factor(
+  data_P3_$Justice_sociale,
+  ordered = TRUE,
+  levels = c(1, 2, 3, 4, 5)
+)
+
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Justice_sociale_rec = ifelse(Justice_sociale %in% c(1, 2, 3), 0, 1)
+  )
+
+```
+
+
+```{r}
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Justice_sociale_rec = ifelse(Justice_sociale %in% c(1, 2, 3), 0, 1),
+    Influencer_sur_autrui_rec = ifelse(Influencer_sur_autrui %in% c(1, 2, 3), 0, 1),
+    Monde_en_paix_rec = ifelse(Monde_en_paix %in% c(1, 2, 3), 0, 1),
+    Securite_pour_famille_rec = ifelse(Securite_pour_famille %in% c(1, 2, 3), 0, 1),
+    Respect_et_armonie_avec_terre_rec = ifelse(Respect_et_armonie_avec_terre %in% c(1, 2, 3), 0, 1),
+    Honorer_parents_aines_rec = ifelse(Honorer_parents_aines %in% c(1, 2, 3), 0, 1),
+    Autorite_commander_autrui_rec = ifelse(Autorite_commander_autrui %in% c(1, 2, 3), 0, 1),
+    Proteger_environnement_rec = ifelse(Proteger_environnement %in% c(1, 2, 3), 0, 1),
+    Richesse_materiel_argent_rec = ifelse(Richesse_materiel_argent %in% c(1, 2, 3), 0, 1),
+    Auto_discipline_rec = ifelse(Auto_discipline %in% c(1, 2, 3), 0, 1),
+    Union_avec_la_nature_rec = ifelse(Union_avec_la_nature %in% c(1, 2, 3), 0, 1),
+    Equite_egalite_des_chances_rec = ifelse(Equite_egalite_des_chances %in% c(1, 2, 3), 0, 1)
+  )
+
+
+
+vars_rec <- c(
+  "Justice_sociale_rec",
+  "Influencer_sur_autrui_rec",
+  "Monde_en_paix_rec",
+  "Securite_pour_famille_rec",
+  "Respect_et_armonie_avec_terre_rec",
+  "Honorer_parents_aines_rec",
+  "Autorite_commander_autrui_rec",
+  "Proteger_environnement_rec",
+  "Richesse_materiel_argent_rec",
+  "Auto_discipline_rec",
+  "Union_avec_la_nature_rec",
+  "Equite_egalite_des_chances_rec"
+)
+
+
+modeles_bin <- list()
+
+```
+
+
+
+```{r}
+# Étape 1 — Liste de variables dépendantes
+vars_rec <- c(
+  "Justice_sociale_rec",
+  "Influencer_sur_autrui_rec",
+  "Monde_en_paix_rec",
+  "Securite_pour_famille_rec",
+  "Respect_et_armonie_avec_terre_rec",
+  "Honorer_parents_aines_rec",
+  "Autorite_commander_autrui_rec",
+  "Proteger_environnement_rec",
+  "Richesse_materiel_argent_rec",
+  "Auto_discipline_rec",
+  "Union_avec_la_nature_rec",
+  "Equite_egalite_des_chances_rec"
+)
+
+# Boucle de modélisation logistique
+modeles_bin <- lapply(vars_rec, function(var) {
+  glm(as.formula(paste(var, "~ Usage_MS")), data = data_P3_, family = binomial)
+})
+names(modeles_bin) <- vars_rec
+
+# Extraction des OR et IC pour chaque modèle
+resultats <- lapply(names(modeles_bin), function(var) {
+  mod <- modeles_bin[[var]]
+  
+  or_ci <- exp(cbind(OddsRatio = coef(mod), confint(mod)))  
+  or_ci <- as.data.frame(or_ci)
+  or_ci$Variable <- rownames(or_ci)
+  or_ci$Outcome <- var
+  rownames(or_ci) <- NULL
+  
+  or_ci
+})
+
+#  Combinaison dans un seul tableau
+table_OR <- bind_rows(resultats) %>%
+  select(Outcome, Variable, OddsRatio, `2.5 %`, `97.5 %`) %>%
+  filter(Variable != "(Intercept)")  
+
+# Étape 5 — Afficher le tableau final
+table_OR
+
+
+```
+
+
+```{r}
+table_OR <- table_OR %>%
+  rename(
+    Variable_étudiée = Outcome,
+    Coef = OddsRatio,
+    Min= `2.5 %`,
+    Max = `97.5 %`
+  )
+
+
+table_OR1 <- table_OR %>%
+  select(-Variable)
+
+table_OR1
+
+df <- table_OR1 %>%
+  mutate(
+    ymin = Min,
+    ymax = Max
+  )
+df
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(df, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") + 
+  coord_flip() +
+  labs(
+    title = "Résultats des régressions logistiques-bruts",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    axis.text.x = element_text(angle = 0, hjust = 1),
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+```
+
+
+
+#Avec toutes les variables 
+```{r}
+modeles_bin <- lapply(vars_rec, function(var) {
+  formule <- as.formula(paste(
+    var, "~ Usage_MS + gpe_age + sexe + lieu_de_naissance +",
+    "Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant"
+  ))
+  glm(formule, data = data_P3_, family = binomial)
+})
+
+names(modeles_bin) <- vars_rec
+
+```
+
+
+```{r}
+library(broom)
+
+resultats <- lapply(names(modeles_bin), function(var) {
+  mod <- modeles_bin[[var]]
+  
+  # Odds ratios et IC
+  or_ci <- exp(cbind(OddsRatio = coef(mod), confint(mod)))
+  or_ci <- as.data.frame(or_ci)
+  or_ci$Variable <- rownames(or_ci)
+  or_ci$Variable_étudiée <- var
+  rownames(or_ci) <- NULL
+  
+  # Ajouter p-values
+  tidy_mod <- tidy(mod)
+  or_ci <- left_join(or_ci, tidy_mod[, c("term", "p.value")],
+                     by = c("Variable" = "term"))
+  
+  or_ci
+})
+
+# Combiner en un seul tableau
+table_OR2 <- bind_rows(resultats) %>%
+  select(Variable_étudiée, Variable, OddsRatio, `2.5 %`, `97.5 %`) %>%
+  filter(Variable == "Usage_MSOui") %>%  # On garde seulement Usage_MS
+  rename(
+    Coef = OddsRatio,
+    Min = `2.5 %`,
+    Max = `97.5 %`
+  )
+
+
+df_plot <- table_OR2 %>%
+  mutate(
+    ymin = Min,
+    ymax = Max
+  )
+
+df_plot
+```
+
+
+```{r}
+library(ggplot2)
+
+ggplot(df_plot, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Résultats des régressions logistiques-bruts-les variables étudiées",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+```
+
+
+#Comparer les resultats
+```{r}
+# Installation (si nécessaire)
+#install.packages("gridExtra")
+
+# Chargement
+library(ggplot2)
+library(gridExtra)
+
+# Exemple de tes deux graphiques
+plot1 <- ggplot(df, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") + 
+  coord_flip() +
+  labs(
+    title = "Résultats- bruts",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+plot2 <- ggplot(df_plot, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Résultats-controlés",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# Affichage côte à côte
+grid.arrange(plot1, plot2, ncol = 2)
+
+```
+
+
+
+```{r}
+install.packages("gridExtra")
+library(gridExtra)
+
+grid.arrange(plot1, plot2, ncol = 2)
+
+```
+
+
+
+===============
+#Regression logistique ordinale 
+===============
+```{r}
+#Usage des médias sociaux (a un compte ou non)
+mod1_ord <- polr(Justice_sociale ~ Usage_MS + gpe_age + sexe +lieu_de_naissance + Diplome_du_repondant +  Occupation_du_repondant + Revenu_annuel_du_repondant,
+                 data = data_P3_, Hess = TRUE)
+
+summary(mod1_ord)
+
+
+#Nombre de comptes réguliers
+mod2_ord <- polr(Justice_sociale ~ Nbr_compte_MS_regulier + gpe_age + sexe +lieu_de_naissance + Diplome_du_repondant + + Occupation_du_repondant + Revenu_annuel_du_repondant,
+                 data = data_P3_, Hess = TRUE)
+summary(mod2_ord)
+
+
+#Temps passé sur les médias sociaux
+mod3_ord <- polr(Justice_sociale ~ Nombre_d_heures_sur_RSM_Jour + gpe_age + sexe +lieu_de_naissance + Diplome_du_repondant + + Occupation_du_repondant + Revenu_annuel_du_repondant,
+                 data = data_P3_, Hess = TRUE)
+
+summary(mod3_ord)
+```
+
+
+#Affihage des resultats
+```{r}
+
+
+# Calcul des p-values
+ctable1 <- coef(summary(mod1_ord))
+p_values1 <- pnorm(abs(ctable1[, "t value"]), lower.tail = FALSE) * 2
+cbind(ctable1, "p value" = p_values1)
+
+
+# Calcul des p-values
+ctable2 <- coef(summary(mod2_ord))
+p_values2 <- pnorm(abs(ctable2[, "t value"]), lower.tail = FALSE) * 2
+cbind(ctable2, "p value" = p_values2)
+
+
+# Calcul des p-values
+ctable3 <- coef(summary(mod3_ord))
+p_values3 <- pnorm(abs(ctable3[, "t value"]), lower.tail = FALSE) * 2
+cbind(ctable3, "p value" = p_values3)
+
+```
+
+
+==================
+#Regressions logistiques binaires
+===================
+```{r}
+
+mod0_bin <- glm(
+  Justice_sociale_rec ~ Usage_MS,
+  data = data_P3_,
+  family = binomial
+)
+
+# Usage des médias sociaux (a un compte ou non)
+mod1_bin <- glm(
+  Justice_sociale_rec ~ Usage_MS + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+#  Nombre de comptes réguliers
+mod2_bin <- glm(
+  Justice_sociale_rec ~ Nbr_compte_MS_regulier + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+#  Temps passé sur les médias sociaux
+mod3_bin <- glm(
+  Justice_sociale_rec ~ Nombre_d_heures_sur_RSM_Jour + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+```
+
+
+```{r}
+
+summary(mod0_bin)
+exp(cbind(OddsRatio = coef(mod0_bin), confint(mod0_bin)))
+
+
+summary(mod1_bin)
+exp(cbind(OddsRatio = coef(mod1_bin), confint(mod1_bin)))
+
+
+summary(mod2_bin)
+exp(cbind(OddsRatio = coef(mod2_bin), confint(mod2_bin)))
+
+
+summary(mod3_bin)
+exp(cbind(OddsRatio = coef(mod3_bin), confint(mod3_bin)))
+
+```
+
+
+
+
+
+
+
+
+#       Regression logistique          
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+#  Fonction pour exécuter la régression logistique
 #install.packages(c("dplyr", "broom", "ggplot2", "purrr", "forestmodel"))
 
 library(dplyr)
@@ -2386,10 +3171,10 @@ run_logistic_regression <- function(dep_var, indep_vars, model_name, data) {
 ```
 
 
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
 # 3 .Forest avec forest_model 
-
-```{r}
-
 #Définition des variables dépendantes et indépendantes
 dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
                     "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
@@ -2409,8 +3194,19 @@ models <- lapply(dependent_vars, function(dep_var) {
 ```
 
 
+## Forest plot 
+dependent_vars <- c("Quiter_nid_rec", "Emploi_TPL_rec", "Vivre_en_couple_rec", 
+                    "Marier_1er_fois_rec", "Parent_1er_fois_rec", 
+                    "Propres_responsabilites_rec", "Propres_decisions_rec", 
+                    "Independance_finance_rec")
+                    
+    "Modèle 1a" = Nbr_compte_MS"
+    "Modèle 1b" =  Nbr_compte_MS_regulier
+    "Modèle 1c" =  Nbr_compte_MS + Nbr_compte_MS_regulier
+    "Modèle 2"  =  Nbr_compte_MS + Nbr_compte_MS_regulier + gpe_age + sexe + Lieu_de_residence
+    
+```{r, echo=T, message=FALSE, warning=FALSE}
 # 3.1. Appliquer forest_model à chaque modèle en ajoutant des options de format
-```{r}
 # Appliquer forest_model à chaque modèle en ajoutant des options de format
 lapply(seq_along(models), function(i) {
   dep_var <- dependent_vars[i]
@@ -2427,8 +3223,10 @@ lapply(seq_along(models), function(i) {
 
 
 
-# 4.Regroupement des regression avec stargazer
-```{r , message=FALSE, warning=FALSE, echo=FALSE}
+## Regroupement des regression avec stargazer
+
+
+```{r , message=FALSE, warning=FALSE, echo=T}
 #install.packages(c("dplyr", "broom", "purrr", "stargazer"))
 
 # Charger les bibliothèques nécessaires
@@ -2478,8 +3276,8 @@ stargazer(models_flat, type = "html", title = "Résultats des régressions logis
 ```
 
 
-# 5. Insertion des variables
-```{r}
+##  Stargazer avec autres variables
+```{r, echo=T, message=FALSE, warning=FALSE}
 #install.packages(c("dplyr", "broom", "purrr", "stargazer"))
 # Charger les bibliothèques nécessaires
 library(dplyr)
@@ -2541,11 +3339,10 @@ stargazer(models_flat, type = "html", title = "Résultats des régressions logis
 
 
 
-# x. Forest plot avec  sjPlot
+## Forest plot avec  sjPlot
 
-
-# X.1. Variable Utilisation des médias 
-```{r}
+###  Variable Utilisation des médias 
+```{r, echo=T, message=FALSE, warning=FALSE}
 #install.packages("sjPlot")
 library(sjPlot)
 # Fonction pour générer un modèle logistique
@@ -2602,8 +3399,8 @@ ggsave(here("figures", "forestplot", "Utilisation des médias_forestplot.png"),
 
 
 
-# X.2.  nombre de de compte des médias
-```{r}
+###  nombre de de compte des médias
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
   formula <- as.formula(paste(dep_var, "~", indep_var))
@@ -2658,8 +3455,8 @@ ggsave(here("figures", "forestplot", "nombre de de compte des médias_forestplot
 ```
 
 
-# X.3. Variable utilisation de compte regulier
-```{r}
+### Variable utilisation de compte regulier
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
   formula <- as.formula(paste(dep_var, "~", indep_var))
@@ -2718,8 +3515,8 @@ ggsave(here("figures", "forestplot", "nombre de de compte regulier_forestplot.pn
 
 
 
-# X.4. Nombre d'heure par Jour
-```{r}
+###  Nombre d'heure par Jour
+```{r, echo=T, message=FALSE, warning=FALSE}
 library(sjPlot)
 library(ggplot2)
 library(here)
@@ -2773,8 +3570,8 @@ p
 
 
 
-# X.5. variables concernant les médias
-```{r}
+### variables concernant les médias
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Fonction pour générer un modèle logistique
 generate_logistic_model <- function(dep_var, indep_var, data) {
   formula <- as.formula(paste(dep_var, "~", indep_var))
@@ -2835,8 +3632,8 @@ ggsave(here("figures", "forestplot", "Toute _les variables_utilisation des médi
 ```
 
 
-# X.6. Inversion des axes pour la variables Utilisation des médias sociaux
-```{r}
+### Inversion des axes pour la variables Utilisation des médias sociaux
+```{r, echo=T, message=FALSE, warning=FALSE}
 library(gtsummary)
 library(dplyr)
 library(ggplot2)
@@ -2895,8 +3692,9 @@ ggsave(here("figures", "forestplot", "Utilisation_des_medias_forestplot_gtsummar
 ```
 
 
-# X.7. Comparaion des modeles  
-```{r}
+### Comparaion des modeles -----A normaliser d'abord avant de pouvoir comparer 
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 library(ggplot2)
 library(broom)
 library(dplyr)
@@ -2954,9 +3752,9 @@ ggplot(results, aes(x = term, y = estimate, color = model, shape = model)) +
 ```
 
 
-#Marqueur objectifs
-```{r}
 
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Marqueur objectifs
 # Définition de la fonction
 transform_values <- function(x) {
   ifelse(is.na(x), x, ifelse(x == 0, 6, x * 12))
@@ -2977,14 +3775,14 @@ data_P3_$nbre_annee_depuis_commencent_travail[is.na(data_P3_$nbre_annee_depuis_c
 
 ```
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 data_P3_$nbre_mois_retour_nid_familial_1ere_fois <- data_P3_$`BC2Q2H[SQ001]`
 data_P3_$nbre_mois_retour_nid_familial_1ere_fois[is.na(data_P3_$nbre_mois_retour_nid_familial_1ere_fois)] <- "Pas_revenu_chez_parent"
 
 ```
 
 
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Création de la nouvelle variable sans écraser l'ancienne
 data_P3_$nbre_année_marié_1er_fois <- data_P3_$BC2Q2F  
 
@@ -3006,7 +3804,7 @@ data_P3_$nbre_année_marié_1er_fois[is.na(data_P3_$nbre_année_marié_1er_fois)
 
 
 # Recodage generale marqueurs subjectifs
-```{r}
+```{r, echo=T, message=FALSE, warning=FALSE}
 # Remplacement des 0 par 6 et multiplication des autres valeurs par 12
 transform_values <- function(x) {
   ifelse(is.na(x), x, ifelse(x == 0, 6, x * 12))
@@ -3027,8 +3825,10 @@ data_P3_$nbre_annee_depuis_independant_financierement[is.na(data_P3_$nbre_annee_
 
 
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 #Classement des marqueurs  objectifs jugés plus important selon les individus
-```{r}
 # Définir les noms des colonnes de score
 score_vars <- c("Importance_quiter_nid", "Importance_emploi_TPL", 
                 "Importance_vivre_en_couple", "Importance_marie_1er_fois", 
@@ -3063,7 +3863,7 @@ data_marqueur$Marqueur_plus_important <- apply(data_marqueur[, score_vars], 1, f
 
 # Afficher un aperçu du résultat
 
-~#View(data_marqueur %>% select(Importance_quiter_nid,Importance_emploi_TPL, 
+#View(data_marqueur %>% select(Importance_quiter_nid,Importance_emploi_TPL, 
                             #Importance_vivre_en_couple,Importance_marie_1er_fois, 
                              #Importance_parent_1er_fois,Marqueur_plus_important))
 head(data_marqueur[, c(score_vars, "Marqueur_plus_important")])
@@ -3073,8 +3873,10 @@ head(data_marqueur[, c(score_vars, "Marqueur_plus_important")])
 
 
 
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+
 #Classement des marqueurs  subjectifs jugés plus important selon les individus
-```{r}
 # Définir les noms des colonnes subjectives
 subj_vars <- c("Importance_independant_finance", "Importance_propres_decisions", 
                "Importance_propres_responsabilites")
@@ -3107,9 +3909,488 @@ data_marqueur_subj$Marqueur_plus_important_subj <- apply(data_marqueur_subj[, su
 })
 
 # Afficher un aperçu du résultat
-View(data_marqueur_subj[, c(subj_vars, "Marqueur_plus_important_subj")])
+#View(data_marqueur_subj[, c(subj_vars, "Marqueur_plus_important_subj")])
+
+```
+
+
+#  Analyse de séquences 
+
+## Analyse de séquences des variables subjectifs 
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Définir les noms des colonnes subjectives
+subj_vars <- c("Importance_independant_finance", 
+               "Importance_propres_decisions", 
+               "Importance_propres_responsabilites")
+
+# Vérifier l'existence des colonnes
+if (!all(subj_vars %in% names(data_P3_))) {
+  stop("Certaines colonnes subjectives ne sont pas présentes dans data_P3_.")
+}
+
+# S'assurer que les colonnes sont numériques
+data_P3_[, subj_vars] <- lapply(data_P3_[, subj_vars], function(x) as.numeric(as.character(x)))
+
+# Fonction pour trier les noms des variables selon les règles demandées
+ordonner_par_valeur_et_nom <- function(x) {
+  valeurs <- as.numeric(x)
+  noms <- names(x)
+  
+  # Trier en ordre décroissant de valeur, puis alphabétique
+  classement <- noms[order(-valeurs, noms)]
+  
+  paste(classement, collapse = " | ")  # tu peux changer le séparateur si tu veux
+}
+
+# Appliquer la fonction ligne par ligne
+data_P3_$Marqueurs_ordonnés_subj <- apply(data_P3_[, subj_vars], 1, ordonner_par_valeur_et_nom)
+
+# Aperçu
+#View(data_P3_[, c(subj_vars, "Marqueurs_ordonnés_subj")])
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Vecteur des combinaisons
+combinaisons <- c(
+  "Importance_independant_finance | Importance_propres_decisions | Importance_propres_responsabilites",
+  "Importance_independant_finance | Importance_propres_responsabilites | Importance_propres_decisions",
+  "Importance_propres_decisions | Importance_propres_responsabilites | Importance_independant_finance",
+  "Importance_propres_decisions | Importance_independant_finance | Importance_propres_responsabilites",
+  "Importance_propres_responsabilites | Importance_propres_decisions | Importance_independant_finance",
+  "Importance_propres_responsabilites | Importance_independant_finance | Importance_propres_decisions"
+)
+
+# Création de la data frame
+df <- data.frame(
+  ID_combinaison = 1:6,
+  Combinaison = combinaisons
+)
+
+
+# Affichage
+#df
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Associer les ID de combinaison à chaque ligne de data_P3_
+data_P3_$Marqueurs_sub <- sapply(data_P3_$Marqueurs_ordonnés_subj, function(x) {
+  match_index <- match(x, df$Combinaison)
+  if (!is.na(match_index)) {
+    return(df$ID_combinaison[match_index])
+  } else {
+    return(NA)  # Si aucune correspondance trouvée
+  }
+})
+
+# Vérification rapide
+#table(data_P3_$Marqueurs_sub, useNA = "ifany")
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Sélectionner uniquement les colonnes souhaitées
+df_verif <- data_P3_[, c("Marqueurs_ordonnés_subj", "Marqueurs_sub")]
+
+# Afficher dans la console
+print(df_verif)
+
+# Ou bien dans une fenêtre de visualisation
+#View(df_verif)
+
+
+```
+
+### Visualisation des modalités ordonées
+```{r, echo=T, message=FALSE, warning=FALSE}
+
+library(ggplot2)
+# Préparer les données
+df_plot <- as.data.frame(table(data_P3_$Marqueurs_ordonnés_subj))
+names(df_plot) <- c("Combinaison", "Effectif")
+
+# Tri décroissant
+df_plot <- df_plot[order(-df_plot$Effectif), ]
+
+# Création d'un identifiant simplifié
+df_plot$ID <- factor(1:nrow(df_plot))
+
+# Graphique
+ggplot(df_plot, aes(x = ID, y = Effectif, fill = Combinaison)) +
+  geom_bar(stat = "identity") +
+  geom_text(aes(label = Effectif), vjust = -0.5, size = 3.5) +
+  labs(title = "Distribution des profils subjectifs",
+       x = "Profils (voir légende)",
+       y = "Effectif",
+       fill = "Combinaison de valeurs perçues\ncomme importantes") +
+  theme_minimal() +
+  theme(axis.text.x = element_blank(),
+        axis.ticks.x = element_blank(),
+        legend.position = "bottom") +  # ✅ ici : "bottom" correct
+  guides(fill = guide_legend(ncol = 2))  # ajuste à 2 colonnes si trop long
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(TraMineR)
+library(dplyr)
+library(stringr)
+
+# --- 1. Nettoyage, séparation des séquences et ajout de l'âge ---
+data_seq <- data_P3_ %>%
+  mutate(Marqueurs_split = str_split(Marqueurs_ordonnés_subj, " \\| ")) %>%
+  mutate(
+    M1 = sapply(Marqueurs_split, `[`, 1),
+    M2 = sapply(Marqueurs_split, `[`, 2),
+    M3 = sapply(Marqueurs_split, `[`, 3)
+  ) %>%
+  select(age, M1, M2, M3)  # Ajout de la variable age
+
+# --- 2. Recodage lisible des états ---
+etat_labels <- c(
+  "Importance_independant_finance" = "finance",
+  "Importance_propres_decisions" = "Décisions",
+  "Importance_propres_responsabilites" = "Responsabilités"
+)
+
+# Recodage uniquement sur M1, M2, M3 (pas sur age)
+data_seq <- data_seq %>%
+  mutate(across(c(M1, M2, M3), ~ etat_labels[.]))
+
+# --- 3. Création de l'objet séquentiel ---
+# On retire la colonne 'age' pour créer l'objet séquentiel (car non séquentielle)
+seq_obj <- seqdef(data_seq %>% select(M1, M2, M3))
+
+```
+
+### Clustering hiérarchique et Sauts d’inertie de la classification des séquences
+```{r, echo=T, message=FALSE, warning=FALSE}
+library(TraMineR)
+library(cluster)
+library(dendextend)
+# 1. Installer le bon package (une seule fois)
+#install.packages("RColorBrewer")
+
+# 2. Le charger
+library(RColorBrewer)
+
+
+
+# 1. Créer une matrice de coût constante
+cost_matrix <- matrix(2, nrow = 3, ncol = 3)  # 3 états (adapter si besoin)
+diag(cost_matrix) <- 0  # coût nul pour les substitutions identiques
+
+# 2. Calcul de la distance avec OM (Optimal Matching)
+seq.om <- seqdist(seq_obj, method = "OM",indel = 1, sm = cost_matrix)
+
+#seq.om <- seqdist(seq_obj, method = "LCS")
+
+# 3. Clustering hiérarchique
+seq.dist <- hclust(as.dist(seq.om), method = "ward.D2")
+
+
+plot(as.dendrogram(seq.dist), leaflab = "none")
+
+#Sauts d’inertie de la classification des séquences 
+plot(sort(seq.dist$height, decreasing = TRUE)[1:20], type = "s", xlab = "nb de classes", ylab = "inertie")
+```
+
+
+### Affichage des sequences
+```{r, echo=T, message=FALSE, warning=FALSE}
+#choix d’une partition en 3 classes
+nbcl <- 3
+seq.part <- cutree(seq.dist, nbcl)
+
+seq.part <- factor(seq.part, labels = paste("classe", 1:nbcl, sep = "."))
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE, fig.cap="sequences", fig.align='center', out.width="90%"}
+seqdplot(seq_obj, group = seq.part, xtlab = 1:721, border = NA)
+```
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+seqIplot(seq_obj, group = seq.part, xtlab = 14:50, space = 0, border = NA, yaxis = FALSE)
+```
+
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+ordre <- cmdscale(as.dist(seq.om), k = 1)
+seqIplot(seq_obj, group = seq.part, sortv = ordre, space = 0, border = NA, yaxis = FALSE)
+```
+🔹 Classe 1 :
+Cette classe regroupe des individus qui accordent une forte importance aux responsabilités et à la finance dès les premières positions. Ensuite, ils continuent à valoriser, dans une moindre mesure, ces deux mêmes dimensions. Les décisions personnelles apparaissent plus rarement en deuxième position, et ne deviennent véritablement visibles qu’en dernière position. Cela reflète un profil où l’autonomie décisionnelle est reléguée au second plan, après les dimensions de gestion et d’engagement.
+
+🔹 Classe 2 :
+Les individus de cette classe présentent un profil très structuré : ils placent en premier lieu l’indépendance financière, suivie de l’autonomie dans les décisions, puis de la prise de responsabilités. On observe ici une logique progressive où l’émancipation économique précède la capacité décisionnelle, elle-même précédant l’engagement en responsabilités.
+
+🔹 Classe 3 :
+Cette classe est caractérisée par une priorité donnée aux décisions personnelles, en première position. Vient ensuite l’importance des responsabilités, suivie par une proportion modeste d’individus valorisant la finance. Contrairement à la classe 1, où la dimension décisionnelle est marginale, ici elle est au cœur des priorités. On y retrouve un profil presque inversé à celui de la classe 1, mettant l'accent sur l’autonomie et le pouvoir d’agir avant les aspects matériels et structurels.
+
+
+
+## Analyse de séquences des variables objectifs   
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Définir les nouvelles colonnes subjectives 
+subj_vars_nouvelles <- c("Importance_quiter_nid", 
+                          "Importance_emploi_TPL", 
+                          "Importance_vivre_en_couple", 
+                          "Importance_marie_1er_fois", 
+                          "Importance_parent_1er_fois")
+
+# Vérifier l'existence des colonnes dans data_P3_
+if (!all(subj_vars_nouvelles %in% names(data_P3_))) {
+  stop("Certaines colonnes subjectives ne sont pas présentes dans data_P3_.")
+}
+
+# S'assurer que les colonnes sont numériques
+data_P3_[, subj_vars_nouvelles] <- lapply(data_P3_[, subj_vars_nouvelles], function(x) as.numeric(as.character(x)))
+
+# Fonction pour trier les noms des variables selon les règles demandées
+ordonner_par_valeur_et_nom <- function(x) {
+  valeurs <- as.numeric(x)
+  noms <- names(x)
+  
+  # Trier en ordre décroissant de valeur, puis alphabétique
+  classement <- noms[order(-valeurs, noms)]
+  
+  paste(classement, collapse = " | ")  # tu peux changer le séparateur si tu veux
+}
+
+# Appliquer la fonction ligne par ligne
+data_P3_$Marqueurs_ordonnés_obj <- apply(data_P3_[, subj_vars_nouvelles], 1, ordonner_par_valeur_et_nom)
+
+# Aperçu des résultats
+#View(data_P3_[, c(subj_vars_nouvelles, "Marqueurs_ordonnés_obj")])
 
 ```
 
 
 
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Charger les packages nécessaires
+library(dplyr)
+
+# Vecteur des nouvelles variables subjectives
+new_vars <- c("Importance_quiter_nid", 
+              "Importance_emploi_TPL", 
+              "Importance_vivre_en_couple", 
+              "Importance_marie_1er_fois", 
+              "Importance_parent_1er_fois")
+
+# Générer toutes les permutations possibles
+combinaisons_all <- gtools::permutations(n = length(new_vars), r = length(new_vars), v = new_vars)
+
+# Coller les combinaisons sous forme de chaînes
+combinaisons_chr <- apply(combinaisons_all, 1, function(x) paste(x, collapse = " | "))
+
+# Créer une data frame avec ID
+df_nouvelles_combinaisons <- data.frame(
+  ID_combinaison = 1:length(combinaisons_chr),
+  Combinaison = combinaisons_chr
+)
+
+# Afficher
+#View(df_nouvelles_combinaisons)
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Associer les ID de combinaison à chaque ligne de data_P3_
+data_P3_$Marqueurs_obj <- sapply(data_P3_$Marqueurs_ordonnés_obj, function(x) {
+  match_index <- match(x, df_nouvelles_combinaisons$Combinaison)
+  if (!is.na(match_index)) {
+    return(df_nouvelles_combinaisons$ID_combinaison[match_index])
+  } else {
+    return(NA)  # Si aucune correspondance trouvée
+  }
+})
+
+# Vérification rapide des correspondances
+#table(data_P3_$Marqueurs_obj, useNA = "ifany")
+
+# Affichage des résultats
+#View(data_P3_[, c("Marqueurs_ordonnés_obj", "Marqueurs_obj")])
+
+#table(data_P3_$Marqueurs_obj, useNA = "ifany")
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Sélectionner uniquement les colonnes souhaitées
+df_verif <- data_P3_[, c("Marqueurs_ordonnés_obj", "Marqueurs_obj")]
+
+# Afficher dans la console
+#print(df_verif)
+
+# Ou bien dans une fenêtre de visualisation
+#View(df_verif)
+
+```
+
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+#Separation des sequences
+library(stringr)
+library(dplyr)
+
+data_seq_obj <- data_P3_ %>%
+  mutate(Marqueurs_split_obj = str_split(Marqueurs_ordonnés_obj, " \\| ")) %>%
+  mutate(
+    O1 = sapply(Marqueurs_split_obj, `[`, 1),
+    O2 = sapply(Marqueurs_split_obj, `[`, 2),
+    O3 = sapply(Marqueurs_split_obj, `[`, 3),
+    O4 = sapply(Marqueurs_split_obj, `[`, 4),
+    O5 = sapply(Marqueurs_split_obj, `[`, 5)
+  ) %>%
+  select(O1, O2, O3, O4, O5)
+
+```
+
+
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+#Recodage des états
+# Recodage lisible des noms pour les graphiques
+etat_labels_obj <- c(
+  "Importance_quiter_nid" = "Quitter le nid",
+  "Importance_emploi_TPL" = "Emploi stable",
+  "Importance_vivre_en_couple" = "Vie de couple",
+  "Importance_marie_1er_fois" = "Premier mariage",
+  "Importance_parent_1er_fois" = "Premier enfant"
+)
+
+data_seq_obj <- data_seq_obj %>%
+  mutate(across(everything(), ~ etat_labels_obj[.]))
+
+```
+
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+#Création de l'objet séquentiel
+library(TraMineR)
+
+seq_obj_obj <- seqdef(data_seq_obj)
+
+```
+
+
+### Calcul des distances & clustering
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Matrice de coût (5 états ici)
+cost_matrix_obj <- matrix(2, nrow = 5, ncol = 5)
+diag(cost_matrix_obj) <- 0
+
+# Distance OM
+seq.om_obj <- seqdist(seq_obj_obj, method = "OM", indel = 1, sm = cost_matrix_obj)
+
+# Clustering
+seq.dist_obj <- hclust(as.dist(seq.om_obj), method = "ward.D2")
+
+# Dendrogramme
+plot(as.dendrogram(seq.dist_obj), leaflab = "none")
+
+# Choix du nombre de classes
+plot(sort(seq.dist_obj$height, decreasing = TRUE)[1:20], type = "s", xlab = "nb de classes", ylab = "inertie")
+
+```
+
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+#Créer les classes
+nbcl_obj <- 5
+seq.part_obj <- cutree(seq.dist_obj, nbcl_obj)
+seq.part_obj <- factor(seq.part_obj, labels = paste("classe", 1:nbcl_obj, sep = "."))
+
+```
+
+### Sequences
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Distribution des états
+seqdplot(seq_obj_obj, group = seq.part_obj, border = NA)
+
+# Index plot + tri
+ordre_obj <- cmdscale(as.dist(seq.om_obj), k = 1)
+seqIplot(seq_obj_obj, group = seq.part_obj, sortv = ordre_obj, space = 0, border = NA, yaxis = FALSE)
+
+# Fréquences
+seqfplot(seq_obj_obj, group = seq.part_obj)
+
+# Heatmap
+library(seqhandbook)
+#seq_heatmap(seq_obj_obj, seq.om_obj)
+
+```
+
+🔵 Classe 1 (154 individus – profil progressif équilibré)
+
+    Représente un cheminement étalé avec une montée progressive d’importance donnée à chaque marqueur.
+
+    Début avec une importance légèrement plus marquée pour l’emploi et quitter le nid.
+
+    Milieu : montée de la priorité donnée au couple et au mariage.
+
+    Fin : importance du premier enfant. 
+    
+    ✅ Profil : transition douce, où tous les aspects de la vie adulte sont valorisés au fil du temps.
+
+🟡 Classe 2 (135 individus – profil centré sur la parentalité tardive)
+
+    Démarre par une priorité sur quitter le nid puis emploi stable.
+
+    Importance du couple et mariage en milieu de séquence.
+
+    Clôture avec la parentalité (importance du premier enfant en O5).
+    
+    ✅ Profil : les responsabilités affectives et familiales viennent en dernier.
+
+🟣 Classe 3 (203 individus – profil centré sur l’emploi puis la famille)
+
+    Forte importance donnée d’emblée à l’emploi stable et quitter le nid.
+
+    Ensuite : montée en puissance des aspects affectifs.
+
+    Le mariage puis l’enfant prennent de l’importance en fin de parcours. 
+    
+    ✅ Profil : vision très structurée, où l’emploi est vu comme préalable à tout.
+
+🟠 Classe 4 (101 individus – profil inversé ou atypique)
+
+    Commence par une très forte priorité à quitter le nid, mariage, et enfant.
+
+    Importance de l’emploi ou du couple vient ensuite. 
+    
+    ✅ Profil atypique : importance donnée d’abord aux relations et responsabilités familiales avant l’indépendance ou le travail.
+
+🔵 Classe 5 (106 individus – profil affectif prioritaire)
+
+    Donne d’abord de l’importance à la vie de couple.
+
+    Ensuite : montée du mariage et du premier enfant.
+
+    L’emploi et quitter le nid arrivent plus tard. 
+    
+    ✅ Profil : l’affectif précède l’indépendance économique dans la représentation de la transition.
+    
+    
+```{r, echo=FALSE,include=FALSE,message=FALSE, warning=FALSE,results='asis'}
+file.rename(
+  from = here("scripts", "Rapport.pdf"),       # emplacement actuel
+  to   = here("rapport", "Rapport.pdf")        # destination
+)
+
+```

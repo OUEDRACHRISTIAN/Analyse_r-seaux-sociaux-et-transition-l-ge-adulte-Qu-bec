@@ -1,0 +1,60 @@
+---
+title: "Untitled"
+output: html_document
+date: "2025-11-04"
+---
+
+
+```{r}
+
+library(ggplot2)
+library(dplyr)
+
+# Data
+df <- data.frame(
+  Variable = c("Justice sociale", "Influence autrui"),
+  Coef = c(3.58011, 2.58011),
+  Min = c(2.0604057, 1.0604057),
+  Max = c(6.299708, 4.299708)
+) %>%
+  mutate(
+    ymin = Min,
+    ymax = Max
+  )
+
+# Plot
+ggplot(df, aes(x = Variable, y = Coef)) +
+  geom_point(size = 4) +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = .15) +
+  labs(
+    title = "Résultats de la régression",
+    y = "Coefficient (IC)",
+    x = ""
+  ) +
+  theme_minimal(base_size = 14)
+
+```
+
+
+```{r}
+
+ggplot(df, aes(x = Variable, y = Coef)) +
+  geom_point(size = 4) +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = .15) +
+  geom_hline(yintercept = 1, linetype = "dashed") + 
+  labs(
+    title = "Résultats de la régression",
+    y = "Coefficient (IC)",
+    x = ""
+  ) +
+theme_classic(base_size = 14) +
+theme(
+  axis.text.x = element_text(angle = 15, hjust = 1),
+  plot.title = element_text(face = "bold") 
+)+
+  coord_flip()
+
+
+```
+
+

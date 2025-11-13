@@ -31,7 +31,7 @@ library(survey)
 library(readxl)
 
 data_P2 = read_csv("data_P2.csv")
-
+data_P2 = read_excel(here("data", "results-survey929869 (35).xlsx"))
 ```
 
 ```{r}
@@ -89,7 +89,7 @@ freq(data_P2$Pas_de_probleme_resenti)
   
 ```{r}
 freq(data_P2$BC1Q1SQ4)
-data_P2w=data_P2 %>% mutate(laugue_parlee=BC1Q1SQ4)
+data_P2=data_P2 %>% mutate(laugue_parlee=BC1Q1SQ4)
 
 
 data_P2=data_P2 %>% 

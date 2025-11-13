@@ -1,0 +1,968 @@
+---
+title: "Les réseaux sociaux et la transition à l’âge adulte au Québec  - `r Sys.Date()`"
+author: "OUEDRAOGO Christian Cyriaque"
+date: "`r Sys.Date()`"
+output: 
+ 
+  word_document: 
+    toc: true
+    toc_depth: 3
+  pdf_document:
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    citation_package: natbib
+    fig_caption: true
+    keep_tex: true
+    highlight: tango
+    fig_width: 12
+    fig_height: 12
+    latex_engine: xelatex
+  html_document: default
+header-includes:
+  - \usepackage{geometry}
+  - \geometry{a4paper, margin=0.6in}
+  - \usepackage{setspace}
+  - \setstretch{1.8}
+  - \usepackage{indentfirst}
+  - \setlength{\parindent}{1.5cm}
+  - \usepackage{fontspec}
+  - \setmainfont{Times New Roman}
+  - \newfontfamily\sffamilyfont{Arial}[Scale=1.0]
+  - \renewcommand{\normalsize}{\fontsize{12}{14}\selectfont}
+  - \renewcommand{\figurename}{Figure}
+  - \renewcommand{\contentsname}{TABLE DES MATIÈRES}
+  - \renewcommand{\tablename}{Tableau}
+  - \renewcommand{\sffamily}{\sffamilyfont}
+  - \usepackage[french]{babel}
+  - \usepackage{amsmath}
+  - \usepackage{fancyhdr}
+  - \pagestyle{fancy}
+  - \fancyhf{}
+  - \fancyfoot[L]{OUEDRAOGO Christian Cyriaque}
+  - \fancyfoot[R]{Projet}
+  - \usepackage{titlesec}
+  - \titleformat{\section}{\large\bfseries}{\thesection}{1em}{}
+  - \titleformat{\subsection}{\normalsize\bfseries}{\thesubsection}{1em}{}
+  - \titleformat{\subsubsection}{\normalsize\itshape}{\thesubsubsection}{1em}{}
+---
+
+
+
+```{r, include=FALSE}
+# Liste des packages à installer
+'packages <- c("officer", "flextable", "tidyverse", "summarytools", 
+              "gtsummary", "survey", "readxl", "dplyr", "ggplot2", "scales","cardx")
+'
+# Installer les packages
+#install.packages(packages)
+
+# Vérifier si les packages sont correctement installés et les charger
+#lapply(packages, require, character.only = TRUE)
+
+library(cardx)
+library(MASS)
+library(officer)
+library(flextable)
+library(tidyverse)
+library(summarytools)
+library(gtsummary)
+library(survey)
+library(readxl)
+library(survey)
+library(dplyr)
+library(ggplot2)
+library(scales)
+library(gridExtra)
+library(broom)
+#chooseCRANmirror()
+#11
+#options(repos = c(CRAN = "https://cran.rstudio.com/"))
+#install.packages("here")
+library(here)
+data_P3_ = read_csv(here("data", "data_P3_.csv"))
+```
+\vspace{1cm}
+
+```{r,include=FALSE}
+
+# Liste des variables initiales
+variables <- c("Votre_mere", "Votre_pere", "Votre_soeur", "Votre_frere", 
+               "Vos_amis", "A_l_ecole", "Vos_colleges_de_travail", 
+               "Les_medias_traditionnels", "Les_medias_numeriques_Q1",
+               "Quiter_nid", "Emploi_TPL", "Vivre_en_couple", "Marier_1er_fois", 
+               "Parent_1er_fois", "Propres_responsabilites", "Propres_decisions", 
+               "Independance_finance")
+
+# Définir l'ordre des niveaux d'importance
+importance_levels <- c("Pas du tout important", "Peu important", 
+                       "Plus ou moins important", "Important", "Très important")
+
+# Appliquer le facteur avec l'ordre défini
+data_P3_[variables] <- lapply(data_P3_[variables], function(x) {
+  factor(x, levels = importance_levels, ordered = TRUE)
+})
+
+```
+\vspace{1cm}
+
+```{r,include=FALSE}
+data_P3_$Nbr_compte_MS_regulier <- factor(data_P3_$Nbr_compte_MS_regulier,
+                                          levels = c("Aucun", "Un", "Deux", "Trois", "Quatre", "Plus de quatre"))
+
+data_P3_$Nbr_compte_MS <- factor(data_P3_$Nbr_compte_MS, levels = c("Aucun", "1 ou 2 comptes","3 à 5 comptes","6 comptes et plus"))
+
+data_P3_$Diplome_mere <- factor(data_P3_$Diplome_mere, levels = c("Primaire/Secondaire", "CEGEP / DEP","Universitaire"))
+
+data_P3_$Diplome_pere <- factor(data_P3_$Diplome_pere, levels = c("Primaire/Secondaire", "CEGEP / DEP","Universitaire"))
+
+data_P3_$Diplome_du_repondant <- factor(data_P3_$Diplome_du_repondant, levels = c("Primaire/Secondaire", "CEGEP / DEP","Universitaire"))
+
+data_P3_ <- data_P3_ %>%
+  rename(Situation_civile_parents = Siruation_civile_parents)
+
+
+
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Nombre_d_heures_sur_RSM_Jour = ifelse(
+      Nbr_compte_MS_regulier == "Aucun" & Nombre_d_heures_sur_RSM_Jour == "Ne sait pas",
+      "00h",
+      Nombre_d_heures_sur_RSM_Jour
+    )
+  )
+
+
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Nombre_d_heures_sur_RSM_Jour = case_when(
+      Nombre_d_heures_sur_RSM_Jour %in% c("4.0 à 5.0 heures", "6 heures et plus") ~ "4 heures et plus",
+      TRUE ~ Nombre_d_heures_sur_RSM_Jour
+    )
+  )
+
+data_P3_$Justice_sociale <- factor(
+  data_P3_$Justice_sociale,
+  ordered = TRUE,
+  levels = c(1, 2, 3, 4, 5)
+)
+
+data_P3_ <- data_P3_ %>%
+  mutate(
+    Justice_sociale_rec = ifelse(Justice_sociale %in% c(1, 2, 3), 0, 1),
+    Influencer_sur_autrui_rec = ifelse(Influencer_sur_autrui %in% c(1, 2, 3), 0, 1),
+    Monde_en_paix_rec = ifelse(Monde_en_paix %in% c(1, 2, 3), 0, 1),
+    Securite_pour_famille_rec = ifelse(Securite_pour_famille %in% c(1, 2, 3), 0, 1),
+    Respect_et_armonie_avec_terre_rec = ifelse(Respect_et_armonie_avec_terre %in% c(1, 2, 3), 0, 1),
+    Honorer_parents_aines_rec = ifelse(Honorer_parents_aines %in% c(1, 2, 3), 0, 1),
+    Autorite_commander_autrui_rec = ifelse(Autorite_commander_autrui %in% c(1, 2, 3), 0, 1),
+    Proteger_environnement_rec = ifelse(Proteger_environnement %in% c(1, 2, 3), 0, 1),
+    Richesse_materiel_argent_rec = ifelse(Richesse_materiel_argent %in% c(1, 2, 3), 0, 1),
+    Auto_discipline_rec = ifelse(Auto_discipline %in% c(1, 2, 3), 0, 1),
+    Union_avec_la_nature_rec = ifelse(Union_avec_la_nature %in% c(1, 2, 3), 0, 1),
+    Equite_egalite_des_chances_rec = ifelse(Equite_egalite_des_chances %in% c(1, 2, 3), 0, 1)
+  )
+
+```
+
+
+
+```{r, include=FALSE}
+#Objet de design en tenant compte des pondérations
+data_design <- svydesign(id = ~id, weights = ~PON, data = data_P3_)
+```
+\newpage
+
+
+# Statistique descriptives
+## Tableau pour les Répondants 
+
+### valeurs et attitudes selon le fait d’être inscrit ou   non à un réseau social
+
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_Usage_MS <- tbl_svysummary(
+  data = data_design,
+  by = Usage_MS,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le fait d’être inscrit ou non à un réseau social**")
+
+table_repondants_Usage_MS
+```
+\vspace{1cm}
+
+
+### valeurs et attitudes selon le nombre de réseaux sociaux utilisés régulièrement
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_Nbr__MS_regulier <- tbl_svysummary(
+  data = data_design,
+  by = Nbr_compte_MS_regulier,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le Nombre de reseaux sociaux utilisés régulièrement**")
+
+table_repondants_Nbr__MS_regulier
+```
+\vspace{1cm}
+
+
+### valeurs et attitudes selon le temps passé chaque jour
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_Nbre_hres_RSM_Jour <- tbl_svysummary(
+  data = data_design,
+  by = Nombre_d_heures_sur_RSM_Jour,
+  include = c(Justice_sociale,Influencer_sur_autrui,Monde_en_paix,Securite_pour_famille,Respect_et_armonie_avec_terre,Honorer_parents_aines,Autorite_commander_autrui,Proteger_environnement,Richesse_materiel_argent,Auto_discipline,Union_avec_la_nature,Equite_egalite_des_chances),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le temps passé chaque jour**")
+
+table_repondants_Nbre_hres_RSM_Jour
+```
+\vspace{1cm}
+
+### Tableau pour les Répondants selon le groupe d'âge
+```{r,include=FALSE, warning=FALSE, warning=FALSE}
+table_repondants_gpe_age <- tbl_svysummary(
+  data = data_design,
+  by = gpe_age,
+  include = c(sexe,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  #add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le groupe d'âge**")
+
+#table_repondants_gpe_age
+```
+\vspace{1cm}
+
+### Tableau pour les Répondants selon le sexe
+```{r,include=FALSE, echo=T, warning=FALSE}
+
+table_repondants_sexe <- tbl_svysummary(
+  data = data_design,
+  by = sexe, 
+  include = c(gpe_age,Lieu_de_residence,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  #add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le sexe**")
+
+
+#table_repondants_sexe
+```
+\vspace{1cm}
+
+### Tableau pour les Répondants Selon le groupe d'âge et par sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_grp_age_sexe <- tbl_merge(
+  tbls = list(table_repondants_gpe_age, table_repondants_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_grp_age_sexe
+
+```
+\vspace{1cm}
+
+
+### Tableau pour les Répondants selon le lieu de residence
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_repondants_Lieu_de_residence <- tbl_svysummary(
+  data = data_design,
+  by = Lieu_de_residence, 
+  include = c(age,sexe,gpe_age,lieu_de_naissance,Diplome_du_repondant, Occupation_du_repondant,Revenu_annuel_du_repondant),
+  
+  statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p}   ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  # ajouter la colonne « Ensemble »
+  add_p() %>%        # ajouter les p-values pour tester la différence entre les groupes
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Répondants selon le Lieu de residence**")
+
+
+ table_repondants_Lieu_de_residence
+```
+\vspace{1cm}
+
+## Tableau pour l'utilisation des médias sociaux 
+
+### Utilisation des médias sociaux selon le groupe d'âge
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux selon le groupe d'age**")
+
+#table_utilisation_medias_sociaux_gpe_age
+```
+\vspace{1cm}
+
+### Utilisation des médias sociaux selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux selon le sexe**")
+
+#table_utilisation_medias_sociaux_sexe
+```
+\vspace{1cm}
+
+### Tableau pour l'utilisation des médias sociaux par groupe d'age et par sexe
+```{r}
+table_medias_sociaux_grp_age_sexe <- tbl_merge(
+  tbls = list(table_utilisation_medias_sociaux_gpe_age, table_utilisation_medias_sociaux_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_medias_sociaux_grp_age_sexe
+
+```
+\vspace{1cm}
+
+### Utilisation des médias sociaux selon le lieu de residence
+```{r, echo=T, message=FALSE, warning=FALSE}
+table_utilisation_medias_sociaux_Lieu_de_residence <- 
+  data_design %>%
+  tbl_svysummary(
+    by = Lieu_de_residence,
+    include = c(Usage_MS,Nbr_compte_MS,Nbr_compte_MS_regulier,Nombre_d_heures_sur_RSM_Jour),
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  
+) %>%
+  add_overall() %>%  
+  add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Utilisation_médias_sociaux selon le lieu de residence**")
+
+#table_utilisation_medias_sociaux_Lieu_de_residence
+```
+\vspace{1cm}
+## Activités faites sur les médias sociaux
+
+### Activités faites sur les médias sociaux selon le groupe d'âge
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_gpe_age <- 
+  data_design %>%
+  tbl_svysummary(
+    by = gpe_age,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux selon le groupe d'âge**")
+
+#Table_activités_médias_sociaux_gpe_age
+
+```
+\vspace{1cm}
+
+### Activités faites sur les médias sociaux selon le sexe
+```{r, echo=T, message=FALSE, warning=FALSE}
+Table_activités_médias_sociaux_sexe <- 
+  data_design %>%
+  tbl_svysummary(
+    by = sexe,
+    include = c(Suivre_activité_amis_et_famille, Communiquer_amis_et_famille, Partager_propre_matériel_avec_proches, Partager_propre_matériel_publiquement, Suivre_actualités_sur_RSM, Prendre_connaissance_programmes_gouv, Rechercher_information_generale, Rechercher_info_importante_personnelle, Aucune, Autre),
+    
+    statistic = list(
+    all_continuous() ~ "{mean}",
+    all_categorical() ~ "{p} ({n})"
+  ),
+  digits=~ c(1,0),
+  missing = "no"  # ne pas afficher les valeurs manquantes
+) %>%
+  add_overall() %>%  
+  #add_p() %>%        
+  modify_header(label = "**Caractéristiques**") %>% 
+  modify_caption("**Activités médias sociaux selon le sexe**")
+
+Table_activités_médias_sociaux_sexe
+```
+\vspace{1cm}
+
+### Activités faites sur les médias sociaux par grpe dage et par sexe
+```{r}
+table_activités_médias_sociaux_grp_age_sexe <- tbl_merge(
+  tbls = list(Table_activités_médias_sociaux_gpe_age, Table_activités_médias_sociaux_sexe),
+  tab_spanner = c("**Selon le groupe d'âge**", "**Selon le sexe**")
+)
+
+table_activités_médias_sociaux_grp_age_sexe
+
+```
+\vspace{1cm}
+
+
+# Regression  
+```{r,include=FALSE}
+vars_rec <- c(
+  "Justice_sociale_rec",
+  "Influencer_sur_autrui_rec",
+  "Monde_en_paix_rec",
+  "Securite_pour_famille_rec",
+  "Respect_et_armonie_avec_terre_rec",
+  "Honorer_parents_aines_rec",
+  "Autorite_commander_autrui_rec",
+  "Proteger_environnement_rec",
+  "Richesse_materiel_argent_rec",
+  "Auto_discipline_rec",
+  "Union_avec_la_nature_rec",
+  "Equite_egalite_des_chances_rec"
+)
+modeles_bin <- list()
+
+```
+
+
+## Modélisation logistique - effets brutes 
+```{r, echo=T, message=FALSE, warning=FALSE}
+# Boucle de modélisation logistique
+modeles_bin <- lapply(vars_rec, function(var) {
+  glm(as.formula(paste(var, "~ Usage_MS")), data = data_P3_, family = binomial)
+})
+names(modeles_bin) <- vars_rec
+
+# Extraction des OR et IC pour chaque modèle
+resultats <- lapply(names(modeles_bin), function(var) {
+  mod <- modeles_bin[[var]]
+  
+  or_ci <- exp(cbind(OddsRatio = coef(mod), confint(mod)))  
+  or_ci <- as.data.frame(or_ci)
+  or_ci$Variable <- rownames(or_ci)
+  or_ci$Outcome <- var
+  rownames(or_ci) <- NULL
+  
+  or_ci
+})
+
+#  Combinaison dans un seul tableau
+table_OR <- bind_rows(resultats) %>%
+  select(Outcome, Variable, OddsRatio, `2.5 %`, `97.5 %`) %>%
+  filter(Variable != "(Intercept)")  
+
+
+table_OR <- table_OR %>%
+  rename(
+    Variable_étudiée = Outcome,
+    Coef = OddsRatio,
+    Min= `2.5 %`,
+    Max = `97.5 %`
+  )
+
+
+table_OR1 <- table_OR %>%
+  select(-Variable)
+
+table_OR1
+
+df <- table_OR1 %>%
+  mutate(
+    ymin = Min,
+    ymax = Max
+  )
+
+
+df
+```
+\vspace{1cm}
+
+
+## Modélisation logistique - effets controlés 
+```{r}
+modeles_bin <- lapply(vars_rec, function(var) {
+  formule <- as.formula(paste(
+    var, "~ Usage_MS + gpe_age + sexe + lieu_de_naissance +",
+    "Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant"
+  ))
+  glm(formule, data = data_P3_, family = binomial)
+})
+
+names(modeles_bin) <- vars_rec
+
+
+resultats <- lapply(names(modeles_bin), function(var) {
+  mod <- modeles_bin[[var]]
+  
+  # Odds ratios et IC
+  or_ci <- exp(cbind(OddsRatio = coef(mod), confint(mod)))
+  or_ci <- as.data.frame(or_ci)
+  or_ci$Variable <- rownames(or_ci)
+  or_ci$Variable_étudiée <- var
+  rownames(or_ci) <- NULL
+  
+  # Ajouter p-values
+  tidy_mod <- tidy(mod)
+  or_ci <- left_join(or_ci, tidy_mod[, c("term", "p.value")],
+                     by = c("Variable" = "term"))
+  
+  or_ci
+})
+
+# Combiner en un seul tableau
+table_OR2 <- bind_rows(resultats) %>%
+  select(Variable_étudiée, Variable, OddsRatio, `2.5 %`, `97.5 %`) %>%
+  filter(Variable == "Usage_MSOui") %>%  # On garde seulement Usage_MS
+  rename(
+    Coef = OddsRatio,
+    Min = `2.5 %`,
+    Max = `97.5 %`
+  )
+
+
+df_plot <- table_OR2 %>%
+  mutate(
+    ymin = Min,
+    ymax = Max
+  )
+
+df_plot
+```
+\vspace{1cm}
+
+
+### Affichage des Odds Ratio - effet brute
+```{r}
+# Réordonner les variables selon la valeur du coefficient
+ df <- df %>%
+  mutate(Variable_étudiée = reorder(Variable_étudiée, Coef))
+
+plot1 <- ggplot(df, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") + 
+  coord_flip() +
+  labs(
+    title = "Résultats- bruts",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+
+ggsave(here("figures", "Odds Ratio - effet brute_plot.png"), plot = plot1, width = 10, height = 6)
+
+plot1
+```
+\vspace{1cm}
+
+
+
+### Affichage des Odds Ratio - effets controlés
+```{r}
+# Réordonner les variables selon la valeur du coefficient
+#df_plot <- df_plot %>%
+  #mutate(Variable_étudiée = reorder(Variable_étudiée, Coef))
+
+plot2 <- ggplot(df_plot, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Résultats-controlés",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+
+ggsave(here("figures", "Odds Ratio - effet cotrolés_plot.png"), plot = plot2, width = 10, height = 6)
+
+plot2
+```
+\vspace{1cm}
+
+
+```{r}
+# Réordonner les variables selon la valeur du coefficient
+df_plot <- df_plot %>%
+  mutate(Variable_étudiée = reorder(Variable_étudiée, Coef))
+
+# Tracé du graphique
+plot3 <- ggplot(df_plot, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Résultats contrôlés",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# Sauvegarde du graphique
+ggsave(here("figures", "Odds Ratio - effet contrôlés_plot.png"), plot = plot3, width = 10, height = 6)
+
+plot3
+
+```
+
+
+### Comparaison des resultats
+```{r}
+plot1 <- ggplot(df, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") + 
+  coord_flip() +
+  labs(
+    title = "Résultats- bruts",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+plot2 <- ggplot(df_plot, aes(x = Variable_étudiée, y = Coef)) +
+  geom_point(size = 2, color = "steelblue") +
+  geom_errorbar(aes(ymin = ymin, ymax = ymax), width = 0.2, color = "steelblue") +
+  geom_hline(yintercept = 1, linetype = "dashed", color = "red") +
+  coord_flip() +
+  labs(
+    title = "Résultats-controlés",
+    y = "Coefficient (Odds Ratio)",
+    x = ""
+  ) +
+  theme_classic(base_size = 14) +
+  theme(
+    plot.title = element_text(face = "bold", hjust = 0.5)
+  )
+
+# Affichage côte à côte
+grid.arrange(plot1, plot2, ncol = 2)
+```
+\vspace{1cm}
+
+
+## Regressions logistiques binaires controlés 
+```{r}
+# Usage des médias sociaux (a un compte ou non)
+mod1_bin <- glm(
+  Justice_sociale_rec ~ Usage_MS + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+#  Nombre de comptes réguliers
+mod2_bin <- glm(
+  Justice_sociale_rec ~ Nbr_compte_MS_regulier + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+#  Temps passé sur les médias sociaux
+mod3_bin <- glm(
+  Justice_sociale_rec ~ Nombre_d_heures_sur_RSM_Jour + gpe_age + sexe + lieu_de_naissance +
+    Diplome_du_repondant + Occupation_du_repondant + Revenu_annuel_du_repondant,
+  data = data_P3_,
+  family = binomial
+)
+
+```
+\vspace{1cm}
+
+### Resultat des Regressions avec Usage des médias sociaux
+```{r}
+summary(mod1_bin)
+exp(cbind(OddsRatio = coef(mod1_bin), confint(mod1_bin)))
+```
+\vspace{1cm}
+
+
+### Resultat des Regressions avec Nombre de comptes réguliers
+```{r}
+summary(mod2_bin)
+exp(cbind(OddsRatio = coef(mod2_bin), confint(mod2_bin)))
+```
+\vspace{1cm}
+
+
+### Resultat des Regressions avec Temps passé sur les médias sociaux
+```{r}
+summary(mod3_bin)
+exp(cbind(OddsRatio = coef(mod3_bin), confint(mod3_bin)))
+```
+\vspace{1cm}
+
+```{r}
+# install.packages("data.table")
+
+library(tidyverse)
+library(broom)
+library(modelsummary)
+
+# Votre data.frame : df
+# Assure que les items sont des facteurs ordonnés 1<2<3<4<5
+items <- c("Justice_sociale",
+  "Influencer_sur_autrui",
+  "Monde_en_paix",
+  "Securite_pour_famille",
+  "Respect_et_armonie_avec_terre",
+  "Honorer_parents_aines",
+  "Autorite_commander_autrui",
+  "Proteger_environnement",
+  "Richesse_materiel_argent",
+  "Auto_discipline",
+  "Union_avec_la_nature",
+  "Equite_egalite_des_chances")
+
+df <- data_P3_ %>%
+  mutate(
+    across(
+      all_of(items),
+      ~ ordered(.x, levels = 1:5)
+    ),
+    
+    # On renomme la variable pour plus de clarté
+    media_cat = factor(
+      Nombre_d_heures_sur_RSM_Jour,
+      levels = c(
+        "00h",
+        "0.5 à 1.5 heures",
+        "2.0 à 3.0 heures",
+        "4 heures et plus",
+        "Ne sait pas"
+      ),
+      labels = c(
+        "Aucune heure",
+        "0.5 à 1.5h",
+        "2 à 3h",
+        "4h et plus",
+        "Ne sait pas"
+      )
+    ),
+    
+    sexe = factor(sexe),
+    scolarite = factor(Diplome_du_repondant)
+  )
+
+```
+
+
+## Régressions ordinales (cumulative logit) séparées
+
+```{r}
+library(ordinal)   
+library(rlang)
+
+# Formule de base
+f_base <- as.formula(~ media_cat + gpe_age + sexe + Diplome_du_repondant)
+
+
+# Fit de tous les modèles en boucle tidyverse
+mods <- map(items, ~ {
+  v <- sym(.x)
+  clm(
+    reformulate(attr(terms(f_base), "term.labels"), response = as_name(v)),
+    data = df,
+    link = "logit"
+  )
+}) %>% set_names(items)
+
+
+# Tidy + OR + IC
+tbl_coef <- imap_dfr(mods, ~ broom::tidy(.x, conf.int = TRUE, exponentiate = TRUE) %>% 
+                       mutate(outcome = .y)) %>%
+  filter(str_detect(term, "^media_cat")) %>%
+  mutate(
+    term = str_replace(term, "media_cat", "Media: ")
+  ) %>%
+  select(outcome, term, estimate, conf.low, conf.high, p.value) %>%
+  arrange(outcome, term) 
+
+#  facteur pour l'axe Y avec labels corrects
+tbl_coef <- tbl_coef %>%
+  mutate(
+    y_axis = paste(outcome, term, sep = " : "),        # label final
+    y_axis = factor(y_axis, levels = y_axis)           # garde l'ordre exact des lignes
+  )
+
+tbl_coef
+
+# Forest plot
+ggplot(tbl_coef, aes(x = estimate, y = fct_rev(y_axis), color = term)) +
+  geom_vline(xintercept = 1, linetype = "dashed") +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = 0.15, show.legend = F) +
+  geom_point(size = 2, show.legend = F) +
+  labs(
+    x = "OR (IC 95%)",
+    y = NULL,
+    title = "",
+    color = "Temps d’usage par jour"
+  ) +
+  theme_classic(base_size = 13)
+
+
+```
+\vspace{1cm}
+
+
+## Facteurs latents (polychorique) + régression
+
+```{r}
+library(psych)
+library(dplyr)
+
+
+df_items_num <- df %>%
+  select(all_of(items)) %>%
+  mutate(across(everything(), ~ as.numeric(as.character(.))))
+
+# Corrélations polychorique sur items
+Rpoly <- psych::polychoric(df_items_num %>% select(all_of(items)))$rho
+
+# Déterminer nb de facteurs (ex : 3) – regarder scree/parallel
+fa3 <- fa(Rpoly, nfactors = 3, fm = "ml", rotate = "oblimin")
+
+print(fa3$loadings, cutoff = 0.3)  # structure
+
+# Scores factoriels (méthode régression) – attention : il faut passer les données brutes
+scores <- factor.scores(df_items_num, fa3, method = "Thurstone")$scores %>%
+  as_tibble() %>%
+  set_names(paste0("F", seq_len(ncol(.))))
+
+
+df2 <- bind_cols(df, scores)
+
+# Régression (linéaire) des scores sur media_use (ou media_cat) + contrôles
+fit_f1 <- lm(F1 ~ media_cat + gpe_age + sexe + Diplome_du_repondant, data = df2)
+
+fit_f2 <- lm(F2 ~ media_cat + gpe_age + sexe + Diplome_du_repondant, data = df2)
+
+fit_f3 <- lm(F3 ~ media_cat + gpe_age + sexe + Diplome_du_repondant, data = df2)
+
+modelsummary(list(F1 = fit_f1, F2 = fit_f2, F3 = fit_f3),
+             statistic = "({p.value})",
+             gof_map = c("n","r.squared","adj.r.squared"))
+
+# Graphique : effet marginal (coeffs) sur chaque facteur
+bind_rows(
+  tidy(fit_f1, conf.int = TRUE) %>% mutate(factor = "F1"),
+  tidy(fit_f2, conf.int = TRUE) %>% mutate(factor = "F2"),
+  tidy(fit_f3, conf.int = TRUE) %>% mutate(factor = "F3")
+) %>% 
+  filter(str_detect(term, "media_cat")) %>%
+  ggplot(aes(x = estimate, y = fct_rev(term))) +
+  geom_vline(xintercept = 0, linetype = "dashed") +
+  geom_errorbarh(aes(xmin = conf.low, xmax = conf.high), height = .15) +
+  geom_point() +
+  facet_wrap(~factor, scales = "free_x") +
+  labs(x = "Effet sur le score factoriel (beta ± IC95%)", y = NULL,
+       title = "Effet de l’usage des médias sociaux sur les facteurs latents de valeurs") +
+  theme_classic(base_size = 13)
+
+```
+\vspace{1cm}
+
+
+```{r, echo=FALSE,include=FALSE,message=FALSE, warning=FALSE,results='asis'}
+file.rename(
+  from = here("scripts", "Rapport_complémentaire.pdf"),       # emplacement actuel
+  to   = here("rapport", "Rapport_complémentaire.pdf")        # destination
+)
+
+```
+
